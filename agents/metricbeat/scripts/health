@@ -1,0 +1,13 @@
+#!bin/bash
+# ASTRID - Metricbeat
+# author: Alex Carrega <alessandro.carrega@cnit.it>
+
+# Check if metricbeat is running or not
+
+source ./vars
+
+if [ -f $PIDFILE ]; then
+    echo "$COMPONENT started"
+else
+    echo "$COMPONENT not started"
+fi

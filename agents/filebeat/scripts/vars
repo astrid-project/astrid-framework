@@ -1,0 +1,15 @@
+#!/bin/bash
+# ASTRID - Filebeat
+# author: Alex Carrega <alessandro.carrega@cnit.it>
+
+VERSION=7.8.0
+COMPONENT=filebeat
+INSTALLATION_PATH=/opt/$COMPONENT
+CONFIG_PATH=$INSTALLATION_PATH/config
+TMP_PATH=/tmp
+SOURCE=$COMPONENT-$VERSION-linux-x86_64
+FILE=$SOURCE.tar.gz
+PIDFILE=$TMP_PATH/$COMPONENT.pid
+ELASTICSEARCH_HOSTS=localhost:9200
+LOGSTASH_HOSTS=localhost:5044
+MONITORING_ENABLED=false

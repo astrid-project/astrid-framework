@@ -1,0 +1,12 @@
+path:
+  data: $INSTALLATION_PATH/lib
+  logs: $INSTALLATION_PATH/logs
+
+log:
+  level: info
+
+xpack.monitoring:
+  enabled: $MONITORING_ENABLED
+  elasticsearch:
+    hosts: $ELASTICSEARCH_HOSTS
+    sniffing: true

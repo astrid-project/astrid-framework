@@ -1,0 +1,34 @@
+tags:
+  - "metricbeat"
+  - "system"
+
+metricbeat.config.modules:
+  path: modules.d/*.yml
+  reload:
+    enabled: true
+    period: 5s
+
+setup:
+  template.settings:
+    index.number_of_shards: 3
+
+output.logstash.hosts:
+  - $LOGSTASH_HOSTS
+
+logging:
+  level: info
+  selectors:
+    - "*"
+  to_files: true
+  files:
+    path: logs
+    name: metricbeat.log
+    keepfiles: 7
+    permissions: 0644
+
+xpack.monitoring:
+  enabled: $MONITORING_ENABLED
+  elasticsearch:
+    hosts:
+      - $ELASTICSEARCH_HOSTS
+    sniffing: true

@@ -1,0 +1,6 @@
+[submodule "agents/lcp/src"]
+	path = agents/lcp/src
+	url = https://github.com/astrid-project/lcp.git
+[submodule "platform/cb-manager/src"]
+	path = platform/cb-manager/src
+	url = https://github.com/astrid-project/cb-manager.git
