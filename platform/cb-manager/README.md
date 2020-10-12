@@ -10,7 +10,8 @@
     - [Configuration](#configuration)
     - [Start](#start)
     - [Stop](#stop)
-  - [Health](#health)
+    - [Health](#health)
+  - [Docker image](#docker-image)
   - [References](#references)
 
 The source code is available in the [src](github.com/astrid-project/cb-manager) directory as git sub-module.
@@ -24,6 +25,7 @@ The variables are defined in [scripts/vars](scripts/vars).
 Name                              | Default value                                                         | Meaning
 ----------------------------------|-----------------------------------------------------------------------|--------
 COMPONENT                         | cb-manager                                                            | Component name
+VERSION                           | master                                                                | Component version
 INSTALLATION_PATH                 | /opt/`$COMPONENT`                                                     | Destination path where the software will be installed
 TMP_PATH                          | /tmp                                                                  | Temporary dictionary path
 PIDFILE                           | `$TMP`/`$COMPONENT`.pid                                               | File path where the PID of the current execution is stored
@@ -61,13 +63,17 @@ $ scripts/start
 $ scripts/stop
 ```
 
-## Health
+### Health
 
 Check if the software is running or not.
 
 ```console
 $ scripts/health
 ```
+
+## Docker image
+
+[Dockerfile](Dockerfile) is used to build the `docker` image with CI in the [https://hub.docker.com/repository/docker/astridproject/cb-manager](https://hub.docker.com/repository/docker/astridproject/cb-manager).
 
 ## References
 

@@ -6,9 +6,9 @@
 
 source ./vars
 
-git clone https://github.com/astrid-project/$COMPONENT $INSTALLATION_PATH
+git clone https://github.com/astrid-project/$COMPONENT --branch $VERSION $INSTALLATION_PATH
 
-cp settings/config.ini $INSTALLATION_PATH
+cp settings/$VERSION/config.ini $INSTALLATION_PATH
 
 cd $INSTALLATION_PATH
 

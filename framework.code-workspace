@@ -8,6 +8,8 @@
 		"cSpell.language": "en-GB",
 		"cSpell.words": [
 			"Carrega",
+			"Fira",
+			"Monokai",
 			"Setup",
 			"Timeout",
 			"alexcarrega",
@@ -50,6 +52,7 @@
 			"lnav",
 			"localtime",
 			"logstash",
+			"markdownlint",
 			"metricbeat",
 			"mkdir",
 			"musl",
@@ -84,6 +87,10 @@
 		"files.insertFinalNewline": true,
 		"workbench.colorTheme": "Monokai Dimmed",
 		"workbench.editor.tabSizing": "shrink",
-		"editor.fontFamily": "Fira Code Retina"
+		"editor.fontFamily": "Fira Code Retina",
+		"markdownlint.config": {
+			"no-inline-html": { "allowed_elements": ["kbd"] },
+			"commands-show-output": false
+		}
 	}
 }
