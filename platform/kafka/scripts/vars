@@ -1,0 +1,12 @@
+#!/bin/bash
+# ASTRID - Kafka
+# author: Alex Carrega <alessandro.carrega@cnit.it>
+
+VERSION=2.6.0
+SCALA_VERSION=2.12
+COMPONENT=kafka
+INSTALLATION_PATH=/opt/$COMPONENT
+TMP_PATH=/tmp
+SOURCE=$COMPONENT_$SCALA_VERSION-$VERSION
+FILE=$SOURCE.tgz
+PIDFILE=$TMP_PATH/$COMPONENT.pid

@@ -2,7 +2,7 @@
 # ASTRID - Logstash
 # author: Alex Carrega <alessandro.carrega@cnit.it>
 
-# Download the binary amd copy the configuration files
+# Download the binary and copy the configuration files
 
 source ./vars
 

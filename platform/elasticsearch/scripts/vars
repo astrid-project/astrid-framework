@@ -1,16 +1,15 @@
 #!/bin/bash
-# ASTRID - Filebeat
+# ASTRID - Elasticsearch
 # author: Alex Carrega <alessandro.carrega@cnit.it>
 
 VERSION=7.8.0
-COMPONENT=filebeat
+COMPONENT=elasticsearch
 INSTALLATION_PATH=/opt/$COMPONENT
 TMP_PATH=/tmp
 SOURCE=$COMPONENT-$VERSION-linux-x86_64
 FILE=$SOURCE.tar.gz
-
 PIDFILE=$TMP_PATH/$COMPONENT.pid
-
 MONITORING_ENABLED=false
-ELASTICSEARCH_HOSTS=localhost:9200
-LOGSTASH_HOSTS=localhost:5044
+ELASTICSEARCH_PORT=9200
+ELASTICSEARCH_TRANSPORT_TCP_PORT=9300
+

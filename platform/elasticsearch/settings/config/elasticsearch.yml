@@ -1,0 +1,30 @@
+node:
+  name: cb
+  master: true
+
+discovery.seed_hosts:
+  - elasticsearch
+
+cluster:
+  name: astrid
+  initial_master_nodes:
+    - cb
+
+path:
+  data: $INSTALLATION_PATH/data
+  logs: $INSTALLATION_PATH/logs
+
+network.host: 0.0.0.0
+transport.tcp.port: $ELASTICSEARCH_TRANSPORT_TCP_PORT
+
+http:
+  port: $ELASTICSEARCH_PORT
+  cors:
+    enabled: true
+    allow-origin: "*"
+    allow-methods: OPTIONS, HEAD, GET, POST, PUT, DELETE
+    allow-headers: X-Requested-With, X-Auth-Token, Content-Type, Content-Length, kbn-version, Origin, Content-Type, Accept, Engaged-Auth-Token
+
+xpack:
+  monitoring.collection.enabled: $MONITORING_ENABLED
+  security.enabled: false

@@ -1,0 +1,12 @@
+#!bin/bash
+# ASTRID - Kafka
+# author: Alex Carrega <alessandro.carrega@cnit.it>
+
+# Download the binary
+
+source ./vars
+
+wget https://www.apache.org/dyn/closer.cgi?path=/$COMPONENT/$VERSION/$FILE $TMP_PATH/
+tar xzvf $TMP_PATH/$FILE
+mv $TMP_PATH/$SOURCE $INSTALLATION_PATH
+rm $TMP_PATH/$FILE

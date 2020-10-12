@@ -1,5 +1,7 @@
 # Filebeat
 
+[![Docker image](https://img.shields.io/docker/image-size/astridproject/filebeat?label=image&logo=docker)](https://hub.docker.com/repository/docker/astridproject/filebeat)
+
 ## Contents
 
 - [Filebeat](#filebeat)
@@ -10,7 +12,8 @@
     - [Configuration](#configuration)
     - [Start](#start)
     - [Stop](#stop)
-  - [Health](#health)
+    - [Health](#health)
+  - [Docker image](#docker-image)
 
 ## Installation Steps
 
@@ -35,7 +38,7 @@ LOGSTASH_HOSTS      | localhost:5044                       | Logstash endpoints 
 ### Initialization
 
 ```console
-$ scrips/init
+$ scripts/init
 ```
 
 ### Configuration
@@ -54,10 +57,14 @@ $ scripts/start
 $ scripts/stop
 ```
 
-## Health
+### Health
 
 Check if the software is running or not.
 
 ```console
 $ scripts/health
 ```
+
+## Docker image
+
+[Dockerfile](Dockerfile) is used to build the `docker` image with CI in the [https://hub.docker.com/repository/docker/astridproject/filebeat](https://hub.docker.com/repository/docker/astridproject/filebeat).

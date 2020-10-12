@@ -1,5 +1,12 @@
 # LCP (Local Control Policies)
 
+[![License](https://img.shields.io/github/license/astrid-project/lcp)](https://github.com/astrid-project/lcp/blob/master/LICENSE)
+[![Code size](https://img.shields.io/github/languages/code-size/astrid-project/lcp?color=red&logo=github)](https://github.com/astrid-project/lcp)
+[![Repository Size](https://img.shields.io/github/repo-size/astrid-project/lcp?color=red&logo=github)](https://github.com/astrid-project/lcp)
+[![Release](https://img.shields.io/github/v/tag/astrid-project/lcp?label=release&logo=github)](https://github.com/astrid-project/lcp/releases)
+[![Docker image](https://img.shields.io/docker/image-size/astridproject/lcp?label=image&logo=docker)](https://hub.docker.com/repository/docker/astridproject/lcp)
+[![Docs](https://readthedocs.org/projects/astrid-lcp/badge/?version=latest)](https://astrid-lcp.readthedocs.io)
+
 ## Contents
 
 - [LCP (Local Control Policies)](#lcp-local-control-policies)
@@ -10,7 +17,8 @@
     - [Configuration](#configuration)
     - [Start](#start)
     - [Stop](#stop)
-  - [Health](#health)
+    - [Health](#health)
+  - [Docker image](#docker-image)
   - [References](#references)
 
 The source code is available in the [src](github.com/astrid-project/lcp) directory as git sub-module.
@@ -24,6 +32,7 @@ The variables are defined in [scripts/vars](scripts/vars).
 Name                 | Default value                                                         | Meaning
 ---------------------|-----------------------------------------------------------------------|--------
 COMPONENT            | lcp                                                                   | Component name
+VERSION              | master                                                                | Component version
 INSTALLATION_PATH    | /opt/lcp                                                              | Destination path where the software will be installed
 TMP_PATH             | /tmp                                                                  | Temporary dictionary path
 PIDFILE              | `$TMP`/`$COMPONENT`.pid                                               | File path where the PID of the current execution is stored
@@ -40,7 +49,7 @@ LCP_LOG_LEVEL        | DEBUG                                                    
 ### Initialization
 
 ```console
-$ scrips/init
+$ scripts/init
 ```
 
 ### Configuration
@@ -59,13 +68,17 @@ $ scripts/start
 $ scripts/stop
 ```
 
-## Health
+### Health
 
 Check if the software is running or not.
 
 ```console
 $ scripts/health
 ```
+
+## Docker image
+
+[Dockerfile](Dockerfile) is used to build the `docker` image with CI in the [https://hub.docker.com/repository/docker/astridproject/lcp](https://hub.docker.com/repository/docker/astridproject/lcp).
 
 ## References
 

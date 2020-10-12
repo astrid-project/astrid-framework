@@ -1,10 +1,10 @@
-# Metricbeat
+# Cubebeat
 
-[![Docker image](https://img.shields.io/docker/image-size/astridproject/metricbeat?label=image&logo=docker)](https://hub.docker.com/repository/docker/astridproject/metricbeat)
+[![Docker image](https://img.shields.io/docker/image-size/astridproject/cubebeat?label=image&logo=docker)](https://hub.docker.com/repository/docker/astridproject/cubebeat)
 
 ## Contents
 
-- [Metricbeat](#metricbeat)
+- [Cubebeat](#cubebeat)
   - [Contents](#contents)
   - [Installation Steps](#installation-steps)
     - [Setup](#setup)
@@ -24,9 +24,9 @@ The variables are defined in [scripts/vars](scripts/vars).
 Name                | Default value                        | Meaning
 --------------------|--------------------------------------|--------
 VERSION             | 7.8.0                                | Version number
-COMPONENT           | metricbeat                           | Component name
+COMPONENT           | filebeat                             | Component name
 INSTALLATION_PATH   | /opt/`COMPONENT`                     | Directory path where the software will be installed
-MODULES_PATH        | `$INSTALLATION_PATH`/modules.d       | Directory path where the module configurations will be stored
+CONFIG_PATH         | `$INSTALLATION_PATH`/config          | Directory path where the configuration will be stored
 TMP_PATH            | /tmp                                 | Temporary dictionary path
 SOURCE              | `$COMPONENT`-`$VERSION`-linux-x86_64 | Source filename
 FILE                | `$SOURCE`.tar.gz                     | Source archive
@@ -67,4 +67,4 @@ $ scripts/health
 
 ## Docker image
 
-[Dockerfile](Dockerfile) is used to build the `docker` image with CI in the [https://hub.docker.com/repository/docker/astridproject/metricbeat](https://hub.docker.com/repository/docker/astridproject/metricbeat).
+[Dockerfile](Dockerfile) is used to build the `docker` image with CI in the [https://hub.docker.com/repository/docker/astridproject/cubebeat](https://hub.docker.com/repository/docker/astridproject/cubebeat).

@@ -1,0 +1,6 @@
+-  backoff: 1s
+   backoff_factor: 1
+   enabled: true
+   paths:
+   - /var/log/**/*.log
+   type: log
