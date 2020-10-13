@@ -8,7 +8,7 @@ source ./vars
 
 git clone https://github.com/$PROJECT-project/$COMPONENT --branch $VERSION $INSTALLATION_PATH
 
-cp settings/$VERSION/config.ini $INSTALLATION_PATH
+cp settings/$VERSION/config.ini $INSTALLATION_PATH/
 
 cd $INSTALLATION_PATH
 pip3 install -r requirements.txt

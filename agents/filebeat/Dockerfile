@@ -20,7 +20,7 @@ LABEL version=$VERSION
 
 # Download
 RUN wget https://artifacts.elastic.co/downloads/beats/$COMPONENT/$FILE $TMP_PATH/
-RUN tar xzvf $TMP_PATH/$FILE
+RUN tar xzvf $TMP_PATH/$FILE -C $TMP_PATH/
 RUN mv $TMP_PATH/$SOURCE $INSTALLATION_PATH
 RUN rm $TMP_PATH/$FILE
 
@@ -36,4 +36,4 @@ COPY settings/$VERSION/config/* $INSTALLATION_PATH/config/
 
 # Execute
 WORKDIR $INSTALLATION_PATH
-ENTRYPOINT ["$INSTALLATION_PATH/$COMPONENT"]
+ENTRYPOINT [ "./$COMPONENT" ]

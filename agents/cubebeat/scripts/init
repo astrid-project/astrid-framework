@@ -2,13 +2,14 @@
 # ASTRID - Cubebeat
 # author: Alex Carrega <alessandro.carrega@cnit.it>
 
-# Download the binary and copy the configuration files
+# Download the source, build the component and copy the configuration files
 
 source ./vars
 
-git clone https://github.com/$PROJECT-project/$COMPONENT --branch $VERSION $INSTALLATION_PATH
+git clone https://github.com/$PROJECT-project/$COMPONENT --branch $VERSION $GOPATH/src/gitlab.com/$PROJECT-repositories/$COMPONENT
 
+cd ./$GOPATH/src/gitlab.com/$PROJECT-repositories/$COMPONENT
+./build.sh
 
-
+cp $COMPONENT $INSTALLATION_PATH/
 cp settings/$COMPONENT.yml $INSTALLATION_PATH/
-cp settings/config/* $CONFIG_PATH/

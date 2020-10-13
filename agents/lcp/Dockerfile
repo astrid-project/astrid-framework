@@ -49,7 +49,8 @@ COPY settings/$VERSION/config.ini $INSTALLATION_PATH/
 
 # Execute
 WORKDIR $INSTALLATION_PATH
-ENTRYPOINT ["python3", "main.py"]
+ENTRYPOINT [ "python3" ]
+CMD [ "main.py" ]
 
 # Port
 EXPOSE $LCP_PORT

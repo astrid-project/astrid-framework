@@ -41,6 +41,7 @@
 			"entrypoint",
 			"filebeat",
 			"getopts",
+			"gitlab",
 			"gopath",
 			"hostfs",
 			"hping",
@@ -80,7 +81,8 @@
 			"workdir",
 			"wurstmeister",
 			"xpack",
-			"xzvf"
+			"xzvf",
+			"zookeeper"
 		],
 		"editor.tabCompletion": "on",
 		"editor.wordWrap": "on",
@@ -90,7 +92,7 @@
 		"workbench.editor.tabSizing": "shrink",
 		"editor.fontFamily": "Fira Code Retina",
 		"markdownlint.config": {
-			"no-inline-html": { "allowed_elements": ["kbd"] },
+			"no-inline-html": { "allowed_elements": [ "kbd" ] },
 			"commands-show-output": false
 		}
 	}

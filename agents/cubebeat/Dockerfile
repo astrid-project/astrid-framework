@@ -21,14 +21,15 @@ ARG INSTALLATION_PATH=/opt/$COMPONENT
 
 ENV GOPATH=/opt/go
 
-COPY --from=git-clone /output $GOPATH/src/gitlab.com/$PROJECT-repositories/$COMPONENT
+RUN apk add --no-cache --virtual .build-deps gcc musl-dev bash make
+
+COPY --from=git-clone $INSTALLATION_PATH $GOPATH/src/gitlab.com/$PROJECT-repositories/$COMPONENT
 
 WORKDIR $GOPATH/src/gitlab.com/$PROJECT-repositories/$COMPONENT
 
-RUN apk add --no-cache --virtual .build-deps gcc musl-dev bash make
 RUN bash build.sh
-RUN mkdir $INSTALLATION_PATH
-RUN cp $COMPONENT $INSTALLATION_PATH
+RUN mkdir -p $INSTALLATION_PATH
+COPY $COMPONENT $INSTALLATION_PATH/
 
 # Stage FINAL
 FROM alpine as final
@@ -42,12 +43,14 @@ LABEL description="Cubebeat built with Golang version 1.14.6 on Alpine Linux ver
 LABEL version=$VERSION
 
 # Variables
+ENV ELASTICSEARCH_HOSTS=localhost:9200
+ENV ELASTICSEARCH_MONITORING_ENABLED=false
 ENV LOGSTASH_HOSTS=localhost:5044
 
 # Settings
-COPY --from=build /output $INSTALLATION_PATH
-COPY settings/$VERSION/cubebeat.yml $INSTALLATION_PATH
+COPY --from=build $INSTALLATION_PATH $INSTALLATION_PATH
+COPY settings/$VERSION/cubebeat.yml $INSTALLATION_PATH/
 
 # Execute
 WORKDIR $INSTALLATION_PATH
-ENTRYPOINT ["./$COMPONENT"]
+ENTRYPOINT [ "./$COMPONENT" ]

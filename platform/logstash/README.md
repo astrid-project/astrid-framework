@@ -21,18 +21,18 @@
 
 The variables are defined in [scripts/vars](scripts/vars).
 
-Name                    | Default value                | Meaning
-------------------------|------------------------------|--------
-VERSION                 | 7.8.0                        | Version number
-COMPONENT               | logstash                     | Component name
-INSTALLATION_PATH       | /opt/`COMPONENT`             | Directory path where the software will be installed
-TMP_PATH                | /tmp                         | Temporary dictionary path
-SOURCE                  | `$COMPONENT`-`$VERSION`      | Source filename
-FILE                    | `$SOURCE`.zip                | Source archive
-PIDFILE                 | `$TMP_PATH`/`$COMPONENT`.pid | File path where the PID of the current execution is stored
-MONITORING_ENABLED      | false                        | Enable monitoring with Elasticsearch
-ELASTICSEARCH_HOSTS     | localhost:9200               | Elasticsearch endpoints to connect for monitoring and to send the data get from Kafka
-KAFKA_BOOTSTRAP_SERVERS | localhost:9092               | Kafka endpoints where to get the data
+Name                             | Default value                | Meaning
+---------------------------------|------------------------------|--------
+COMPONENT                        | logstash                     | Component name
+VERSION                          | 7.8.0                        | Version number
+INSTALLATION_PATH                | /opt/`COMPONENT`             | Directory path where the software will be installed
+TMP_PATH                         | /tmp                         | Temporary dictionary path
+SOURCE                           | `$COMPONENT`-`$VERSION`      | Source filename
+FILE                             | `$SOURCE`.zip                | Source archive
+PIDFILE                          | `$TMP_PATH`/`$COMPONENT`.pid | File path where the PID of the current execution is stored
+ELASTICSEARCH_HOSTS              | localhost:9200               | Elasticsearch endpoints to connect for monitoring and to send the data get from Kafka
+ELASTICSEARCH_MONITORING_ENABLED | false                        | Enable monitoring with Elasticsearch
+KAFKA_BOOTSTRAP_SERVERS          | localhost:9092               | Kafka endpoints where to get the data
 
 ### Initialization
 

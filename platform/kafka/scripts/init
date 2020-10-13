@@ -2,11 +2,14 @@
 # ASTRID - Kafka
 # author: Alex Carrega <alessandro.carrega@cnit.it>
 
-# Download the binary
+# Download the binary and copy the configuration files
 
 source ./vars
 
 wget https://www.apache.org/dyn/closer.cgi?path=/$COMPONENT/$VERSION/$FILE $TMP_PATH/
-tar xzvf $TMP_PATH/$FILE
+tar xzvf $TMP_PATH/$FILE -C $TMP_PATH/
 mv $TMP_PATH/$SOURCE $INSTALLATION_PATH
 rm $TMP_PATH/$FILE
+
+mkdir -p $INSTALLATION_PATH/config
+cp settings/$VERSION/config/* $INSTALLATION_PATH/config/

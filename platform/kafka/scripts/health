@@ -6,6 +6,12 @@
 
 source ./vars
 
+if [ -f $PIDFILE_DEP ]; then
+    echo "$COMPONENT_DEP started"
+else
+    echo "$COMPONENT_DEP not started"
+fi
+
 if [ -f $PIDFILE ]; then
     echo "$COMPONENT started"
 else

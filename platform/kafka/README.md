@@ -23,14 +23,18 @@ The variables are defined in [scripts/vars](scripts/vars).
 
 Name                    | Default value                            | Meaning
 ------------------------|------------------------------------------|--------
+COMPONENT               | kafka                                    | Component name
+COMPONENT_DEP           | zookeeper                                | Component dependency name
 VERSION                 | 2.6.0                                    | Version number
 SCALA_VERSION           | 2.12.0                                   | Version of `Scala` programming language
-COMPONENT               | kafka                                    | Component name
 INSTALLATION_PATH       | /opt/`$COMPONENT`                        | Directory path where the software will be installed
 TMP_PATH                | /tmp                                     | Temporary dictionary path
 SOURCE                  | `$COMPONENT`_`$SCALA_VERSION`-`$VERSION` | Source filename
 FILE                    | `$SOURCE`.tgz                            | Source archive
 PIDFILE                 | `$TMP_PATH`/`$COMPONENT`.pid             | File path where the PID of the current execution is stored
+PIDFILE_DEP             | `$TMP_PATH`/`$COMPONENT_DEP`.pid         | File path where the PID of the current execution dependency is stored
+ZOOKEEPER_PORT          | 2181                                     | Port at which the clients will connect.
+KAFKA_PORT              | 9092                                     | The port the socket server listens on.
 
 ### Initialization
 
