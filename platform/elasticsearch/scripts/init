@@ -6,10 +6,10 @@
 
 source ./vars
 
-wget https://artifacts.elastic.co/downloads/logstash/$COMPONENT/$FILE $TMP_PATH/
+wget https://artifacts.elastic.co/downloads/$COMPONENT/$FILE $TMP_PATH/
 tar xzvf $TMP_PATH/$FILE
 mv $TMP_PATH/$SOURCE $INSTALLATION_PATH
 rm $TMP_PATH/$FILE
 
 mkdir -p $INSTALLATION_PATH/config
-cp settings/config/* $INSTALLATION_PATH/config/
+cp settings/$VERSION/config/* $INSTALLATION_PATH/config/

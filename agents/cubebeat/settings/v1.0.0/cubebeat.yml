@@ -1,10 +1,9 @@
-name: exec-env
 tags:
-  - "filebeat"
-  - "log"
+  - "polycube"
+  - "cubebeat"
 
-filebeat.config.inputs:
-  path: config/*.yml
+cubebeat.config.inputs:
+  path: config.d/*.yml
   reload:
     enabled: true
     period: 5s
@@ -28,12 +27,12 @@ logging:
   to_files: true
   files:
     path: $INSTALLATION_PATH/logs
-    name: filebeat.log
+    name: cubebeat.log
     keepfiles: 7
     permissions: 0644
 
 xpack.monitoring:
-  enabled: $MONITORING_ENABLED
+  enabled: $ELASTICSEARCH_MONITORING_ENABLED
   elasticsearch:
     hosts:
       - $ELASTICSEARCH_HOSTS

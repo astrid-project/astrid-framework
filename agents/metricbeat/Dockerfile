@@ -1,4 +1,4 @@
-# ASTRID - Filebeat
+# ASTRID - CB Manager
 # author: Alex Carrega <alessandro.carrega@cnit.it>
 
 # Image
@@ -6,12 +6,12 @@ ARG OS_VERSION=3.12.0
 FROM alpine:$OS_VERSION
 
 # Args
-ARG COMPONENT=filebeat
+ARG COMPONENT=metricbeat
 ARG VERSION=7.8.0
 ARG INSTALLATION_PATH=/opt/$COMPONENT
 ARG TMP_PATH=/tmp
-ARG SOURCE=$COMPONENT-$VERSION-linux-x86_64
-ARG FILE=$SOURCE.tar.gz
+ARG SOURCE=$COMPONENT-$VERSION
+ARG FILE=$SOURCE-linux-x86_64.tar.gz
 
 # Label
 LABEL maintainer="alessandro.carrega@cnit.it"
@@ -31,8 +31,8 @@ ENV LOGSTASH_HOSTS=localhost:5044
 
 # Settings
 COPY settings/$VERSION/$COMPONENT.yml $INSTALLATION_PATH/
-RUN mkdir -p $INSTALLATION_PATH/config
-COPY settings/$VERSION/config/* $INSTALLATION_PATH/config/
+RUN mkdir -p $INSTALLATION_PATH/modules.d
+COPY settings/$VERSION/modules.d/* $INSTALLATION_PATH/modules.d
 
 # Execute
 WORKDIR $INSTALLATION_PATH

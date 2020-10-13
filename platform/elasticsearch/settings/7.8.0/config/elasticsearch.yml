@@ -26,5 +26,5 @@ http:
     allow-headers: X-Requested-With, X-Auth-Token, Content-Type, Content-Length, kbn-version, Origin, Content-Type, Accept, Engaged-Auth-Token
 
 xpack:
-  monitoring.collection.enabled: $MONITORING_ENABLED
+  monitoring.collection.enabled: $ELASTICSEARCH_MONITORING_ENABLED
   security.enabled: false

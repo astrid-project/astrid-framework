@@ -1,10 +1,9 @@
-name: exec-env
 tags:
-  - "filebeat"
-  - "log"
+  - "metricbeat"
+  - "system"
 
-filebeat.config.inputs:
-  path: config/*.yml
+metricbeat.config.modules:
+  path: modules.d/*.yml
   reload:
     enabled: true
     period: 5s
@@ -16,24 +15,19 @@ setup:
 output.logstash.hosts:
   - $LOGSTASH_HOSTS
 
-processors:
-  - add_host_metadata: ~
-  - add_cloud_metadata: ~
-
 logging:
   level: info
   selectors:
-   - "*"
-  metrics.enabled: false
+    - "*"
   to_files: true
   files:
-    path: $INSTALLATION_PATH/logs
-    name: filebeat.log
+    path: logs
+    name: metricbeat.log
     keepfiles: 7
     permissions: 0644
 
 xpack.monitoring:
-  enabled: $MONITORING_ENABLED
+  enabled: $ELASTICSEARCH_MONITORING_ENABLED
   elasticsearch:
     hosts:
       - $ELASTICSEARCH_HOSTS

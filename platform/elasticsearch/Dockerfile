@@ -1,4 +1,4 @@
-# ASTRID - CB Manager
+# ASTRID - Elasticsearch
 # author: Alex Carrega <alessandro.carrega@cnit.it>
 
 # Image
@@ -6,8 +6,8 @@ ARG OS_VERSION=3.12.0
 FROM alpine:$OS_VERSION
 
 # Args
-ARG VERSION=7.8.0
 ARG COMPONENT=elasticsearch
+ARG VERSION=7.8.0
 ARG INSTALLATION_PATH=/opt/$COMPONENT
 ARG TMP_PATH=/tmp
 ARG SOURCE=$COMPONENT-$VERSION-linux-x86_64
@@ -19,16 +19,20 @@ LABEL description="$COMPONENT image based on Alpine Linux"
 LABEL version=$VERSION
 
 # Download
-RUN cd $TMP_PATH \
-    && wget https://artifacts.elastic.co/downloads/$COMPONENT/$FILE \
-    && tar xzvf $TMP_PATH/$FILE \
-    && mv $TMP_PATH/$SOURCE $INSTALLATION_PATH \
-    && rm $TMP_PATH/*
+RUN wget https://artifacts.elastic.co/downloads/$COMPONENT/$FILE $TMP_PATH/
+RUN tar xzvf $TMP_PATH/$FILE
+RUN mv $TMP_PATH/$SOURCE $INSTALLATION_PATH
+RUN rm $TMP_PATH/$FILE
+
+# Variables
+ENV ELASTICSEARCH_PORT=9200
+ENV ELASTICSEARCH_MONITORING_ENABLED=false
+ENV ELASTICSEARCH_TRANSPORT_TCP_PORT=9300
 
 # Settings
-WORKDIR $INSTALLATION_PATH
 RUN mkdir -p config
-COPY settings/config/* config/
+COPY settings/$VERSION/config/* config/
 
-# Run
+# Execute
+WORKDIR $INSTALLATION_PATH
 ENTRYPOINT ["$INSTALLATION_PATH/$COMPONENT"]

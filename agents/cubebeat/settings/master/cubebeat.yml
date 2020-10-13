@@ -1,9 +1,9 @@
 tags:
-  - "metricbeat"
-  - "system"
+  - "polycube"
+  - "cubebeat"
 
-metricbeat.config.modules:
-  path: modules.d/*.yml
+cubebeat.config.inputs:
+  path: config.d/*.yml
   reload:
     enabled: true
     period: 5s
@@ -15,19 +15,24 @@ setup:
 output.logstash.hosts:
   - $LOGSTASH_HOSTS
 
+processors:
+  - add_host_metadata: ~
+  - add_cloud_metadata: ~
+
 logging:
   level: info
   selectors:
-    - "*"
+   - "*"
+  metrics.enabled: false
   to_files: true
   files:
-    path: logs
-    name: metricbeat.log
+    path: $INSTALLATION_PATH/logs
+    name: cubebeat.log
     keepfiles: 7
     permissions: 0644
 
 xpack.monitoring:
-  enabled: $MONITORING_ENABLED
+  enabled: $ELASTICSEARCH_MONITORING_ENABLED
   elasticsearch:
     hosts:
       - $ELASTICSEARCH_HOSTS

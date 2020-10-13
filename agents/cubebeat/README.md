@@ -23,8 +23,9 @@ The variables are defined in [scripts/vars](scripts/vars).
 
 Name                | Default value                        | Meaning
 --------------------|--------------------------------------|--------
+COMPONENT           | cubebeat                             | Component name
 VERSION             | 7.8.0                                | Version number
-COMPONENT           | filebeat                             | Component name
+PROJECT             | astrid                               | Project name
 INSTALLATION_PATH   | /opt/`COMPONENT`                     | Directory path where the software will be installed
 CONFIG_PATH         | `$INSTALLATION_PATH`/config          | Directory path where the configuration will be stored
 TMP_PATH            | /tmp                                 | Temporary dictionary path

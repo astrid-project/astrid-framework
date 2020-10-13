@@ -6,11 +6,9 @@
 
 source ./vars
 
-wget https://artifacts.elastic.co/downloads/beats/$COMPONENT/$FILE $TMP_PATH/
+git clone https://github.com/$PROJECT-project/$COMPONENT --branch $VERSION $INSTALLATION_PATH
 
-tar xzvf $TMP_PATH/$FILE
-mv $TMP_PATH/$SOURCE $INSTALLATION_PATH
-rm $TMP_PATH/$FILE
+
 
 cp settings/$COMPONENT.yml $INSTALLATION_PATH/
 cp settings/config/* $CONFIG_PATH/

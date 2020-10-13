@@ -6,7 +6,7 @@ log:
   level: info
 
 xpack.monitoring:
-  enabled: $MONITORING_ENABLED
+  enabled: $ELASTICSEARCH_MONITORING_ENABLED
   elasticsearch:
     hosts:
       - $ELASTICSEARCH_HOSTS

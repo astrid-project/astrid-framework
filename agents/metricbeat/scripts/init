@@ -2,15 +2,16 @@
 # ASTRID - Metricbeat
 # author: Alex Carrega <alessandro.carrega@cnit.it>
 
-# Download the binary
+# Download the binary and copy the configuration files
 
 source ./vars
 
 wget https://artifacts.elastic.co/downloads/beats/$COMPONENT/$FILE $TMP_PATH/
-
 tar xzvf $TMP_PATH/$FILE
 mv $TMP_PATH/$SOURCE $INSTALLATION_PATH
 rm $TMP_PATH/$FILE
 
-cp settings/$COMPONENT.yml $INSTALLATION_PATH/
-cp settings/modules.d/* $MODULES_PATH/
+cp settings/$VERSION/$COMPONENT.yml $INSTALLATION_PATH/
+
+mkdir -p $INSTALLATION_PATH/modules.d
+cp settings/$VERSION/modules.d/* $INSTALLATION_PATH/modules.d/

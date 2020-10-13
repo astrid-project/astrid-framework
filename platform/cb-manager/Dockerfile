@@ -6,16 +6,18 @@ FROM alpine/git as git-clone
 
 ARG COMPONENT=cb-manager
 ARG VERSION=master
+ARG PROJECT=astrid
 ARG INSTALLATION_PATH=/opt/$COMPONENT
 
-RUN git clone https://github.com/astrid-project/$COMPONENT --branch $VERSION $INSTALLATION_PATH
+RUN git clone https://github.com/$PROJECT-project/$COMPONENT --branch $VERSION $INSTALLATION_PATH
 
 
 # Stage PIP REQUIREMENTS
-FROM astridproject/python3:3.8-alpine as pip-requirements
+FROM python:3.8-alpine as pip-requirements
+
+RUN apk add --no-cache --virtual .build-deps gcc musl-dev linux-headers
 
 COPY --from=git-clone $INSTALLATION_PATH/requirements.txt /requirements.txt
-
 RUN pip install --prefix=$INSTALLATION_PATH -r /requirements.txt
 
 
@@ -44,11 +46,11 @@ ENV CB_MAN_LOG_LEVEL=DEBUG
 
 COPY --from=git-clone $INSTALLATION_PATH $INSTALLATION_PATH
 COPY --from=pip-requirements $INSTALLATION_PATH /usr/local
-WORKDIR $INSTALLATION_PATH
 
 COPY settings/$VERSION/config.ini $INSTALLATION_PATH/
 
 # Execute
+WORKDIR $INSTALLATION_PATH
 ENTRYPOINT ["python3", "main.py"]
 
 # Port

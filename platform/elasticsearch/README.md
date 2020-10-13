@@ -23,15 +23,15 @@ The variables are defined in [scripts/vars](scripts/vars).
 
 Name                             | Default value                | Meaning
 ---------------------------------|------------------------------|--------
+COMPONENT                        | elasticsearch                | Component name
 VERSION                          | 7.8.0                        | Version number
-COMPONENT                        | logstash                     | Component name
 INSTALLATION_PATH                | /opt/`COMPONENT`             | Directory path where the software will be installed
 TMP_PATH                         | /tmp                         | Temporary dictionary path
 SOURCE                           | `$COMPONENT`-`$VERSION`      | Source filename
 FILE                             | `$SOURCE`.zip                | Source archive
 PIDFILE                          | `$TMP_PATH`/`$COMPONENT`.pid | File path where the PID of the current execution is stored
-MONITORING_ENABLED               | false                        | Enable monitoring
 ELASTICSEARCH_PORT               | 9200                         | Port where Elasticsearch listen to get the data
+ELASTICSEARCH_MONITORING_ENABLED | false                        | Enable monitoring
 ELASTICSEARCH_TRANSPORT_TCP_PORT | localhost:9092               | Port for communications between nodes in a Elasticsearch cluster
 
 ### Initialization

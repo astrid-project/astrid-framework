@@ -21,19 +21,19 @@
 
 The variables are defined in [scripts/vars](scripts/vars).
 
-Name                    | Default value                | Meaning
-------------------------|------------------------------|--------
-VERSION                 | 7.8.0                        | Version number
-COMPONENT               | logstash                     | Component name
-INSTALLATION_PATH       | /opt/`COMPONENT`             | Directory path where the software will be installed
-TMP_PATH                | /tmp                         | Temporary dictionary path
-SOURCE                  | `$COMPONENT`-`$VERSION`      | Source filename
-FILE                    | `$SOURCE`.zip                | Source archive
-PIDFILE                 | `$TMP_PATH`/`$COMPONENT`.pid | File path where the PID of the current execution is stored
-LOGSTASH_PORT           | 5044                         | Port where Logstash is listening to get the data from the beats
-MONITORING_ENABLED      | false                        | Enable monitoring with Elasticsearch
-ELASTICSEARCH_HOSTS     | localhost:9200               | Elasticsearch endpoints to connect for monitoring
-KAFKA_BOOTSTRAP_SERVERS | localhost:9092               | Kafka endpoints where to send the data
+Name                             | Default value                | Meaning
+---------------------------------|------------------------------|--------
+COMPONENT                        | logstash                     | Component name
+VERSION                          | 7.8.0                        | Version number
+INSTALLATION_PATH                | /opt/`COMPONENT`             | Directory path where the software will be installed
+TMP_PATH                         | /tmp                         | Temporary dictionary path
+SOURCE                           | `$COMPONENT`-`$VERSION`      | Source filename
+FILE                             | `$SOURCE`.zip                | Source archive
+PIDFILE                          | `$TMP_PATH`/`$COMPONENT`.pid | File path where the PID of the current execution is stored
+LOGSTASH_PORT                    | 5044                         | Port where Logstash is listening to get the data from the beats
+ELASTICSEARCH_HOSTS              | localhost:9200               | Elasticsearch endpoints to connect for monitoring
+ELASTICSEARCH_MONITORING_ENABLED | false                        | Enable monitoring with Elasticsearch
+KAFKA_BOOTSTRAP_SERVERS          | localhost:9092               | Kafka endpoints where to send the data
 
 ### Initialization
 

@@ -7,10 +7,11 @@
 source ./vars
 
 wget https://artifacts.elastic.co/downloads/beats/$COMPONENT/$FILE $TMP_PATH/
-
 tar xzvf $TMP_PATH/$FILE
 mv $TMP_PATH/$SOURCE $INSTALLATION_PATH
 rm $TMP_PATH/$FILE
 
-cp settings/$COMPONENT.yml $INSTALLATION_PATH/
-cp settings/config/* $INSTALLATION_PATH/config/
+cp settings/$VERSION/$COMPONENT.yml $INSTALLATION_PATH/
+
+mkdir -p $INSTALLATION_PATH/config
+cp settings/$VERSION/config/* $INSTALLATION_PATH/config/
