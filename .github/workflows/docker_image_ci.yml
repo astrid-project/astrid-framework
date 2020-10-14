@@ -1,8 +1,8 @@
 name: Docker Image CI
 on:
-  workflow_dispatch:
+  workflow_dispatch: # manual trigger
   schedule:
-    - cron: '0 10 * * *' # everyday at 10am
+    - cron: '0 08 * * *' # everyday at 08am
 jobs:
   docker:
     runs-on: ubuntu-latest
@@ -13,9 +13,8 @@ jobs:
             version: 7.8.0
             context: agents/filebeat
             title: Filebeat
-            description: Filebeat Docker image with configuration files
+            description: 'Filebeat Docker image with configuration files'
             url: https://www.elastic.co/beats/filebeat
-            source: https://github.com/astrid-project/astrid-framework/tree/main/agents/filebeat
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -30,6 +29,8 @@ jobs:
         id: prep
         run: |
           echo ::set-output name=created::$(date -u +'%Y-%m-%dT%H:%M:%SZ')
+      - name: branch-name
+        uses: nelonoel/branch-name@v1
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v1
       - name: Set up Docker Buildx
@@ -52,7 +53,7 @@ jobs:
             org.opencontainers.image.title=${{ matrix.title }}
             org.opencontainers.image.description=${{ matrix.description }}
             org.opencontainers.image.url=${{ matrix.url }}
-            org.opencontainers.image.source=${{ fromJson(steps.repo.outputs.result).html_url }}/tree/${{ github.event.repository.name }}/${{ matrix.context }}
+            org.opencontainers.image.source=${{ fromJson(steps.repo.outputs.result).html_url }}/tree/${{ $BRANCH_NAME }}/${{ matrix.context }}
             org.opencontainers.image.version=${{ matrix.version }}
             org.opencontainers.image.created=${{ steps.prep.outputs.created }}
             org.opencontainers.image.revision=${{ github.sha }}
