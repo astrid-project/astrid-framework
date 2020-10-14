@@ -46,6 +46,8 @@ jobs:
           context: ${{ matrix.context }}
           file: ${{ matrix.context }}/Dockerfile
           platforms: linux/amd64,linux/arm64,linux/386
+          build-args: |
+            VERSION=${{ matrix.version }}
           push: true
           tags: astridproject/${{ matrix.component }}:${{ matrix.version }}
           labels: |
