@@ -15,6 +15,11 @@ RUN git clone https://github.com/$PROJECT-project/$COMPONENT --branch $VERSION $
 # Stage PIP REQUIREMENTS
 FROM python:3.8-alpine as pip-requirements
 
+ARG COMPONENT=cb-manager
+ARG VERSION=master
+ARG PROJECT=astrid
+ARG INSTALLATION_PATH=/opt/$COMPONENT
+
 RUN apk add --no-cache --virtual .build-deps gcc musl-dev linux-headers
 
 COPY --from=git-clone $INSTALLATION_PATH/requirements.txt /requirements.txt
@@ -24,7 +29,9 @@ RUN pip install --prefix=$INSTALLATION_PATH -r /requirements.txt
 # Stage FINAL
 FROM python:3.8-alpine as final
 
+ARG COMPONENT=cb-manager
 ARG VERSION=master
+ARG PROJECT=astrid
 ARG INSTALLATION_PATH=/opt/$COMPONENT
 
 LABEL maintainer="alessandro.carrega@cnit.it"
