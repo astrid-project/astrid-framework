@@ -4,3 +4,6 @@
 [submodule "platform/cb-manager/src"]
 	path = platform/cb-manager/src
 	url = https://github.com/astrid-project/cb-manager.git
+[submodule "agents/cubebeat/src"]
+	path = agents/cubebeat/src
+	url = https://github.com/astrid-project/cubebeat.git
