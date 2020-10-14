@@ -12,6 +12,10 @@ jobs:
           - component: filebeat
             version: 7.8.0
             context: agents/filebeat
+            title: Filebeat
+            description: Filebeat Docker image with configuration files
+            url: https://www.elastic.co/beats/filebeat
+            source: https://github.com/astrid-project/astrid-framework/tree/main/agents/filebeat
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -39,17 +43,17 @@ jobs:
         id: docker_build
         uses: docker/build-push-action@v2
         with:
-          context: ${{ strategy.matrix.context }}
+          context: ${{ matrix.context }}
           file: ./Dockerfile
           platforms: linux/amd64,linux/arm64,linux/386
           push: true
-          tags: astridproject/${{ strategy.matrix.component }}:${{ strategy.matrix.version }}
+          tags: astridproject/${{ matrix.component }}:${{ matrix.version }}
           labels: |
-            org.opencontainers.image.title=${{ fromJson(steps.repo.outputs.result).name }}
-            org.opencontainers.image.description=${{ fromJson(steps.repo.outputs.result).description }}
-            org.opencontainers.image.url=${{ fromJson(steps.repo.outputs.result).html_url }}
-            org.opencontainers.image.source=${{ fromJson(steps.repo.outputs.result).clone_url }}
-            org.opencontainers.image.version=${{ strategy.matrix.version }}
+            org.opencontainers.image.title=${{ matrix.title }}
+            org.opencontainers.image.description=${{ matrix.description }}
+            org.opencontainers.image.url=${{ matrix.url }}
+            org.opencontainers.image.source=${{ fromJson(steps.repo.outputs.result).html_url }}/tree/${{ github.event.repository.name }}/${{ matrix.context }}
+            org.opencontainers.image.version=${{ matrix.version }}
             org.opencontainers.image.created=${{ steps.prep.outputs.created }}
             org.opencontainers.image.revision=${{ github.sha }}
             org.opencontainers.image.licenses=${{ fromJson(steps.repo.outputs.result).license.spdx_id }}
