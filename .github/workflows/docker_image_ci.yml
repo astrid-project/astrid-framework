@@ -144,6 +144,7 @@ jobs:
           file: ${{ matrix.context }}/Dockerfile
           build-args: |
             VERSION=${{ matrix.version }}
+          no-cache: true
           push: true
           tags: astridproject/${{ matrix.component }}:${{ matrix.version }}
           labels: |
