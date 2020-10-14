@@ -1,23 +1,115 @@
 name: Docker Image CI
+
 on:
   workflow_dispatch: # manual trigger
+
   schedule:
-    - cron: '0 08 * * *' # everyday at 08am
+    - cron: '0 05 * * *' # everyday at 05am
+
 jobs:
   docker:
     runs-on: ubuntu-latest
     strategy:
       matrix:
         include:
+          - component: cubebeat
+            version: master
+            context: agents/cubebeat
+            title: Cubebeat
+            description: 'Cubebeat Docker image with configuration files'
+            url: https://github.com/astrid-project/cubebeat
+
+
+          - component: cubebeat
+            version: v1.0.0
+            context: agents/cubebeat
+            title: Cubebeat
+            description: 'Cubebeat Docker image with configuration files'
+            url: https://github.com/astrid-project/cubebeat
+
+
           - component: filebeat
             version: 7.8.0
             context: agents/filebeat
             title: Filebeat
             description: 'Filebeat Docker image with configuration files'
             url: https://www.elastic.co/beats/filebeat
+
+
+          - component: lcp
+            version: master
+            context: agents/lcp
+            title: LCP (Local Control Plane)
+            description: 'LCP Docker image with configuration files'
+            url: https://github.com/astrid-project/lcp
+
+          - component: lcp
+            version: v1.0.0
+            context: agents/lcp
+            title: LCP (Local Control Plane)
+            description: 'LCP Docker image with configuration files'
+            url: https://github.com/astrid-project/lcp
+
+
+          - component: logstash-local
+            version: 7.8.0
+            context: agents/logstash
+            title: Logstash
+            description: 'Logstash Docker image with configuration files for local environment'
+            url: https://www.elastic.co/logstash
+
+
+          - component: metricbeat
+            version: 7.8.0
+            context: agents/metricbeat
+            title: Metricbeat
+            description: 'Metricbeat Docker image with configuration files'
+            url: https://www.elastic.co/beats/metricbeat
+
+
+          - component: cb-manager
+            version: master
+            context: platform/cb-manager
+            title: CB (Context Broker) Manager
+            description: 'CB-Manager Docker image with configuration files'
+            url: https://github.com/astrid-project/cb-manager
+
+          - component: cb-manager
+            version: v1.0.0
+            context: platform/cb-manager
+            title: CB (Context Broker) Manager
+            description: 'CB-Manager Docker image with configuration files'
+            url: https://github.com/astrid-project/cb-manager
+
+
+          - component: elasticsearch
+            version: 7.8.0
+            context: platform/elasticsearch
+            title: Elasticsearch
+            description: 'Elasticsearch Docker image with configuration files'
+            url: https://www.elastic.co/elasticsearch
+
+
+          - component: kafka
+            version: 2.6.0
+            context: platform/kafka
+            title: Kafka
+            description: 'Kafka Docker image with configuration files'
+            url: https://kafka.apache.org
+
+
+          - component: logstash-central
+            version: 7.8.0
+            context: platform/logstash
+            title: Logstash
+            description: 'Logstash Docker image with configuration files for central node'
+            url: https://www.elastic.co/logstash
+
+
     steps:
       - name: Checkout
         uses: actions/checkout@v2
+
       - name: Repo metadata
         id: repo
         uses: actions/github-script@v3
@@ -25,20 +117,25 @@ jobs:
           script: |
             const repo = await github.repos.get(context.repo)
             return repo.data
+
       - name: Prepare
         id: prep
         run: |
           echo ::set-output name=created::$(date -u +'%Y-%m-%dT%H:%M:%SZ')
           echo ::set-output name=branch::$(echo ${GITHUB_REF#refs/heads/} | sed 's/\//_/g')
+
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v1
+
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v1
+
       - name: Login to DockerHub
         uses: docker/login-action@v1
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
+
       - name: Build and push
         id: docker_build
         uses: docker/build-push-action@v2
@@ -59,5 +156,6 @@ jobs:
             org.opencontainers.image.created=${{ steps.prep.outputs.created }}
             org.opencontainers.image.revision=${{ github.sha }}
             org.opencontainers.image.licenses=${{ fromJson(steps.repo.outputs.result).license.spdx_id }}
+
       - name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
