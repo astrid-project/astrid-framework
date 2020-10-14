@@ -6,7 +6,7 @@
 
 source ./vars
 
-wget https://www.apache.org/dyn/closer.cgi?path=/$COMPONENT/$VERSION/$FILE $TMP_PATH/
+wget -P $TMP_PATH/ https://www.apache.org/dyn/closer.cgi?path=/$COMPONENT/$VERSION/$FILE
 tar xzvf $TMP_PATH/$FILE -C $TMP_PATH/
 mv $TMP_PATH/$SOURCE $INSTALLATION_PATH
 rm $TMP_PATH/$FILE

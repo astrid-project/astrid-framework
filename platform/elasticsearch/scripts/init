@@ -6,7 +6,7 @@
 
 source ./vars
 
-wget https://artifacts.elastic.co/downloads/$COMPONENT/$FILE $TMP_PATH/
+wget -P $TMP_PATH/ https://artifacts.elastic.co/downloads/$COMPONENT/$FILE
 tar xzvf $TMP_PATH/$FILE -C $TMP_PATH/
 mv $TMP_PATH/$SOURCE $INSTALLATION_PATH
 rm $TMP_PATH/$FILE

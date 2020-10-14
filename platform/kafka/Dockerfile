@@ -20,7 +20,7 @@ LABEL description="$COMPONENT image based on Alpine Linux"
 LABEL version=$VERSION
 
 # Download
-RUN wget https://www.apache.org/dyn/closer.cgi?path=/$COMPONENT/$VERSION/$FILE $TMP_PATH/
+RUN wget -P $TMP_PATH/ https://www.apache.org/dyn/closer.cgi?path=/$COMPONENT/$VERSION/$FILE
 RUN tar xzvf $TMP_PATH/$FILE -C $TMP_PATH/
 RUN mv $TMP_PATH/$SOURCE $INSTALLATION_PATH
 RUN rm $TMP_PATH/$FILE
