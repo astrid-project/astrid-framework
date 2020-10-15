@@ -27,7 +27,8 @@ COPY --from=git-clone $INSTALLATION_PATH $GOPATH/src/gitlab.com/$PROJECT-reposit
 
 WORKDIR $GOPATH/src/gitlab.com/$PROJECT-repositories/$COMPONENT
 
-RUN bash +x build.sh
+RUN chmod +x ./build.sh
+RUN ./build.sh
 RUN mkdir -p $INSTALLATION_PATH
 COPY $COMPONENT $INSTALLATION_PATH/
 
