@@ -8,8 +8,9 @@ source ./vars
 
 git clone https://github.com/$PROJECT-project/$COMPONENT --branch $VERSION $GOPATH/src/gitlab.com/$PROJECT-repositories/$COMPONENT
 
+cp ../settings/$VERSION/$COMPONENT.yml $INSTALLATION_PATH/
+
 cd ./$GOPATH/src/gitlab.com/$PROJECT-repositories/$COMPONENT
 ./build.sh
 
-cp $COMPONENT $INSTALLATION_PATH/
-cp settings/$COMPONENT.yml $INSTALLATION_PATH/
+cp ./$COMPONENT $INSTALLATION_PATH/

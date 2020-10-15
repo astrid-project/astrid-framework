@@ -8,8 +8,8 @@
   - [Contents](#contents)
   - [Installation Steps](#installation-steps)
     - [Setup](#setup)
+    - [Requirements](#requirements)
     - [Initialization](#initialization)
-    - [Configuration](#configuration)
     - [Start](#start)
     - [Stop](#stop)
     - [Health](#health)
@@ -36,26 +36,30 @@ PIDFILE_DEP             | `$TMP_PATH`/`$COMPONENT_DEP`.pid         | File path w
 ZOOKEEPER_PORT          | 2181                                     | Port at which the clients will connect.
 KAFKA_PORT              | 9092                                     | The port the socket server listens on.
 
+### Requirements
+
+Enter into the `scripts` directory.
+
+```console
+$ cd scripts
+```
+
 ### Initialization
 
 ```console
-$ scripts/init
+$ ./init
 ```
-
-### Configuration
-
-Before to run the software, it could be necessary to update the configuration files located in [settings](settings) directory.
 
 ### Start
 
 ```console
-$ scripts/start
+$ ./start
 ```
 
 ### Stop
 
 ```console
-$ scripts/stop
+$ ./stop
 ```
 
 ### Health
@@ -63,7 +67,7 @@ $ scripts/stop
 Check if the software is running or not.
 
 ```console
-$ scripts/health
+$ ./health
 ```
 
 ## Docker image

@@ -8,8 +8,8 @@
   - [Contents](#contents)
   - [Installation Steps](#installation-steps)
     - [Setup](#setup)
+    - [Requirements](#requirements)
     - [Initialization](#initialization)
-    - [Configuration](#configuration)
     - [Start](#start)
     - [Stop](#stop)
     - [Health](#health)
@@ -34,26 +34,30 @@ ELASTICSEARCH_HOSTS              | localhost:9200                       | Elasti
 ELASTICSEARCH_MONITORING_ENABLED | false                                | Enable monitoring with Elasticsearch
 LOGSTASH_HOSTS                   | localhost:5044                       | Logstash endpoints where to send the collected data
 
+### Requirements
+
+Enter into the `scripts` directory.
+
+```console
+$ cd scripts
+```
+
 ### Initialization
 
 ```console
-$ scripts/init
+$ ./init
 ```
-
-### Configuration
-
-Before to run the software, it could be necessary to update the configuration files located in [settings](settings) directory.
 
 ### Start
 
 ```console
-$ scripts/start
+$ ./start
 ```
 
 ### Stop
 
 ```console
-$ scripts/stop
+$ ./stop
 ```
 
 ### Health
@@ -61,7 +65,7 @@ $ scripts/stop
 Check if the software is running or not.
 
 ```console
-$ scripts/health
+$ ./health
 ```
 
 ## Docker image

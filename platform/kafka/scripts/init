@@ -12,4 +12,4 @@ mv $TMP_PATH/$SOURCE $INSTALLATION_PATH
 rm $TMP_PATH/$FILE
 
 mkdir -p $INSTALLATION_PATH/config
-cp settings/$VERSION/config/* $INSTALLATION_PATH/config/
+cp ../settings/$VERSION/config/* $INSTALLATION_PATH/config/

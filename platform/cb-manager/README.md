@@ -13,8 +13,8 @@
   - [Contents](#contents)
   - [Installation Steps](#installation-steps)
     - [Setup](#setup)
+    - [Requirements](#requirements)
     - [Initialization](#initialization)
-    - [Configuration](#configuration)
     - [Start](#start)
     - [Stop](#stop)
     - [Health](#health)
@@ -49,26 +49,30 @@ CB_MAN_DEV_USERNAME               | cb-manager                                  
 CB_MAN_DEV_PASSWORD               | 9c804f2550e31d8f98ac9b460cfe7fbfc676c5e4452a261a2899a1ea168c0a50 [^1] | Password for HTTP authorization (used in development)
 CB_MAN_LOG_LEVEL                  | DEBUG                                                                 | General LOG level
 
+### Requirements
+
+Enter into the `scripts` directory.
+
+```console
+$ cd scripts
+```
+
 ### Initialization
 
 ```console
-$ scripts/init
+$ ./init
 ```
-
-### Configuration
-
-Before to run the software, it could be necessary to update the configuration file in [settings](settings) directory.
 
 ### Start
 
 ```console
-$ scripts/start
+$ ./start
 ```
 
 ### Stop
 
 ```console
-$ scripts/stop
+$ ./stop
 ```
 
 ### Health
@@ -76,7 +80,7 @@ $ scripts/stop
 Check if the software is running or not.
 
 ```console
-$ scripts/health
+$ ./health
 ```
 
 ## Docker image

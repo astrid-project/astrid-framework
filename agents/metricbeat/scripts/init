@@ -11,7 +11,7 @@ tar xzvf $TMP_PATH/$FILE -C $TMP_PATH/
 mv $TMP_PATH/$SOURCE $INSTALLATION_PATH
 rm $TMP_PATH/$FILE
 
-cp settings/$VERSION/$COMPONENT.yml $INSTALLATION_PATH/
+cp ../settings/$VERSION/$COMPONENT.yml $INSTALLATION_PATH/
 
 mkdir -p $INSTALLATION_PATH/modules.d
-cp settings/$VERSION/modules.d/* $INSTALLATION_PATH/modules.d/
+cp ../settings/$VERSION/modules.d/* $INSTALLATION_PATH/modules.d/
