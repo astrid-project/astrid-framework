@@ -30,7 +30,7 @@ ENV ZOOKEEPER_PORT=2181
 ENV KAFKA_PORT=9092
 
 # Settings
-COPY settings/$VERSION/entrypoint $INSTALLATION_PATH/
+COPY settings/$VERSION/entrypoint.sh $INSTALLATION_PATH/
 RUN chmod +x $INSTALLATION_PATH/entrypoint.sh
 RUN mkdir -p $INSTALLATION_PATH/config
 COPY settings/$VERSION/config/* $INSTALLATION_PATH/config/

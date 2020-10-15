@@ -10,8 +10,8 @@ ARG COMPONENT=elasticsearch
 ARG VERSION=7.8.0
 ARG INSTALLATION_PATH=/opt/$COMPONENT
 ARG TMP_PATH=/tmp
-ARG SOURCE=$COMPONENT-$VERSION-linux-x86_64
-ARG FILE=$SOURCE.tar.gz
+ARG SOURCE=$COMPONENT-$VERSION
+ARG FILE=$SOURCE-linux-x86_64.tar.gz
 
 # Label
 LABEL maintainer="alessandro.carrega@cnit.it"
