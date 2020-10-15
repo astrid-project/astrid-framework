@@ -6,7 +6,7 @@
 
 source ./vars
 
-if [ -f $PIDFILE ] ;; then
+if [ -f $PIDFILE ] ; then
     echo "Error: $COMPONENT already started"
     echo "Note: to force the start please remove $PIDFILE"
 else
