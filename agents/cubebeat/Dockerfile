@@ -21,7 +21,7 @@ ARG INSTALLATION_PATH=/opt/$COMPONENT
 
 ENV GOPATH=/opt/go
 
-RUN apk add --no-cache --virtual .build-deps gcc musl-dev bash make
+RUN apk add --no-cache --virtual .build-deps gcc musl-dev bash make git
 
 COPY --from=git-clone $INSTALLATION_PATH $GOPATH/src/gitlab.com/$PROJECT-repositories/$COMPONENT
 
@@ -30,7 +30,7 @@ WORKDIR $GOPATH/src/gitlab.com/$PROJECT-repositories/$COMPONENT
 RUN chmod +x ./build.sh
 RUN ./build.sh
 RUN mkdir -p $INSTALLATION_PATH
-COPY $COMPONENT $INSTALLATION_PATH/
+RUN cp $COMPONENT $INSTALLATION_PATH/
 
 # Stage FINAL
 FROM alpine as final
