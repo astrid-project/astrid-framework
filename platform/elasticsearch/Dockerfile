@@ -35,4 +35,4 @@ COPY settings/$VERSION/config/* config/
 
 # Execute
 WORKDIR $INSTALLATION_PATH
-ENTRYPOINT [ "./elasticsearch" ]
+ENTRYPOINT [ "$INSTALLATION_PATH/$COMPONENT" ]

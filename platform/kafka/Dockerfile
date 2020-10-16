@@ -38,4 +38,4 @@ COPY settings/$VERSION/config/* $INSTALLATION_PATH/config/
 
 # Execute
 WORKDIR $INSTALLATION_PATH
-ENTRYPOINT [ "./entrypoint.sh" ]
+ENTRYPOINT [ "$INSTALLATION_PATH/entrypoint.sh" ]
