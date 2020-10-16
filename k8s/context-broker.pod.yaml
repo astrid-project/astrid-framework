@@ -80,12 +80,12 @@ spec:
           value: "9300"
         volumeMounts:
         - name: elasticsearch-data
-          mountPath: /usr/share/elasticsearch/data/
+          mountPath: /opt/elasticsearch/data/
 
       initContainers:
       - name: elasticsearch-configuration
         image: busybox
-        command: ["sh", "-c", "chmod 777 /mnt/node/mnt/elasticsearch-data"]
+        command: ["sh", "-c", "mkdir -p /mnt/node/mnt/elasticsearch-data && chmod 777 /mnt/node/mnt/elasticsearch-data"]
         securityContext:
           runAsUser: 0
         volumeMounts:

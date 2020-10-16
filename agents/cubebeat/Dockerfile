@@ -54,4 +54,4 @@ COPY settings/$VERSION/cubebeat.yml $INSTALLATION_PATH/
 
 # Execute
 WORKDIR $INSTALLATION_PATH
-ENTRYPOINT [ "./$COMPONENT" ]
+ENTRYPOINT [ "./cubebeat" ]

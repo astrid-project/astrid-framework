@@ -36,4 +36,4 @@ COPY settings/$VERSION/modules.d/* $INSTALLATION_PATH/modules.d/
 
 # Execute
 WORKDIR $INSTALLATION_PATH
-ENTRYPOINT [ "./$COMPONENT" ]
+ENTRYPOINT [ "./metricbeat" ]

@@ -37,4 +37,4 @@ COPY settings/$VERSION/pipeline/* $INSTALLATION_PATH/pipeline/
 
 # Execute
 WORKDIR $INSTALLATION_PATH
-ENTRYPOINT [ "./$COMPONENT" ]
+ENTRYPOINT [ "./logstash" ]

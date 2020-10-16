@@ -36,4 +36,4 @@ COPY settings/$VERSION/config/* $INSTALLATION_PATH/config/
 
 # Execute
 WORKDIR $INSTALLATION_PATH
-ENTRYPOINT [ "./$COMPONENT" ]
+ENTRYPOINT [ "./filebeat" ]
