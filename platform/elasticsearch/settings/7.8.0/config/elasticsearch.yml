@@ -11,14 +11,14 @@ cluster:
     - cb
 
 path:
-  data: $INSTALLATION_PATH/data
-  logs: $INSTALLATION_PATH/logs
+  data: "${INSTALLATION_PATH}/data"
+  logs: "${INSTALLATION_PATH}/logs"
 
 network.host: 0.0.0.0
-transport.tcp.port: $ELASTICSEARCH_TRANSPORT_TCP_PORT
+transport.tcp.port: "${ELASTICSEARCH_TRANSPORT_TCP_PORT}"
 
 http:
-  port: $ELASTICSEARCH_PORT
+  port: "${ELASTICSEARCH_PORT}"
   cors:
     enabled: true
     allow-origin: "*"
@@ -26,5 +26,5 @@ http:
     allow-headers: X-Requested-With, X-Auth-Token, Content-Type, Content-Length, kbn-version, Origin, Content-Type, Accept, Engaged-Auth-Token
 
 xpack:
-  monitoring.collection.enabled: $ELASTICSEARCH_MONITORING_ENABLED
+  monitoring.collection.enabled: "${ELASTICSEARCH_MONITORING_ENABLED}"
   security.enabled: false

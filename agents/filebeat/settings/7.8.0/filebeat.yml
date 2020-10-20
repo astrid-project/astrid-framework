@@ -13,7 +13,7 @@ setup:
     index.number_of_shards: 3
 
 output.logstash.hosts:
-  - $LOGSTASH_HOSTS
+  - "${LOGSTASH_HOSTS}"
 
 processors:
   - add_host_metadata: ~
@@ -26,14 +26,14 @@ logging:
   metrics.enabled: false
   to_files: true
   files:
-    path: $INSTALLATION_PATH/logs
+    path: "${INSTALLATION_PATH}/logs"
     name: filebeat.log
     keepfiles: 7
     permissions: 0644
 
 xpack.monitoring:
-  enabled: $ELASTICSEARCH_MONITORING_ENABLED
+  enabled: "${ELASTICSEARCH_MONITORING_ENABLED}"
   elasticsearch:
     hosts:
-      - $ELASTICSEARCH_HOSTS
+      - "${ELASTICSEARCH_HOSTS}"
     sniffing: true

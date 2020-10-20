@@ -1,2 +1,2 @@
 - pipeline.id: data
-  path.config: $INSTALLATION_PATH/pipeline/data.conf
+  path.config: "${INSTALLATION_PATH}/pipeline/data.conf"

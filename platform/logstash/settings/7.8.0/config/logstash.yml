@@ -1,12 +1,12 @@
 path:
-  data: $INSTALLATION_PATH/lib
-  logs: $INSTALLATION_PATH/logs
+  data: "${INSTALLATION_PATH}/lib"
+  logs: "${INSTALLATION_PATH}/logs"
 
 log:
   level: info
 
 xpack.monitoring:
-  enabled: $MONITORING_ENABLED
+  enabled: "${ELASTICSEARCH_MONITORING_ENABLED}"
   elasticsearch:
-    hosts: $ELASTICSEARCH_HOSTS
+    hosts: "${ELASTICSEARCH_HOSTS}"
     sniffing: true

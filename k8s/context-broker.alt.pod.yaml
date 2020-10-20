@@ -43,18 +43,34 @@ spec:
         - name: CB_MAN_LOG_LEVEL
           value: "DEBUG"
 
+      - name: zookeeper
+        image: digitalwonderland/zookeeper
+        ports:
+        - containerPort: 2181
+        env:
+        - name: ZOOKEEPER_ID
+          value: "1"
+        - name: ZOOKEEPER_SERVER_1
+          value: localhost
+
       - name: kafka
-        image: astridproject/kafka:2.6.0
+        image: wurstmeister/kafka
         ports:
         - containerPort: 9092
         env:
-        - name: KAFKA_PORT
+        - name: KAFKA_ADVERTISED_PORT
           value: "9092"
-        - name: ZOOKEEPER_PORT
-          value: "2181"
+        - name: KAFKA_ADVERTISED_HOST_NAME
+          value: kafka-service
+        - name: KAFKA_ZOOKEEPER_CONNECT
+          value: localhost:2181
+        - name: KAFKA_BROKER_ID
+          value: "0"
+        - name: KAFKA_CREATE_TOPICS
+          value: "data:1:1"
 
       - name: logstash
-        image: astridproject/logstash-central:7.8.0
+        image: docker.elastic.co/logstash/logstash:7.8.0
         ports:
         - containerPort: 5144
         env:
@@ -66,9 +82,14 @@ spec:
           value: "localhost:9200"
         - name: KAFKA_BOOTSTRAP_SERVERS
           value: "localhost:9092"
+        volumeMounts:
+          - name: logstash-config
+            mountPath: /usr/share/logstash/config/
+          - name: logstash-pipeline
+            mountPath: /usr/share/logstash/pipeline/
 
       - name: elasticsearch
-        image: astridproject/elasticsearch:7.8.0
+        image: docker.elastic.co/elasticsearch/elasticsearch:7.8.0
         securityContext:
           runAsUser: 0
         ports:
@@ -83,10 +104,11 @@ spec:
         - name: ELASTICSEARCH_TRANSPORT_TCP_PORT
           value: "9300"
         volumeMounts:
+        - name: elasticsearch-config
+          mountPath: /usr/share/elasticsearch/config/
         - name: elasticsearch-data
-          mountPath: /opt/elasticsearch/data/
+          mountPath: /usr/share/elasticsearch/data/
 
-      initContainers:
       - name: elasticsearch-configuration
         image: busybox
         command: ["sh", "-c", "mkdir -p /mnt/node/mnt/elasticsearch-data && chmod 777 /mnt/node/mnt/elasticsearch-data"]
@@ -100,6 +122,28 @@ spec:
       - name: node
         hostPath:
           path: /
+      - name: logstash-config
+        configMap:
+          name: logstash-config
+          items:
+          - key: log4j2.properties
+            path: log4j2.properties
+          - key: logstash.yml
+            path: logstash.yml
+          - key: pipelines.yml
+            path: pipelines.yml
+      - name: logstash-pipeline
+        configMap:
+          name: logstash-pipeline
+          items:
+          - key: data.conf
+            path: data.conf
+      - name: elasticsearch-config
+        configMap:
+          name: elasticsearch-config
+          items:
+          - key: elasticsearch.yml
+            path: elasticsearch.yml
       - name: elasticsearch-data
         persistentVolumeClaim:
           claimName: elasticsearch-pv-claim
