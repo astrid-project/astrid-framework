@@ -2,16 +2,16 @@
 # ASTRID - Cubebeat
 # author: Alex Carrega <alessandro.carrega@cnit.it>
 
-COMPONENT=cubebeat
-VERSION=master
-PROJECT=astrid
-INSTALLATION_PATH=/opt/$COMPONENT
+export COMPONENT=cubebeat
+export VERSION=master
+export PROJECT=astrid
+export INSTALLATION_PATH=/opt/$COMPONENT
 
-TMP_PATH=/tmp
-PIDFILE=$TMP_PATH/$COMPONENT.pid
+export TMP_PATH=/tmp
+export PIDFILE=$TMP_PATH/$COMPONENT.pid
 
-GOPATH=/opt/go
+export GOPATH=/opt/go
 
-ELASTICSEARCH_HOSTS=localhost:9200
-ELASTICSEARCH_MONITORING_ENABLED=false
-LOGSTASH_HOSTS=localhost:5044
+export ELASTICSEARCH_HOSTS=localhost:9200
+export ELASTICSEARCH_MONITORING_ENABLED=false
+export LOGSTASH_HOSTS=localhost:5044
