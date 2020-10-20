@@ -42,6 +42,9 @@ spec:
           value: "9c804f2550e31d8f98ac9b460cfe7fbfc676c5e4452a261a2899a1ea168c0a50"
         - name: CB_MAN_LOG_LEVEL
           value: "DEBUG"
+        volumeMounts:
+        - name: node
+          mountPath: /mnt/node
 
       - name: zookeeper
         image: digitalwonderland/zookeeper
@@ -52,6 +55,9 @@ spec:
           value: "1"
         - name: ZOOKEEPER_SERVER_1
           value: localhost
+        volumeMounts:
+        - name: node
+          mountPath: /mnt/node
 
       - name: kafka
         image: wurstmeister/kafka
@@ -68,6 +74,9 @@ spec:
           value: "0"
         - name: KAFKA_CREATE_TOPICS
           value: "data:1:1"
+        volumeMounts:
+        - name: node
+          mountPath: /mnt/node
 
       - name: logstash
         image: docker.elastic.co/logstash/logstash:7.8.0
@@ -75,7 +84,7 @@ spec:
         - containerPort: 5144
         env:
         - name: INSTALLATION_PATH
-          value: /opt/elasticsearch
+          value: /usr/share/logstash
         - name: ELASTICSEARCH_MONITORING_ENABLED
           value: "false"
         - name: ELASTICSEARCH_HOSTS
@@ -87,6 +96,8 @@ spec:
             mountPath: /usr/share/logstash/config/
           - name: logstash-pipeline
             mountPath: /usr/share/logstash/pipeline/
+          - name: node
+            mountPath: /mnt/node
 
       - name: elasticsearch
         image: docker.elastic.co/elasticsearch/elasticsearch:7.8.0
@@ -96,7 +107,7 @@ spec:
         - containerPort: 9200
         env:
         - name: INSTALLATION_PATH
-          value: /opt/elasticsearch
+          value: /usr/share/elasticsearch
         - name: ELASTICSEARCH_PORT
           value: "9200"
         - name: ELASTICSEARCH_MONITORING_ENABLED
@@ -105,18 +116,24 @@ spec:
           value: "9300"
         volumeMounts:
         - name: elasticsearch-config
-          mountPath: /usr/share/elasticsearch/config/
+          mountPath: /usr/share/elasticsearch/config/elasticsearch.yml
+          subPath: elasticsearch.yml
         - name: elasticsearch-data
           mountPath: /usr/share/elasticsearch/data/
-
-      - name: elasticsearch-configuration
-        image: busybox
-        command: ["sh", "-c", "mkdir -p /mnt/node/mnt/elasticsearch-data && chmod 777 /mnt/node/mnt/elasticsearch-data"]
-        securityContext:
-          runAsUser: 0
-        volumeMounts:
         - name: node
-          mountPath: /mnt/node/
+          mountPath: /mnt/node
+
+      # - name: elasticsearch-configuration
+      #   image: busybox
+      #   command:
+      #   - "sh"
+      #   - "-c"
+      #   - "mkdir -p /mnt/node/mnt/elasticsearch-data && chmod 777 /mnt/node/mnt/elasticsearch-data"
+      #   securityContext:
+      #     runAsUser: 0
+      #   volumeMounts:
+      #   - name: node
+      #     mountPath: /mnt/node/
 
       volumes:
       - name: node
