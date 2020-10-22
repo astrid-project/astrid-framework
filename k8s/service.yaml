@@ -1,0 +1,47 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: cb-manager-service
+  namespace: astrid-kube
+  labels:
+    app: context-broker
+spec:
+  selector:
+    app: context-broker
+  type: LoadBalancer
+  ports:
+  - name: cb-manager-port
+    port: 5000
+    targetPort: 5000
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: kafka-service
+  namespace: astrid-kube
+  labels:
+    app: context-broker
+spec:
+  selector:
+    app: context-broker
+  type: LoadBalancer
+  ports:
+  - name: kafka-port
+    port: 9092
+    targetPort: 9092
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: elasticsearch-service
+  namespace: astrid-kube
+  labels:
+    app: context-broker
+spec:
+  selector:
+    app: context-broker
+  type: LoadBalancer
+  ports:
+  - name: elasticsearch-port
+    port: 9200
+    targetPort: 9200

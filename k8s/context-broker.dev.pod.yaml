@@ -44,7 +44,7 @@ spec:
           value: "DEBUG"
         volumeMounts:
         - name: node
-          mountPath: /mnt/node
+          mountPath: /node
 
       - name: zookeeper
         image: digitalwonderland/zookeeper
@@ -57,7 +57,7 @@ spec:
           value: localhost
         volumeMounts:
         - name: node
-          mountPath: /mnt/node
+          mountPath: /node
 
       - name: kafka
         image: wurstmeister/kafka
@@ -76,7 +76,7 @@ spec:
           value: "data:1:1"
         volumeMounts:
         - name: node
-          mountPath: /mnt/node
+          mountPath: /node
 
       - name: logstash
         image: docker.elastic.co/logstash/logstash:7.8.0
@@ -97,7 +97,7 @@ spec:
           - name: logstash-pipeline
             mountPath: /usr/share/logstash/pipeline/
           - name: node
-            mountPath: /mnt/node
+            mountPath: /node
 
       - name: elasticsearch
         image: docker.elastic.co/elasticsearch/elasticsearch:7.8.0
@@ -121,19 +121,19 @@ spec:
         - name: elasticsearch-data
           mountPath: /usr/share/elasticsearch/data/
         - name: node
-          mountPath: /mnt/node
+          mountPath: /node
 
-      # - name: elasticsearch-configuration
-      #   image: busybox
-      #   command:
-      #   - "sh"
-      #   - "-c"
-      #   - "mkdir -p /mnt/node/mnt/elasticsearch-data && chmod 777 /mnt/node/mnt/elasticsearch-data"
-      #   securityContext:
-      #     runAsUser: 0
-      #   volumeMounts:
-      #   - name: node
-      #     mountPath: /mnt/node/
+      - name: elasticsearch-data-permission-fix
+        image: busybox
+        command:
+        - "sh -c"
+        - "/bin/mkdir -p /node/mnt/elasticsearch-data ;"
+        - "/bin/chmod -R 777 /node/mnt/elasticsearch-data"
+        securityContext:
+          runAsUser: 0
+        volumeMounts:
+        - name: node
+          mountPath: /node/
 
       volumes:
       - name: node
