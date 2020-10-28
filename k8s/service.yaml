@@ -8,6 +8,7 @@ metadata:
 spec:
   selector:
     app: context-broker
+  clusterIP: None
   ports:
   - name: cb-manager-port
     port: 5000
@@ -23,6 +24,7 @@ metadata:
 spec:
   selector:
     app: context-broker
+  clusterIP: None
   ports:
   - name: kafka-port
     port: 9092
@@ -38,6 +40,7 @@ metadata:
 spec:
   selector:
     app: context-broker
+  clusterIP: None
   ports:
   - name: elasticsearch-port
     port: 9200
