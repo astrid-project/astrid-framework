@@ -123,17 +123,17 @@ spec:
         - name: node
           mountPath: /node
 
-      - name: elasticsearch-data-permission-fix
-        image: busybox
-        command:
-        - "sh -c"
-        - "/bin/mkdir -p /node/mnt/elasticsearch-data ;"
-        - "/bin/chmod -R 777 /node/mnt/elasticsearch-data"
-        securityContext:
-          runAsUser: 0
-        volumeMounts:
-        - name: node
-          mountPath: /node/
+      # - name: elasticsearch-data-permission-fix
+      #   image: busybox
+      #   command:
+      #   - "sh"
+      #   - "-c"
+      #   - "/bin/mkdir -p /node/mnt/elasticsearch-data ; /bin/chmod -R 777 /node/mnt/elasticsearch-data"
+      #   securityContext:
+      #     runAsUser: 0
+      #   volumeMounts:
+      #   - name: node
+      #     mountPath: /node/
 
       volumes:
       - name: node

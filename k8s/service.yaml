@@ -8,7 +8,6 @@ metadata:
 spec:
   selector:
     app: context-broker
-  type: LoadBalancer
   ports:
   - name: cb-manager-port
     port: 5000
@@ -24,7 +23,6 @@ metadata:
 spec:
   selector:
     app: context-broker
-  type: LoadBalancer
   ports:
   - name: kafka-port
     port: 9092
@@ -40,7 +38,6 @@ metadata:
 spec:
   selector:
     app: context-broker
-  type: LoadBalancer
   ports:
   - name: elasticsearch-port
     port: 9200
