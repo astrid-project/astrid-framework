@@ -1,8 +1,6 @@
 #!/bin/bash
-# ASTRID - CB Manager
+# ASTRID
 # author: Alex Carrega <alessandro.carrega@cnit.it>
-
-# Check if the cb-manager is running or not
 
 CB_PATH="/opt/cb-manager/"
 KAFKA_PATH="/opt/kafka/"
