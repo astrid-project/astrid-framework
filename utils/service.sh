@@ -4,7 +4,7 @@
 
 # Check if the cb-manager is running or not
 
-CB_MAN_PATH="/opt/cb-manager/"
+CB_PATH="/opt/cb-manager/"
 KAFKA_PATH="/opt/kafka/"
 
 if [ -z "$1" ]; then
