@@ -19,7 +19,7 @@ elif [ "$1" == "kakfa" ]; then
     else
         echo "Error: unknown action, must be: start|stop"
     fi
-elif [ "$1" == "zookeeper"]; then
+elif [ "$1" == "zookeeper" ]; then
     if [ -z "$2" ]; then
         echo "Error: missing action [start|stop]"
     elif [ "$2" == "start" ]; then
