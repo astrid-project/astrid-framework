@@ -7,7 +7,7 @@ KAFKA_PATH="/opt/kafka/"
 
 if [ -z "$1" ]; then
     echo "Error: missing service [kafka|zookeeper|cb-manager]"
-elif [ "$1" == "kakfa" ]; then
+elif [ "$1" == "kafka" ]; then
     if [ -z "$2" ]; then
         echo "Error: missing action [start|stop]"
     elif [ "$2" == "start" ]; then
