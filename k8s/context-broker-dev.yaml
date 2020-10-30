@@ -60,20 +60,22 @@ spec:
           mountPath: /node
 
       - name: kafka
-        image: wurstmeister/kafka
+        image: bitnami/kafka:latest
         ports:
         - containerPort: 9092
         env:
-        - name: KAFKA_ADVERTISED_PORT
-          value: "9092"
-        - name: KAFKA_ADVERTISED_HOST_NAME
-          value: kafka-service
-        - name: KAFKA_ZOOKEEPER_CONNECT
-          value: localhost:2181
         - name: KAFKA_BROKER_ID
           value: "0"
-        - name: KAFKA_CREATE_TOPICS
-          value: "data:1:1,AstridProxyPublishStatus:1:1,AstridProxyReadData:1:1"
+        - name: KAFKA_LISTENERS
+          value: "PLAINTEXT://:9092"
+        - name: KAFKA_ADVERTISED_LISTENERS
+          value: "PLAINTEXT://kafka-service:9092"
+        - name: KAFKA_CFG_ZOOKEEPER_CONNECT
+          value: localhost:2181
+        - name: ALLOW_PLAINTEXT_LISTENER
+          value: "yes"
+        - name: KAFKA_CFG_AUTO_CREATE_TOPICS_ENABLE
+          value: "true"
         volumeMounts:
         - name: node
           mountPath: /node
