@@ -1,0 +1,66 @@
+{
+    "id": "firewall",
+    "actions": [{
+            "id": "start",
+            "status": "started",
+            "config": {
+                "cmd": "polycubectl firewall add fw"
+            }
+        },
+        {
+            "id": "stop",
+            "status": "stopped",
+            "config": {
+                "cmd": "polycubectl fw del"
+            }
+        },
+        {
+            "id": "attach",
+            "config": {
+                "cmd": "polycubectl attach fw {port}"
+            }
+        },
+        {
+            "id": "insert",
+            "config": {
+                "cmd": "polycubectl firewall fw chain {chain} insert id={n} src={src} dst={dst} action={action}"
+            }
+        },
+        {
+            "id": "append",
+            "config": {
+                "cmd": "polycubectl firewall fw chain {chain} append src={src} dst={dst} action={action}"
+            }
+        },
+        {
+            "id": "prepend",
+            "config": {
+                "cmd": "polycubectl firewall fw chain {chain} insert src={src} dst={dst} action={action}"
+            }
+        },
+        {
+            "id": "delete",
+            "config": {
+                "cmd": "polycubectl firewall fw chain {chain} rule del {n}"
+            }
+        },
+        {
+            "id": "default",
+            "config": {
+                "cmd": "polycubectl firewall fw chain {chain} set default={action}"
+            }
+        },
+        {
+            "id": "list",
+            "config": {
+                "cmd": "polycubectl firewall fw chain {chain} rule show"
+            }
+        },
+        {
+            "id": "stats",
+            "config": {
+                "cmd": "polycubectl firewall fw chain {chain} stats show"
+            }
+        }
+    ]
+}

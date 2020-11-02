@@ -1,0 +1,82 @@
+{
+    "id": "metricbeat",
+    "parameters": [{
+            "id": "system-enabled",
+            "type": "boolean",
+            "example": true,
+            "description": "Enable/disable the collection of the system data",
+            "config": {
+                "schema": "yaml",
+                "source": "/opt/metricbeat/modules.d/system.yml",
+                "path": [
+                    "0",
+                    "enabled"
+                ]
+            }
+        },
+        {
+            "id": "system-period",
+            "type": "time-duration",
+            "example": "10s",
+            "description": "Period to collect the system data",
+            "config": {
+                "schema": "yaml",
+                "source": "/opt/metricbeat/modules.d/system.yml",
+                "path": [
+                    "0",
+                    "period"
+                ]
+            }
+        },
+        {
+            "id": "mysql-enabled",
+            "type": "boolean",
+            "example": true,
+            "description": "Enable/disable the collection of the MySQL data",
+            "config": {
+                "schema": "yaml",
+                "source": "/opt/metricbeat/modules.d/mysql.yml",
+                "path": [
+                    "0",
+                    "enabled"
+                ]
+            }
+        },
+        {
+            "id": "mysql-period",
+            "type": "time-duration",
+            "example": "10s",
+            "description": "Period to collect the MySQL data",
+            "config": {
+                "schema": "yaml",
+                "source": "/opt/metricbeat/modules.d/mysql.yml",
+                "path": [
+                    "0",
+                    "period"
+                ]
+            }
+        }
+    ],
+    "actions": [{
+            "id": "start",
+            "status": "started",
+            "config": {
+                "cmd": "sudo service metricbeat start"
+            }
+        },
+        {
+            "id": "stop",
+            "status": "stopped",
+            "config": {
+                "cmd": "sudo service metricbeat stop"
+            }
+        },
+        {
+            "id": "restart",
+            "status": "started",
+            "config": {
+                "cmd": "sudo service metricbeat restart"
+            }
+        }
+    ]
+}

@@ -1,0 +1,54 @@
+{
+    "id": "filebeat",
+    "parameters": [{
+            "id": "log-enabled",
+            "type": "boolean",
+            "example": true,
+            "description": "Enable/disable the collection of log data",
+            "config": {
+                "schema": "yaml",
+                "source": "/opt/filebeat/config/log.yml",
+                "path": [
+                    "0",
+                    "enabled"
+                ]
+            }
+        },
+        {
+            "id": "log-period",
+            "type": "time-duration",
+            "example": "10s",
+            "description": "Period to collect the log data",
+            "config": {
+                "schema": "yaml",
+                "source": "/opt/filebeat/config/log.yml",
+                "path": [
+                    "0",
+                    "backoff"
+                ]
+            }
+        }
+    ],
+    "actions": [{
+            "id": "start",
+            "status": "started",
+            "config": {
+                "cmd": "sudo service filebeat start"
+            }
+        },
+        {
+            "id": "stop",
+            "status": "stopped",
+            "config": {
+                "cmd": "sudo service filebeat stop"
+            }
+        },
+        {
+            "id": "restart",
+            "status": "started",
+            "config": {
+                "cmd": "sudo service filebeat restart"
+            }
+        }
+    ]
+}
