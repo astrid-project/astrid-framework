@@ -3,6 +3,6 @@
     "actions": [{
         "id": "start",
         "status": "started",
-        "config": { "cmd": "polycubectl dynmon add dn" }
+        "config": { "cmd": "polycubectl dynmon add dm" }
     }]
 }
