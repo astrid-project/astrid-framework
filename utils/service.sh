@@ -31,7 +31,7 @@ elif [ "$1" == "cb-manager" ]; then
     if [ -z "$2" ]; then
         echo "Error: missing action [start|stop]"
     elif [ "$2" == "start" ]; then
-        screen -S contextbroker -dm /usr/bin/python3 $CB_PATH/main.py
+        screen -S contextbroker -dm /usr/bin/python3 $CB_PATH/main.py --es-endpoint localhost:9200
     elif [ "$2" == "stop" ]; then
         screen -S contextbroker -X quit
     else
