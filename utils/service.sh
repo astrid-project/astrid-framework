@@ -15,7 +15,7 @@ elif [ "$1" == "kafka" ]; then
             screen -S kafka -dm $KAFKA_PATH/bin/kafka-server-start.sh $KAFKA_PATH/config/server.properties
         else
             echo "Error: kafka already running, use stop to close this session."
-        if
+        fi
     elif [ "$2" == "stop" ]; then
         screen -S kafka -X quit
     else
