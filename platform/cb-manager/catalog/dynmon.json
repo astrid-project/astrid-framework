@@ -1,8 +1,0 @@
-{
-    "id": "dynmon",
-    "actions": [{
-        "id": "start",
-        "status": "started",
-        "config": { "cmd": "polycubectl dynmon add dm" }
-    }]
-}

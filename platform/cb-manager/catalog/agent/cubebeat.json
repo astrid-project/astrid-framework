@@ -1,0 +1,47 @@
+{
+    "id": "cubebeat",
+    "parameters": [{
+            "id": "synflood-enabled",
+            "type": "boolean",
+            "example": true,
+            "description": "Enable/disable the collection of synflood data",
+            "config": {
+                "schema": "yaml",
+                "source": "/opt/cubebeat/config.d/synflood.yml",
+                "path": [
+                    "0",
+                    "enabled"
+                ]
+            }
+        },
+        {
+            "id": "synflood-period",
+            "type": "time-duration",
+            "example": "10s",
+            "description": "Period to collect the synflood data",
+            "config": {
+                "schema": "yaml",
+                "source": "/opt/cubebeat/config.d/synflood.yml",
+                "path": [
+                    "0",
+                    "period"
+                ]
+            }
+        }
+    ],
+    "actions": [{
+            "id": "start",
+            "status": "started",
+            "config": {
+                "cmd": "sudo /opt/cubebeat/cubebeat"
+            }
+        },
+        {
+            "id": "stop",
+            "status": "stopped",
+            "config": {
+                "cmd": "sudo killall -9 cubebeat"
+            }
+        }
+    ]
+}
