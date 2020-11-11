@@ -1,0 +1,10 @@
+{
+    "id": "ebpf_test-cnit",
+    "type_id": "container-docker",
+    "description": "eBPF test on CNIT infrastructure",
+    "hostname": "192.168.0.172",
+    "enabled": true,
+    "lcp": {
+        "port": 4000
+    }
+}

@@ -1,0 +1,10 @@
+{
+    "id": "alexcarrega-cnit",
+    "type_id": "vm",
+    "description": "VM on Alex Carrega (CNIT) laptop",
+    "hostname": "172.21.169.47",
+    "enabled": true,
+    "lcp": {
+        "port": 4000
+    }
+}
