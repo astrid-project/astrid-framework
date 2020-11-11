@@ -27,36 +27,16 @@
                     "period"
                 ]
             }
-        },
-        {
-            "id": "mysql-enabled",
-            "type": "boolean",
-            "example": true,
-            "description": "Enable/disable the collection of the MySQL data",
-            "config": {
-                "schema": "yaml",
-                "source": "/opt/metricbeat/modules.d/mysql.yml",
-                "path": [
-                    "0",
-                    "enabled"
-                ]
-            }
-        },
-        {
-            "id": "mysql-period",
-            "type": "time-duration",
-            "example": "10s",
-            "description": "Period to collect the MySQL data",
-            "config": {
-                "schema": "yaml",
-                "source": "/opt/metricbeat/modules.d/mysql.yml",
-                "path": [
-                    "0",
-                    "period"
-                ]
-            }
         }
     ],
+    "resources": [{
+        "id": "config-file",
+        "description": "Configuration file to collect log system data",
+        "config": {
+            "path": "/opt/metricbeat/modules.d/system.yml"
+        },
+        "example": "https://github.com/astrid-project/astrid-framework/blob/75ff3182b290b44329dc146140af5e4e083484ed/agents/metricbeat/settings/7.8.0/modules.d/system.yml"
+    }],
     "actions": [{
             "id": "start",
             "status": "started",

@@ -29,6 +29,14 @@
             }
         }
     ],
+    "resources": [{
+        "id": "config-file",
+        "description": "Configuration file to collect log data",
+        "config": {
+            "path": "/opt/filebeat/config/log.yml"
+        },
+        "example": "https://gitlab.com/guard2/guard-platform/-/blob/297be389b24e4fefda75cd8620629ede8e73d593/local_sidercars/monitoring/filebeat/settings/7.8.0/config/log.yml"
+    }],
     "actions": [{
             "id": "start",
             "status": "started",
