@@ -1,0 +1,24 @@
+{
+    "id": "metricbeat@alexcarrega-cnit",
+    "exec_env_id": "alexcarrega-cnit",
+    "agent_catalog_id": "metricbeat",
+    "status": "stopped"
+}
+
+{
+    "id": "metricbeat@alexcarrega-cnit",
+    "operations": {
+        "actions": [{
+            "id": "start"
+        }]
+    }
+}
+
+{
+    "id": "metricbeat@alexcarrega-cnit",
+    "operations": {
+        "actions": [{
+            "id": "stop"
+        }]
+    }
+}
