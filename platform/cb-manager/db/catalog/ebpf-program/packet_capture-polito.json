@@ -1,0 +1,36 @@
+{
+    "id": "packet-capture",
+    "description": "Transparent service to capture packets flowing through the interface it is attached to, apply filters and obtain capture in .pcap format.",
+    "parameters": [{
+        "id": "interface",
+        "type": "string",
+        "list": false,
+        "example": "eno1",
+        "description": "Network interface to connect the eBPF program to."
+    }],
+    "config": {
+        "code": [
+            "BPF_ARRAY(PKT_COUNTER, uint64_t, 1);",
+            "static __always_inline int handle_rx(struct CTXTYPE *ctx, struct pkt_metadata *md) {",
+            "   unsigned int key = 0;",
+            "   uint64_t *pkt_counter = PKT_COUNTER.lookup(&key);",
+            "   if (!pkt_counter){",
+            "       /*counter map not found !? */",
+            "       return RX_OK;",
+            "   }",
+            "   *pkt_counter+=1;",
+            "   pcn_log(ctx, LOG_TRACE, \"counter: %d\", *pkt_counter);",
+            "   return RX_OK;",
+            "}"
+        ],
+        "metrics": [{
+            "name": "packets_total",
+            "map-name": "PKT_COUNTER",
+            "open-metrics-metadata": {
+                "help": "This metric represents the number of packets that has travelled trough this probe.",
+                "type": "counter",
+                "labels": []
+            }
+        }]
+    }
+}

@@ -41,21 +41,22 @@
             "id": "start",
             "status": "started",
             "config": {
-                "cmd": "sudo service filebeat start"
+                "cmd": "/opt/filebeat/filebeat run -c /opt/filebeat/filebeat.yml",
+                "daemon": true
             }
         },
         {
             "id": "stop",
             "status": "stopped",
             "config": {
-                "cmd": "sudo service filebeat stop"
+                "cmd": "killall -9 filebeat"
             }
         },
         {
             "id": "restart",
             "status": "started",
             "config": {
-                "cmd": "sudo service filebeat restart"
+                "cmd": "killall -HUP filebeat"
             }
         }
     ]

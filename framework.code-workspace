@@ -84,6 +84,7 @@
 			"opencontainers",
 			"optarg",
 			"optind",
+			"packetbeat",
 			"pcap",
 			"peterevans",
 			"pfring",
