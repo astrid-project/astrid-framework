@@ -41,21 +41,22 @@
             "id": "start",
             "status": "started",
             "config": {
-                "cmd": "sudo service metricbeat start"
+                "cmd": "/opt/metricbeat/metricbeat run -c /opt/metricbeat/metricbeat.yml",
+                "daemon": true
             }
         },
         {
             "id": "stop",
             "status": "stopped",
             "config": {
-                "cmd": "sudo service metricbeat stop"
+                "cmd": "killall -9 metricbeat"
             }
         },
         {
             "id": "restart",
             "status": "started",
             "config": {
-                "cmd": "sudo service metricbeat restart"
+                "cmd": "killall -HUP metricbeat"
             }
         }
     ]
