@@ -15,7 +15,7 @@
             "   unsigned int key = 0;",
             "   uint64_t *pkt_counter = PKT_COUNTER.lookup(&key);",
             "   if (!pkt_counter){",
-            "       /*counter map not found !? */",
+            "       /* counter map not found !? */",
             "       return RX_OK;",
             "   }",
             "   *pkt_counter+=1;",

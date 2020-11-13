@@ -1,0 +1,19 @@
+/* POST */
+
+{
+    "ebpf_program_catalog_id": "packet-capture",
+    "exec_env_id": "alexcarrega-cnit",
+    "id": "packet-capture@alexcarrega-cnit",
+    "interface": "eth0"
+}
+
+/* DELETE */
+
+{
+    "where": {
+        "equals": {
+            "expr": "alexcarrega-cnit",
+            "target": "exec_env_id"
+        }
+    }
+}
