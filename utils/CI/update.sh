@@ -7,7 +7,7 @@ CB_PATH="/opt/cb-manager/"
 
 if [ "$1" == "cb-manager" ]; then
     echo "$1 - Update repo"
-    cd $INSTALLATION_PATH
+    cd $CB_PATH
     git checkout '*'
     git pull
 
