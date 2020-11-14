@@ -35,7 +35,7 @@
         "config": {
             "path": "/opt/filebeat/config/log.yml"
         },
-        "example": "https://gitlab.com/guard2/guard-platform/-/blob/297be389b24e4fefda75cd8620629ede8e73d593/local_sidercars/monitoring/filebeat/settings/7.8.0/config/log.yml"
+        "example": "https://github.com/astrid-project/astrid-framework/blob/89cee77fb4b3c3af2bcf0b52bb40c26937a49202/agents/filebeat/settings/7.8.0/config/log.yml"
     }],
     "actions": [{
             "id": "start",

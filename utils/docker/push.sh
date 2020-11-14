@@ -1,5 +1,5 @@
 #!/bin/bash
-# GUARD
+# ASTRID
 # author: Alex Carrega <alessandro.carrega@cnit.it>
 
 usage() {
@@ -17,7 +17,7 @@ if [ -z "$2" ]; then
     usage 2
 fi
 
-PROJECT=guard
+PROJECT=astrid
 COMPONENT=$1
 VERSION=$2
 

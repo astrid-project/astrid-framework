@@ -1,5 +1,5 @@
 #!/bin/bash
-# GUARD
+# ASTRID
 # author: Alex Carrega <alessandro.carrega@cnit.it>
 
 usage() {
