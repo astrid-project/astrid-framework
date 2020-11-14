@@ -21,5 +21,5 @@ docker run -d -p $GRAFANA_PORT:3000 \
     -e DS_NAME="Elasticsearch" -e DS_TYPE="elasticsearch" \
     -e DS_URL="http://$ELASTICSEARCH_ENDPOINT" \
     -e GF_USER="admin" -e GF_PASS="astrid" \
-    --name=grafana -v grafana-storage:/var/lib/grafana qapps/grafana-docker
+    --name=grafana -v grafana-storage:/var/lib/grafana qapps/grafana-docker:master
 
