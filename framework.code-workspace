@@ -97,6 +97,7 @@
 			"polycubenetwork",
 			"pycodestyle",
 			"pydocstyle",
+			"qapps",
 			"qemu",
 			"refs",
 			"repos",

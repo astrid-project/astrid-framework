@@ -4,7 +4,7 @@
 
 if [ -z "$1" ]; then
     echo "Error: missing Kafka IP address"
-    echo "Usage: $0 <kafka-ip-address> <kafdrop-port>"
+    echo "Usage: $0 <kafka-ip-address> [<kafdrop-port>]"
     exit 1
 fi
 
