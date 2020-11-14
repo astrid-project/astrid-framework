@@ -9,4 +9,4 @@ else
     GRAFANA_PORT=$1
 fi
 
-docker run --docker run -d -p $GRAFANA_PORT:3000 --name=grafana -v grafana-storage:/var/lib/grafana grafana/grafana
+docker run -d -p $GRAFANA_PORT:3000 --name=grafana -v grafana-storage:/var/lib/grafana grafana/grafana
