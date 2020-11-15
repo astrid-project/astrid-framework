@@ -4,16 +4,11 @@
 
 if [ -z "$1" ]; then
     echo "Error: missing Kafka IP address"
-    echo "Usage: $0 <kafka-ip-address> [<kafdrop-port>]"
+    echo "Usage: $0 <kafka-ip-address>"
     exit 1
 fi
 
-if [ -z "$2" ]; then
-    KAFDROP_PORT=9000
-else
-    KAFDROP_PORT=$2
-fi
-
+KAFDROP_PORT=9001
 KAFKA_IP_ADDRESS=$1
 
 docker run --restart=always -it --add-host kafka:$KAFKA_IP_ADDRESS -d -p $KAFDROP_PORT:9000 \
