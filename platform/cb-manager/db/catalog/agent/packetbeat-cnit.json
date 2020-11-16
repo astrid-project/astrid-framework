@@ -1,5 +1,37 @@
 {
     "id": "packetbeat",
+    "parameters": [{
+            "id": "interface",
+            "type": "string",
+            "example": "eth0",
+            "description": "The network device to capture traffic from (you can specify any for the device)",
+            "config": {
+                "schema": "yaml",
+                "source": "/opt/packetbeat/packetbeat.yml",
+                "path": [
+                    "packetbeat",
+                    "interfaces",
+                    "device"
+                ]
+            }
+        },
+        {
+            "id": "icmp-enabled",
+            "type": "boolean",
+            "example": true,
+            "description": "Enable/disable the stats of ICMP packets",
+            "config": {
+                "schema": "yaml",
+                "source": "/opt/packetbeat/packetbeat.yml",
+                "path": [
+                    "packetbeat",
+                    "protocols",
+                    "icmp",
+                    "enabled"
+                ]
+            }
+        }
+    ],
     "actions": [{
             "id": "start",
             "status": "started",
@@ -20,6 +52,13 @@
             "status": "started",
             "config": {
                 "cmd": "killall -HUP packetbeat"
+            }
+        },
+        {
+            "id": "devices",
+            "description": "List of available devices",
+            "config": {
+                "cmd": "/opt/packetbeat/packetbeat devices"
             }
         }
     ]
