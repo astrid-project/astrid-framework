@@ -75,6 +75,14 @@ jobs:
             url: https://www.elastic.co/beats/metricbeat
 
 
+          - component: packetbeat
+            version: 7.8.0
+            context: agents/packetbeat
+            title: Packetbeat
+            description: 'Packetbeat Docker image with configuration files'
+            url: https://www.elastic.co/beats/packetbeat
+
+
           - component: cb-manager
             version: master
             context: platform/cb-manager
