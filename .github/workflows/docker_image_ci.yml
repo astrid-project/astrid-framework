@@ -121,7 +121,7 @@ jobs:
             url: https://kafka.apache.org
 
 
-          - component: logstash-central
+          - component: logstash-core
             version: 7.8.0
             context: platform/logstash
             title: Logstash
