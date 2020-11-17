@@ -25,7 +25,7 @@ if [ "$1" == "cb-manager" ]; then
 				[ -f "$HOME/at-azure" ] && location="azure"
 				[ -f "$HOME/at-cnit_openstack" ] && location="CNIT-openstack"
 				[ -f "$HOME/at-cnit_k8s" ] && location="CNIT-k8s"
-				bash $WORK_DIR/../utils/send2telegram.sh "@${location} ${action} - ${mode}: ${CONTENT}"
+				bash $WORK_DIR/../send2telegram.sh "@${location} ${action} - ${mode}: ${CONTENT}"
 			fi
 		done
 	done
