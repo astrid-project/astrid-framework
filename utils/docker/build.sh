@@ -33,4 +33,4 @@ if [ -z "$DOCKER_TAG" ]; then
 fi
 
 echo "Build image -- $DOCKER_TAG"
-docker build --no-cache --build-arg VERSION=$VERSION -t $DOCKER_TAG "$DOCKERFILE_PATH"
+docker build --rm=true --no-cache --build-arg VERSION=$VERSION -t $DOCKER_TAG "$DOCKERFILE_PATH"
