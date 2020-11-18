@@ -20,4 +20,4 @@ fi
 TELEGRAM_TOKEN="1463515955:AAHPW75lMcnOUfD2dZEilrW1d0HwQgcyGt4"
 TELEGRAM_CHATID="429595417"
 
-curl -s -X POST https://api.telegram.org/bot$TELEGRAM_TOKEN/sendPhoto -F chat_id=$TELEGRAM_CHATID -F photo="@$1" -F caption="$2"
+curl -s -X POST https://api.telegram.org/bot$TELEGRAM_TOKEN/sendPhoto -F chat_id=$TELEGRAM_CHATID -F photo="@$1" -d caption="$2"
