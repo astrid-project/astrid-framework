@@ -1,5 +1,5 @@
 {
-    "id": "ebpf_test-cnit",
+    "id": "ebpf-test",
     "partner": "cnit",
     "type_id": "container-docker",
     "description": "eBPF test on CNIT infrastructure",
