@@ -29,7 +29,7 @@ if [ "$1" == "cb-manager" ]; then
 
 				echo "Send notification via Telegram"
 				cat $HOME/log/${action}-${mode}.log | convert label:@- "$HOME/log/${action}-${mode}.png"
-				bash "$HOME/$FRAMEWORK_DIR/utils/send2telegram/photo.sh" "$HOME/log/${action}-${mode}.png" "\@${location} ${action} - ${mode}"
+				bash "$HOME/$FRAMEWORK_DIR/utils/send2telegram/photo.sh" "$HOME/log/${action}-${mode}.png" "%40${location}: ${action} - ${mode}"
 			fi
 		done
 	done
@@ -40,7 +40,7 @@ if [ "$1" == "cb-manager" ]; then
 
 	echo "Send notification via Telegram"
 	screen -ls | convert label:@- "$HOME/log/screen-ls.png"
-	bash "$HOME/$FRAMEWORK_DIR/utils/send2telegram/photo.sh" "$HOME/log/screen-ls.png" "\@cnit-openstack"
+	bash "$HOME/$FRAMEWORK_DIR/utils/send2telegram/photo.sh" "$HOME/log/screen-ls.png" "%40cnit-openstack"
 else
 	echo "Error: unknown service, must be: cb-manager"
 fi
