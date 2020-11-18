@@ -6,7 +6,7 @@ FRAMEWORK_DIR=astrid-framework
 
 #--------------------------------------------------
 
-rm -f "$HOME/log/checkout-*.*" "$HOME/log/pull-*.*"
+rm -f $HOME/log/checkout-*.* $HOME/log/pull-*.*
 
 cd "$HOME/$FRAMEWORK_DIR"
 git checkout "*" > "$HOME/log/checkout-out.log" 2> "$HOME/log/checkout-err.log"

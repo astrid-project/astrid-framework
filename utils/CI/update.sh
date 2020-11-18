@@ -7,7 +7,7 @@ CB_PATH="/opt/cb-manager/"
 
 if [ "$1" == "cb-manager" ]; then
 	echo "$1 - Update repo"
-	rm -f "$HOME/log/checkout-*.*" "$HOME/log/pull-*.*" "$HOME/log/screen-ls.png"
+	rm -f $HOME/log/checkout-*.* $HOME/log/pull-*.* $HOME/log/screen-ls.png
 
 	cd "$CB_PATH"
 	git checkout '*' > "$HOME/log/checkout-out.log" 2> "$HOME/log/checkout-err.log"
