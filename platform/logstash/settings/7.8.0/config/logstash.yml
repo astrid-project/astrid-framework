@@ -1,9 +1,14 @@
-path:
-  data: "${INSTALLATION_PATH}/lib"
-  logs: "${INSTALLATION_PATH}/logs"
+config.reload:
+  automatic: true
+  interval: 60s
 
 log:
   level: info
+
+path:
+  data: "${INSTALLATION_PATH}/lib"
+  logs: "${INSTALLATION_PATH}/logs"
+  config: "${INSTALLATION_PATH}/pipeline"
 
 xpack.monitoring:
   enabled: "${ELASTICSEARCH_MONITORING_ENABLED}"

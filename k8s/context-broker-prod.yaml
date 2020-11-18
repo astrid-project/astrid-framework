@@ -54,7 +54,7 @@ spec:
           value: "2181"
 
       - name: logstash
-        image: astridproject/logstash-central:7.8.0
+        image: astridproject/logstash-core:7.8.0
         ports:
         - containerPort: 5144
         env:

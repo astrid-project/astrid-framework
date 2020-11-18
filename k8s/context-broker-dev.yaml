@@ -149,14 +149,14 @@ spec:
             path: log4j2.properties
           - key: logstash.yml
             path: logstash.yml
-          - key: pipelines.yml
-            path: pipelines.yml
       - name: logstash-pipeline
         configMap:
           name: logstash-pipeline
           items:
           - key: data.conf
             path: data.conf
+          - key: event.conf
+            path: event.conf
       - name: elasticsearch-config
         configMap:
           name: elasticsearch-config
