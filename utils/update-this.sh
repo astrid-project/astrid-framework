@@ -19,7 +19,7 @@ for action in $ACTIONS; do
 	for mode in $MODE; do
 		echo $action $mode
 
-		CONTENT="$(cat \"$HOME/log/${action}-${mode}.log\")"
+		CONTENT="$(cat $HOME/log/${action}-${mode}.log)"
 		if [ ! -z "$CONTENT" ]; then
 			location="unknown"
 			[ -f "$HOME/at-azure" ] && location="azure"
