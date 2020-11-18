@@ -6,7 +6,7 @@ FRAMEWORK_DIR=astrid-framework
 
 #--------------------------------------------------
 
-rm -f "$HOME/log/checkout-*.log" "$HOME/log/pull-*.log"
+rm -f "$HOME/log/checkout-*.*" "$HOME/log/pull-*.*"
 
 cd "$HOME/$FRAMEWORK_DIR"
 git checkout "*" > "$HOME/log/checkout-out.log" 2> "$HOME/log/checkout-err.log"
@@ -27,7 +27,9 @@ for action in $ACTIONS; do
 			[ -f "$HOME/at-cnit_k8s" ] && location="CNIT-k8s"
 
 			echo "Send notification via Telegram"
-			bash "$HOME/$FRAMEWORK_DIR/utils/send2telegram.sh" "@${location} ${action} - ${mode}: ${CONTENT}"
+			bash "$HOME/$FRAMEWORK_DIR/utils/send2telegram/message.sh" "@${location} ${action} - ${mode}"
+			cat $HOME/log/${action}-${mode}.log | convert label:@- $HOME/log/${action}-${mode}.png
+			bash "$HOME/$FRAMEWORK_DIR/utils/send2telegram/photo.sh" "@$HOME/log/${action}-${mode}.png"
 		fi
 		echo -e "\n"
 	done
