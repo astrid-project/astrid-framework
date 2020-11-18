@@ -1,5 +1,6 @@
 {
     "id": "cubebeat",
+    "partner": "cnit",
     "parameters": [{
             "id": "synflood-enabled",
             "type": "boolean",

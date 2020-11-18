@@ -1,0 +1,24 @@
+{
+    "id": "metricbeat@alexcarrega-laptop",
+    "exec_env_id": "alexcarrega-laptop",
+    "agent_catalog_id": "metricbeat",
+    "status": "stopped"
+}
+
+{
+    "id": "metricbeat@alexcarrega-laptop",
+    "operations": {
+        "actions": [{
+            "id": "start"
+        }]
+    }
+}
+
+{
+    "id": "metricbeat@alexcarrega-laptop",
+    "operations": {
+        "actions": [{
+            "id": "stop"
+        }]
+    }
+}

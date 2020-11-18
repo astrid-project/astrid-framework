@@ -1,5 +1,6 @@
 {
     "id": "firewall",
+    "partner": "polito",
     "actions": [{
             "id": "start",
             "status": "started",

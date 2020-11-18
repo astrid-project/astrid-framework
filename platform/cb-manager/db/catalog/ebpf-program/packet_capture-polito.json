@@ -1,5 +1,6 @@
 {
     "id": "packet-capture",
+    "partner": "polito",
     "description": "Transparent service to capture packets flowing through the interface it is attached to, apply filters and obtain capture in .pcap format.",
     "parameters": [{
         "id": "interface",

@@ -1,5 +1,6 @@
 {
-    "id": "alexcarrega-cnit",
+    "id": "alexcarrega-laptop",
+    "partner": "cnit",
     "type_id": "vm",
     "description": "VM on Alex Carrega (CNIT) laptop",
     "hostname": "172.21.169.47",

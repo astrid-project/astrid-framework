@@ -1,5 +1,6 @@
 {
     "id": "metricbeat",
+    "partner": "cnit",
     "parameters": [{
             "id": "system-enabled",
             "type": "boolean",

@@ -1,5 +1,6 @@
 {
     "id": "packetbeat",
+    "partner": "cnit",
     "parameters": [{
             "id": "interface",
             "type": "string",

@@ -1,12 +1,12 @@
 {
-    "id": "metricbeat@alexcarrega-cnit",
-    "exec_env_id": "alexcarrega-cnit",
-    "agent_catalog_id": "metricbeat",
+    "id": "filebeat@alexcarrega-laptop",
+    "exec_env_id": "alexcarrega-laptop",
+    "agent_catalog_id": "filebeat",
     "status": "stopped"
 }
 
 {
-    "id": "metricbeat@alexcarrega-cnit",
+    "id": "filebeat@alexcarrega-laptop",
     "operations": {
         "actions": [{
             "id": "start"
@@ -15,7 +15,7 @@
 }
 
 {
-    "id": "metricbeat@alexcarrega-cnit",
+    "id": "filebeat@alexcarrega-laptop",
     "operations": {
         "actions": [{
             "id": "stop"

@@ -1,5 +1,6 @@
 {
     "id": "filebeat",
+    "partner": "cnit",
     "parameters": [{
             "id": "log-enabled",
             "type": "boolean",
