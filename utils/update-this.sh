@@ -28,7 +28,7 @@ for action in $ACTIONS; do
 
 			echo "Send notification via Telegram"
 			cat $HOME/log/${action}-${mode}.log | convert label:@- $HOME/log/${action}-${mode}.png
-			bash "$HOME/$FRAMEWORK_DIR/utils/send2telegram/photo.sh" "$HOME/log/${action}-${mode}.png" "%40${location}: ${action} - ${mode}"
+			bash "$HOME/$FRAMEWORK_DIR/utils/send2telegram/photo.sh" "$HOME/log/${action}-${mode}.png" "${location}: ${action} - ${mode}"
 		fi
 		echo -e "\n"
 	done
