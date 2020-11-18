@@ -2,6 +2,8 @@
 # ASTRID
 # author: Alex Carrega <alessandro.carrega@cnit.it>
 
+WORK_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
 usage() {
     echo "Usage: $0 <dockerfile-path> <component-version>"
     exit $1
@@ -47,3 +49,6 @@ docker run -d $CB_MAN_ELASTICSEARCH_ENDPOINT_ENV \
             $CB_MAN_PORT_ARG \
             $LCP_PORT_ARG \
         --name $COMPONENT.$VERSION -t $DOCKER_TAG
+
+echo "Send notification via Telegram"
+bash "$WORK_DIR/../send2telegram.sh" "@azure: $(docker container list)"
