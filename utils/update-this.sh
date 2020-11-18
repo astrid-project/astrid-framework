@@ -27,9 +27,8 @@ for action in $ACTIONS; do
 			[ -f "$HOME/at-cnit_k8s" ] && location="CNIT-k8s"
 
 			echo "Send notification via Telegram"
-			bash "$HOME/$FRAMEWORK_DIR/utils/send2telegram/message.sh" "${location} ${action} - ${mode}"
 			cat $HOME/log/${action}-${mode}.log | convert label:@- $HOME/log/${action}-${mode}.png
-			bash "$HOME/$FRAMEWORK_DIR/utils/send2telegram/photo.sh" "$HOME/log/${action}-${mode}.png"
+			bash "$HOME/$FRAMEWORK_DIR/utils/send2telegram/photo.sh" "$HOME/log/${action}-${mode}.png" "${location} ${action} - ${mode}"
 		fi
 		echo -e "\n"
 	done
