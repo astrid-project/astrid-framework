@@ -29,7 +29,7 @@ if [ "$1" == "cb-manager" ]; then
 
 				echo "Send notification via Telegram"
 				cat "$HOME/log/${action}-${mode}.log" | convert label:@- "$HOME/log/${action}-${mode}.png"
-				bash "$HOME/$FRAMEWORK_DIR/utils/send2telegram/photo.sh" "$HOME/log/${action}-${mode}.png" "{${location}} [cb-manager] (${action} - ${mode})"
+				bash "$WORK_DIR/../utils/send2telegram/photo.sh" "$HOME/log/${action}-${mode}.png" "{${location}} [cb-manager] (${action} - ${mode})"
 			fi
 		done
 	done
