@@ -52,5 +52,5 @@ docker run -d $CB_MAN_ELASTICSEARCH_ENDPOINT_ENV \
 
 echo "Send notification via Telegram"
 rm -rf "$HOME/log/docker-container-list.png"
-docker container list | convert -extent 200x200 -gravity center label:@- "$HOME/log/docker-container-list.png"
+docker container list | convert -extent 200x400 -gravity center label:@- "$HOME/log/docker-container-list.png"
 bash "$WORK_DIR/../send2telegram/photo.sh" "$HOME/log/docker-container-list.png" "{azure} [$COMPONENT] (run)"

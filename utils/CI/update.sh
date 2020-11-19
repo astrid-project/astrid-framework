@@ -28,7 +28,7 @@ if [ "$1" == "cb-manager" ]; then
 				[ -f "$HOME/at-cnit_k8s" ] && location="CNIT-k8s"
 
 				echo "Send notification via Telegram"
-				cat "$HOME/log/${action}-${mode}.log" | convert -extent 200x200 -gravity center label:@- "$HOME/log/${action}-${mode}.png"
+				cat "$HOME/log/${action}-${mode}.log" | convert -extent 200x400 -gravity center label:@- "$HOME/log/${action}-${mode}.png"
 				bash "$WORK_DIR/../send2telegram/photo.sh" "$HOME/log/${action}-${mode}.png" "{${location}} [cb-manager] (${action} - ${mode})"
 			fi
 		done
