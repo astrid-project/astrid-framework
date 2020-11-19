@@ -15,6 +15,10 @@ git pull > "$HOME/log/pull-out.log" 2> "$HOME/log/pull-err.log"
 ACTIONS="checkout pull"
 MODE="out err"
 
+COMPUTER=$'\xF0\x9F\x92\xBB'
+PACKAGE=$'\xF0\x9F\x93\xA6'
+SPEAKER=$'\xF0\x9F\x93\xA2'
+
 for action in $ACTIONS; do
 	for mode in $MODE; do
 		echo $action $mode
@@ -28,7 +32,7 @@ for action in $ACTIONS; do
 
 			echo "Send notification via Telegram"
 			cat "$HOME/log/${action}-${mode}.log" | convert -extent 400x200 -gravity center label:@- "$HOME/log/${action}-${mode}.png"
-			bash "$HOME/$FRAMEWORK_DIR/utils/send2telegram/photo.sh" "$HOME/log/${action}-${mode}.png" "{${location}} [astrid-framework] (${action} - ${mode})"
+			bash "$HOME/$FRAMEWORK_DIR/utils/send2telegram/photo.sh" "$HOME/log/${action}-${mode}.png" "$COMPUTER ${location} $PACKAGE astrid-framework $SPEAKER ${action} - ${mode}"
 		fi
 		echo -e "\n"
 	done

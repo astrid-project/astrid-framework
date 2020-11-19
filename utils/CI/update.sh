@@ -5,6 +5,10 @@
 WORK_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 CB_PATH="/opt/cb-manager/"
 
+COMPUTER=$'\xF0\x9F\x92\xBB'
+PACKAGE=$'\xF0\x9F\x93\xA6'
+SPEAKER=$'\xF0\x9F\x93\xA2'
+
 if [ "$1" == "cb-manager" ]; then
 	echo "$1 - Update repo"
 	rm -f $HOME/log/checkout-*.* $HOME/log/pull-*.* $HOME/log/screen-ls.png
@@ -29,7 +33,7 @@ if [ "$1" == "cb-manager" ]; then
 
 				echo "Send notification via Telegram"
 				cat "$HOME/log/${action}-${mode}.log" | convert -extent 400x200 -gravity center label:@- "$HOME/log/${action}-${mode}.png"
-				bash "$WORK_DIR/../send2telegram/photo.sh" "$HOME/log/${action}-${mode}.png" "{${location}} [cb-manager] (${action} - ${mode})"
+				bash "$WORK_DIR/../send2telegram/photo.sh" "$HOME/log/${action}-${mode}.png" "$COMPUTER ${location} $PACKAGE cb-manager $SPEAKER ${action} - ${mode}"
 			fi
 		done
 	done

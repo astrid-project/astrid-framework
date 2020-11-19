@@ -50,7 +50,11 @@ docker run -d $CB_MAN_ELASTICSEARCH_ENDPOINT_ENV \
             $LCP_PORT_ARG \
         --name $COMPONENT.$VERSION -t $DOCKER_TAG
 
+COMPUTER=$'\xF0\x9F\x92\xBB'
+PACKAGE=$'\xF0\x9F\x93\xA6'
+SPEAKER=$'\xF0\x9F\x93\xA2'
+
 echo "Send notification via Telegram"
 rm -rf "$HOME/log/docker-container-list.png"
 docker container list | convert -extent 400x200 -gravity center label:@- "$HOME/log/docker-container-list.png"
-bash "$WORK_DIR/../send2telegram/photo.sh" "$HOME/log/docker-container-list.png" "{azure} [$COMPONENT] (run)"
+bash "$WORK_DIR/../send2telegram/photo.sh" "$HOME/log/docker-container-list.png" "$COMPUTER azure $PACKAGE $COMPONENT $SPEAKER run"
