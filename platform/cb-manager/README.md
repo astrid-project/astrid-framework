@@ -39,9 +39,9 @@ TMP_PATH                          | /tmp                                        
 PIDFILE                           | `$TMP`/`$COMPONENT`.pid                                               | File path where the PID of the current execution is stored
 CB_MAN_HOST                       | 0.0.0.0                                                               | Host address where CB-Manager is listening
 CB_MAN_PORT                       | 5000                                                                  | TCP port where CB-Manager is listening
-CB_MAN_HEARTBEAT_TIMEOUT          | 5s                                                                    | Heartbeat timeout
-CB_MAN_HEARTBEAT_PERIOD           | 5min                                                                  | Heartbeat period
-CB_MAN_HEARTBEAT_AUTH_EXPIRATION  | 30min                                                                 | Heartbeat authentication time validity
+CB_MAN_HEARTBEAT_TIMEOUT          | 10s                                                                   | Heartbeat timeout
+CB_MAN_HEARTBEAT_PERIOD           | 1min                                                                  | Heartbeat period
+CB_MAN_HEARTBEAT_AUTH_EXPIRATION  | 5min                                                                  | Heartbeat authentication time validity
 CB_MAN_ELASTICSEARCH_ENDPOINT     | localhost:9200                                                        | Elasticsearch endpoint
 CB_MAN_ELASTICSEARCH_TIMEOUT      | 20s                                                                   | Timeout for requests to Elasticsearch
 CB_MAN_ELASTICSEARCH_RETRY_PERIOD | 1min                                                                  | Period of time to wait after which to retry connection with Elasticsearch
