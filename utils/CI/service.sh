@@ -67,4 +67,4 @@ fi
 
 echo "Send notification via Telegram"
 screen -ls | convert label:@- "$HOME/log/screen-ls.png"
-bash "$WORK_DIR/../utils/send2telegram/photo.sh" "$HOME/log/screen-ls.png" "{cnit-openstack} [$1] ($2)"
+bash "$WORK_DIR/../send2telegram/photo.sh" "$HOME/log/screen-ls.png" "{cnit-openstack} [$1] ($2)"
