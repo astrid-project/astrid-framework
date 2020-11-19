@@ -19,7 +19,7 @@ for action in $ACTIONS; do
 	for mode in $MODE; do
 		echo $action $mode
 
-		CONTENT="$(cat $HOME/log/${action}-${mode}.log)"
+		CONTENT="$(cat '$HOME/log/${action}-${mode}.log')"
 		if [ ! -z "$CONTENT" ]; then
 			location="unknown"
 			[ -f "$HOME/at-azure" ] && location="azure"
@@ -27,8 +27,8 @@ for action in $ACTIONS; do
 			[ -f "$HOME/at-cnit_k8s" ] && location="CNIT-k8s"
 
 			echo "Send notification via Telegram"
-			cat $HOME/log/${action}-${mode}.log | convert label:@- $HOME/log/${action}-${mode}.png
-			bash "$HOME/$FRAMEWORK_DIR/utils/send2telegram/photo.sh" "$HOME/log/${action}-${mode}.png" "${location}: ${action} - ${mode}"
+			cat "$HOME/log/${action}-${mode}.log" | convert label:@- "$HOME/log/${action}-${mode}.png"
+			bash "$HOME/$FRAMEWORK_DIR/utils/send2telegram/photo.sh" "$HOME/log/${action}-${mode}.png" "{${location}} [astrid-framework] (${action} - ${mode})"
 		fi
 		echo -e "\n"
 	done

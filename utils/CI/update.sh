@@ -20,7 +20,7 @@ if [ "$1" == "cb-manager" ]; then
 		for mode in $MODE; do
 			echo $action $mode
 
-			CONTENT="$(cat $HOME/log/${action}-${mode}.log)"
+			CONTENT="$(cat '$HOME/log/${action}-${mode}.log')"
 			if [ ! -z "$CONTENT" ]; then
 				location="unknown"
 				[ -f "$HOME/at-azure" ] && location="azure"
@@ -28,8 +28,8 @@ if [ "$1" == "cb-manager" ]; then
 				[ -f "$HOME/at-cnit_k8s" ] && location="CNIT-k8s"
 
 				echo "Send notification via Telegram"
-				cat $HOME/log/${action}-${mode}.log | convert label:@- "$HOME/log/${action}-${mode}.png"
-				bash "$HOME/$FRAMEWORK_DIR/utils/send2telegram/photo.sh" "$HOME/log/${action}-${mode}.png" "${location}: ${action} - ${mode}"
+				cat "$HOME/log/${action}-${mode}.log" | convert label:@- "$HOME/log/${action}-${mode}.png"
+				bash "$HOME/$FRAMEWORK_DIR/utils/send2telegram/photo.sh" "$HOME/log/${action}-${mode}.png" "{${location}} [cb-manager] (${action} - ${mode})"
 			fi
 		done
 	done
@@ -37,10 +37,7 @@ if [ "$1" == "cb-manager" ]; then
 	echo "$1 - Restart"
 	bash "$WORK_DIR/service.sh" "$1" stop
 	bash "$WORK_DIR/service.sh" "$1" start
-
-	echo "Send notification via Telegram"
-	screen -ls | convert label:@- "$HOME/log/screen-ls.png"
-	bash "$HOME/$FRAMEWORK_DIR/utils/send2telegram/photo.sh" "$HOME/log/screen-ls.png" "cnit-openstack"
 else
 	echo "Error: unknown service, must be: cb-manager"
+	exit 1
 fi
