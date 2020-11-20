@@ -1,0 +1,14 @@
+[
+    {
+        "id": "filebeat@user-vm",
+        "exec_env_id": "user-vm",
+        "agent_catalog_id": "filebeat",
+        "status": "stopped"
+    },
+    {
+        "id": "metricbeat@user-vm",
+        "exec_env_id": "user-vm",
+        "agent_catalog_id": "metricbeat",
+        "status": "stopped"
+    }
+]

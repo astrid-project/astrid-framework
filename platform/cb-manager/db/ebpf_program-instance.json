@@ -1,0 +1,14 @@
+[
+    {
+        "id": "packet-capture@user-vm",
+        "exec_env_id": "user-vm",
+        "ebpf_program_catalog_id": "packet-capture",
+        "interface": "eth0"
+    },
+    {
+        "id": "packet-capture@simulation-model-tool",
+        "exec_env_id": "simulation-model-tool",
+        "ebpf_program_catalog_id": "packet-capture",
+        "interface": "eth0"
+    }
+]

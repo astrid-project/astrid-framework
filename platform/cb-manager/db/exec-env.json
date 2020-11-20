@@ -1,0 +1,26 @@
+[
+    {
+        "id": "user-vm",
+        "partner": "cnit",
+        "type_id": "vm",
+        "description": "User Virtual Machine",
+        "hostname": "172.21.169.47",
+        "enabled": true,
+        "lcp": {
+            "port": 4000
+        },
+        "stage": "development"
+    },
+    {
+        "id": "simulation-model-tool",
+        "partner": "cnit",
+        "type_id": "application",
+        "description": "Simulation Modeling Tool",
+        "hostname": "192.168.0.172",
+        "enabled": true,
+        "lcp": {
+            "port": 4000
+        },
+        "stage": "development"
+    }
+]

@@ -1,0 +1,30 @@
+[
+    {
+        "id": "bare-metal",
+        "name": "Bare Metal"
+    },
+    {
+        "id": "container-docker",
+        "name": "Container Docker"
+    },
+    {
+        "id": "container-k8s",
+        "name": "Container Kubernetes"
+    },
+    {
+        "id": "vm",
+        "name": "Virtual Machine"
+    },
+    {
+        "id": "cloud",
+        "name": "Cloud"
+    },
+    {
+        "id": "application",
+        "name": "Application"
+    },
+    {
+        "id": "gateway",
+        "name": "Gateway"
+    }
+]
