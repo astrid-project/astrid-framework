@@ -7,5 +7,7 @@
     "enabled": true,
     "lcp": {
         "port": 4000
-    }
+    },
+    "label": "eBPF-testbed",
+    "stage": "development"
 }

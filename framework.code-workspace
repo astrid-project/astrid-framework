@@ -115,6 +115,7 @@
 			"sshserver",
 			"struct",
 			"synflood",
+			"testbed",
 			"vars",
 			"wifi",
 			"workdir",
