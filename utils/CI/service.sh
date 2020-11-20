@@ -70,5 +70,5 @@ PACKAGE=$'\xF0\x9F\x93\xA6'
 SPEAKER=$'\xF0\x9F\x93\xA2'
 
 echo "Send notification via Telegram"
-screen -ls | convert -extent 400x200 -gravity center label:@- "$HOME/log/screen-ls.png"
+screen -ls | convert -extent 600x200 -gravity center label:@- "$HOME/log/screen-ls.png"
 bash "$WORK_DIR/../send2telegram/photo.sh" "$HOME/log/screen-ls.png" "$COMPUTER cnit-openstack $PACKAGE $1 $SPEAKER $2"
