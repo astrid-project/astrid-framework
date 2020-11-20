@@ -31,7 +31,7 @@ for action in $ACTIONS; do
 			[ -f "$HOME/at-cnit_k8s" ] && location="CNIT-k8s"
 
 			echo "Send notification via Telegram"
-			cat "$HOME/log/${action}-${mode}.log" | convert -extent 600x200 -gravity center label:@- "$HOME/log/${action}-${mode}.png"
+			cat "$HOME/log/${action}-${mode}.log" | convert -extent 1000x200 -gravity center label:@- "$HOME/log/${action}-${mode}.png"
 			bash "$HOME/$FRAMEWORK_DIR/utils/send2telegram/photo.sh" "$HOME/log/${action}-${mode}.png" "$COMPUTER ${location} $PACKAGE astrid-framework $SPEAKER ${action} - ${mode}"
 		fi
 		echo -e "\n"
