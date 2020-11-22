@@ -26,5 +26,9 @@
     {
         "id": "gateway",
         "name": "Gateway"
+    },
+    {
+        "id": "mobile",
+        "name": "Mobile"
     }
 ]

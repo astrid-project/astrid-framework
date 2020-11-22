@@ -1,13 +1,25 @@
 [
     {
+        "id": "mobile-phone",
+        "partner": "cnit",
+        "type_id": "mobile",
+        "description": "Mobile Phone (Android)",
+        "hostname": "localhost",
+        "enabled": true,
+        "lcp": {
+            "port": 4321
+        },
+        "stage": "development"
+    },
+    {
         "id": "user-vm",
         "partner": "cnit",
         "type_id": "vm",
         "description": "User Virtual Machine",
-        "hostname": "172.21.169.47",
+        "hostname": "localhost",
         "enabled": true,
         "lcp": {
-            "port": 4000
+            "port": 4567
         },
         "stage": "development"
     },
@@ -15,7 +27,7 @@
         "id": "simulation-model-tool",
         "partner": "cnit",
         "type_id": "application",
-        "description": "Simulation Modeling Tool",
+        "description": "Simulation Modelling Tool",
         "hostname": "192.168.0.172",
         "enabled": true,
         "lcp": {
