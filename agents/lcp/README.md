@@ -40,7 +40,7 @@ PIDFILE              | `$TMP`/`$COMPONENT`.pid                                  
 LCP_HOST             | 0.0.0.0                                                               | Host address where LCP is listening
 LCP_PORT             | 4000                                                                  | TCP port where LCP is listening
 LCP_AUTH_MAX_TTL     | 10min                                                                 | Maximum time for HTTP authorization validity
-LCP_POLYCUBE_HOST    | 127.0.0.1                                                             | Polycube host address
+LCP_POLYCUBE_HOST    | localhost                                                             | Polycube host address
 LCP_POLYCUBE_PORT    | 9000                                                                  | Polycube port address
 LCP_POLYCUBE_TIMEOUT | 20s                                                                   | Timeout for requests to Polycube
 LCP_DEV_USERNAME     | lcp                                                                   | Username for HTTP authorization (used in development)
