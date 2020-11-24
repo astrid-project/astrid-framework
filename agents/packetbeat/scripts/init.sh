@@ -7,6 +7,11 @@
 WORK_PATH="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 source "$WORK_PATH/vars.sh"
 
+if [ -d "$INSTALLATION_PATH" ]; then
+    echo "Error: component $COMPONENT already initialized in $INSTALLATION_PATH"
+    exit 1
+fi
+
 if [ ! -f $TMP_PATH/$FILE ]; then
     wget -P $TMP_PATH/ https://artifacts.elastic.co/downloads/beats/$COMPONENT/$FILE
 fi
