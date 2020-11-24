@@ -188,7 +188,7 @@ data:
     logger.saml2_decrypt.level = fatal
 kind: ConfigMap
 metadata:
-  creationTimestamp: "2020-11-20T14:24:31Z"
+  #creationTimestamp: "2020-11-20T14:24:31Z"
   managedFields:
   - apiVersion: v1
     fieldsType: FieldsV1
@@ -199,9 +199,9 @@ metadata:
         f:log4j2.properties: {}
     manager: kubectl-create
     operation: Update
-    time: "2020-11-20T14:24:31Z"
+    #time: "2020-11-20T14:24:31Z"
   name: elasticsearch-config
   namespace: astrid-kube
-  resourceVersion: "6704182"
+  #resourceVersion: "6704182"
   selfLink: /api/v1/namespaces/astrid-kube/configmaps/elasticsearch-config
-  uid: 2eb464b9-6ec5-42b2-aa54-45c2527514e6
+  #uid: 2eb464b9-6ec5-42b2-aa54-45c2527514e6
