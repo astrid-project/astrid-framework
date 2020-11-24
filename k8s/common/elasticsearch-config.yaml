@@ -6,7 +6,7 @@ data:
       master: true
 
     discovery.seed_hosts:
-      - localhost
+      - elasticsearch
 
     cluster:
       name: astrid
