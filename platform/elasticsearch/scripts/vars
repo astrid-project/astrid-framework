@@ -2,15 +2,19 @@
 # ASTRID - Elasticsearch
 # author: Alex Carrega <alessandro.carrega@cnit.it>
 
-export COMPONENT=elasticsearch
-export VERSION=7.8.0
-export INSTALLATION_PATH=/opt/$COMPONENT
-export SOURCE=$COMPONENT-$VERSION
-export FILE=$SOURCE-linux-x86_64.tar.gz
+set_var() {
+    [ ! -v $1 ] && export $1="$2"
+}
 
-export TMP_PATH=/tmp
-export PIDFILE=$TMP_PATH/$COMPONENT.pid
+set_var COMPONENT elasticsearch
+set_var VERSION 7.8.0
+set_var INSTALLATION_PATH /opt/$COMPONENT
+set_var SOURCE $COMPONENT-$VERSION
+set_var FILE $SOURCE-linux-x86_64.tar.gz
 
-export ELASTICSEARCH_PORT=9200
-export ELASTICSEARCH_MONITORING_ENABLED=false
-export ELASTICSEARCH_TRANSPORT_TCP_PORT=9300
+set_var TMP_PATH /tmp
+set_var PIDFILE $TMP_PATH/$COMPONENT.pid
+
+set_var ELASTICSEARCH_PORT 9200
+set_var ELASTICSEARCH_MONITORING_ENABLED false
+set_var ELASTICSEARCH_TRANSPORT_TCP_PORT 9300

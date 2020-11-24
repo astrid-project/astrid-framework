@@ -2,17 +2,21 @@
 # ASTRID - Kafka
 # author: Alex Carrega <alessandro.carrega@cnit.it>
 
-export COMPONENT=kafka
-export COMPONENT_DEP=zookeeper
-export VERSION=2.6.0
-export SCALA_VERSION=2.12
-export INSTALLATION_PATH=/opt/$COMPONENT
-export SOURCE=${COMPONENT}_$SCALA_VERSION-$VERSION
-export FILE=$SOURCE.tgz
+set_var() {
+    [ ! -v $1 ] && export $1="$2"
+}
 
-export TMP_PATH=/tmp
-export PIDFILE=$TMP_PATH/$COMPONENT.pid
-export PIDFILE_DEP=$TMP_PATH/$COMPONENT_DEP.pid
+set_var COMPONENT kafka
+set_var COMPONENT_DEP zookeeper
+set_var VERSION 2.6.0
+set_var SCALA_VERSION 2.12
+set_var INSTALLATION_PATH /opt/$COMPONENT
+set_var SOURCE ${COMPONENT}_$SCALA_VERSION-$VERSION
+set_var FILE $SOURCE.tgz
 
-export ZOOKEEPER_PORT=2181
-export KAFKA_PORT=9092
+set_var TMP_PATH /tmp
+set_var PIDFILE $TMP_PATH/$COMPONENT.pid
+set_var PIDFILE_DEP $TMP_PATH/$COMPONENT_DEP.pid
+
+set_var ZOOKEEPER_PORT 2181
+set_var KAFKA_PORT 9092
