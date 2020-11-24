@@ -2,7 +2,7 @@
 # ASTRID
 # author: Alex Carrega <alessandro.carrega@cnit.it>
 
-WORK_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+WORK_PATH="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 usage() {
     echo "Usage: $0 <dockerfile-path> <component-version>"
@@ -57,4 +57,4 @@ SPEAKER=$'\xF0\x9F\x93\xA2'
 echo "Send notification via Telegram"
 rm -rf "$HOME/log/docker-container-list.png"
 docker container list | convert -extent 1000x200 -gravity center label:@- "$HOME/log/docker-container-list.png"
-bash "$WORK_DIR/../send2telegram/photo.sh" "$HOME/log/docker-container-list.png" "$COMPUTER azure $PACKAGE $COMPONENT $SPEAKER run"
+bash "$WORK_PATH/../send2telegram/photo.sh" "$HOME/log/docker-container-list.png" "$COMPUTER azure $PACKAGE $COMPONENT $SPEAKER run"

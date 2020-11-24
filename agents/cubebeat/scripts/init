@@ -4,13 +4,14 @@
 
 # Download the source, build the component and copy the configuration files
 
-source ./vars
+WORK_PATH="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+source "$WORK_PATH/vars"
 
 git clone https://github.com/$PROJECT-project/$COMPONENT --branch $VERSION $GOPATH/src/gitlab.com/$PROJECT-repositories/$COMPONENT
 
-cp ../settings/$VERSION/$COMPONENT.yml $INSTALLATION_PATH/
+cp "$WORK_PATH/../settings/$VERSION/$COMPONENT.yml" $INSTALLATION_PATH/
 
-cd ./$GOPATH/src/gitlab.com/$PROJECT-repositories/$COMPONENT
+cd $GOPATH/src/gitlab.com/$PROJECT-repositories/$COMPONENT
 ./build.sh
 
 cp ./$COMPONENT $INSTALLATION_PATH/

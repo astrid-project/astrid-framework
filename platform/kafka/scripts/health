@@ -4,7 +4,8 @@
 
 # Check if kafka is running or not
 
-source ./vars
+WORK_PATH="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+source "$WORK_PATH/vars"
 
 if [ -f $PIDFILE_DEP ]; then
     echo "$COMPONENT_DEP started"

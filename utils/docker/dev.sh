@@ -17,7 +17,6 @@ if [ -z "$2" ]; then
     usage 2
 fi
 
-WORK_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 COMPONENT=$1
 VERSION=$2
 

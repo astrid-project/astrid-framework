@@ -2,7 +2,7 @@
 # ASTRID
 # author: Alex Carrega <alessandro.carrega@cnit.it>
 
-WORK_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+WORK_PATH="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 CB_PATH="/opt/cb-manager/"
 KAFKA_PATH="/opt/kafka/"
 
@@ -71,4 +71,4 @@ SPEAKER=$'\xF0\x9F\x93\xA2'
 
 echo "Send notification via Telegram"
 screen -ls | convert -extent 1000x200 -gravity center label:@- "$HOME/log/screen-ls.png"
-bash "$WORK_DIR/../send2telegram/photo.sh" "$HOME/log/screen-ls.png" "$COMPUTER cnit-openstack $PACKAGE $1 $SPEAKER $2"
+bash "$WORK_PATH/../send2telegram/photo.sh" "$HOME/log/screen-ls.png" "$COMPUTER cnit-openstack $PACKAGE $1 $SPEAKER $2"

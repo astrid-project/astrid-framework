@@ -4,7 +4,8 @@
 
 # Start the lcp
 
-source ./vars
+WORK_PATH="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+source "$WORK_PATH/vars"
 
 if [ -f $PIDFILE ] ; then
     echo "Error: $COMPONENT already started"

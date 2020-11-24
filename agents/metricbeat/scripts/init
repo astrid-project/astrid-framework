@@ -4,14 +4,15 @@
 
 # Download the binary and copy the configuration files
 
-source ./vars
+WORK_PATH="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+source "$WORK_PATH/vars"
 
 wget -P $TMP_PATH/ https://artifacts.elastic.co/downloads/beats/$COMPONENT/$FILE
 tar xzvf $TMP_PATH/$FILE -C $TMP_PATH/
 mv $TMP_PATH/$SOURCE $INSTALLATION_PATH
 rm $TMP_PATH/$FILE
 
-cp ../settings/$VERSION/$COMPONENT.yml $INSTALLATION_PATH/
+cp "$WORK_PATH/../settings/$VERSION/$COMPONENT.yml" $INSTALLATION_PATH/
 
 mkdir -p $INSTALLATION_PATH/modules.d
-cp ../settings/$VERSION/modules.d/* $INSTALLATION_PATH/modules.d/
+cp "$WORK_PATH/../settings/$VERSION/modules.d/*" $INSTALLATION_PATH/modules.d/
