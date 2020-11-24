@@ -115,7 +115,7 @@ data:
         sniffing: true
 kind: ConfigMap
 metadata:
-  creationTimestamp: "2020-11-20T14:25:27Z"
+  #creationTimestamp: "2020-11-20T14:25:27Z"
   managedFields:
   - apiVersion: v1
     fieldsType: FieldsV1
@@ -126,9 +126,9 @@ metadata:
         f:logstash.yml: {}
     manager: kubectl-create
     operation: Update
-    time: "2020-11-20T14:25:27Z"
+    #time: "2020-11-20T14:25:27Z"
   name: logstash-config
   namespace: astrid-kube
-  resourceVersion: "6704416"
+  #resourceVersion: "6704416"
   selfLink: /api/v1/namespaces/astrid-kube/configmaps/logstash-config
-  uid: e8bcf6f9-1bd6-4d24-b68e-d86d6b168de4
+  #uid: e8bcf6f9-1bd6-4d24-b68e-d86d6b168de4
