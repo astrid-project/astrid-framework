@@ -13,7 +13,7 @@ if [ -f "$PIDFILE" ] ; then
 else
     cd "$INSTALLATION_PATH"
     "./bin/$COMPONENT_DEP-server-start.sh" "./config/$COMPONENT_DEP.properties" &
-    echo "$?" > "$PIDFILE_DEP"
+    echo "$!" > "$PIDFILE_DEP"
     "./bin/$COMPONENT-server-start.sh" "./config/$COMPONENT.properties" &
-    echo "$?" > "$PIDFILE"
+    echo "$!" > "$PIDFILE"
 fi

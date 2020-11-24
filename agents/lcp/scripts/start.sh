@@ -13,5 +13,5 @@ if [ -f "$PIDFILE" ] ; then
 else
     cd "$INSTALLATION_PATH"
     python3 main.py &
-    echo "$?" > "$PIDFILE"
+    echo "$!" > "$PIDFILE"
 fi

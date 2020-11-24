@@ -13,5 +13,5 @@ if [ -f "$PIDFILE" ] ; then
 else
     cd "$INSTALLATION_PATH"
     "./$COMPONENT" &
-    echo "$?" > "$PIDFILE"
+    echo "$!" > "$PIDFILE"
 fi
