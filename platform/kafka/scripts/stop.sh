@@ -7,16 +7,16 @@
 WORK_PATH="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 source "$WORK_PATH/vars.sh"
 
-if [ -f $PIDFILE ]; then
-    kill $(cat $PIDFILE)
-    rm -f $PIDFILE
+if [ -f "$PIDFILE" ]; then
+    kill $(cat "$PIDFILE")
+    rm -f "$PIDFILE"
 else
     echo "Error: $COMPONENT not started"
 fi
 
-if [ -f $PIDFILE_DEP ]; then
-    kill $(cat $PIDFILE_DEP)
-    rm -f $PIDFILE_DEP
+if [ -f "$PIDFILE_DEP" ]; then
+    kill $(cat "$PIDFILE_DEP")
+    rm -f "$PIDFILE_DEP"
 else
     echo "Error: $COMPONENT_DEP not started"
 fi

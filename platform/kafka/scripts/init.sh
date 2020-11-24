@@ -12,11 +12,17 @@ if [ -d "$INSTALLATION_PATH" ]; then
     exit 1
 fi
 
-if [ ! -f $TMP_PATH/$FILE ]; then
-    wget -P $TMP_PATH/ https://downloads.apache.org/$COMPONENT/$VERSION/$FILE
+if [ "$1" == "-f" ] || [ "$1" == "--force" ]; then
+    rm -rf "$TMP_PATH/$FILE"
 fi
-tar -xzf $TMP_PATH/$FILE -C $TMP_PATH/
-mv $TMP_PATH/$SOURCE $INSTALLATION_PATH
 
-mkdir -p $INSTALLATION_PATH/config
-cp $WORK_PATH/../settings/$VERSION/config/* $INSTALLATION_PATH/config/
+if [ ! -f "$TMP_PATH/$FILE" ]; then
+    wget -P "$TMP_PATH/" "https://downloads.apache.org/$COMPONENT/$VERSION/$FILE"
+else
+    echo "Info: $COMPONENT already downloaded"
+fi
+tar -xzf "$TMP_PATH/$FILE" -C "$TMP_PATH/"
+mv "$TMP_PATH/$SOURCE" "$INSTALLATION_PATH"
+
+mkdir -p "$INSTALLATION_PATH/config"
+cp $WORK_PATH/../settings/$VERSION/config/* "$INSTALLATION_PATH/config/"

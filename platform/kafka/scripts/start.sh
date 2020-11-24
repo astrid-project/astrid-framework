@@ -7,13 +7,13 @@
 WORK_PATH="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 source "$WORK_PATH/vars.sh"
 
-if [ -f $PIDFILE ] ; then
+if [ -f "$PIDFILE" ] ; then
     echo "Error: $COMPONENT already started"
     echo "Note: to force the start please remove $PIDFILE"
 else
-    cd $INSTALLATION_PATH
-    ./bin/$COMPONENT_DEP-server-start.sh ./config/$COMPONENT_DEP.properties &
-    echo $? > $PIDFILE_DEP
-    ./bin/$COMPONENT-server-start ./config/$COMPONENT.properties &
-    echo $? > $PIDFILE
+    cd "$INSTALLATION_PATH"
+    "./bin/$COMPONENT_DEP-server-start.sh" "./config/$COMPONENT_DEP.properties" &
+    echo "$?" > "$PIDFILE_DEP"
+    "./bin/$COMPONENT-server-start.sh" "./config/$COMPONENT.properties" &
+    echo "$?" > "$PIDFILE"
 fi

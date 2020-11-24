@@ -12,14 +12,20 @@ if [ -d "$INSTALLATION_PATH" ]; then
     exit 1
 fi
 
-if [ ! -f $TMP_PATH/$FILE ]; then
-    wget -P $TMP_PATH/ https://artifacts.elastic.co/downloads/$COMPONENT/$FILE
+if [ "$1" == "-f" ] || [ "$1" == "--force" ]; then
+    rm -rf "$TMP_PATH/$FILE"
 fi
-unzip $TMP_PATH/$FILE -d $TMP_PATH/
-mv $TMP_PATH/$SOURCE $INSTALLATION_PATH
 
-mkdir -p $INSTALLATION_PATH/config
-cp $WORK_PATH/../settings/$VERSION/config/* $INSTALLATION_PATH/config/
+if [ ! -f "$TMP_PATH/$FILE" ]; then
+    wget -P "$TMP_PATH/" "https://artifacts.elastic.co/downloads/$COMPONENT/$FILE"
+else
+    echo "Info: $COMPONENT already downloaded"
+fi
+unzip "$TMP_PATH/$FILE" -d "$TMP_PATH/"
+mv "$TMP_PATH/$SOURCE" "$INSTALLATION_PATH"
 
-mkdir -p $INSTALLATION_PATH/pipeline
-cp $WORK_PATH/../settings/$VERSION/pipeline/* $INSTALLATION_PATH/pipeline/
+mkdir -p "$INSTALLATION_PATH/config"
+cp $WORK_PATH/../settings/$VERSION/config/* "$INSTALLATION_PATH/config/"
+
+mkdir -p "$INSTALLATION_PATH/pipeline"
+cp $WORK_PATH/../settings/$VERSION/pipeline/* "$INSTALLATION_PATH/pipeline/"

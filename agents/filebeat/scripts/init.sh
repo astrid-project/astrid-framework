@@ -12,14 +12,20 @@ if [ -d "$INSTALLATION_PATH" ]; then
     exit 1
 fi
 
-if [ ! -f $TMP_PATH/$FILE ]; then
-    wget -P $TMP_PATH/ https://artifacts.elastic.co/downloads/beats/$COMPONENT/$FILE
+if [ "$1" == "-f" ] || [ "$1" == "--force" ]; then
+    rm -rf "$TMP_PATH/$FILE"
 fi
-tar xzvf $TMP_PATH/$FILE -C $TMP_PATH/
-mv $TMP_PATH/$SOURCE $INSTALLATION_PATH
+
+if [ ! -f "$TMP_PATH/$FILE" ]; then
+    wget -P "$TMP_PATH/" "https://artifacts.elastic.co/downloads/beats/$COMPONENT/$FILE"
+else
+    echo "Info: $COMPONENT already downloaded"
+fi
+tar xzvf "$TMP_PATH/$FILE" -C "$TMP_PATH/"
+mv "$TMP_PATH/$SOURCE" "$INSTALLATION_PATH"
 
 
-cp "$WORK_PATH/../settings/$VERSION/$COMPONENT.yml" $INSTALLATION_PATH/
+cp "$WORK_PATH/../settings/$VERSION/$COMPONENT.yml" "$INSTALLATION_PATH/"
 
-mkdir -p $INSTALLATION_PATH/config
-cp $WORK_PATH/../settings/$VERSION/config/* $INSTALLATION_PATH/config/
+mkdir -p "$INSTALLATION_PATH/config"
+cp $WORK_PATH/../settings/$VERSION/config/* "$INSTALLATION_PATH/config/"

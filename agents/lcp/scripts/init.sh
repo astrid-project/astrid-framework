@@ -12,9 +12,9 @@ if [ -d "$INSTALLATION_PATH" ]; then
     exit 1
 fi
 
-git clone https://github.com/$PROJECT-project/$COMPONENT --branch $VERSION $INSTALLATION_PATH
+git clone "https://github.com/$PROJECT-project/$COMPONENT" --branch "$VERSION" "$INSTALLATION_PATH"
 
-cp "$WORK_PATH/../settings/$VERSION/config.ini" $INSTALLATION_PATH/
+cp "$WORK_PATH/../settings/$VERSION/config.ini" "$INSTALLATION_PATH/"
 
-cd $INSTALLATION_PATH
+cd "$INSTALLATION_PATH"
 pip3 install -r requirements.txt

@@ -7,7 +7,7 @@
 WORK_PATH="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 source "$WORK_PATH/vars.sh"
 
-if [ -f $PIDFILE ]; then
+if [ -f "$PIDFILE" ]; then
     echo "$COMPONENT started"
 else
     echo "$COMPONENT not started"

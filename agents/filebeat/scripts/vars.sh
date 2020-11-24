@@ -8,12 +8,12 @@ set_var() {
 
 set_var COMPONENT filebeat
 set_var VERSION 7.8.0
-set_var INSTALLATION_PATH /opt/$COMPONENT
-set_var SOURCE $COMPONENT-$VERSION-linux-x86_64
-set_var FILE $SOURCE.tar.gz
+set_var INSTALLATION_PATH "/opt/$COMPONENT"
+set_var SOURCE "$COMPONENT-$VERSION-linux-x86_64"
+set_var FILE "$SOURCE.tar.gz"
 
 set_var TMP_PATH /tmp
-set_var PIDFILE $TMP_PATH/$COMPONENT.pid
+set_var PIDFILE "$TMP_PATH/$COMPONENT.pid"
 
 set_var ELASTICSEARCH_HOSTS localhost:9200
 set_var ELASTICSEARCH_MONITORING_ENABLED false
