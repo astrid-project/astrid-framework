@@ -22,7 +22,7 @@ data:
     => true\n\t\t\t}\n\t\t}\n\t}\n}\n"
 kind: ConfigMap
 metadata:
-  creationTimestamp: "2020-11-20T14:25:51Z"
+  #creationTimestamp: "2020-11-20T14:25:51Z"
   managedFields:
   - apiVersion: v1
     fieldsType: FieldsV1
@@ -33,9 +33,9 @@ metadata:
         f:event.conf: {}
     manager: kubectl-create
     operation: Update
-    time: "2020-11-20T14:25:51Z"
+    #time: "2020-11-20T14:25:51Z"
   name: logstash-pipeline
   namespace: astrid-kube
-  resourceVersion: "6704517"
+  #resourceVersion: "6704517"
   selfLink: /api/v1/namespaces/astrid-kube/configmaps/logstash-pipeline
-  uid: 9de5c51c-613d-49d3-9fc1-3a14ce632b68
+  #uid: 9de5c51c-613d-49d3-9fc1-3a14ce632b68
