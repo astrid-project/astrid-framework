@@ -109,7 +109,7 @@ spec:
         - containerPort: 9200
         envFrom:
           - configMapRef:
-            name: elasticsearch-config
+              name: elasticsearch-config
         env:
         - name: INSTALLATION_PATH
           value: /usr/share/elasticsearch
