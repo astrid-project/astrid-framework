@@ -21,7 +21,7 @@ fi
 
 DOCKERFILE_PATH=$1
 
-source "$DOCKERFILE_PATH/scripts/vars"
+source "$DOCKERFILE_PATH/scripts/vars.sh"
 
 VERSION=$2
 
