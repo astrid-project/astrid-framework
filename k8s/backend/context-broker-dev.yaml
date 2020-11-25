@@ -126,10 +126,6 @@ spec:
         - name: node
           mountPath: /node
 
-        envFrom:
-          - configMapRef:
-              name: elasticsearch-config
-
       # - name: elasticsearch-data-permission-fix
       #   image: busybox
       #   command:
