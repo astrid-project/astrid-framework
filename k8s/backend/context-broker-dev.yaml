@@ -107,6 +107,7 @@ spec:
           runAsUser: 0
         ports:
         - containerPort: 9200
+        
         env:
         - name: INSTALLATION_PATH
           value: /usr/share/elasticsearch
