@@ -1,7 +1,8 @@
 {
     "id": "packetbeat",
     "partner": "cnit",
-    "parameters": [{
+    "parameters": [
+        {
             "id": "interface",
             "type": "string",
             "example": "eth0",
@@ -33,11 +34,19 @@
             }
         }
     ],
-    "actions": [{
+    "actions": [
+        {
+            "id": "devices",
+            "description": "List of available devices",
+            "config": {
+                "cmd": "/opt/packetbeat/packetbeat devices"
+            }
+        },
+        {
             "id": "start",
             "status": "started",
             "config": {
-                "cmd": "/opt/packetbeat/packetbeat run -c /opt/packetbeat/packetbeat.yml",
+                "cmd": "sudo bash /home/ubuntu/dev/components/packetbeat/astrid-openstack-cnit.sh start",
                 "daemon": true
             }
         },
@@ -45,21 +54,19 @@
             "id": "stop",
             "status": "stopped",
             "config": {
-                "cmd": "killall -9 packetbeat"
+                "cmd": "sudo bash /home/ubuntu/dev/components/packetbeat/astrid-openstack-cnit.sh stop"
             }
         },
         {
-            "id": "restart",
-            "status": "started",
+            "id": "health",
             "config": {
-                "cmd": "killall -HUP packetbeat"
+                "cmd": "sudo bash /home/ubuntu/dev/components/packetbeat/astrid-openstack-cnit.sh health"
             }
         },
         {
-            "id": "devices",
-            "description": "List of available devices",
+            "id": "dev",
             "config": {
-                "cmd": "/opt/packetbeat/packetbeat devices"
+                "cmd": "{cmd}"
             }
         }
     ]

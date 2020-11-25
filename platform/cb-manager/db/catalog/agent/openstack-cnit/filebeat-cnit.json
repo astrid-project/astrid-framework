@@ -38,11 +38,12 @@
         },
         "example": "https://github.com/astrid-project/astrid-framework/blob/89cee77fb4b3c3af2bcf0b52bb40c26937a49202/agents/filebeat/settings/7.8.0/config/log.yml"
     }],
-    "actions": [{
+    "actions": [
+        {
             "id": "start",
             "status": "started",
             "config": {
-                "cmd": "/opt/filebeat/filebeat run -c /opt/filebeat/filebeat.yml",
+                "cmd": "sudo bash /home/ubuntu/dev/components/filebeat/astrid-openstack-cnit.sh start",
                 "daemon": true
             }
         },
@@ -50,14 +51,19 @@
             "id": "stop",
             "status": "stopped",
             "config": {
-                "cmd": "killall -9 filebeat"
+                "cmd": "sudo bash /home/ubuntu/dev/components/filebeat/astrid-openstack-cnit.sh stop"
             }
         },
         {
-            "id": "restart",
-            "status": "started",
+            "id": "health",
             "config": {
-                "cmd": "killall -HUP filebeat"
+                "cmd": "sudo bash /home/ubuntu/dev/components/filebeat/astrid-openstack-cnit.sh health"
+            }
+        },
+        {
+            "id": "dev",
+            "config": {
+                "cmd": "{cmd}"
             }
         }
     ]

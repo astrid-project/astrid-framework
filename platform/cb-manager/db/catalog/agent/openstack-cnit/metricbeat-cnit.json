@@ -1,7 +1,8 @@
 {
     "id": "metricbeat",
     "partner": "cnit",
-    "parameters": [{
+    "parameters": [
+        {
             "id": "system-enabled",
             "type": "boolean",
             "example": true,
@@ -30,19 +31,22 @@
             }
         }
     ],
-    "resources": [{
-        "id": "config-file",
-        "description": "Configuration file to collect log system data",
-        "config": {
-            "path": "/opt/metricbeat/modules.d/system.yml"
-        },
-        "example": "https://github.com/astrid-project/astrid-framework/blob/75ff3182b290b44329dc146140af5e4e083484ed/agents/metricbeat/settings/7.8.0/modules.d/system.yml"
-    }],
-    "actions": [{
+    "resources": [
+        {
+            "id": "config-file",
+            "description": "Configuration file to collect log system data",
+            "config": {
+                "path": "/opt/metricbeat/modules.d/system.yml"
+            },
+            "example": "https://github.com/astrid-project/astrid-framework/blob/75ff3182b290b44329dc146140af5e4e083484ed/agents/metricbeat/settings/7.8.0/modules.d/system.yml"
+        }
+    ],
+    "actions": [
+        {
             "id": "start",
             "status": "started",
             "config": {
-                "cmd": "/opt/metricbeat/metricbeat run -c /opt/metricbeat/metricbeat.yml",
+                "cmd": "sudo bash /home/ubuntu/dev/components/metricbeat/astrid-openstack-cnit.sh start",
                 "daemon": true
             }
         },
@@ -50,14 +54,19 @@
             "id": "stop",
             "status": "stopped",
             "config": {
-                "cmd": "killall -9 metricbeat"
+                "cmd": "sudo bash /home/ubuntu/dev/components/metricbeat/astrid-openstack-cnit.sh stop"
             }
         },
         {
-            "id": "restart",
-            "status": "started",
+            "id": "health",
             "config": {
-                "cmd": "killall -HUP metricbeat"
+                "cmd": "sudo bash /home/ubuntu/dev/components/metricbeat/astrid-openstack-cnit.sh health"
+            }
+        },
+        {
+            "id": "dev",
+            "config": {
+                "cmd": "{cmd}"
             }
         }
     ]
