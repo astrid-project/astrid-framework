@@ -24,7 +24,7 @@ if [ ! -d "$DOCKERFILE_PATH/settings/$2" ]; then
     usage 3
 fi
 
-source "$DOCKERFILE_PATH/scripts/vars"
+source "$DOCKERFILE_PATH/scripts/vars.sh"
 
 VERSION=$2
 

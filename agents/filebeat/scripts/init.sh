@@ -5,7 +5,7 @@
 # Download the binary and copy the configuration files
 
 WORK_PATH="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-source "$WORK_PATH/vars.sh" ./vars
+source "$WORK_PATH/vars.sh"
 
 if [ -d "$INSTALLATION_PATH" ]; then
     echo "Error: component $COMPONENT already initialized in $INSTALLATION_PATH"

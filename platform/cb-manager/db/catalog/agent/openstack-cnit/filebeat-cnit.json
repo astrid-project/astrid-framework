@@ -43,7 +43,7 @@
             "id": "start",
             "status": "started",
             "config": {
-                "cmd": "sudo bash /home/ubuntu/dev/components/filebeat/astrid-openstack-cnit.sh start",
+                "cmd": "bash /home/ubuntu/dev/components/filebeat/astrid-openstack-cnit.sh start",
                 "daemon": true
             }
         },
@@ -51,13 +51,13 @@
             "id": "stop",
             "status": "stopped",
             "config": {
-                "cmd": "sudo bash /home/ubuntu/dev/components/filebeat/astrid-openstack-cnit.sh stop"
+                "cmd": "bash /home/ubuntu/dev/components/filebeat/astrid-openstack-cnit.sh stop"
             }
         },
         {
             "id": "health",
             "config": {
-                "cmd": "sudo bash /home/ubuntu/dev/components/filebeat/astrid-openstack-cnit.sh health"
+                "cmd": "bash /home/ubuntu/dev/components/filebeat/astrid-openstack-cnit.sh health"
             }
         },
         {
