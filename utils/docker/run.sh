@@ -48,7 +48,7 @@ fi
 docker run -d $CB_MAN_ELASTICSEARCH_ENDPOINT_ENV \
             $CB_MAN_PORT_ARG \
             $LCP_PORT_ARG \
-        --net="bridge" \
+        --net="host" \
         --name $COMPONENT.$VERSION -t $DOCKER_TAG
 
 COMPUTER=$'\xF0\x9F\x92\xBB'
