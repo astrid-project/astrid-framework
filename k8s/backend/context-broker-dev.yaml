@@ -107,9 +107,7 @@ spec:
           runAsUser: 0
         ports:
         - containerPort: 9200
-        envFrom:
-          - configMapRef:
-              name: elasticsearch-config
+        
         env:
         - name: INSTALLATION_PATH
           value: /usr/share/elasticsearch
@@ -127,6 +125,10 @@ spec:
           mountPath: /usr/share/elasticsearch/data/
         - name: node
           mountPath: /node
+
+        envFrom:
+          - configMapRef:
+              name: elasticsearch-config
 
       # - name: elasticsearch-data-permission-fix
       #   image: busybox
