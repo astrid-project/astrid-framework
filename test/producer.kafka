@@ -1,0 +1,6 @@
+PRODUCER test-json
+topic: data-cnit
+{
+    "type": "test",
+    "tag": "log"
+}

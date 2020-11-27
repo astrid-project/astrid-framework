@@ -1,0 +1,25 @@
+@uri = {{algorithm_uri}}
+
+GET http://{{cb_manager_endpoint}}/{{uri}} HTTP/1.1
+
+{
+    "select": [],
+    "where": {
+        "equals": {
+            "target": "id",
+            "expr": "ml"
+        }
+    }
+}
+
+###
+
+POST http://{{cb_manager_endpoint}}/{{uri}} HTTP/1.1
+
+###
+
+PUT http://{{cb_manager_endpoint}}/{{uri}} HTTP/1.1
+
+###
+
+DELETE http://{{cb_manager_endpoint}}/{{uri}} HTTP/1.1

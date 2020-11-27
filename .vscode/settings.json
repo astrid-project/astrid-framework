@@ -1,0 +1,44 @@
+{
+    "rest-client.defaultHeaders": {
+        "User-Agent": "vscode-restclient",
+        "Authorization": "Basic cb-manager:{cb_manager_password}",
+        "content-type": "application/json"
+    },
+    "rest-client.environmentVariables": {
+        "$shared": {
+            "instance_agent_uri": "instance/agent",
+            "catalog_agent_uri": "catalog/agent",
+            "instance_ebpf_program_uri": "instance/ebpf-program",
+            "catalog_ebpf_program_uri": "catalog/ebpf-program",
+            "type_exec_env_uri": "type/exec-env",
+            "exec_env_uri": "exec-env",
+            "type_network_link_uri": "type/network-link",
+            "network_link_uri": "network-link",
+            "connection_uri": "connection",
+            "data_uri": "data",
+            "event_uri": "event",
+            "algorithm_uri": "algorithm"
+        },
+        "CNIT / K8s": {
+            "cb_manager_endpoint": "130.251.17.128:5000",
+            "cb_manager_password": "guard",
+            "lcp_endpoint": "0.0.0.0:4000",
+            "lcp_password": "astrid",
+            "elasticsearch_endpoint": "130.251.17.128:9200"
+        },
+        "CNIT / OpenStack": {
+            "cb_manager_endpoint": "130.251.17.128:5000",
+            "cb_manager_password": "guard",
+            "lcp_endpoint": "0.0.0.0:4000",
+            "lcp_password": "astrid",
+            "elasticsearch_endpoint": "130.251.17.128:9200"
+        },
+        "Darkstar": {
+            "cb_manager_endpoint": "0.0.0.0:5000",
+            "cb_manager_password": "guard",
+            "lcp_endpoint": "0.0.0.0:4000",
+            "lcp_password": "astrid",
+            "elasticsearch_endpoint": "130.251.17.128:9200"
+        }
+    }
+}
