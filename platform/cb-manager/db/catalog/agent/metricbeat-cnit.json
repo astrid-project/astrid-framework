@@ -46,7 +46,7 @@
             "id": "start",
             "status": "started",
             "config": {
-                "cmd": "bash /home/ubuntu/dev/components/metricbeat/astrid-openstack-cnit.sh start",
+                "cmd": "bash /home/ubuntu/dev/components/metricbeat/astrid-{platform}.sh start",
                 "daemon": true
             }
         },
@@ -54,13 +54,13 @@
             "id": "stop",
             "status": "stopped",
             "config": {
-                "cmd": "bash /home/ubuntu/dev/components/metricbeat/astrid-openstack-cnit.sh stop"
+                "cmd": "bash /home/ubuntu/dev/components/metricbeat/astrid-{platform}.sh stop"
             }
         },
         {
             "id": "health",
             "config": {
-                "cmd": "bash /home/ubuntu/dev/components/metricbeat/astrid-openstack-cnit.sh health"
+                "cmd": "bash /home/ubuntu/dev/components/metricbeat/astrid-{platform}.sh health"
             }
         },
         {
