@@ -20,25 +20,25 @@
             "algorithm_uri": "algorithm"
         },
         "CNIT / K8s": {
-            "cb_manager_endpoint": "130.251.17.128:5000",
+            "cb_manager_endpoint": "http://130.251.17.128:5000",
             "cb_manager_password": "guard",
-            "lcp_endpoint": "0.0.0.0:4000",
+            "lcp_endpoint": "http://0.0.0.0:4000",
             "lcp_password": "astrid",
-            "elasticsearch_endpoint": "130.251.17.128:9200"
+            "elasticsearch_endpoint": "http://130.251.17.128:9200"
         },
         "CNIT / OpenStack": {
-            "cb_manager_endpoint": "130.251.17.128:5000",
+            "cb_manager_endpoint": "http://130.251.17.128:5000",
             "cb_manager_password": "guard",
-            "lcp_endpoint": "0.0.0.0:4000",
+            "lcp_endpoint": "http://0.0.0.0:4000",
             "lcp_password": "astrid",
-            "elasticsearch_endpoint": "130.251.17.128:9200"
+            "elasticsearch_endpoint": "http://130.251.17.128:9200"
         },
         "Darkstar": {
-            "cb_manager_endpoint": "0.0.0.0:5000",
+            "cb_manager_endpoint": "http://0.0.0.0:5000",
             "cb_manager_password": "guard",
-            "lcp_endpoint": "0.0.0.0:4000",
+            "lcp_endpoint": "http://0.0.0.0:4000",
             "lcp_password": "astrid",
-            "elasticsearch_endpoint": "130.251.17.128:9200"
+            "elasticsearch_endpoint": "http://130.251.17.128:9200"
         }
     }
 }

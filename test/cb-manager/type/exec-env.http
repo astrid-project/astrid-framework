@@ -1,6 +1,6 @@
 @uri = {{type_exec_env_uri}}
 
-GET http://{{cb_manager_endpoint}}/{{uri}} HTTP/1.1
+GET {{cb_manager_endpoint}}/{{uri}} HTTP/1.1
 
 {
     "select": [],
@@ -14,12 +14,12 @@ GET http://{{cb_manager_endpoint}}/{{uri}} HTTP/1.1
 
 ###
 
-POST http://{{cb_manager_endpoint}}/{{uri}} HTTP/1.1
+POST {{cb_manager_endpoint}}/{{uri}} HTTP/1.1
 
 ###
 
-PUT http://{{cb_manager_endpoint}}/{{uri}} HTTP/1.1
+PUT {{cb_manager_endpoint}}/{{uri}} HTTP/1.1
 
 ###
 
-DELETE http://{{cb_manager_endpoint}}/{{uri}} HTTP/1.1
+DELETE {{cb_manager_endpoint}}/{{uri}} HTTP/1.1
