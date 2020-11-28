@@ -12,5 +12,8 @@
             "name": "Kafka",
             "url": "file:///tmp/kafka-logs/*.log"
         }
-    ]
+    ],
+    "route": {
+        "root_path": "/logserver"
+    }
 }
