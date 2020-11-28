@@ -1,5 +1,5 @@
 PRODUCER test-json
-topic: data-cnit
+topic: data-test
 {
     "type": "test",
     "tag": "log"

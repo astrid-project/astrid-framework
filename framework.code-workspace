@@ -75,6 +75,7 @@
 			"libc",
 			"lnav",
 			"localtime",
+			"logserver",
 			"logstash",
 			"markdownlint",
 			"metricbeat",
@@ -114,6 +115,7 @@
 			"servlet",
 			"spdx",
 			"sshserver",
+			"stratoscale",
 			"struct",
 			"synflood",
 			"testbed",
@@ -135,6 +137,20 @@
 		"markdownlint.config": {
 			"no-inline-html": { "allowed_elements": [ "kbd" ] },
 			"commands-show-output": false
-		}
+		},
+		"logViewer.watch": [
+			{
+				"title": "Logstash",
+				"pattern": "/var/log/logstash/logstash-plain.log"
+			},
+			{
+				"title": "Elasticsearch",
+				"pattern": "/var/log/elasticsearch/**.log"
+			},
+			{
+				"title": "Kafka",
+				"pattern": "/tmp/kafka-logs/**.log"
+			}
+		]
 	}
 }

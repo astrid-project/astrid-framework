@@ -1,0 +1,16 @@
+{
+    "sources": [
+        {
+            "name": "Logstash",
+            "url": "file:///var/log/logstash/logstash-plain.log"
+        },
+        {
+            "name": "Elasticsearch",
+            "url": "file:///var/log/elasticsearch/*.log",
+        },
+        {
+            "name": "Kafka",
+            "url": "file:///tmp/kafka-logs/*.log"
+        }
+    ]
+}

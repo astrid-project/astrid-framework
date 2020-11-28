@@ -14,7 +14,7 @@
             "exec_env_uri": "exec-env",
             "type_network_link_uri": "type/network-link",
             "network_link_uri": "network-link",
-            "connection_uri": "connection",
+            "connection_uri<": "connection",
             "data_uri": "data",
             "event_uri": "event",
             "algorithm_uri": "algorithm"
