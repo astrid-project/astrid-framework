@@ -6,15 +6,24 @@
         },
         {
             "name": "Elasticsearch",
-            "url": "file:///var/log/elasticsearch/*.log"
+            "url": "file:///var/log/elasticsearch"
         },
         {
             "name": "Kafka",
-            "url": "file:///var/log/kafka/*.log"
+            "url": "file:///var/log/kafka"
         },
         {
             "name": "CB-Manager",
-            "url": "file:///var/log/cb-manager/*.log"
+            "url": "file:///var/log/cb-manager"
+        }
+    ],
+    "parsers": [
+        {
+            "glob": "*.log",
+            "regexp": "(?P<time>\\d{4}-\\d{2}-\\d{2}\\W\\d{2}:\\d{2}:\\d{2},\\d{3}.\\d{3})\\W\\d+\\W(?P<level>[[:alpha:]]+)\\W(?P<module>[^\\.]+)\\.(?P<function>[^\\W]+)\\W\\[[^]+]\\]\\W(?P<msg>.*)",
+            "time_formats": [
+                "2006-01-02T15:04:05,000"
+            ]
         }
     ]
 }
