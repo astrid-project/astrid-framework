@@ -16,8 +16,5 @@
             "name": "CB-Manager",
             "url": "file:///var/log/cb-manager/*.log"
         }
-    ],
-    "route": {
-        "root_path": "/"
-    }
+    ]
 }
