@@ -5,9 +5,10 @@
 WORK_PATH="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 CB_PATH="/opt/cb-manager/"
 KAFKA_PATH="/opt/kafka/"
+LOG_VIEWER="/opt/log-viewer"
 
 if [ -z "$1" ]; then
-    echo "Error: missing service [kafka|zookeeper|cb-manager]"
+    echo "Error: missing service [kafka|zookeeper|cb-manager|log-viewer]"
     exit 1
 elif [ "$1" == "kafka" ]; then
     if [ -z "$2" ]; then
@@ -60,8 +61,25 @@ elif [ "$1" == "cb-manager" ]; then
         echo "Error: unknown action, must be: start|stop"
         exit 4
     fi
+elif [ "$1" == "log-viewer" ]; then
+    if [ -z "$2" ]; then
+        echo "Error: missing action [start|stop]"
+        exit 2
+    elif [ "$2" == "start" ]; then
+        if ! screen -list | grep -q "log-viewer"; then
+            screen -S log-viewer -dm /opt/log-viewer/logviewer.sh
+        else
+            echo "Error: log-viewer already running, use stop to close this session."
+            exit 3
+        fi
+    elif [ "$2" == "stop" ]; then
+        screen -S log-viewer -X quit
+    else
+        echo "Error: unknown action, must be: start|stop"
+        exit 4
+    fi
 else
-    echo "Error: unknown service, must be: kafka|zookeeper|cb-manager"
+    echo "Error: unknown service, must be: kafka|zookeeper|cb-manager|log-viewer"
     exit 5
 fi
 
