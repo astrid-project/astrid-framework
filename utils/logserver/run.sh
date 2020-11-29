@@ -16,7 +16,11 @@ fi
 
 LOGSERVER_PORT=$1
 
+NAME=logserver
+
+docker stop $NAME
+docker rm $NAME
 docker run -d --restart always -p $LOGSERVER_PORT:$LOGSERVER_PORT \
-    --name logserver --net host \
+    --name $NAME --net="host" \
     -v "$WORK_PATH/config.json:/logserver.json" \
     stratoscale/logserver -addr :$LOGSERVER_PORT

@@ -6,7 +6,7 @@
         },
         {
             "name": "Elasticsearch",
-            "url": "file:///var/log/elasticsearch/*.log",
+            "url": "file:///var/log/elasticsearch/*.log"
         },
         {
             "name": "Kafka",
