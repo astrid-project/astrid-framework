@@ -10,10 +10,14 @@
         },
         {
             "name": "Kafka",
-            "url": "file:///tmp/kafka-logs/*.log"
+            "url": "file:///var/log/kafka/*.log"
+        },
+        {
+            "name": "CB-Manager",
+            "url": "file:///var/log/cb-manager/*.log"
         }
     ],
     "route": {
-        "root_path": "/logserver"
+        "root_path": "/"
     }
 }
