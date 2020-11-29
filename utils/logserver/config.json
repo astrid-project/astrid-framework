@@ -2,7 +2,7 @@
     "sources": [
         {
             "name": "Logstash",
-            "url": "file:///var/log/logstash/logstash-plain.log"
+            "url": "file:///var/log/logstash"
         },
         {
             "name": "Elasticsearch",
