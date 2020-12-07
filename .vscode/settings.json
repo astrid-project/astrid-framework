@@ -40,5 +40,6 @@
             "lcp_password": "astrid",
             "elasticsearch_endpoint": "http://130.251.17.128:9200"
         }
-    }
+    },
+    "python.analysis.extraPaths": ["tasks", "k8s/tasks"]
 }
