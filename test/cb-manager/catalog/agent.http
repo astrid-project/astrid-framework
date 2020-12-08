@@ -6,8 +6,8 @@ GET {{cb_manager_endpoint}}/{{uri}} HTTP/1.1
     "select": ["id", "actions"],
     "where": {
         "equals": {
-            "target": "id",
-            "expr": "filebeat"
+            "target": "partner",
+            "expr": "cnit"
         }
     }
 }
@@ -19,6 +19,8 @@ POST {{cb_manager_endpoint}}/{{uri}} HTTP/1.1
 ###
 
 PUT {{cb_manager_endpoint}}/{{uri}} HTTP/1.1
+
+< C:\Users\aless\Dropbox (Personal)\work\projects\astrid\gitlab_repositories\framework\platform\cb-manager\db\catalog\agent\packetbeat-cnit.json
 
 ###
 

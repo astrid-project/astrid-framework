@@ -40,10 +40,16 @@
     }],
     "actions": [
         {
+            "id": "init",
+            "config": {
+                "cmd": "cd /home/ubuntu/dev && inv agent.init --name=filebeat --project=astrid --platform={platform}"
+            }
+        },
+        {
             "id": "start",
             "status": "started",
             "config": {
-                "cmd": "bash /home/ubuntu/dev/components/filebeat/astrid-{platform}.sh start",
+                "cmd": "cd /home/ubuntu/dev && inv agent.start --name=filebeat --project=astrid --platform={platform}",
                 "daemon": true
             }
         },
@@ -51,13 +57,13 @@
             "id": "stop",
             "status": "stopped",
             "config": {
-                "cmd": "bash /home/ubuntu/dev/components/filebeat/astrid-{platform}.sh stop"
+                "cmd": "cd /home/ubuntu/dev && inv agent.stop --name=filebeat --project=astrid --platform={platform}"
             }
         },
         {
             "id": "health",
             "config": {
-                "cmd": "bash /home/ubuntu/dev/components/filebeat/astrid-{platform}.sh health"
+                "cmd": "cd /home/ubuntu/dev && inv agent.health --name=filebeat --project=astrid --platform={platform}"
             }
         },
         {

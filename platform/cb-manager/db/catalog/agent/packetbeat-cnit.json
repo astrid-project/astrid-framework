@@ -43,10 +43,16 @@
             }
         },
         {
+            "id": "init",
+            "config": {
+                "cmd": "cd /home/ubuntu/dev && inv agent.init --name=packetbeat --project=astrid --platform={platform}"
+            }
+        },
+        {
             "id": "start",
             "status": "started",
             "config": {
-                "cmd": "bash /home/ubuntu/dev/components/packetbeat/astrid-{platform}.sh start",
+                "cmd": "cd /home/ubuntu/dev && inv agent.start --name=packetbeat --project=astrid --platform={platform}",
                 "daemon": true
             }
         },
@@ -54,13 +60,13 @@
             "id": "stop",
             "status": "stopped",
             "config": {
-                "cmd": "bash /home/ubuntu/dev/components/packetbeat/astrid-{platform}.sh stop"
+                "cmd": "cd /home/ubuntu/dev && inv agent.stop --name=packetbeat --project=astrid --platform={platform}"
             }
         },
         {
             "id": "health",
             "config": {
-                "cmd": "bash /home/ubuntu/dev/components/packetbeat/astrid-{platform}.sh health"
+                "cmd": "cd /home/ubuntu/dev && inv agent.health --name=packetbeat --project=astrid --platform={platform}"
             }
         },
         {
