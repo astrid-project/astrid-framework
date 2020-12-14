@@ -1,0 +1,53 @@
+# Copyright (c) 2020 ASTRID
+# author: Alex Carrega <alessandro.carrega@cnit.it>
+
+project: astrid
+
+platforms:
+    azure': 130.251.17.128:5000',
+    cnit-openstack: 130.251.17.128:5000
+    darkstar: localhost:5000
+
+icon:
+  componenet: package
+  platform: computer
+  version: label
+  error: exclamation
+  info: information_source
+  warn: warning
+  success: white_check_mark
+
+log:
+  console:
+    level: DEBUG
+    format: "%(message)s"
+
+  file:
+    level: DEBUG
+    format: "[%(asctime)s] %(levelname)-8s %(calledfilename)s@%(calledfunction)s:%(calledlineno)05d %(message)s"
+    path: logs
+    when: midnight
+    interval: 1
+
+  net:
+    level: INFO
+    format: "[%(asctime)s] %(levelname)-8s %(calledfilename)s@%(calledfunction)s:%(calledlineno)05d %(message)s"
+    host: 0.0.0.0
+    port: 8765
+
+  logger:
+    __default__: DEBUG
+    service: INFO
+    test: DEBUG
+
+repository:
+  git:
+    cb-manager': /opt/cb-manager
+  platforms:
+    at-azure: azure
+    at-cnit_openstack: CNIT-openstack
+    at-cnit_k8s: CNIT-k8s
+
+telegrot:
+  token: 1463515955:AAHPW75lMcnOUfD2dZEilrW1d0HwQgcyGt4
+  chat-id: 429595417

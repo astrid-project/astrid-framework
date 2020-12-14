@@ -1,0 +1,36 @@
+@uri = {{instance_ebpf_program_uri}}
+
+GET {{cb_manager_endpoint}}/{{uri}} HTTP/1.1
+
+{
+    "select": []
+}
+
+###
+
+POST {{cb_manager_endpoint}}/{{uri}} HTTP/1.1
+
+{
+    "ebpf_program_catalog_id": "packet-capture",
+    "id": "packet-capture-instance@user-vm",
+    "description": "Collect system metrics from Apache HTTP Web Server.",
+    "exec_env_id": "user-vm",
+    "interface": "eth0"
+}
+
+###
+
+PUT {{cb_manager_endpoint}}/{{uri}} HTTP/1.1
+
+###
+
+DELETE {{cb_manager_endpoint}}/{{uri}} HTTP/1.1
+
+{
+    "where": {
+        "equals": {
+            "target": "id",
+            "expr": "packet-capture-instance@user-vm"
+        }
+    }
+}

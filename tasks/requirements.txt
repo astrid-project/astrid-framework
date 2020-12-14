@@ -1,0 +1,10 @@
+# Copyright (c) 2020 ASTRID
+# author: Alex Carrega <alessandro.carrega@cnit.it>
+
+docker
+emoji
+gitpython
+invoke
+rich
+screenutils
+python-telegram-bot

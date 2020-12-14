@@ -1,0 +1,7 @@
+# Copyright (c) 2020 ASTRID
+# author: Alex Carrega <alessandro.carrega@cnit.it>
+
+debug: true
+run:
+  hide: true
+  warn: true

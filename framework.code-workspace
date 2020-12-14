@@ -116,6 +116,7 @@
 			"polycubed",
 			"polycubenetwork",
 			"portainer",
+			"pswd",
 			"pycodestyle",
 			"pydocstyle",
 			"qapps",
@@ -144,7 +145,7 @@
 		"editor.wordWrap": "on",
 		"editor.wrappingIndent": "deepIndent",
 		"files.insertFinalNewline": true,
-		"workbench.colorTheme": "Monokai Dimmed",
+		"workbench.colorTheme": "Kimbie Dark",
 		"workbench.editor.tabSizing": "shrink",
 		"editor.fontFamily": "Fira Code Retina",
 		"markdownlint.config": {

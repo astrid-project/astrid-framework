@@ -1,13 +1,13 @@
-@uri = {{instance_ebpf_program_uri}}
+@uri = {{exec_env_uri}}
 
 GET {{cb_manager_endpoint}}/{{uri}} HTTP/1.1
 
 {
-    "select": ["id", "actions"],
+    "select": [],
     "where": {
         "equals": {
-            "target": "id",
-            "expr": "packet-capture"
+            "target": "partner",
+            "expr": "cnit"
         }
     }
 }

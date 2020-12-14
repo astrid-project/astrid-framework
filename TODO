@@ -1,0 +1,21 @@
+☐ add file signature @low
+
+tasks:
+    container:
+        ☐ check
+        ☐ test
+        ☐ docs
+    repository:
+        ☐ check
+        ☐ test
+        ☐ docs
+    service:
+        ✔ check @done(20-12-08 06:29)
+        ☐ test
+        ☐ docs
+    telegrot:
+        ☐ check
+        ☐ test
+        ☐ docs
+    log:
+        ☐ add success with verbose library @critical
