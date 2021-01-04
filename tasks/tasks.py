@@ -2,15 +2,11 @@
 # Copyright (c) ASTRID 2020-2022
 # author: Alex Carrega <alessandro.carrega@cnit.it>
 
+from invoke import Collection
+
 import container
 import repository
-import service
-import telegrot
-from invoke import Collection, task
-
 
 namespace = Collection(
     container,
-    repository,
-    service,
-    telegrot)
+    repository)
