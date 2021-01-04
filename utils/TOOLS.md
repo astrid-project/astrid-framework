@@ -5,7 +5,6 @@
 - **Garuda Linux** [https://garudalinux.org/index.html].
 - **Fly Dev Tunnel** [https://github.com/LukeLambert/fly-dev-tunnel].
 - **WakaTime** [https://wakatime.com].
-- **NodeMon** [https://nodemon.io].
 
 ## Programming
 
