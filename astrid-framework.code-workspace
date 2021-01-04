@@ -1,0 +1,29 @@
+{
+    "folders": [
+        {
+            "name": "ASTRID Framework",
+            "path": "."
+        }
+    ],
+    "settings": {
+        "cSpell.language": "en-GB",
+        "editor.fontFamily": "Fira Code Retina",
+        "editor.tabCompletion": "on",
+        "editor.wordWrap": "on",
+        "editor.wrappingIndent": "deepIndent",
+        "files.insertFinalNewline": true,
+        "markdownlint.config": {
+            "no-inline-html": {
+                "allowed_elements": [
+                    "kbd"
+                ]
+            },
+            "commands-show-output": false
+        },
+        "restructuredtext.builtDocumentationPath": "docs/.build/html",
+        "restructuredtext.confPath": "docs/conf.py",
+        "restructuredtext.experimental": true,
+        "workbench.colorTheme": "Atom One Dark", // Only for this workspace
+        "workbench.editor.tabSizing": "shrink"
+    }
+}

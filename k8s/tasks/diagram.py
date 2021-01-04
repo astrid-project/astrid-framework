@@ -1,5 +1,5 @@
 #!/usr/bin/env inv
-# Copyright (c) 2020 ASTRID
+# Copyright (c) ASTRID 2020-2022
 # author: Alex Carrega <alessandro.carrega@cnit.it>
 
 # cspell:ignore strg srvs
@@ -27,7 +27,7 @@ def general(c):
 
         with Cluster('Services'):
             _srvs = [Service('elasticsearch-service'),
-                         Service('kafka-service'), Service('cb-manager-service')]
+                     Service('kafka-service'), Service('cb-manager-service')]
 
         with Cluster('Storage'):
             _strg = PVC('elasticsearch-pv-volume') >> PV('elasticsearch-pv')
@@ -45,7 +45,8 @@ def cb(c):
         _cb_man = Python('cb-manager')
 
         with Cluster('elasticsearch-config'):
-            _elasticsearch_cfg = [CM('elasticsearch.yml'), CM('log4j2.properties')]
+            _elasticsearch_cfg = [
+                CM('elasticsearch.yml'), CM('log4j2.properties')]
         _ = _elasticsearch_cfg - _elasticsearch
 
         with Cluster('logstash-config'):

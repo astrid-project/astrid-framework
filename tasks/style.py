@@ -1,10 +1,10 @@
 #!/usr/bin/env inv
-# Copyright (c) 2020 ASTRID
+# Copyright (c) ASTRID 2020-2022
 # author: Alex Carrega <alessandro.carrega@cnit.it>
 
 from rich.theme import Theme
 
-BOLD_CYAN ='bold cyan'
+BOLD_CYAN = 'bold cyan'
 BOLD_GREEN = 'bold green'
 BOLD_RED = 'bold red'
 BOLD_YELLOW = 'bold yellow'

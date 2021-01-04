@@ -1,12 +1,12 @@
-# Copyright (c) 2020 ASTRID
+# Copyright (c) ASTRID 2020-2022
 # author: Alex Carrega <alessandro.carrega@cnit.it>
 
 project: astrid
 
 platforms:
-    azure': 130.251.17.128:5000',
-    cnit-openstack: 130.251.17.128:5000
-    darkstar: localhost:5000
+  azure': 130.251.17.128:5000',
+  cnit-openstack: 130.251.17.128:5000
+  darkstar: localhost:5000
 
 icon:
   componenet: package
