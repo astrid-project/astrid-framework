@@ -24,6 +24,7 @@
         "restructuredtext.confPath": "docs/conf.py",
         "restructuredtext.experimental": true,
         "workbench.colorTheme": "Atom One Dark", // Only for this workspace
-        "workbench.editor.tabSizing": "shrink"
+        "workbench.editor.tabSizing": "shrink",
+        "jupyter.jupyterServerType": "local"
     }
 }
