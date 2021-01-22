@@ -10,6 +10,7 @@ Main repository with all the components developed by the ASTRID consortium and t
 - Elasticsearch
 - Logstash
 - Kafka
+- [Security Dashboard](https://github.com/astrid-project/security-dashboard)
 
 ## Agents
 
