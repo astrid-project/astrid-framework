@@ -18,4 +18,4 @@ if [ -z "$SLACK_WEBHOOK_URL" ]; then
 fi
 
 echo "[$DATE] Start superslacker"
-superslacker --webhook="$SLACK_WEBHOOK_URL" --hostname="cb.guard.openstack.cnit" --events="STOPPED,STARTING,RUNNING,BACKOFF,STOPPING,EXITED,FATAL,UNKNOWN" --user="guard-project"
+superslacker --webhook="$SLACK_WEBHOOK_URL" --hostname="cb.guard.openstack.cnit" --events="STOPPED,STARTING,RUNNING,BACKOFF,STOPPING,EXITED,FATAL,UNKNOWN" --user="guard-project" --channel="dev"
