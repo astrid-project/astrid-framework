@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: cb-manager
-        image: astridproject/cb-manager:v1.0.0
+        image: astridproject/cb-manager:master
         ports:
         - containerPort: 5000
         env:
