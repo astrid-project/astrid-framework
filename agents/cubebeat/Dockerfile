@@ -43,7 +43,14 @@ LABEL maintainer="alessandro.carrega@cnit.it"
 LABEL description="Cubebeat built with Golang version 1.14.6 on Alpine Linux version 3.12"
 LABEL version=$VERSION
 
+# Component execution deps
+RUN apk add libc6-compat
+
 # Variables
+ENV COMPONENT=$COMPONENT
+ENV VERSION=$VERSION
+ENV INSTALLATION_PATH=$INSTALLATION_PATH
+
 ENV ELASTICSEARCH_HOSTS=localhost:9200
 ENV ELASTICSEARCH_MONITORING_ENABLED=false
 ENV LOGSTASH_HOSTS=localhost:5044
@@ -54,4 +61,4 @@ COPY settings/$VERSION/cubebeat.yml $INSTALLATION_PATH/
 
 # Execute
 WORKDIR $INSTALLATION_PATH
-ENTRYPOINT [ "$INSTALLATION_PATH/$COMPONENT" ]
+ENTRYPOINT [ "/opt/cubebeat/cubebeat" ]
