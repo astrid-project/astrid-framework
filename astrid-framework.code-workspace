@@ -25,6 +25,7 @@
         "restructuredtext.experimental": true,
         "workbench.colorTheme": "Atom One Dark", // Only for this workspace
         "workbench.editor.tabSizing": "shrink",
-        "jupyter.jupyterServerType": "local"
+        "jupyter.jupyterServerType": "local",
+        "restructuredtext.languageServer.disabled": true
     }
 }
