@@ -39,12 +39,16 @@ TMP_PATH                          | /tmp                                        
 PIDFILE                           | `$TMP`/`$COMPONENT`.pid                                               | File path where the PID of the current execution is stored
 CB_MAN_HOST                       | 0.0.0.0                                                               | Host address where CB-Manager is listening
 CB_MAN_PORT                       | 5000                                                                  | TCP port where CB-Manager is listening
+CB_MAN_AUTH                       | true                                                                  | Enable HTTP authentication
+CB_MAN_HTTPS                      | false                                                                 | Force to use HTTPS instead of HTTP
 CB_MAN_HEARTBEAT_TIMEOUT          | 10s                                                                   | Heartbeat timeout
 CB_MAN_HEARTBEAT_PERIOD           | 1min                                                                  | Heartbeat period
 CB_MAN_HEARTBEAT_AUTH_EXPIRATION  | 5min                                                                  | Heartbeat authentication time validity
 CB_MAN_ELASTICSEARCH_ENDPOINT     | localhost:9200                                                        | Elasticsearch endpoint
 CB_MAN_ELASTICSEARCH_TIMEOUT      | 20s                                                                   | Timeout for requests to Elasticsearch
 CB_MAN_ELASTICSEARCH_RETRY_PERIOD | 1min                                                                  | Period of time to wait after which to retry connection with Elasticsearch
+CB_MAN_ELASTIC_APM_ENABLED        | false                                                                 | Enable Elastic APM
+CB_MAN_ELASTIC_APM_SERVER         | http://localhost:8200                                                 | Elastic APM Server
 CB_MAN_DEV_USERNAME               | cb-manager                                                            | Username for HTTP authorization (used in development)
 CB_MAN_DEV_PASSWORD               | 9c804f2550e31d8f98ac9b460cfe7fbfc676c5e4452a261a2899a1ea168c0a50 [^1] | Password for HTTP authorization (used in development)
 CB_MAN_LOG_LEVEL                  | DEBUG                                                                 | General LOG level
