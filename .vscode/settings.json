@@ -1,7 +1,7 @@
 {
     "rest-client.defaultHeaders": {
         "User-Agent": "vscode-restclient",
-        "Authorization": "Basic cb-manager:{cb_manager_password}",
+        "Authorization": "Basic cb-manager:astrid",
         "content-type": "application/json"
     },
     "rest-client.environmentVariables": {
@@ -21,21 +21,18 @@
         },
         "CNIT / K8s": {
             "cb_manager_endpoint": "http://130.251.17.128:5000",
-            "cb_manager_password": "guard",
             "lcp_endpoint": "http://0.0.0.0:4000",
             "lcp_password": "astrid",
             "elasticsearch_endpoint": "http://130.251.17.128:9200"
         },
         "CNIT / OpenStack": {
             "cb_manager_endpoint": "http://130.251.17.128:5000",
-            "cb_manager_password": "guard",
             "lcp_endpoint": "http://0.0.0.0:4000",
             "lcp_password": "astrid",
             "elasticsearch_endpoint": "http://130.251.17.128:9200"
         },
         "Darkstar": {
             "cb_manager_endpoint": "http://0.0.0.0:5000",
-            "cb_manager_password": "guard",
             "lcp_endpoint": "http://0.0.0.0:4000",
             "lcp_password": "astrid",
             "elasticsearch_endpoint": "http://130.251.17.128:9200"
