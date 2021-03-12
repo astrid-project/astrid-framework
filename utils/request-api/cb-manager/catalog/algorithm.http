@@ -1,4 +1,4 @@
-@uri = {{algorithm_uri}}
+@uri = {{catalog_algorithm_uri}}
 
 GET {{cb_manager_endpoint}}/{{uri}} HTTP/1.1
 
@@ -7,7 +7,7 @@ GET {{cb_manager_endpoint}}/{{uri}} HTTP/1.1
     "where": {
         "equals": {
             "target": "id",
-            "expr": "ml"
+            "expr": "dos-predictor"
         }
     }
 }

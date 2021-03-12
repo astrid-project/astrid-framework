@@ -1,40 +1,30 @@
 @index=exec-env
 
 ### Info
-
 GET {{elasticsearch_endpoint}}/?pretty HTTP/1.1
 
 ### Health
-
 GET {{elasticsearch_endpoint}}/_cat/health?v&pretty HTTP/1.1
 
 ### Nodes
-
 GET {{elasticsearch_endpoint}}/_cat/nodes?v&pretty HTTP/1.1
 
 ### Indeces
-
-GET {{elasticsearch_endpoint}}/_cat/indices?v&health=red&pretty HTTP/1.1
+GET {{elasticsearch_endpoint}}/_cat/indices?v&health=red+yellow&pretty HTTP/1.1
 
 ### Index definition
-
 GET {{elasticsearch_endpoint}}/{{index}} HTTP/1.1
 
-
 ### Index data
-
 GET {{elasticsearch_endpoint}}/{{index}}/_search HTTP/1.1
 
 ### Create index
-
 PUT {{elasticsearch_endpoint}}/{{index}} HTTP/1.1
 
 ### Delete index
-
 DELETE {{elasticsearch_endpoint}}/{{index}} HTTP/1.1
 
 ### Pipeline
-
 GET {{elasticsearch_endpoint}}/_ingest/pipeline
 
 ### Cluster health
@@ -49,3 +39,5 @@ GET {{elasticsearch_endpoint}}/_cluster/stats?pretty
 ### Cluster settings
 GET {{elasticsearch_endpoint}}/_cluster/settings?pretty
 
+### Shard
+GET {{elasticsearch_endpoint}}/_cat/shards?v&h=n,index,shard,prirep,state,sto,sc,unassigned.reason,unassigned.details&s=sto,index
