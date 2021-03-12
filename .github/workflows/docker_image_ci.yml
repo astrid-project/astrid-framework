@@ -128,7 +128,7 @@ jobs:
 
 
           - component: kafka
-            version: 2.6.0
+            version: 2.6.1
             context: platform/kafka
             title: Kafka
             description: 'Kafka Docker image with configuration files'
