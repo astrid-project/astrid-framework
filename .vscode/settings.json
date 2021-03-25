@@ -18,7 +18,8 @@
             "network_link_uri": "network-link",
             "connection_uri": "connection",
             "data_uri": "data",
-            "event_uri": "event"
+            "event_uri": "event",
+            "pipeline_uri": "pipeline"
         },
         "CNIT / K8s": {
             "cb_manager_endpoint": "http://130.251.17.128:5000",
