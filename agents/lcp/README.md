@@ -19,7 +19,8 @@
     - [Stop](#stop)
     - [Health](#health)
   - [Docker image](#docker-image)
-  - [References](#references)
+    - [Build](#build)
+    - [Run](#run)
 
 The source code is available in the [src](github.com/astrid-project/lcp) directory as git sub-module.
 
@@ -27,7 +28,7 @@ The source code is available in the [src](github.com/astrid-project/lcp) directo
 
 ### Setup
 
-The variables are defined in [scripts/vars](scripts/vars).
+The variables are defined in [scripts/vars](scripts/vars) and in the .env file depending on the chosen version (variable `VERSION` in the table).
 
 Name                 | Default value                                                         | Meaning
 ---------------------|-----------------------------------------------------------------------|--------
@@ -37,15 +38,6 @@ PROJECT              | astrid                                                   
 INSTALLATION_PATH    | /opt/lcp                                                              | Destination path where the software will be installed
 TMP_PATH             | /tmp                                                                  | Temporary dictionary path
 PIDFILE              | `$TMP`/`$COMPONENT`.pid                                               | File path where the PID of the current execution is stored
-LCP_HOST             | 0.0.0.0                                                               | Host address where LCP is listening
-LCP_PORT             | 4000                                                                  | TCP port where LCP is listening
-LCP_AUTH_MAX_TTL     | 10min                                                                 | Maximum time for HTTP authorization validity
-LCP_POLYCUBE_HOST    | localhost                                                             | Polycube host address
-LCP_POLYCUBE_PORT    | 9000                                                                  | Polycube port address
-LCP_POLYCUBE_TIMEOUT | 20s                                                                   | Timeout for requests to Polycube
-LCP_DEV_USERNAME     | lcp                                                                   | Username for HTTP authorization (used in development)
-LCP_DEV_PASSWORD     | 9c804f2550e31d8f98ac9b460cfe7fbfc676c5e4452a261a2899a1ea168c0a50 [^1] | Password for HTTP authorization (used in development)
-LCP_LOG_LEVEL        | DEBUG                                                                 | General LOG level
 
 ### Requirements
 
@@ -85,6 +77,33 @@ $ ./health
 
 [Dockerfile](Dockerfile) is used to build the `docker` image with CI in the [https://hub.docker.com/repository/docker/astridproject/lcp](https://hub.docker.com/repository/docker/astridproject/lcp).
 
-## References
+### Build
 
-[^1] Password: "astrid" hashed in sha256.
+You can build the image with tag astridproject/lcp:`$VERSION`.
+`$VERSION` is the specific version to build the image.
+
+```console
+$ docker build . -t astridproject/lcp:$VERSION
+```
+
+Example:
+
+```console
+$ VERSION=master
+$ docker build . -t astridproject/lcp:$VERSION
+```
+
+### Run
+
+In addition, it is possible to run the image in a container specifying the environment variable using the specific .env file for the chosen version.
+
+```console
+$ docker run --env-file settings/$VERSION/.env --name lcp.$VERSION astridproject/lcp:$VERSION
+```
+
+Example:
+
+```console
+$ VERSION=master
+$ docker run --env-file settings/$VERSION/.env --name lcp.$VERSION astridproject/lcp:$VERSION
+```

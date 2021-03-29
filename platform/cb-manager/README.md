@@ -19,7 +19,8 @@
     - [Stop](#stop)
     - [Health](#health)
   - [Docker image](#docker-image)
-  - [References](#references)
+    - [Build](#build)
+    - [Run](#run)
 
 The source code is available in the [src](github.com/astrid-project/cb-manager) directory as git sub-module.
 
@@ -27,7 +28,7 @@ The source code is available in the [src](github.com/astrid-project/cb-manager) 
 
 ### Setup
 
-The variables are defined in [scripts/vars](scripts/vars).
+The variables are defined in [scripts/vars](scripts/vars) and in the .env file depending on the chosen version (variable `VERSION` in the table).
 
 Name                              | Default value                                                         | Meaning
 ----------------------------------|-----------------------------------------------------------------------|--------
@@ -37,21 +38,6 @@ PROJECT                           | astrid                                      
 INSTALLATION_PATH                 | /opt/`$COMPONENT`                                                     | Destination path where the software will be installed
 TMP_PATH                          | /tmp                                                                  | Temporary dictionary path
 PIDFILE                           | `$TMP`/`$COMPONENT`.pid                                               | File path where the PID of the current execution is stored
-CB_MAN_HOST                       | 0.0.0.0                                                               | Host address where CB-Manager is listening
-CB_MAN_PORT                       | 5000                                                                  | TCP port where CB-Manager is listening
-CB_MAN_AUTH                       | true                                                                  | Enable HTTP authentication
-CB_MAN_HTTPS                      | false                                                                 | Force to use HTTPS instead of HTTP
-CB_MAN_HEARTBEAT_TIMEOUT          | 10s                                                                   | Heartbeat timeout
-CB_MAN_HEARTBEAT_PERIOD           | 1min                                                                  | Heartbeat period
-CB_MAN_HEARTBEAT_AUTH_EXPIRATION  | 5min                                                                  | Heartbeat authentication time validity
-CB_MAN_ELASTICSEARCH_ENDPOINT     | localhost:9200                                                        | Elasticsearch endpoint
-CB_MAN_ELASTICSEARCH_TIMEOUT      | 20s                                                                   | Timeout for requests to Elasticsearch
-CB_MAN_ELASTICSEARCH_RETRY_PERIOD | 1min                                                                  | Period of time to wait after which to retry connection with Elasticsearch
-CB_MAN_ELASTIC_APM_ENABLED        | false                                                                 | Enable Elastic APM
-CB_MAN_ELASTIC_APM_SERVER         | http://localhost:8200                                                 | Elastic APM Server
-CB_MAN_DEV_USERNAME               | cb-manager                                                            | Username for HTTP authorization (used in development)
-CB_MAN_DEV_PASSWORD               | 9c804f2550e31d8f98ac9b460cfe7fbfc676c5e4452a261a2899a1ea168c0a50 [^1] | Password for HTTP authorization (used in development)
-CB_MAN_LOG_LEVEL                  | DEBUG                                                                 | General LOG level
 
 ### Requirements
 
@@ -91,6 +77,33 @@ $ ./health
 
 [Dockerfile](Dockerfile) is used to build the `docker` image with CI in the [https://hub.docker.com/repository/docker/astridproject/cb-manager](https://hub.docker.com/repository/docker/astridproject/cb-manager).
 
-## References
+### Build
 
-[^1] Password: "astrid" hashed in sha256.
+You can build the image with tag astridproject/cb-manager:`$VERSION`.
+`$VERSION` is the specific version to build the image.
+
+```console
+$ docker build . -t astridproject/cb-manager:$VERSION
+```
+
+Example:
+
+```console
+$ VERSION=master
+$ docker build . -t astridproject/cb-manager:$VERSION
+```
+
+### Run
+
+In addition, it is possible to run the image in a container specifying the environment variable using the specific .env file for the chosen version.
+
+```console
+$ docker run --env-file settings/$VERSION/.env --name cb-manager.$VERSION astridproject/cb-manager:$VERSION
+```
+
+Example:
+
+```console
+$ VERSION=master
+$ docker run --env-file settings/$VERSION/.env --name cb-manager.$VERSION astridproject/cb-manager:$VERSION
+```
