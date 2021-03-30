@@ -30,14 +30,14 @@ The source code is available in the [src](github.com/astrid-project/cb-manager) 
 
 The variables are defined in [scripts/vars](scripts/vars) and in the .env file depending on the chosen version (variable `VERSION` in the table).
 
-Name                              | Default value                                                         | Meaning
-----------------------------------|-----------------------------------------------------------------------|--------
-COMPONENT                         | cb-manager                                                            | Component name
-VERSION                           | master                                                                | Component version
-PROJECT                           | astrid                                                                | Project name
-INSTALLATION_PATH                 | /opt/`$COMPONENT`                                                     | Destination path where the software will be installed
-TMP_PATH                          | /tmp                                                                  | Temporary dictionary path
-PIDFILE                           | `$TMP`/`$COMPONENT`.pid                                               | File path where the PID of the current execution is stored
+Name              | Default value           | Meaning
+------------------|-------------------------|--------
+COMPONENT         | cb-manager              | Component name
+VERSION           | master                  | Component version
+PROJECT           | astrid                  | Project name
+INSTALLATION_PATH | /opt/`$COMPONENT`       | Destination path where the software will be installed
+TMP_PATH          | /tmp                    | Temporary dictionary path
+PIDFILE           | `$TMP`/`$COMPONENT`.pid | File path where the PID of the current execution is stored
 
 ### Requirements
 

@@ -45,6 +45,13 @@ jobs:
             url: https://github.com/astrid-project/lcp
 
           - component: lcp
+            version: v1.0.3
+            context: agents/lcp
+            title: LCP (Local Control Plane)
+            description: 'LCP Docker image with configuration files'
+            url: https://github.com/astrid-project/lcp
+
+          - component: lcp
             version: v1.0.2
             context: agents/lcp
             title: LCP (Local Control Plane)
@@ -92,6 +99,13 @@ jobs:
 
           - component: cb-manager
             version: master
+            context: platform/cb-manager
+            title: CB (Context Broker) Manager
+            description: 'CB-Manager Docker image with configuration files'
+            url: https://github.com/astrid-project/cb-manager
+          
+          - component: cb-manager
+            version: v1.0.3
             context: platform/cb-manager
             title: CB (Context Broker) Manager
             description: 'CB-Manager Docker image with configuration files'
