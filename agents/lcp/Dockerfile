@@ -20,7 +20,7 @@ ARG VERSION=master
 ARG PROJECT=astrid
 ARG INSTALLATION_PATH=/opt/$COMPONENT
 
-RUN apk add --no-cache --virtual .build-deps gcc musl-dev linux-headers libffi-dev
+RUN apk add --no-cache --virtual .build-deps gcc musl-dev linux-headers libffi-dev cargo
 
 COPY --from=git-clone $INSTALLATION_PATH/requirements.txt /requirements.txt
 RUN pip install --prefix=$INSTALLATION_PATH -r /requirements.txt
