@@ -22,8 +22,8 @@
             "pipeline_uri": "pipeline"
         },
         "CNIT / K8s": {
-            "cb_manager_endpoint": "http://172.21.100.31:5000",
-            "elasticsearch_endpoint": "http://172.21.100.31:9200"
+            "cb_manager_endpoint": "http://compute01.k8s.cnit:5000",
+            "elasticsearch_endpoint": "http://compute01.k8s.cnit:9200"
         },
         "CNIT / OpenStack": {
             "cb_manager_endpoint": "http://130.251.17.128:5000",
