@@ -23,6 +23,14 @@ spec:
           value: "0.0.0.0"
         - name: CB_MAN_PORT
           value: "5000"
+        - name: CB_MAN_HTTPS
+          value: "false"
+        - name: CB_MAN_AUTH_ENABLED
+          value: "true"
+        - name: CB_MAN_AUTH_HEADER_PREFIX
+          value: "ASTRID"
+        - name: CB_MAN_AUTH_SECRET_KEY
+          value: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOiIxNjE2NzgxMDU4IiwiZXhwIjoiMTY0ODMxNzA1OCIsIm5iZiI6MTYxNjc4MTA1OH0.3eNv1XH_YDq_u5KFn8B79KMzXPXI1cypgjry9xKXlN4"
         - name: CB_MAN_HEARTBEAT_TIMEOUT
           value: "1min"
         - name: CB_MAN_HEARTBEAT_PERIOD
@@ -35,6 +43,10 @@ spec:
           value: "20s"
         - name: CB_MAN_ELASTICSEARCH_RETRY_PERIOD
           value: "1min"
+        - name: CB_MAN_ELASTIC_APM_ENABLED 
+          value: "false"
+        - name: CB_MAN_ELASTIC_APM_SERVER
+          value: "http://localhost:8200"
         - name: CB_MAN_DEV_USERNAME
           value: "cb-manager"
         # Password: "astrid" hashed in sha256
