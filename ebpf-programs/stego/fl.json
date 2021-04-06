@@ -5,7 +5,21 @@
         "metric-configs": [
             {
                 "name": "Flow label occurrences",
-                "map-name": "fl_stats"
+                "map-name": "fl_stats",
+					 "open-metrics-metadata": {
+						 "help": "This metrics measures the distribution of flow label values in IPv6 packets.",
+						 "type": "histogram",
+						 "labels": [
+						 {
+							 "name": "IP_VERS",
+							 "value": "IPv6"
+						 },
+						 {
+							 "name": "FIELD",
+							 "value": "FLOW_LABEL"
+						 }
+						 ]
+					 }
             }
         ]
     },

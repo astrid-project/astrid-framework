@@ -5,7 +5,22 @@
         "metric-configs": [
             {
                 "name": "Traffic Class occurrences",
-                "map-name": "tc_stats"
+                "map-name": "tc_stats",
+					 "open-metrics-metadata": {
+						 "help": "This metrics measures the distribution of traffic class values in IPv6 packets.",
+						 "type": "histogram",
+						 "labels": [
+						 {
+							 "name": "IP_VERS",
+							 "value": "IPv6"
+						 },
+						 {
+							 "name": "FIELD",
+							 "value": "TRAFFIC_CLASS"
+						 }
+						 ]
+					 }
+            }
             }
         ]
     },

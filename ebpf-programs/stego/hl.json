@@ -5,7 +5,22 @@
         "metric-configs": [
             {
                 "name": "Hop Limit occurrences",
-                "map-name": "hl_stats"
+                "map-name": "hl_stats",
+					 "open-metrics-metadata": {
+						 "help": "This metrics measures the distribution of hop limit values in IPv6 packets.",
+						 "type": "histogram",
+						 "labels": [
+						 {
+							 "name": "IP_VERS",
+							 "value": "IPv6"
+						 },
+						 {
+							 "name": "FIELD",
+							 "value": "HOP_LIMIT"
+						 }
+						 ]
+					 }
+            }
             }
         ]
     },
