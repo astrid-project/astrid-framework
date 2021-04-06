@@ -13,4 +13,4 @@ LCP_ELASTIC_APM_SERVER  | http://localhost:8200 | Elastic APM server.
 LCP_POLYCUBE_HOST       | localhost             | IP address to contact the [Polycube](https://github.com/polycube-network/polycube) installation.
 LCP_POLYCUBE_PORT       | 9000                  | Port address to contact the Polycube installation.
 LCP_POLYCUBE_TIMEOUT    | 20s                   | Timeout for the connection to Polycube.
-LCP_LOG_LEVEL           | DEBUG                 | Log level.
+LCP_LOG_CONFIG          | log.yaml              | Log configuration path.

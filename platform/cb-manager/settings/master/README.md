@@ -15,5 +15,4 @@ CB_MAN_ELASTICSEARCH_TIMEOUT        | 20s                   | Timeout for connec
 CB_MAN_ELASTICSEARCH_RETRY_PERIOD   | 1min                  | Time to wait to retry the connection to Elasticsearch instance.
 CB_MAN_ELASTIC_APM_ENABLED          | false                 | Enable [Elastic APM](https://www.elastic.co/apm) integration.
 CB_MAN_ELASTIC_APM_SERVER           | http://localhost:8200 | Elastic APM server.
-CB_MAN_LOG_LEVEL                    | DEBUG                 | Log level.
-
+CB_MAN_CONFIG                       | log.yaml              | Log configuration path.

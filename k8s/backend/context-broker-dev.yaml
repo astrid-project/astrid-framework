@@ -23,25 +23,30 @@ spec:
           value: "0.0.0.0"
         - name: CB_MAN_PORT
           value: "5000"
+        - name: CB_MAN_HTTPS
+          value: "false"
+        - name: CB_MAN_AUTH_ENABLED
+          value: "true"
+        - name: CB_MAN_AUTH_HEADER_PREFIX
+          value: ASTRID
+        - name: CB_MAN_AUTH_SECRET_KEY
+          value: astrid-secret-key
         - name: CB_MAN_HEARTBEAT_TIMEOUT
           value: "1min"
         - name: CB_MAN_HEARTBEAT_PERIOD
           value: "20s"
-        - name: CB_MAN_HEARTBEAT_AUTH_EXPIRATION
-          value: 5min
         - name: CB_MAN_ELASTICSEARCH_ENDPOINT
           value: "localhost:9200"
         - name: CB_MAN_ELASTICSEARCH_TIMEOUT
           value: "20s"
         - name: CB_MAN_ELASTICSEARCH_RETRY_PERIOD
           value: "1min"
-        - name: CB_MAN_DEV_USERNAME
-          value: "cb-manager"
-        # Password: "astrid" hashed in sha256
-        - name: CB_MAN_DEV_PASSWORD
-          value: "9c804f2550e31d8f98ac9b460cfe7fbfc676c5e4452a261a2899a1ea168c0a50"
-        - name: CB_MAN_LOG_LEVEL
-          value: "DEBUG"
+        - name: CB_MAN_ELASTIC_APM_ENABLED
+          value: "false"
+        - name: CB_MAN_ELASTIC_APM_SERVER
+          value: "http://localhost:8200"
+        - name: CB_MAN_LOG_CONFIG
+          value: "log.yaml"
         volumeMounts:
         - name: node
           mountPath: /node
@@ -107,7 +112,7 @@ spec:
           runAsUser: 0
         ports:
         - containerPort: 9200
-        
+
         env:
         - name: INSTALLATION_PATH
           value: /usr/share/elasticsearch
