@@ -1,7 +1,0 @@
-# Copyright (c) ASTRID 2020-2022
-# author: Alex Carrega <alessandro.carrega@cnit.it>
-
-debug: true
-run:
-  hide: true
-  warn: true
