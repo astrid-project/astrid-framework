@@ -16,3 +16,4 @@ set_var PIDFILE $TMP_PATH/$COMPONENT.pid
 
 WORK_PATH="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 source "$WORK_PATH/../settings/$VERSION/.env"
+export $(cut -d= -f1 "$WORK_PATH/../settings/$VERSION/.env")
