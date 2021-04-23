@@ -103,7 +103,7 @@ jobs:
             title: CB (Context Broker) Manager
             description: 'CB-Manager Docker image with configuration files'
             url: https://github.com/astrid-project/cb-manager
-          
+
           - component: cb-manager
             version: v1.0.3
             context: platform/cb-manager
@@ -142,7 +142,7 @@ jobs:
 
 
           - component: kafka
-            version: 2.6.1
+            version: 2.6.2
             context: platform/kafka
             title: Kafka
             description: 'Kafka Docker image with configuration files'
