@@ -48,19 +48,19 @@ $ cd scripts
 ### Initialization
 
 ```console
-$ ./init
+$ bash ./init.sh
 ```
 
 ### Start
 
 ```console
-$ ./start
+$ bash ./start.sh
 ```
 
 ### Stop
 
 ```console
-$ ./stop
+$ bash ./stop.sh
 ```
 
 ### Health
@@ -68,7 +68,7 @@ $ ./stop
 Check if the software is running or not.
 
 ```console
-$ ./health
+$ bash ./health.sh
 ```
 
 ## Docker image
