@@ -24,6 +24,8 @@ Programs can be directly injected in <A href="https://github.com/polycube-networ
 
 [1] M. Repetto, A. Carrega, G. Lamanna, J. Yusupov, O. Toscano, G. Bruno, M. Nuovo, M. Cappelli. Leveraging the 5G architecture to mitigate amplification attacks. 3rd International Workshop on Cyber-Security Threats, Trust and Privacy Management in Software-defined and Virtualized Infrastructures (SecSoft), July 2nd, 2021, Tokyo, Japan. 
 
+## Notes
+
 <a name="myfootnote1">1</a>: Less than two years after the unprecedented 1.35 Tbps DDoS attack experienced by GitHub, AWS reported to have defeated against a 2.3 Tbps attack in February 2020, which almost doubled the previous volume. During the same period, Imperva reported one of its client to have experienced a 500 million packets-per-second attack, which represents the most intensive DDoS attack against network infrastructure in the history of the Internet.
 
 
