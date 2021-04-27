@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: execution-environment
+  namespace: astrid-kube
+spec:
+  selector:
+    matchLabels:
+      app: execution-environment
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: execution-environment
+    spec:
+      containers:
+      - name: lcp
+        image: astridproject/lcp:master
+        ports:
+        - containerPort: 4000
+        env:
+        - name: LCP_PORT
+          value: "0.0.0.0"
+        - name: LCP_PORT
+          value: "4000"
+        - name: LCP_HTTPS
+          value: "false"
+        - name: LCP_AUTH_ENABLED
+          value: "true"
+        - name: LCP_AUTH_HEADER_PREFIX
+          value: ASTRID
+        - name: LCP_AUTH_SECRET_KEY
+          value: astrid-secret-key
+        - name: LCP_ELASTIC_APM_ENABLED
+          value: "false"
+        - name: LCP_ELASTIC_APM_SERVER
+          value: "http://localhost:8200"
+        - name: LCP_POLYCUBE_HOST
+          value: "localhost"
+        - name: LCP_POLYCUBE_PORT
+          value: "9000"
+        - name: LCP_POLYCUBE_TIMEOUT
+          value: "20s"
+        - name: LCP_LOG_CONFIG
+          value: "log.yaml"
+        volumeMounts:
+        - name: node
+          mountPath: /node
