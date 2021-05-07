@@ -98,6 +98,8 @@ spec:
           value: "localhost:9200"
         - name: KAFKA_BOOTSTRAP_SERVERS
           value: "localhost:9092"
+        securityContext:
+          runAsUser: 0
         volumeMounts:
           - name: logstash-config
             mountPath: /usr/share/logstash/config/
@@ -131,17 +133,22 @@ spec:
         - name: node
           mountPath: /node
 
-      # - name: elasticsearch-data-permission-fix
-      #   image: busybox
-      #   command:
-      #   - "sh"
-      #   - "-c"
-      #   - "/bin/mkdir -p /node/mnt/elasticsearch-data ; /bin/chmod -R 777 /node/mnt/elasticsearch-data"
-      #   securityContext:
-      #     runAsUser: 0
-      #   volumeMounts:
-      #   - name: node
-      #     mountPath: /node/
+#      - name: elasticsearch-data-permission-fix
+#        image: busybox
+#        command:
+#        - "sh"
+#        - "-c"
+#        - "/bin/mkdir -p /node/mnt/elasticsearch-data ; /bin/chmod -R 777 /node/mnt/elasticsearch-data"
+#        securityContext:
+#          runAsUser: 0
+#        volumeMounts:
+#        - name: node
+#          mountPath: /node/
+#
+#      securityContext:
+#        runAsUser: 0
+#        runAsGroup: 0
+#        fsGroup: 0
 
       volumes:
       - name: node
