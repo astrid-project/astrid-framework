@@ -12,3 +12,32 @@
         "status": "stopped"
     }
 ]
+
+
+{
+    "id": "filebeat@user-vm",
+    "operations": [
+        {
+            "actions": [
+                {
+                    "id": "start",
+                    "platform": "..."
+                }
+            ],
+            "parameters": [
+                {
+                    "id": "log-enabled",
+                    "value": false
+                }
+            ]
+        },
+        {
+            "resources": [
+                {
+                    "id": "config-file",
+                    "content": "......."
+                }
+            ]
+        }
+    ]
+}
