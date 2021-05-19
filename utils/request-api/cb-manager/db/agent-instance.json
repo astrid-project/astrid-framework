@@ -3,41 +3,14 @@
         "id": "filebeat@user-vm",
         "exec_env_id": "user-vm",
         "agent_catalog_id": "filebeat",
-        "status": "stopped"
+        "status": "stopped",
+        "partner": "cnit"
     },
     {
         "id": "metricbeat@user-vm",
         "exec_env_id": "user-vm",
         "agent_catalog_id": "metricbeat",
-        "status": "stopped"
+        "status": "stopped",
+        "partner": "cnit"
     }
 ]
-
-
-{
-    "id": "filebeat@user-vm",
-    "operations": [
-        {
-            "actions": [
-                {
-                    "id": "start",
-                    "platform": "..."
-                }
-            ],
-            "parameters": [
-                {
-                    "id": "log-enabled",
-                    "value": false
-                }
-            ]
-        },
-        {
-            "resources": [
-                {
-                    "id": "config-file",
-                    "content": "......."
-                }
-            ]
-        }
-    ]
-}

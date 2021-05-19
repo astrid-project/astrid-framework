@@ -1,4 +1,4 @@
-@index=exec-env
+@index=algorithm-instance
 
 ### Info
 GET {{elasticsearch_endpoint}}/?pretty HTTP/1.1
@@ -10,7 +10,7 @@ GET {{elasticsearch_endpoint}}/_cat/health?v&pretty HTTP/1.1
 GET {{elasticsearch_endpoint}}/_cat/nodes?v&pretty HTTP/1.1
 
 ### Indeces
-GET {{elasticsearch_endpoint}}/_cat/indices?v&health=red+yellow&pretty HTTP/1.1
+GET {{elasticsearch_endpoint}}/_cat/indices?v&health=yellow&pretty HTTP/1.1
 
 ### Index definition
 GET {{elasticsearch_endpoint}}/{{index}} HTTP/1.1
@@ -21,8 +21,26 @@ GET {{elasticsearch_endpoint}}/{{index}}/_search HTTP/1.1
 ### Create index
 PUT {{elasticsearch_endpoint}}/{{index}} HTTP/1.1
 
+{
+   "mappings": {
+      "properties": {
+         "value": {
+            "type": "object",
+            "properties": {
+               "value": {
+                  "type": "text"
+               }
+            }
+         }
+      }
+   }
+}
+
 ### Delete index
 DELETE {{elasticsearch_endpoint}}/{{index}} HTTP/1.1
+
+### Get Mapping of index
+GET {{elasticsearch_endpoint}}/{{index}}/_mapping
 
 ### Pipeline
 GET {{elasticsearch_endpoint}}/_ingest/pipeline

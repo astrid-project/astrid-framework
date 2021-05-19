@@ -1,0 +1,12 @@
+{
+    "id": "{{agent_instance_id}}",
+    "operations": [
+        {
+            "actions": [
+                {
+                    "id": "{{action_id}}"
+                }
+            ]
+        }
+    ]
+}

@@ -1,0 +1,41 @@
+@uri = {{exec_env_uri}}
+@select=  "id", "lcp"
+@operator = reg_exp
+@target = partner
+@expr = cnit
+
+
+GET {{cb_manager_endpoint}}/{{uri}} HTTP/1.1
+
+{
+    "select": [{{select}}],
+    "where": {
+        "{{operator}}": {
+            "target": "{{target}}",
+            "expr": "{{expr}}"
+        }
+    }
+}
+
+###
+
+POST {{cb_manager_endpoint}}/{{uri}} HTTP/1.1
+
+
+###
+
+PUT {{cb_manager_endpoint}}/{{uri}} HTTP/1.1
+
+
+###
+
+DELETE {{cb_manager_endpoint}}/{{uri}} HTTP/1.1
+
+{
+    "where": {
+        "{{operator}}": {
+            "target": "{{target}}",
+            "expr": "{{expr}}"
+        }
+    }
+}
