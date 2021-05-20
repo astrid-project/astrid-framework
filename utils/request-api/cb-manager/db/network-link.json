@@ -1,0 +1,30 @@
+[
+    {
+        "id": "cnit-network-slice",
+        "type_id": "network-slice"
+    },
+    {
+        "id": "hosted@digit-cyber",
+        "type_id": "hosted"
+    },
+    {
+        "id": "hosted@alpha-service",
+        "type_id": "hosted"
+    },
+    {
+        "id": "hosted@vision-tech",
+        "type_id": "hosted"
+    },
+    {
+        "id": "frontend-backend",
+        "type_id": "pnt2pnt"
+    },
+    {
+        "id": "cloud-federation",
+        "type_id": "network-slice"
+    },
+    {
+        "id": "wifi@vision-tech",
+        "type_id": "wifi"
+    }
+]

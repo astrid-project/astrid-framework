@@ -5,22 +5,7 @@
         "content-type": "application/json"
     },
     "rest-client.environmentVariables": {
-        "$shared": {
-            "instance_agent_uri": "instance/agent",
-            "catalog_agent_uri": "catalog/agent",
-            "instance_algorithm_uri": "instance/algorithm",
-            "catalog_algorithm_uri": "catalog/algorithm",
-            "instance_ebpf_program_uri": "instance/ebpf-program",
-            "catalog_ebpf_program_uri": "catalog/ebpf-program",
-            "type_exec_env_uri": "type/exec-env",
-            "exec_env_uri": "exec-env",
-            "type_network_link_uri": "type/network-link",
-            "network_link_uri": "network-link",
-            "connection_uri": "connection",
-            "data_uri": "data",
-            "event_uri": "event",
-            "pipeline_uri": "pipeline"
-        },
+        "$shared": {},
         "CNIT / K8s": {
             "cb_manager_endpoint": "http://172.21.100.31:5000",
             "elasticsearch_endpoint": "http://172.21.100.31:9200"

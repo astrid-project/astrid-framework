@@ -23,7 +23,7 @@
         "restructuredtext.builtDocumentationPath": "docs/.build/html",
         "restructuredtext.confPath": "docs/conf.py",
         "restructuredtext.experimental": true,
-        "workbench.colorTheme": "Atom One Dark", // Only for this workspace
+        "workbench.colorTheme": "Monokai", // Only for this workspace
         "workbench.editor.tabSizing": "shrink",
         "jupyter.jupyterServerType": "local",
         "restructuredtext.languageServer.disabled": true

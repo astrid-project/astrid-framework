@@ -1,7 +1,8 @@
 {
     "id": "cubebeat",
     "partner": "cnit",
-    "parameters": [{
+    "parameters": [
+        {
             "id": "synflood-enabled",
             "type": "boolean",
             "example": true,
@@ -30,15 +31,18 @@
             }
         }
     ],
-    "resources": [{
-        "id": "config-file",
-        "description": "Configuration file to collect log system data",
-        "config": {
-            "path": "/opt/metricbeat/modules.d/system.yml"
-        },
-        "example": "https://github.com/astrid-project/astrid-framework/blob/75ff3182b290b44329dc146140af5e4e083484ed/agents/cubebeat/settings/master/config.d/synflood.yml"
-    }],
-    "actions": [{
+    "resources": [
+        {
+            "id": "config-file",
+            "description": "Configuration file to collect synflood data",
+            "config": {
+                "path": "/opt/cubebeat/config.d/synflood.yml"
+            },
+            "example": "https://github.com/astrid-project/astrid-framework/blob/75ff3182b290b44329dc146140af5e4e083484ed/agents/cubebeat/settings/master/config.d/synflood.yml"
+        }
+    ],
+    "actions": [
+        {
             "id": "start",
             "status": "started",
             "config": {

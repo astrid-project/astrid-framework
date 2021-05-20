@@ -1,0 +1,17 @@
+[
+    {
+        "id": "user-vm>hosted@digit-cyber",
+        "exec_env_id": "user-vm",
+        "network_link_id": "hosted@digit-cyber"
+    },
+    {
+        "id": "user-vm>cnit-network-slice",
+        "exec_env_id": "user-vm",
+        "network_link_id": "cnit-network-slice"
+    },
+    {
+        "id": "mobile-phone>cnit-network-slice",
+        "exec_env_id": "mobile-phone",
+        "network_link_id": "cnit-network-slice"
+    }
+]
