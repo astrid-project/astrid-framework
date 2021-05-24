@@ -1,10 +1,10 @@
 # @uri = instance/agent
-@uri = catalog/agent
+# @uri = catalog/agent
 # @uri = instance/algorithm
-# @uri = catalog/algorithm
+@uri = catalog/algorithm
 # @uri = instance/ebpf-program
 # @uri = catalog/ebpf-program
-#@uri = type/exec-env
+# @uri = type/exec-env
 # @uri = exec-env
 # @uri = type/network-link
 # @uri = network-link
@@ -12,7 +12,7 @@
 # @uri = data
 # @uri = event
 # @uri = pipeline
-@select=
+@select =
 @operator = equals
 # @target = name
 @target = id
@@ -23,10 +23,7 @@ GET {{cb_manager_endpoint}}/{{uri}} HTTP/1.1
 {
     "select": [{{select}}],
     "where": {
-        "{{operator}}": {
-            "target": "{{target}}",
-            "expr": "{{expr}}"
-        }
+
     }
 }
 
@@ -34,7 +31,7 @@ GET {{cb_manager_endpoint}}/{{uri}} HTTP/1.1
 
 POST {{cb_manager_endpoint}}/{{uri}} HTTP/1.1
 
-< db/catalog/agent/cubebeat-cnit.json
+< db/catalog/algorithm/test.json
 
 ###
 

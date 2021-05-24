@@ -1,0 +1,73 @@
+[
+    {
+        "id": "algo-test-01",
+        "description": "Test for dashboard development",
+        "parameters": [
+            {
+                "id": "param-test-01",
+                "type": "time-duration",
+                "description": "Test paramter",
+                "example": "10s"
+            },
+            {
+                "id": "param-test-02",
+                "type": "binary",
+                "encoding-scheme": "base64",
+                "description": "Test paramter",
+                "example": "YmluYXJ5LWRhdGE="
+            }
+        ]
+    },
+    {
+        "id": "algo-test-02",
+        "description": "Test for dashboard development",
+        "parameters": [
+            {
+                "id": "param-test-01",
+                "type": "string",
+                "description": "Test paramter",
+                "example": "eth0"
+            },
+            {
+                "id": "param-test-02",
+                "type": "integer",
+                "description": "Test paramter",
+                "example": 100
+            }
+        ]
+    },
+    {
+        "id": "algo-test-03",
+        "description": "Test for dashboard development",
+        "parameters": [
+            {
+                "id": "param-test-01",
+                "type": "number",
+                "description": "Test paramter",
+                "example": 10.1
+            },
+            {
+                "id": "param-test-02",
+                "type": "boolean",
+                "description": "Test paramter",
+                "example": true
+            },
+            {
+                "id": "param-test-03",
+                "type": "choice",
+                "list": true,
+                "description": "Test paramter",
+                "example": [
+                    "option-1",
+                    "option-4"
+                ],
+                "values": [
+                    "option-1",
+                    "option-2",
+                    "option-3",
+                    "option-4"
+                ]
+            }
+        ]
+    }
+]
