@@ -12,7 +12,7 @@
             {
                 "id": "param-test-02",
                 "type": "binary",
-                "encoding-scheme": "base64",
+                "encoding_scheme": "base64",
                 "description": "Test paramter",
                 "example": "YmluYXJ5LWRhdGE="
             }

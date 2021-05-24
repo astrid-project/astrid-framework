@@ -43,9 +43,6 @@ DELETE {{cb_manager_endpoint}}/{{uri}} HTTP/1.1
 
 {
     "where": {
-        "{{operator}}": {
-            "target": "{{target}}",
-            "expr": "{{expr}}"
-        }
+
     }
 }
