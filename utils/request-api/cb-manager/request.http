@@ -18,20 +18,14 @@
 @target = id
 @expr = cubebeat
 
-GET {{cb_manager_endpoint}}/{{uri}} HTTP/1.1
+GET {{cb_manager_endpoint}}/{{uri}}/ATk-Decision-1 HTTP/1.1
 
-{
-    "select": [{{select}}],
-    "where": {
-
-    }
-}
 
 ###
 
 POST {{cb_manager_endpoint}}/{{uri}} HTTP/1.1
 
-< db/catalog/algorithm/test.json
+< db/catalog/algorithm/atk-tei.json
 
 ###
 
@@ -43,6 +37,9 @@ DELETE {{cb_manager_endpoint}}/{{uri}} HTTP/1.1
 
 {
     "where": {
-
+        "equals": {
+            "target": "partner",
+            "expr": "tei"
+        }
     }
 }

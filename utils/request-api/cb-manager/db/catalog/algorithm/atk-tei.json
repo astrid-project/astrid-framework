@@ -1,0 +1,58 @@
+[
+    {
+        "id": "ATk-Decision-1",
+        "name": "ATk Decision Maker",
+        "description": "ATk deals with a certain \"use-case\" of interest and decides whether an alarm must be raised. It consumes a time-series representing a first \"forecast\" parameter (typically traffic volume for a network protocol for a set of nodes) and detect deviations.  When a significant deviation is detected, it raises a Warning and additionally consumes another time-series typically obtained by packet inspection related to a second \"detection\" parameter. With this second parameter it decides whether to raise alarm, wait or publish ceased alarm.",
+        "partner": "tei",
+        "parameters": [
+            {
+                "id": "uc-id",
+                "type": "string",
+                "description": "The use-case refers to a specific kind of network attack.",
+                "example": "NTP"
+            },
+            {
+                "id": "forecast-parameter",
+                "type": "string",
+                "description": "The physical quantity represented by the \"forecast\" time-series.",
+                "example": "NTP_volume"
+            },
+            {
+                "id": "forecast-threshold",
+                "type": "integer",
+                "description": "When the actual forecast-parameter is greater than the value forecasted by this percentage, ATk detects a deviation.",
+                "example": 20,
+                "min": 1,
+                "max": 100
+            },
+            {
+                "id": "detection-parameter",
+                "type": "string",
+                "description": "The physical quantity represented by the \"detection\" time-series.",
+                "example": "NTP_monlist"
+            },
+            {
+                "id": "detection-threshold",
+                "type": "number",
+                "description": "When the detection-parameter is greater than this value.",
+                "example": 100.0,
+                "min": 0.0
+            },
+            {
+                "id": "detection-hysteresis",
+                "type": "integer",
+                "description": "Once in Warning state, ATk waits for this amount of timeslots (time-series samples) before raising Alarm to prevent false positives.",
+                "example": 3,
+                "min": 0,
+                "max": 15
+            },
+            {
+                "id": "num-nodes",
+                "description": "Number of nodes",
+                "type": "integer",
+                "example": 30,
+                "min": 1
+            }
+        ]
+    }
+]
