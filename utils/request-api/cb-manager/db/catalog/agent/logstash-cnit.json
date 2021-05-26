@@ -30,12 +30,6 @@
             "config": {
                 "cmd": "cd /home/ubuntu/dev && inv agent.health --name=logstash --project=astrid --platform={platform}"
             }
-        },
-        {
-            "id": "dev",
-            "config": {
-                "cmd": "{cmd}"
-            }
         }
     ]
 }

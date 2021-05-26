@@ -1,0 +1,14 @@
+{
+    "id": "dev",
+    "partner": "cnit",
+    "stage": "development",
+    "description": "Agent entry for development purpose.",
+    "actions": [
+        {
+            "id": "test",
+            "config": {
+                "cmd": "{run}"
+            }
+        }
+    ]
+}

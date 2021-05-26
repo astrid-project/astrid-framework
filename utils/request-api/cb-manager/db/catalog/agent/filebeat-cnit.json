@@ -1,7 +1,8 @@
 {
     "id": "filebeat",
     "partner": "cnit",
-    "parameters": [{
+    "parameters": [
+        {
             "id": "log-enabled",
             "type": "boolean",
             "example": true,
@@ -30,14 +31,16 @@
             }
         }
     ],
-    "resources": [{
-        "id": "config-file",
-        "description": "Configuration file to collect log data",
-        "config": {
-            "path": "/opt/filebeat/config/log.yml"
-        },
-        "example": "https://github.com/astrid-project/astrid-framework/blob/89cee77fb4b3c3af2bcf0b52bb40c26937a49202/agents/filebeat/settings/7.8.0/config/log.yml"
-    }],
+    "resources": [
+        {
+            "id": "config-file",
+            "description": "Configuration file to collect log data",
+            "config": {
+                "path": "/opt/filebeat/config/log.yml"
+            },
+            "example": "https://github.com/astrid-project/astrid-framework/blob/89cee77fb4b3c3af2bcf0b52bb40c26937a49202/agents/filebeat/settings/7.8.0/config/log.yml"
+        }
+    ],
     "actions": [
         {
             "id": "init",
@@ -64,12 +67,6 @@
             "id": "health",
             "config": {
                 "cmd": "cd /home/ubuntu/dev && inv agent.health --name=filebeat --project=astrid --platform={platform}"
-            }
-        },
-        {
-            "id": "dev",
-            "config": {
-                "cmd": "{cmd}"
             }
         }
     ]

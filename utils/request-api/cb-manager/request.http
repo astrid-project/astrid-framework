@@ -1,7 +1,7 @@
 # @uri = instance/agent
-# @uri = catalog/agent
+@uri = catalog/agent
 # @uri = instance/algorithm
-@uri = catalog/algorithm
+# @uri = catalog/algorithm
 # @uri = instance/ebpf-program
 # @uri = catalog/ebpf-program
 # @uri = type/exec-env
@@ -14,18 +14,31 @@
 # @uri = pipeline
 @select =
 @operator = equals
-# @target = name
-@target = id
-@expr = cubebeat
+@target = partner
+@expr = cnit
 
-GET {{cb_manager_endpoint}}/{{uri}}/ATk-Decision-1 HTTP/1.1
+GET {{cb_manager_endpoint}}/{{uri}} HTTP/1.1
 
+{
+    "select": [{{select}}],
+    "where": {
+        "{{operator}}": {
+            "target": "{{target}}",
+            "expr": "{{expr}}"
+        }
+    }
+}
 
 ###
 
 POST {{cb_manager_endpoint}}/{{uri}} HTTP/1.1
 
-< db/catalog/algorithm/atk-tei.json
+# < db/catalog/agent/filebeat-cnit.json
+# < db/catalog/agent/metricbeat-cnit.json
+# < db/catalog/agent/packetbeat-cnit.json
+# < db/catalog/agent/cubebeat-cnit.json
+# < db/catalog/agent/logstash-cnit.json
+< db/catalog/agent/dev-cnit.json
 
 ###
 
@@ -37,9 +50,9 @@ DELETE {{cb_manager_endpoint}}/{{uri}} HTTP/1.1
 
 {
     "where": {
-        "equals": {
-            "target": "partner",
-            "expr": "tei"
+        "{{operator}}": {
+            "target": "{{target}}",
+            "expr": "{{expr}}"
         }
     }
 }
