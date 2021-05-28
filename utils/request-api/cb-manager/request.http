@@ -1,5 +1,5 @@
-# @uri = instance/agent
-@uri = catalog/agent
+@uri = instance/agent
+# @uri = catalog/agent
 # @uri = instance/algorithm
 # @uri = catalog/algorithm
 # @uri = instance/ebpf-program
@@ -38,7 +38,8 @@ POST {{cb_manager_endpoint}}/{{uri}} HTTP/1.1
 # < db/catalog/agent/packetbeat-cnit.json
 # < db/catalog/agent/cubebeat-cnit.json
 # < db/catalog/agent/logstash-cnit.json
-< db/catalog/agent/dev-cnit.json
+# < db/catalog/agent/dev-cnit.json
+< db/agent-instance.json
 
 ###
 

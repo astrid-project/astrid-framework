@@ -12,5 +12,19 @@
         "agent_catalog_id": "metricbeat",
         "status": "stopped",
         "partner": "cnit"
+    },
+    {
+        "id": "dev@user-vm",
+        "exec_env_id": "user-vm",
+        "agent_catalog_id": "dev",
+        "status": "stopped",
+        "partner": "cnit"
+    },
+    {
+        "id": "dev@mobile-phone",
+        "exec_env_id": "mobile-phone",
+        "agent_catalog_id": "dev",
+        "status": "stopped",
+        "partner": "cnit"
     }
 ]
