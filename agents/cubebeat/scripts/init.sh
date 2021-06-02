@@ -12,11 +12,17 @@ if [ -d "$INSTALLATION_PATH" ]; then
     exit 1
 fi
 
-git clone "https://github.com/$PROJECT-project/$COMPONENT" --branch "$VERSION" "$GOPATH/src/gitlab.com/$PROJECT-repositories/$COMPONENT"
+if [ -d "$GOPATH/src/gitlab.com/$PROJECT-repositories/$COMPONENT" ]; then
+    git pull
+else
+    git clone "https://github.com/$PROJECT-project/$COMPONENT" --branch "$VERSION" "$GOPATH/src/gitlab.com/$PROJECT-repositories/$COMPONENT"
+fi
+
+mkdir -p "$INSTALLATION_PATH"
 
 cp "$WORK_PATH/../settings/$VERSION/$COMPONENT.yml" "$INSTALLATION_PATH/"
 
 cd "$GOPATH/src/gitlab.com/$PROJECT-repositories/$COMPONENT"
-./build.sh
+bash ./build.sh
 
 cp "./$COMPONENT" "$INSTALLATION_PATH/"

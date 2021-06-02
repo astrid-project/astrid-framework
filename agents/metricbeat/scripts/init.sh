@@ -27,4 +27,4 @@ mv "$TMP_PATH/$SOURCE" "$INSTALLATION_PATH"
 cp "$WORK_PATH/../settings/$VERSION/$COMPONENT.yml" "$INSTALLATION_PATH/"
 
 mkdir -p "$INSTALLATION_PATH/modules.d"
-cp "$WORK_PATH/../settings/$VERSION/modules.d/*" "$INSTALLATION_PATH/modules.d/"
+cp $WORK_PATH/../settings/$VERSION/modules.d/* "$INSTALLATION_PATH/modules.d/"
