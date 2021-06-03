@@ -12,9 +12,10 @@
 # @uri = data
 # @uri = event
 # @uri = pipeline
-@select =
+@select = "id"
 @operator = equals
 @target = partner
+@agent = dev
 @expr = cnit
 
 GET {{cb_manager_endpoint}}/{{uri}} HTTP/1.1
@@ -33,13 +34,8 @@ GET {{cb_manager_endpoint}}/{{uri}} HTTP/1.1
 
 POST {{cb_manager_endpoint}}/{{uri}} HTTP/1.1
 
-# < db/catalog/agent/filebeat-cnit.json
-# < db/catalog/agent/metricbeat-cnit.json
-# < db/catalog/agent/packetbeat-cnit.json
-# < db/catalog/agent/cubebeat-cnit.json
-# < db/catalog/agent/logstash-cnit.json
-# < db/catalog/agent/dev-cnit.json
-< db/agent-instance.json
+< db/catalog/agent/{{agent}}-cnit.json
+# < db/agent-instance.json
 
 ###
 
