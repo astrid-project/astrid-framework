@@ -7,21 +7,22 @@
 WORK_PATH="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 source "$WORK_PATH/vars.sh"
 
-if [ -d "$INSTALLATION_PATH" ]; then
-    echo "Error: component $COMPONENT already initialized in $INSTALLATION_PATH"
-    exit 1
-fi
+mkdir -p $COMPONENT_PATH
+rm -f $COMPONENT_PATH/$COMPONENT
+ln -fs $WORK_PATH $COMPONENT_PATH/$COMPONENT
 
-if [ "$1" == "-f" ] || [ "$1" == "--force" ]; then
+if [ "$1" == "-nc" ] || [ "$1" == "--no-cache" ]; then
     rm -rf "$TMP_PATH/$FILE"
 fi
 
 if [ ! -f "$TMP_PATH/$FILE" ]; then
     wget -P "$TMP_PATH/" "https://artifacts.elastic.co/downloads/$COMPONENT/$FILE"
 else
-    echo "Info: $COMPONENT already downloaded"
+    echo "Info: get $COMPONENT from cache"
 fi
 unzip "$TMP_PATH/$FILE" -d "$TMP_PATH/"
+
+rm -rf "$INSTALLATION_PATH"
 mv "$TMP_PATH/$SOURCE" "$INSTALLATION_PATH"
 
 mkdir -p "$INSTALLATION_PATH/config"
