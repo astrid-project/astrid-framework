@@ -43,17 +43,30 @@
     ],
     "actions": [
         {
+            "id": "init",
+            "config": {
+                "cmd": "/opt/component/cubebeat/init.sh"
+            }
+        },
+        {
             "id": "start",
             "status": "started",
             "config": {
-                "cmd": "sudo /opt/cubebeat/cubebeat"
+                "cmd": "/opt/component/cubebeat/start.sh",
+                "daemon": true
             }
         },
         {
             "id": "stop",
             "status": "stopped",
             "config": {
-                "cmd": "sudo killall -9 cubebeat"
+                "cmd": "/opt/component/cubebeat/stop.sh"
+            }
+        },
+        {
+            "id": "health",
+            "config": {
+                "cmd": "/opt/component/cubebeat/health.sh"
             }
         }
     ]

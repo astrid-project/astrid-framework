@@ -45,14 +45,14 @@
         {
             "id": "init",
             "config": {
-                "cmd": "cd /home/ubuntu/dev && inv agent.init --name=metricbeat --project=astrid --platform={platform}"
+                "cmd": "/opt/component/metricbeat/init.sh"
             }
         },
         {
             "id": "start",
             "status": "started",
             "config": {
-                "cmd": "cd /home/ubuntu/dev && inv agent.start --name=metricbeat --project=astrid --platform={platform}",
+                "cmd": "/opt/component/metricbeat/start.sh",
                 "daemon": true
             }
         },
@@ -60,13 +60,13 @@
             "id": "stop",
             "status": "stopped",
             "config": {
-                "cmd": "cd /home/ubuntu/dev && inv agent.stop --name=metricbeat --project=astrid --platform={platform}"
+                "cmd": "/opt/component/metricbeat/stop.sh"
             }
         },
         {
             "id": "health",
             "config": {
-                "cmd": "cd /home/ubuntu/dev && inv agent.health --name=metricbeat --project=astrid --platform={platform}"
+                "cmd": "/opt/component/metricbeat/health.sh"
             }
         }
     ]

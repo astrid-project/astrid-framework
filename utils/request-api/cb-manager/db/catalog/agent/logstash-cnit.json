@@ -1,20 +1,19 @@
 {
     "id": "logstash",
     "partner": "cnit",
-    "parameters": [
-    ],
+    "parameters": [],
     "actions": [
         {
             "id": "init",
             "config": {
-                "cmd": "cd /home/ubuntu/dev && inv agent.init --name=logstash --project=astrid --platform={platform}"
+                "cmd": "/opt/component/logstash/init.sh"
             }
         },
         {
             "id": "start",
             "status": "started",
             "config": {
-                "cmd": "cd /home/ubuntu/dev && inv agent.start --name=logstash --project=astrid --platform={platform}",
+                "cmd": "/opt/component/logstash/start.sh",
                 "daemon": true
             }
         },
@@ -22,13 +21,13 @@
             "id": "stop",
             "status": "stopped",
             "config": {
-                "cmd": "cd /home/ubuntu/dev && inv agent.stop --name=logstash --project=astrid --platform={platform}"
+                "cmd": "/opt/component/logstash/stop.sh"
             }
         },
         {
             "id": "health",
             "config": {
-                "cmd": "cd /home/ubuntu/dev && inv agent.health --name=logstash --project=astrid --platform={platform}"
+                "cmd": "/opt/component/logstash/health.sh"
             }
         }
     ]
