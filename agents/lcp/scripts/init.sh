@@ -11,10 +11,11 @@ mkdir -p $COMPONENT_PATH
 rm -f $COMPONENT_PATH/$COMPONENT
 ln -fs $WORK_PATH $COMPONENT_PATH/$COMPONENT
 
-if [ -d "$INSTALLATION_PATH" ]; then
-    git pull
-else
+if [ "$1" == "-nc" ] || [ "$1" == "--no-cache" ] || [ ! -d "$INSTALLATION_PATH" ]; then
+    rm -rf $INSTALLATION_PATH
     git clone "https://github.com/$PROJECT-project/$COMPONENT" --branch "$VERSION" "$INSTALLATION_PATH"
+else
+    git pull
 fi
 
 cp "$WORK_PATH/../settings/$VERSION/config.ini" "$INSTALLATION_PATH/"

@@ -10,10 +10,11 @@ source "$WORK_PATH/vars.sh"
 mkdir -p $COMPONENT_PATH
 ln -fs $WORK_PATH $COMPONENT_PATH/$COMPONENT
 
-if [ -d "$GOPATH/src/gitlab.com/$PROJECT-repositories/$COMPONENT" ]; then
-    git pull
-else
+if [ "$1" == "-nc" ] || [ "$1" == "--no-cache" ] || [ ! -d "$GOPATH/src/gitlab.com/$PROJECT-repositories/$COMPONENT" ]; then
+    rm -rf "$GOPATH/src/gitlab.com/$PROJECT-repositories/$COMPONENT"
     git clone "https://github.com/$PROJECT-project/$COMPONENT" --branch "$VERSION" "$GOPATH/src/gitlab.com/$PROJECT-repositories/$COMPONENT"
+else
+    git pull
 fi
 
 rm -rf "$INSTALLATION_PATH"
