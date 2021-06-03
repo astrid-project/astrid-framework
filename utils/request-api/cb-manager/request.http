@@ -1,5 +1,5 @@
-@uri = instance/agent
-# @uri = catalog/agent
+# @uri = instance/agent
+@uri = catalog/agent
 # @uri = instance/algorithm
 # @uri = catalog/algorithm
 # @uri = instance/ebpf-program

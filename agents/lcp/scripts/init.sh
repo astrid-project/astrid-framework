@@ -7,12 +7,15 @@
 WORK_PATH="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 source "$WORK_PATH/vars.sh"
 
-if [ -d "$INSTALLATION_PATH" ]; then
-    echo "Error: component $COMPONENT already initialized in $INSTALLATION_PATH"
-    exit 1
-fi
+mkdir -p $COMPONENT_PATH
+rm $COMPONENT_PATH/$COMPONENT
+ln -fs $WORK_PATH $COMPONENT_PATH/$COMPONENT
 
-git clone "https://github.com/$PROJECT-project/$COMPONENT" --branch "$VERSION" "$INSTALLATION_PATH"
+if [ -d "$INSTALLATION_PATH" ]; then
+    git pull
+else
+    git clone "https://github.com/$PROJECT-project/$COMPONENT" --branch "$VERSION" "$INSTALLATION_PATH"
+fi
 
 cp "$WORK_PATH/../settings/$VERSION/config.ini" "$INSTALLATION_PATH/"
 

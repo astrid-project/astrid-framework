@@ -9,9 +9,11 @@ set_var() {
 set_var COMPONENT cubebeat
 set_var VERSION master
 set_var PROJECT astrid
-set_var INSTALLATION_PATH "/opt/$COMPONENT"
 
+set_var INSTALLATION_PATH "/opt/$COMPONENT"
+set_var COMPONENT_PATH /opt/component
 set_var TMP_PATH /tmp
+
 set_var PIDFILE "$TMP_PATH/$COMPONENT.pid"
 
 set_var GOPATH /opt/go
