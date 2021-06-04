@@ -12,8 +12,8 @@ if [ -f "$PIDFILE" ] ; then
     echo "Note: to force the start please remove $PIDFILE"
 else
     cd "$INSTALLATION_PATH"
-    "./bin/$COMPONENT_DEP-server-start.sh" "./config/$COMPONENT_DEP.properties" &
+    "./bin/$COMPONENT_DEP-server-start.sh" "./config/$COMPONENT_DEP.properties" > /tmp/$COMPONENT_DEP.log &
     echo "$!" > "$PIDFILE_DEP"
-    "./bin/$COMPONENT-server-start.sh" "./config/$COMPONENT.properties" &
+    "./bin/$COMPONENT-server-start.sh" "./config/$COMPONENT.properties" > /tmp/$COMPONENT.log &
     echo "$!" > "$PIDFILE"
 fi

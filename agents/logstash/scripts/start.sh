@@ -12,6 +12,6 @@ if [ -f "$PIDFILE" ] ; then
     echo "Note: to force the start please remove $PIDFILE"
 else
     cd "$INSTALLATION_PATH"
-    "./bin/$COMPONENT" &
+    "./bin/$COMPONENT" > /tmp/$COMPONENT.log &
     echo "$!" > "$PIDFILE"
 fi
