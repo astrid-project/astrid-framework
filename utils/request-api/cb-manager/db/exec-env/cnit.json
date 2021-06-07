@@ -4,7 +4,7 @@
         "partner": "cnit",
         "type_id": "mobile",
         "description": "Mobile Phone (Android)",
-        "hostname": "localhost",
+        "hostname": "172.21.100.31",
         "enabled": true,
         "lcp": {
             "port": 4321,
@@ -17,7 +17,7 @@
         "partner": "cnit",
         "type_id": "vm",
         "description": "User Virtual Machine",
-        "hostname": "localhost",
+        "hostname": "172.21.100.31",
         "enabled": true,
         "lcp": {
             "port": 4567,
@@ -34,6 +34,32 @@
         "enabled": true,
         "lcp": {
             "port": 4000,
+            "https": false
+        },
+        "stage": "development"
+    },
+    {
+        "id": "raspberry-pi-1",
+        "partner": "cnit",
+        "type_id": "raspberry",
+        "description": "Raspberry PI1 for IoT",
+        "hostname": "172.21.100.31",
+        "enabled": true,
+        "lcp": {
+            "port": 1234,
+            "https": false
+        },
+        "stage": "development"
+    },
+    {
+        "id": "raspberry-pi-2",
+        "partner": "cnit",
+        "type_id": "raspberry",
+        "description": "Raspberry PI2 for IoT",
+        "hostname": "172.21.100.31",
+        "enabled": true,
+        "lcp": {
+            "port": 7654,
             "https": false
         },
         "stage": "development"

@@ -1,11 +1,11 @@
 # @uri = instance/agent
-@uri = catalog/agent
+# @uri = catalog/agent
 # @uri = instance/algorithm
 # @uri = catalog/algorithm
 # @uri = instance/ebpf-program
 # @uri = catalog/ebpf-program
 # @uri = type/exec-env
-# @uri = exec-env
+@uri = exec-env
 # @uri = type/network-link
 # @uri = network-link
 # @uri = connection
@@ -34,8 +34,42 @@ GET {{cb_manager_endpoint}}/{{uri}} HTTP/1.1
 
 POST {{cb_manager_endpoint}}/{{uri}} HTTP/1.1
 
-< db/catalog/agent/{{agent}}-cnit.json
+# < db/catalog/agent/{{agent}}-cnit.json
 # < db/agent-instance.json
+
+# {
+#     "id": "raspberry",
+#     "name": "Raspberry"
+# }
+
+[
+    {
+        "id": "raspberry-pi-1",
+        "partner": "cnit",
+        "type_id": "raspberry",
+        "description": "Raspberry PI1 for IoT",
+        "hostname": "172.21.100.31",
+        "enabled": true,
+        "lcp": {
+            "port": 1234,
+            "https": false
+        },
+        "stage": "development"
+    },
+    {
+        "id": "raspberry-pi-2",
+        "partner": "cnit",
+        "type_id": "raspberry",
+        "description": "Raspberry PI2 for IoT",
+        "hostname": "172.21.100.31",
+        "enabled": true,
+        "lcp": {
+            "port": 7654,
+            "https": false
+        },
+        "stage": "development"
+    }
+]
 
 ###
 
