@@ -6,14 +6,14 @@
         {
             "id": "init",
             "config": {
-                "cmd": "/opt/component/logstash/init.sh"
+                "cmd": "/opt/astrid/commands/logstash/init.sh"
             }
         },
         {
             "id": "start",
             "status": "started",
             "config": {
-                "cmd": "/opt/component/logstash/start.sh",
+                "cmd": "/opt/astrid/commands/logstash/start.sh",
                 "daemon": true
             }
         },
@@ -21,13 +21,13 @@
             "id": "stop",
             "status": "stopped",
             "config": {
-                "cmd": "/opt/component/logstash/stop.sh"
+                "cmd": "/opt/astrid/commands/logstash/stop.sh"
             }
         },
         {
             "id": "health",
             "config": {
-                "cmd": "/opt/component/logstash/health.sh"
+                "cmd": "/opt/astrid/commands/logstash/health.sh"
             }
         }
     ]

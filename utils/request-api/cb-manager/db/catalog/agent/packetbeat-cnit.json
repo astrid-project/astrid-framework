@@ -9,7 +9,7 @@
             "description": "The network device to capture traffic from (you can specify any for the device)",
             "config": {
                 "schema": "yaml",
-                "source": "/opt/packetbeat/packetbeat.yml",
+                "source": "/opt/astrid/packetbeat/packetbeat.yml",
                 "path": [
                     "packetbeat",
                     "interfaces",
@@ -24,7 +24,7 @@
             "description": "Enable/disable the stats of ICMP packets",
             "config": {
                 "schema": "yaml",
-                "source": "/opt/packetbeat/packetbeat.yml",
+                "source": "/opt/astrid/packetbeat/packetbeat.yml",
                 "path": [
                     "packetbeat",
                     "protocols",
@@ -39,20 +39,20 @@
             "id": "devices",
             "description": "List of available devices",
             "config": {
-                "cmd": "/opt/packetbeat/packetbeat devices"
+                "cmd": "/opt/astrid/packetbeat/packetbeat devices"
             }
         },
         {
             "id": "init",
             "config": {
-                "cmd": "/opt/component/packetbeat/init.sh"
+                "cmd": "/opt/astrid/commands/packetbeat/init.sh"
             }
         },
         {
             "id": "start",
             "status": "started",
             "config": {
-                "cmd": "/opt/component/packetbeat/start.sh",
+                "cmd": "/opt/astrid/commands/packetbeat/start.sh",
                 "daemon": true
             }
         },
@@ -60,13 +60,13 @@
             "id": "stop",
             "status": "stopped",
             "config": {
-                "cmd": "/opt/component/packetbeat/stop.sh"
+                "cmd": "/opt/astrid/commands/packetbeat/stop.sh"
             }
         },
         {
             "id": "health",
             "config": {
-                "cmd": "/opt/component/packetbeat/health.sh"
+                "cmd": "/opt/astrid/commands/packetbeat/health.sh"
             }
         }
     ]

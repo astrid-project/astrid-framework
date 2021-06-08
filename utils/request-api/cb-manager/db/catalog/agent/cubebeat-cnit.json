@@ -9,7 +9,7 @@
             "description": "Enable/disable the collection of synflood data",
             "config": {
                 "schema": "yaml",
-                "source": "/opt/cubebeat/config.d/synflood.yml",
+                "source": "/opt/astrid/cubebeat/config.d/synflood.yml",
                 "path": [
                     "0",
                     "enabled"
@@ -23,7 +23,7 @@
             "description": "Period to collect the synflood data",
             "config": {
                 "schema": "yaml",
-                "source": "/opt/cubebeat/config.d/synflood.yml",
+                "source": "/opt/astrid/cubebeat/config.d/synflood.yml",
                 "path": [
                     "0",
                     "period"
@@ -36,7 +36,7 @@
             "id": "config-file",
             "description": "Configuration file to collect synflood data",
             "config": {
-                "path": "/opt/cubebeat/config.d/synflood.yml"
+                "path": "/opt/astrid/cubebeat/config.d/synflood.yml"
             },
             "example": "https://github.com/astrid-project/astrid-framework/blob/75ff3182b290b44329dc146140af5e4e083484ed/agents/cubebeat/settings/master/config.d/synflood.yml"
         }
@@ -45,14 +45,14 @@
         {
             "id": "init",
             "config": {
-                "cmd": "/opt/component/cubebeat/init.sh"
+                "cmd": "/opt/astrid/commands/cubebeat/init.sh"
             }
         },
         {
             "id": "start",
             "status": "started",
             "config": {
-                "cmd": "/opt/component/cubebeat/start.sh",
+                "cmd": "/opt/astrid/commands/cubebeat/start.sh",
                 "daemon": true
             }
         },
@@ -60,13 +60,13 @@
             "id": "stop",
             "status": "stopped",
             "config": {
-                "cmd": "/opt/component/cubebeat/stop.sh"
+                "cmd": "/opt/astrid/commands/cubebeat/stop.sh"
             }
         },
         {
             "id": "health",
             "config": {
-                "cmd": "/opt/component/cubebeat/health.sh"
+                "cmd": "/opt/astrid/commands/cubebeat/health.sh"
             }
         }
     ]

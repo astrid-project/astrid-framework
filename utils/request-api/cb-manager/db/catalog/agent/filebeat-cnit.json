@@ -9,7 +9,7 @@
             "description": "Enable/disable the collection of log data",
             "config": {
                 "schema": "yaml",
-                "source": "/opt/filebeat/config/log.yml",
+                "source": "/opt/astrid/filebeat/config/log.yml",
                 "path": [
                     "0",
                     "enabled"
@@ -23,7 +23,7 @@
             "description": "Period to collect the log data",
             "config": {
                 "schema": "yaml",
-                "source": "/opt/filebeat/config/log.yml",
+                "source": "/opt/astrid/filebeat/config/log.yml",
                 "path": [
                     "0",
                     "backoff"
@@ -36,7 +36,7 @@
             "id": "config-file",
             "description": "Configuration file to collect log data",
             "config": {
-                "path": "/opt/filebeat/config/log.yml"
+                "path": "/opt/astrid/filebeat/config/log.yml"
             },
             "example": "https://github.com/astrid-project/astrid-framework/blob/89cee77fb4b3c3af2bcf0b52bb40c26937a49202/agents/filebeat/settings/7.8.0/config/log.yml"
         }
@@ -45,14 +45,14 @@
         {
             "id": "init",
             "config": {
-                "cmd": "/opt/component/filebeat/init.sh"
+                "cmd": "/opt/astrid/commands/filebeat/init.sh"
             }
         },
         {
             "id": "start",
             "status": "started",
             "config": {
-                "cmd": "/opt/component/filebeat/start.sh",
+                "cmd": "/opt/astrid/commands/filebeat/start.sh",
                 "daemon": true
             }
         },
@@ -60,13 +60,13 @@
             "id": "stop",
             "status": "stopped",
             "config": {
-                "cmd": "/opt/component/filebeat/stop.sh"
+                "cmd": "/opt/astrid/commands/filebeat/stop.sh"
             }
         },
         {
             "id": "health",
             "config": {
-                "cmd": "/opt/component/filebeat/health.sh"
+                "cmd": "/opt/astrid/commands/filebeat/health.sh"
             }
         }
     ]
