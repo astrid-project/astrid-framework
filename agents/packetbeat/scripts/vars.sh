@@ -13,8 +13,8 @@ set_var PROJECT astrid
 set_var SOURCE $COMPONENT-$VERSION-linux-x86_64
 set_var FILE $SOURCE.tar.gz
 
-set_var INSTALLATION_PATH "/opt/$COMPONENT"
-set_var COMPONENT_PATH /opt/component
+set_var INSTALLATION_PATH "/opt/astrid/$COMPONENT"
+set_var COMMANDS_PATH /opt/astrid/commands
 set_var TMP_PATH /tmp
 
 set_var PIDFILE $TMP_PATH/$COMPONENT.pid

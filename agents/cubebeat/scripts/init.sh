@@ -7,8 +7,8 @@
 WORK_PATH="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 source "$WORK_PATH/vars.sh"
 
-mkdir -p $COMPONENT_PATH
-ln -fs $WORK_PATH $COMPONENT_PATH/$COMPONENT
+mkdir -p $COMMANDS_PATH
+ln -fs $WORK_PATH $COMMANDS_PATH/$COMPONENT
 
 if [ "$1" == "-nc" ] || [ "$1" == "--no-cache" ] || [ ! -d "$GOPATH/src/gitlab.com/$PROJECT-repositories/$COMPONENT" ]; then
     rm -rf "$GOPATH/src/gitlab.com/$PROJECT-repositories/$COMPONENT"
