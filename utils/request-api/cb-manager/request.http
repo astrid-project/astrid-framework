@@ -1,22 +1,23 @@
-# @uri = instance/agent
+# @uri = exec-env
 # @uri = catalog/agent
+# @uri = type/exec-env
+# @uri = type/network-link
+# @uri = network-link
+@uri = connection
+
+# @uri = instance/agent
 # @uri = instance/algorithm
 # @uri = catalog/algorithm\
 # @uri = instance/ebpf-program
 # @uri = catalog/ebpf-program
-# @uri = type/exec-env
-@uri = exec-env
-# @uri = type/network-link
-# @uri = network-link
-# @uri = connection
 # @uri = data
 # @uri = event
 # @uri = pipeline
+
 @select = "id"
-@operator = equals
-@target = partner
-@agent = packetbeat
-@expr = cnit
+@operator = reg_exp
+@target = network_link_id
+@expr = .*
 
 GET {{cb_manager_endpoint}}/{{uri}} HTTP/1.1
 
@@ -34,19 +35,18 @@ GET {{cb_manager_endpoint}}/{{uri}} HTTP/1.1
 
 POST {{cb_manager_endpoint}}/{{uri}} HTTP/1.1
 
-{
-    "id": "user-container",
-    "partner": "cnit",
-    "type_id": "container-k8s",
-    "description": "User Container",
-    "hostname": "172.21.100.31",
-    "enabled": true,
-    "lcp": {
-        "port": 7890,
-        "https": false
-    },
-    "stage": "development"
-}
+# < db/catalog/agent/cnit/cubebeat.json
+# < db/catalog/agent/cnit/dev.json
+# < db/catalog/agent/cnit/filebeat.json
+# < db/catalog/agent/cnit/logstash.json
+# < db/catalog/agent/cnit/metricbeat.json
+# < db/catalog/agent/cnit/nprobe.json
+# < db/catalog/agent/cnit/packetbeat.json
+# < db/catalog/agent/cnit/termux-api.json
+# < db/exec-env/type.json
+# < db/network-link/type.json
+# < db/network-link/data.json
+< db/connection.json
 
 ###
 

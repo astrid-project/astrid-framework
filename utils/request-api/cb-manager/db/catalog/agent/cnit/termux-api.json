@@ -1,0 +1,12 @@
+{
+    "id": "termux-api",
+    "partner": "cnit",
+    "actions": [
+        {
+            "id": "battery-status",
+            "config": {
+                "cmd": "termux-battery-status"
+            }
+        }
+    ]
+}
