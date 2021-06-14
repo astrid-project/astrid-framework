@@ -26,5 +26,11 @@
         "agent_catalog_id": "dev",
         "status": "stopped",
         "partner": "cnit"
+    },
+    {
+        "id": "agent-probe@{{node-n}}",
+        "exec_env_id": "{{node-n}}",
+        "agent_catalog_id": "agent-probe",
+        "status": "stopped"
     }
 ]

@@ -1,23 +1,23 @@
 # @uri = exec-env
-# @uri = catalog/agent
+@uri = catalog/agent
 # @uri = type/exec-env
 # @uri = type/network-link
 # @uri = network-link
-@uri = connection
+# @uri = connection
 
 # @uri = instance/agent
 # @uri = instance/algorithm
-# @uri = catalog/algorithm\
+# @uri = catalog/algorithm
 # @uri = instance/ebpf-program
 # @uri = catalog/ebpf-program
 # @uri = data
 # @uri = event
 # @uri = pipeline
 
-@select = "id"
-@operator = reg_exp
-@target = network_link_id
-@expr = .*
+@select = 
+@operator = equals
+@target = id
+@expr = agent-probe
 
 GET {{cb_manager_endpoint}}/{{uri}} HTTP/1.1
 
@@ -46,11 +46,49 @@ POST {{cb_manager_endpoint}}/{{uri}} HTTP/1.1
 # < db/exec-env/type.json
 # < db/network-link/type.json
 # < db/network-link/data.json
-< db/connection.json
+# < db/connection.json
+
+{
+    "id": "agent-probe",
+    "partner": "cnit",
+    "actions": [
+        {
+            "id": "kafka-topic-ntp-bau",
+            "config": {
+                "cmd": "sed -i 's/topic_id => \".*\"/topic_id => \"{value}\"' /usr/share/logstash/pipeline/polycube_bau.conf"
+            }
+        },
+        {
+            "id": "kafka-topic-ntp-warn-alarm",
+            "config": {
+                "cmd": "sed -i 's/topic_id => \".*\"/topic_id => \"{value}\"' /usr/share/logstash/pipeline/polycube_bau_and_warn.conf"
+            }
+        },
+        {
+            "id": "kafka-topic-dns-bau",
+            "config": {
+                "cmd": "sed -i 's/topic_id => \".*\"/topic_id => \"{value}\"' /usr/share/logstash/pipeline/polycube_dns_bau.conf"
+            }
+        },
+        {
+            "id": "kafka-topic-dns-warn-alarm",
+            "config": {
+                "cmd": "sed -i 's/topic_id => \".*\"/topic_id => \"{value}\"' /usr/share/logstash/pipeline/polycube_dns_warn.conf"
+            }
+        }
+    ]
+}
 
 ###
 
 PUT {{cb_manager_endpoint}}/{{uri}} HTTP/1.1
+
+{
+    "id": "agent-probe@...",
+    "exec_env_id": "...",
+    "agent_catalog_id": "agent-probe",
+    "status": "stopped"
+}
 
 ###
 

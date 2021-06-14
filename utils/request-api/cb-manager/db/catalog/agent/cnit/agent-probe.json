@@ -1,0 +1,84 @@
+{
+    "id": "agent-probe",
+    "partner": "cnit",
+    "actions": [
+        {
+            "id": "kafka-topic-ntp-bau",
+            "config": {
+                "cmd": "sed -i 's/topic_id => \".*\"/topic_id => \"{value}\"' /usr/share/logstash/pipeline/polycube_bau.conf"
+            }
+        },
+        {
+            "id": "kafka-topic-ntp-warn-alarm",
+            "config": {
+                "cmd": "sed -i 's/topic_id => \".*\"/topic_id => \"{value}\"' /usr/share/logstash/pipeline/polycube_bau_and_warn.conf"
+            }
+        },
+        {
+            "id": "kafka-topic-dns-bau",
+            "config": {
+                "cmd": "sed -i 's/topic_id => \".*\"/topic_id => \"{value}\"' /usr/share/logstash/pipeline/polycube_dns_bau.conf"
+            }
+        },
+        {
+            "id": "kafka-topic-dns-warn-alarm",
+            "config": {
+                "cmd": "sed -i 's/topic_id => \".*\"/topic_id => \"{value}\"' /usr/share/logstash/pipeline/polycube_dns_warn.conf"
+            }
+        }
+    ],
+    "parameters": [
+        {
+            "id": "kafka-topic-ntp-bau",
+            "type": "string",
+            "example": "AstridProxyReadData",
+            "description": "Kafka topic where to send data",
+            "config": {
+                "schema": "json",
+                "source": "/usr/share/logstash/pipeline/polycube_bau.conf",
+                "path": [
+                    "topic_id"
+                ]
+            }
+        },
+        {
+            "id": "Kafka-topic-ntp-warn-alarm",
+            "type": "string",
+            "example": "AstridProxyReadData",
+            "description": "Kafka topic where to send data",
+            "config": {
+                "schema": "json",
+                "source": "/usr/share/logstash/pipeline/polycube_bau_and_warn.conf",
+                "path": [
+                    "topic_id"
+                ]
+            }
+        },
+        {
+            "id": "kafka-topic-dns-bau",
+            "type": "string",
+            "example": "AstridProxyReadData",
+            "description": "Kafka topic where to send data",
+            "config": {
+                "schema": "json",
+                "source": "/usr/share/logstash/pipeline/polycube_dns_bau.conf",
+                "path": [
+                    "topic_id"
+                ]
+            }
+        },
+        {
+            "id": "kafka-topic-dns-warn-alarm",
+            "type": "string",
+            "example": "AstridProxyReadData",
+            "description": "Kafka topic where to send data",
+            "config": {
+                "schema": "json",
+                "source": "/usr/share/logstash/pipeline/polycube_dns_warn.conf",
+                "path": [
+                    "topic_id"
+                ]
+            }
+        }
+    ]
+}
