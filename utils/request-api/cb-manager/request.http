@@ -53,27 +53,9 @@ POST {{cb_manager_endpoint}}/{{uri}} HTTP/1.1
     "partner": "cnit",
     "actions": [
         {
-            "id": "kafka-topic-ntp-bau",
+            "id": "kafka-topic",
             "config": {
-                "cmd": "sed -i 's/topic_id => \".*\"/topic_id => \"{value}\"' /usr/share/logstash/pipeline/polycube_bau.conf"
-            }
-        },
-        {
-            "id": "kafka-topic-ntp-warn-alarm",
-            "config": {
-                "cmd": "sed -i 's/topic_id => \".*\"/topic_id => \"{value}\"' /usr/share/logstash/pipeline/polycube_bau_and_warn.conf"
-            }
-        },
-        {
-            "id": "kafka-topic-dns-bau",
-            "config": {
-                "cmd": "sed -i 's/topic_id => \".*\"/topic_id => \"{value}\"' /usr/share/logstash/pipeline/polycube_dns_bau.conf"
-            }
-        },
-        {
-            "id": "kafka-topic-dns-warn-alarm",
-            "config": {
-                "cmd": "sed -i 's/topic_id => \".*\"/topic_id => \"{value}\"' /usr/share/logstash/pipeline/polycube_dns_warn.conf"
+                "cmd": "sed -i 's/topic_id => \".*\"/topic_id => \"{value}\"/' /usr/share/logstash/pipeline/polycube_*.conf"
             }
         }
     ]
