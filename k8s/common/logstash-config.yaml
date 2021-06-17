@@ -106,7 +106,12 @@ data:
     path:
       data: "${INSTALLATION_PATH}/lib"
       logs: "${INSTALLATION_PATH}/logs"
-      config: "${INSTALLATION_PATH}/pipeline"
+      #config: "${INSTALLATION_PATH}/pipeline"
+      settings:
+        - pipeline.id: data
+          path.config: "${INSTALLATION_PATH}/pipeline/data.conf"
+        - pipeline.id: event
+          path.config: "${INSTALLATION_PATH}/pipeline/event.conf"
 
     xpack.monitoring:
       enabled: "${ELASTICSEARCH_MONITORING_ENABLED}"
