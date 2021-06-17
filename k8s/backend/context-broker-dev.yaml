@@ -162,6 +162,8 @@ spec:
             path: log4j2.properties
           - key: logstash.yml
             path: logstash.yml
+          - key: pipelines.yml
+            path: pipelines.yml
       - name: logstash-pipeline
         configMap:
           name: logstash-pipeline
