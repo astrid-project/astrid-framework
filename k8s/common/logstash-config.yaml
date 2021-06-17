@@ -95,6 +95,11 @@ data:
 
     logger.licensereader.name = logstash.licensechecker.licensereader
     logger.licensereader.level = error
+  pipelines.yml: |
+    - pipeline.id: data
+      path.config: "${INSTALLATION_PATH}/pipeline/data.conf"
+    - pipeline.id: event
+      path.config: "${INSTALLATION_PATH}/pipeline/event.conf"
   logstash.yml: |
     config.reload:
       automatic: true
@@ -106,12 +111,7 @@ data:
     path:
       data: "${INSTALLATION_PATH}/lib"
       logs: "${INSTALLATION_PATH}/logs"
-      #config: "${INSTALLATION_PATH}/pipeline"
-      settings:
-        - pipeline.id: data
-          path.config: "${INSTALLATION_PATH}/pipeline/data.conf"
-        - pipeline.id: event
-          path.config: "${INSTALLATION_PATH}/pipeline/event.conf"
+      config: "${INSTALLATION_PATH}/pipeline"
 
     xpack.monitoring:
       enabled: "${ELASTICSEARCH_MONITORING_ENABLED}"
