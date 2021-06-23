@@ -1,0 +1,22 @@
+[
+    {
+        "id": "cnit-ml",
+        "name": "CNIT Machine Learning",
+        "description": "Feature Selection Evaluation towards a Lightweight Deep Learning DDoS Detector",
+        "partner": "cnit",
+        "parameters": [
+            {
+                "id": "kafka-topic-in",
+                "description": "Incoming Kafka Topic (data from local agents)",
+                "type": "string",
+                "example": "ml-in"
+            },
+            {
+                "id": "kafka-topic-out",
+                "description": "Outgoing Kafka Topic (output to dashboard)",
+                "type": "string",
+                "example": "ml-out"
+            }
+        ]
+    }
+]

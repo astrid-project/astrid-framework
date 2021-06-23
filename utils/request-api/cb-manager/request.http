@@ -1,13 +1,12 @@
 # @uri = exec-env
-@uri = catalog/agent
+# @uri = catalog/agent
 # @uri = type/exec-env
 # @uri = type/network-link
 # @uri = network-link
 # @uri = connection
-
 # @uri = instance/agent
 # @uri = instance/algorithm
-# @uri = catalog/algorithm
+@uri = catalog/algorithm
 # @uri = instance/ebpf-program
 # @uri = catalog/ebpf-program
 # @uri = data
@@ -15,9 +14,9 @@
 # @uri = pipeline
 
 @select = 
-@operator = equals
-@target = id
-@expr = agent-probe
+@operator = reg_exp
+@target = name
+@expr = .*
 
 GET {{cb_manager_endpoint}}/{{uri}} HTTP/1.1
 
@@ -35,9 +34,8 @@ GET {{cb_manager_endpoint}}/{{uri}} HTTP/1.1
 
 POST {{cb_manager_endpoint}}/{{uri}} HTTP/1.1
 
-# < db/catalog/agent/cnit/cubebeat.json
 # < db/catalog/agent/cnit/dev.json
-# < db/catalog/agent/cnit/filebeat.json
+# < db/catalog/agent/cnit/filebeat.jsonalgo-test-02
 # < db/catalog/agent/cnit/logstash.json
 # < db/catalog/agent/cnit/metricbeat.json
 # < db/catalog/agent/cnit/nprobe.json
@@ -47,19 +45,8 @@ POST {{cb_manager_endpoint}}/{{uri}} HTTP/1.1
 # < db/network-link/type.json
 # < db/network-link/data.json
 # < db/connection.json
-
-{
-    "id": "agent-probe",
-    "partner": "cnit",
-    "actions": [
-        {
-            "id": "kafka-topic",
-            "config": {
-                "cmd": "sed -i 's/topic_id => \".*\"/topic_id => \"{value}\"/' /usr/share/logstash/pipeline/polycube_*.conf"
-            }
-        }
-    ]
-}
+# < db/catalog/algorithm/tei-atk.json
+< db/catalog/algorithm/cnit-ml.json
 
 ###
 

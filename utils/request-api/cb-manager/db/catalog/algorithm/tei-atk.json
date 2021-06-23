@@ -1,6 +1,6 @@
 [
     {
-        "id": "ATk-Decision-1",
+        "id": "atk-decision-maker",
         "name": "ATk Decision Maker",
         "description": "ATk deals with a certain \"use-case\" of interest and decides whether an alarm must be raised. It consumes a time-series representing a first \"forecast\" parameter (typically traffic volume for a network protocol for a set of nodes) and detect deviations.  When a significant deviation is detected, it raises a Warning and additionally consumes another time-series typically obtained by packet inspection related to a second \"detection\" parameter. With this second parameter it decides whether to raise alarm, wait or publish ceased alarm.",
         "partner": "tei",
@@ -22,7 +22,7 @@
                 "type": "integer",
                 "description": "When the actual forecast-parameter is greater than the value forecasted by this percentage, ATk detects a deviation.",
                 "example": 20,
-                "min": 1,
+                "min": 1.0,
                 "max": 100
             },
             {
@@ -43,7 +43,7 @@
                 "type": "integer",
                 "description": "Once in Warning state, ATk waits for this amount of timeslots (time-series samples) before raising Alarm to prevent false positives.",
                 "example": 3,
-                "min": 0,
+                "min": 0.0,
                 "max": 15
             },
             {
@@ -51,7 +51,7 @@
                 "description": "Number of nodes",
                 "type": "integer",
                 "example": 30,
-                "min": 1
+                "min": 1.0
             }
         ]
     }
