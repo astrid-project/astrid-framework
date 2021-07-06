@@ -8,7 +8,7 @@ log:
 path:
   data: "${INSTALLATION_PATH}/lib"
   logs: "${INSTALLATION_PATH}/logs"
-  config: "${INSTALLATION_PATH}/pipeline"
+  # config: "${INSTALLATION_PATH}/pipeline"
 
 xpack.monitoring:
   enabled: "${ELASTICSEARCH_MONITORING_ENABLED}"
