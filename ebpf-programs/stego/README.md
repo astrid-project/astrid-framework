@@ -1,7 +1,13 @@
 # BPF tools for detecting network covert channels
 
 This folder contains a set of bpf programs for inspecting IPv6 headers, which are compatible with the <A href="https://github.com/polycube-network/polycube/blob/master/Documentation/services/pcn-dynmon/dynmon.rst">Polycube Dynmon</A> service. 
-They create simple statistics about the usage of vulnerable fields that can be used for implementing network covert channels. Currently supported fields: flow label (fl), traffic class (tc), hop limit (hl).<br>
+They create simple statistics about the usage of vulnerable fields that can be used for implementing network covert channels. Currently supported fields: 
+<ul>
+<li>IPv6: flow label, traffic class, hop limit, 
+<li>IPv4: type of service/differentiated service code pointer, identification, time-to-live, fragment offset, internet header length, 
+<li>TCP: ack, reserved bits, timestamp,
+<li>UDP: checksum.
+</ul>
 The current folder maintains the source code, as well as the corresponding json files that can be injected to Dynmon.
 
 ## Theory of operation
