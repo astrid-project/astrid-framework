@@ -1,6 +1,6 @@
 # eBPF Programs
 
-In this directory are stored the eBPF programs that can be managed with [CB-Manager](../platform/cb-manager/README.md).
+In this directory are stored the eBPF programs that can be managed with [CB-Manager](../platform/cb-manager/README.md). Each folder contains a set of programs developed for a specific use case, included the json definitions to load the program in polycube. An internal subfolder contains the json definitions to load the eBPF programs in the corresponding catalog of the CB-Manager.
 
 ## Instruction
 
