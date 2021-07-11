@@ -1,0 +1,36 @@
+{
+   "id": "dns_bau",
+   "description": "Counter of all DNS packets",
+	"config": {
+        "code": "#include <uapi/linux/ip.h>\r\n#include <uapi/linux/udp.h>\r\n\r\n#define IP_PROTO_UDP 17\r\n#define DNS_PORT 53\r\n\r\nstruct eth_hdr {\r\n    __be64 dst : 48;\r\n    __be64 src : 48;\r\n    __be16 proto;\r\n} __attribute__((packed));\r\n\r\nBPF_ARRAY(DNS_PACKETS_COUNTER, uint64_t,1);\r\n\r\nstatic __always_inline\r\nint handle_rx(struct CTXTYPE *ctx, struct pkt_metadata *md) {\r\n\r\n    /*Parsing L2*/\r\n    void *data = (void *) (long) ctx->data;\r\n    void *data_end = (void *) (long) ctx->data_end;\r\n    struct eth_hdr *ethernet = data;\r\n    if (data + sizeof(*ethernet) > data_end)\r\n        return RX_OK;\r\n\r\n    if (ethernet->proto != bpf_htons(ETH_P_IP))\r\n        return RX_OK;\r\n\r\n    /*Parsing L3*/\r\n    struct iphdr *ip = data + sizeof(struct eth_hdr);\r\n    if (data + sizeof(struct eth_hdr) + sizeof(*ip) > data_end)\r\n        return RX_OK;\r\n    if ((int) ip->version != 4)\r\n        return RX_OK;\r\n\r\n    if (ip->protocol != IP_PROTO_UDP)\r\n        return RX_OK;\r\n\r\n    /*Parsing L4*/\r\n    uint8_t ip_header_len = 4 * ip->ihl;\r\n    struct udphdr *udp = data + sizeof(*ethernet) + ip_header_len;\r\n    if (data + sizeof(*ethernet) + ip_header_len + sizeof(*udp) > data_end)\r\n        return RX_OK;\r\n\r\n    if (udp->source == bpf_htons(DNS_PORT) || udp->dest == bpf_htons(DNS_PORT)) {\r\n        pcn_log(ctx, LOG_TRACE, \"%I:%P\\t-> %I:%P\", ip->saddr,udp->source,ip->daddr,udp->dest);\r\n        unsigned int key = 0;\r\n        uint64_t * dns_pckts_counter = DNS_PACKETS_COUNTER.lookup(&key);\r\n        if (!dns_pckts_counter)\r\n            pcn_log(ctx, LOG_ERR, \"[DNS_AMP_BUA] Unable to find DNS_PACKETS_COUNTER map\");\r\n        else\r\n            *dns_pckts_counter+=1;\r\n    }\r\n\r\n    return RX_OK;\r\n}\r\n",
+      "metrics": [
+				{
+                "name": "Total DNS packets",
+                "map-name": "DNS_PACKETS_COUNTER",
+					 "open-metrics-metadata": {
+						 "help": "This metrics represents the number of DNS packets seen by the probe.", 
+						 "type": "counter",
+						 "labels": [
+						 {
+							 "name": "IPPROTO",
+							 "value": "UDP"
+						 },
+						 {
+							 "name": "L4",
+							 "value": "DNS"
+						 }
+						 ]
+					 }
+            }
+      ]
+   },
+   "parameters": [
+       {
+           "description": "Local interface to monitor",
+           "example": "eno1",
+           "id": "interface",
+           "list": false,
+           "type": "string"
+       }
+   ]
+}

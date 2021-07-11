@@ -1,0 +1,54 @@
+{
+   "id": "dns_warn_ip",
+   "description": "Counter of total DNS packets and ANY query - Raw IP packets version",
+	"config": {
+        "code": "#include <uapi/linux/ip.h>\r\n#include <uapi/linux/udp.h>\r\n\r\n#define IP_PROTO_UDP 17\r\n#define DNS_PORT 53\r\n#define DNS_QTYPE_INVALID 0\r\n#define DNS_QTYPE_ANY 255\r\n\r\n\r\nstruct dnshdr {\r\n   uint16_t id;\r\n#if __BYTE_ORDER == __BIG_ENDIAN\r\n   uint16_t qr:1;\r\n   uint16_t opcode:4;\r\n   uint16_t aa:1;\r\n   uint16_t tc:1;\r\n   uint16_t rd:1;\r\n   uint16_t ra:1;\r\n   uint16_t zero:3;\r\n   uint16_t rcode:4;\r\n#elif __BYTE_ORDER == __LITTLE_ENDIAN\r\n   uint16_t rd:1;\r\n   uint16_t tc:1;\r\n   uint16_t aa:1;\r\n   uint16_t opcode:4;\r\n   uint16_t qr:1;\r\n   uint16_t rcode:4;\r\n   uint16_t zero:3;\r\n   uint16_t ra:1;\r\n#else\r\n#error \"Adjust your <bits/endian.h> defines\"\r\n#endif\r\n   uint16_t qcount;   /* question count */\r\n   uint16_t ancount;   /* Answer record count */\r\n   uint16_t nscount;   /* Name Server (Autority Record) Count */ \r\n   uint16_t adcount;   /* Additional Record Count */\r\n} __attribute__((packed));\r\n\r\n\r\nBPF_ARRAY(DNS_PACKETS_COUNTER, uint64_t, 1);\r\nBPF_ARRAY(DNS_QTYPE_ANY_PACKETS_COUNTER, uint64_t, 1);\r\n\r\nstatic __always_inline\r\nunsigned short parse_dns_query(void *query, void *data_end, unsigned int *count)\r\n{\r\n   /* Struct of the query:\r\n    *   [len] [characters] [len] [characters] [0] [qtype] [qclass]\r\n    *     8        len       8        len      8     16       16\r\n    */\r\n\r\n   struct dnslen {\r\n      uint8_t len;\r\n   };\r\n   struct query_type {\r\n      uint16_t value;\r\n   };\r\n   struct dnslen *p;\r\n   struct query_type *qtype;\r\n   uint8_t len = 0;\r\n   *count = 0; \r\n\r\n   /* Loop through the url, until len==0 */\r\n   /* Current limitation: max 10 domains. */\r\n   /* Kernel 4.19 does not allow more than 5 cycles in this case! */\r\n   for(unsigned int i=0; i<3 ; i++) {\r\n      p = query;\r\n      if( query + sizeof(struct dnslen) > data_end)\r\n         return DNS_QTYPE_INVALID;\r\n\r\n      len = p->len;\r\n\r\n      query+=len+1;\r\n      *count+=len+1; /* Counts the chars + the len field itself */\r\n\r\n      if( len == 0 ) {\r\n         break;\r\n      }\r\n   }\r\n   \r\n   qtype = query;\r\n   if( (void *)(qtype+1) > data_end )\r\n      return DNS_QTYPE_INVALID;\r\n\r\n   /* Might be improved by checking for specific qclasses (e.g., IN). */\r\n   return ntohs(qtype->value);\r\n}\r\n\r\nstatic __always_inline\r\nint handle_rx(struct CTXTYPE *ctx, struct pkt_metadata *md) {\r\n    void *data = (void *) (long) ctx->data;\r\n    void *data_end = (void *) (long) ctx->data_end;\r\n\r\n    /*Parsing L3*/\r\n    struct iphdr *ip = data;\r\n    if (data + sizeof(*ip) > data_end)\r\n        return RX_OK;\r\n    if ((int) ip->version != 4)\r\n        return RX_OK;\r\n\r\n    if (ip->protocol != IP_PROTO_UDP)\r\n        return RX_OK;\r\n\r\n    /*Parsing L4*/\r\n    uint8_t ip_header_len = 4 * ip->ihl;\r\n    struct udphdr *udp = data + ip_header_len;\r\n    if (data + ip_header_len + sizeof(*udp) > data_end)\r\n        return RX_OK;\r\n\r\n    if (udp->source == bpf_htons(DNS_PORT) || udp->dest == bpf_htons(DNS_PORT)) {\r\n        pcn_log(ctx, LOG_TRACE, \"%I:%P\\t-> %I:%P\", ip->saddr,udp->source,ip->daddr,udp->dest);\r\n        unsigned int key = 0;\r\n        uint64_t * dns_pckts_counter = DNS_PACKETS_COUNTER.lookup(&key);\r\n        if (!dns_pckts_counter)\r\n            pcn_log(ctx, LOG_ERR, \"[DNS_AMP_WARNING] Unable to find DNS_PACKETS_COUNTER map\");\r\n        else\r\n            *dns_pckts_counter+=1;\r\n\r\n        /*Parsing DNS*/\r\n        struct dnshdr *dnsh = data + ip_header_len + sizeof(struct udphdr);\r\n        if (data + ip_header_len + sizeof(struct udphdr) + sizeof(struct dnshdr) > data_end)\r\n            return RX_OK;\r\n\r\n     /* Counts queries both in requests and responses. */\r\n\r\n     unsigned int count = 0; /* First time initalized to 0. */\r\n     unsigned short qtype = DNS_QTYPE_INVALID;\r\n     uint16_t num_queries = ntohs(dnsh->qcount);\r\n     if( num_queries == 0 )\r\n        return RX_OK;\r\n\r\n     void *query = (void *) dnsh + 12;\r\n     /* Loop through multiple queries in the same packet. */\r\n     for(unsigned int i=1; i<4; i++) {\r\n        query+=count;\r\n        if( query > data_end )\r\n           return RX_OK;\r\n        qtype = parse_dns_query(query, data_end, &count);\r\n   \r\n        if ( qtype == DNS_QTYPE_INVALID )\r\n           return RX_OK;\r\n   \r\n        /* hh    For integer types, causes printf to expect an int-sized integer argument which was promoted from a char. \r\n         * h    For integer types, causes printf to expect an int-sized integer argument which was promoted from a short.\r\n         */\r\n           pcn_log(ctx, LOG_TRACE, \"Query Type: %hu\", qtype);\r\n\r\n      /* Stop when an ANY query is seen. */\r\n      if ( qtype == DNS_QTYPE_ANY || i>=num_queries)\r\n         break;\r\n\r\n     }\r\n\r\n\r\n        if (qtype == DNS_QTYPE_ANY) {\r\n            pcn_log(ctx, LOG_TRACE, \"RECEIVED DNS QUERY ANY\");\r\n            key = 0;\r\n            uint64_t * dns_qtype_any_counter = DNS_QTYPE_ANY_PACKETS_COUNTER.lookup(&key);\r\n            if (!dns_qtype_any_counter)\r\n                pcn_log(ctx, LOG_ERR, \"[DNS_AMP_WARNING] Unable to find DNS_QTYPE_ANY_PACKETS_COUNTER map\");\r\n            else\r\n                *dns_qtype_any_counter+=1;\r\n        }\r\n    }\r\n\r\n    return RX_OK;\r\n}\r\n",
+      "metrics": [
+            {
+                "name": "Total DNS packets",
+                "map-name": "DNS_PACKETS_COUNTER",
+					 "open-metrics-metadata": {
+						 "help": "This metrics represents the number of DNS packets seen by the probe.", 
+						 "type": "counter",
+						 "labels": [
+						 {
+							 "name": "IPPROTO",
+							 "value": "UDP"
+						 },
+						 {
+							 "name": "L4",
+							 "value": "DNS"
+						 }
+						 ]
+					 }
+            },
+            {
+                "name": "Total DNS queries of type ANY",
+                "map-name": "DNS_QTYPE_ANY_PACKETS_COUNTER",
+					 "open-metrics-metadata": {
+						 "help": "This metrics represents the number of DNS queries of type ANY  seen by the probe.", 
+						 "type": "counter",
+						 "labels": [
+						 {
+							 "name": "IPPROTO",
+							 "value": "UDP"
+						 },
+						 {
+							 "name": "L4",
+							 "value": "DNS"
+						 }
+						 ]
+					 }
+            }
+      ]
+   },
+   "parameters": [
+       {
+           "description": "Local interface to monitor",
+           "example": "eno1",
+           "id": "interface",
+           "list": false,
+           "type": "string"
+       }
+   ]
+}
