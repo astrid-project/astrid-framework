@@ -1,0 +1,36 @@
+{
+   "id": "fl",
+   "description": "Histogram of the values used for flow labels in IPv6 packets",
+	"config": {
+      "code": "#include <linux/if_vlan.h>\r\n#include <linux/if_ether.h>      // struct ethhdr\r\n#include <linux/pkt_cls.h>\r\n#include <linux/time.h>\r\n#include <linux/if_ether.h>\r\n#include <linux/ip.h>\r\n#include <linux/ipv6.h>\r\n#include <linux/icmp.h>\r\n#include <linux/tcp.h>\r\n#include <linux/udp.h>\r\n#include <linux/ip.h>\r\n\r\n#define BINBASE 12 \r\n#define NBINS 0x1<<BINBASE\r\n\r\n/* TODO: Improve performance by using multiple per-cpu hash maps.\r\n */\r\nBPF_ARRAY(fl_stats, __u32, NBINS);\r\n\r\n/* Header cursor to keep track of current parsing position */\r\nstruct hdr_cursor {\r\n        void *pos;\r\n};\r\n\r\nstatic __always_inline int proto_is_vlan(__u16 h_proto)\r\n{\r\n        return !!(h_proto == bpf_htons(ETH_P_8021Q) ||\r\n                  h_proto == bpf_htons(ETH_P_8021AD));\r\n}\r\n\r\n/*\r\n      * Struct icmphdr_common represents the common part of the icmphdr and icmp6hdr\r\n      *  * structures.\r\n      *   */\r\nstruct icmphdr_common {\r\n        __u8   type;\r\n   __u8    code;\r\n   __sum16 cksum;\r\n};\r\n\r\n\r\n/* Parse the Ethernet header and return protocol.\r\n * Ignore VLANs.\r\n *\r\n * Protocol is returned in network byte order.\r\n */\r\nstatic __always_inline int parse_ethhdr(struct hdr_cursor *nh,\r\n                                        void *data_end,\r\n                                        struct ethhdr **ethhdr)\r\n{\r\n       struct ethhdr *eth = nh->pos;\r\n        int hdrsize = sizeof(*eth);\r\n        struct vlan_hdr *vlh;\r\n        __u16 h_proto;\r\n        int i;\r\n\r\n        /* Byte-count bounds check; check if current pointer + size of header\r\n         * is after data_end.\r\n         */\r\n        if (nh->pos + hdrsize > data_end)\r\n                return -1;\r\n\r\n        nh->pos += hdrsize;\r\n        *ethhdr = eth;\r\n        vlh = nh->pos;\r\n        h_proto = eth->h_proto;\r\n\r\n        /* Use loop unrolling to avoid the verifier restriction on loops;\r\n         * support up to VLAN_MAX_DEPTH layers of VLAN encapsulation.\r\n         */\r\n        #pragma unroll\r\n        for (i = 0; i < VLAN_MAX_DEPTH; i++) {\r\n                if (!proto_is_vlan(h_proto))\r\n                        break;\r\n\r\n                if ( (void *)(vlh + 1) > data_end)\r\n                        break;\r\n\r\n                h_proto = vlh->h_vlan_encapsulated_proto;\r\n                vlh++;\r\n        }\r\n\r\n        nh->pos = vlh;\r\n        return h_proto; /* network-byte-order */\r\n\r\n\r\n}\r\n\r\nstatic __always_inline int parse_ip6hdr(struct hdr_cursor *nh,\r\n               void *data_end,\r\n               struct ipv6hdr **ip6hdr)\r\n{\r\n   struct ipv6hdr *ip6h = nh->pos;\r\n\r\n    if ( (void *)(ip6h + 1) > data_end)\r\n      return -1;\r\n\r\n   nh->pos = ip6h + 1;\r\n   *ip6hdr = ip6h;\r\n\r\n   return ip6h->nexthdr;\r\n}\r\n\r\nstatic __always_inline int handle_rx(struct CTXTYPE *ctx, struct pkt_metadata *md) \r\n{\r\n   /* Preliminary step: cast to void*.\r\n    * (Not clear why data/data_end are stored as long)\r\n    */\r\n   void *data_end = (void *)(long)ctx->data_end;\r\n   void *data     = (void *)(long)ctx->data;\r\n   __u32 ipv6field = 0;\r\n   __u32 len = 0;\r\n   __u32 init_value = 1;\r\n   int eth_proto, ip_proto = 0;\r\n   struct hdr_cursor nh;\r\n   struct ethhdr *eth;\r\n   struct ipv6hdr* iph6;\r\n\r\n   /* Parse Ethernet header and verify protocol number. */\r\n   nh.pos = data;\r\n   len = data_end - data;\r\n   eth = (struct ethhdr *)data;\r\n   eth_proto = parse_ethhdr(&nh, data_end, &eth);\r\n   if ( eth_proto < 0 ) {\r\n      return TC_ACT_OK; /* TODO: XDP_ABORT? */\r\n   }\r\n   if ( eth_proto != bpf_htons(ETH_P_IPV6) )\r\n   {\r\n      return TC_ACT_OK;\r\n   }\r\n\r\n   /* Parse IP header and verify protocol number. */\r\n   if( (ip_proto = parse_ip6hdr(&nh, data_end, &iph6)) < 0 ) {\r\n      return TC_ACT_OK;\r\n   }   \r\n\r\n   /* Check flow label\r\n    */\r\n   if( (void*) iph6 + sizeof(struct ipv6hdr) < data_end) {\r\n      for(short i=0;i<3;i++) {\r\n        ipv6field |= iph6->flow_lbl[i];\r\n        if(i==0) {\r\n            /* Remove DSCP value */\r\n            ipv6field &=0x0f;\r\n        }\r\n        if(i!=2)\r\n            ipv6field <<= 8;\r\n      }\r\n   }\r\n\r\n   /* Collect the required statistics. */\r\n\r\n   __u32 key = ipv6field >> (20-BINBASE);\r\n   __u32 *counter = \r\n      fl_stats.lookup(&key);\r\n\r\n   if(!counter)\r\n      fl_stats.update(&key, &init_value);\r\n   else\r\n      __sync_fetch_and_add(counter, 1);\r\n\r\n     \r\n\r\n   return TC_ACT_OK;\r\n}\r\n\r\n",
+      "metrics": [
+				{
+                "name": "Flow label occurrences",
+                "map-name": "fl_stats",
+					 "open-metrics-metadata": {
+						 "help": "This metrics measures the distribution of flow label values in IPv6 packets.",
+						 "type": "histogram",
+						 "labels": [
+						 	{
+							 "name": "IP_VERS",
+							 "value": "IPv6"
+						 	},
+						 	{
+							 "name": "FIELD",
+							 "value": "FLOW_LABEL"
+						 	}
+						 ]
+					 }
+				}
+      ]
+   },
+   "parameters": [
+       {
+           "description": "Local interface to monitor",
+           "example": "eno1",
+           "id": "interface",
+           "list": false,
+           "type": "string"
+       }
+   ]
+}
