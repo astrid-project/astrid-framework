@@ -1,12 +1,12 @@
 # @uri = exec-env
-# @uri = catalog/agent
+@uri = catalog/agent
 # @uri = type/exec-env
 # @uri = type/network-link
 # @uri = network-link
 # @uri = connection
 # @uri = instance/agent
 # @uri = instance/algorithm
-@uri = catalog/algorithm
+# @uri = catalog/algorithm
 # @uri = instance/ebpf-program
 # @uri = catalog/ebpf-program
 # @uri = data
@@ -14,20 +14,14 @@
 # @uri = pipeline
 
 @select = 
-@operator = reg_exp
-@target = name
-@expr = .*
+@operator = equals
+@target = id
+@expr = dev
 
 GET {{cb_manager_endpoint}}/{{uri}} HTTP/1.1
 
 {
-    "select": [{{select}}],
-    "where": {
-        "{{operator}}": {
-            "target": "{{target}}",
-            "expr": "{{expr}}"
-        }
-    }
+    "select": ["id", "actions"]
 }
 
 ###
@@ -46,17 +40,32 @@ POST {{cb_manager_endpoint}}/{{uri}} HTTP/1.1
 # < db/network-link/data.json
 # < db/connection.json
 # < db/catalog/algorithm/tei-atk.json
-< db/catalog/algorithm/cnit-ml.json
+< db/catalog/agent/cnit/dev.json
 
 ###
 
 PUT {{cb_manager_endpoint}}/{{uri}} HTTP/1.1
 
 {
-    "id": "agent-probe@...",
-    "exec_env_id": "...",
-    "agent_catalog_id": "agent-probe",
-    "status": "stopped"
+    "id": "dev@user-vm",
+    "operations": [
+        {
+            "parameters": [
+                {
+                    "id": "test-json",
+                    "value": "crypted"
+                },
+                {
+                    "id": "test-xml",
+                    "value": 32
+                },
+                {
+                    "id": "test-yaml",
+                    "value": false
+                }
+            ]
+        }
+    ]
 }
 
 ###

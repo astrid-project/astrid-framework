@@ -10,5 +10,75 @@
                 "cmd": "{run}"
             }
         }
+    ],
+    "parameters": [
+        {
+            "id": "test-yaml",
+            "type": "boolean",
+            "example": true,
+            "description": "Test field",
+            "config": {
+                "schema": "yaml",
+                "source": "/home/alexcarrega/test/test.yml",
+                "path": [
+                    "test",
+                    "2",
+                    "enabled"
+                ]
+            }
+        },
+        {
+            "id": "test-json",
+            "type": "string",
+            "example": "plain",
+            "description": "Test field",
+            "config": {
+                "schema": "json",
+                "source": "/home/alexcarrega/test/test.json",
+                "path": [
+                    "test",
+                    "1",
+                    "format"
+                ]
+            }
+        },
+        {
+            "id": "test-xml",
+            "type": "integer",
+            "example": 35,
+            "description": "Test field",
+            "config": {
+                "schema": "xml",
+                "source": "/home/alexcarrega/test/test.xml",
+                "path": [
+                    "test",
+                    "counter"
+                ]
+            }
+        },
+        {
+            "id": "test-properties",
+            "type": "string",
+            "example": "ssl",
+            "description": "Test field",
+            "config": {
+                "schema": "properties",
+                "source": "/home/alexcarrega/test/test.ini",
+                "path": [
+                    "test",
+                    "enhanced"
+                ]
+            }
+        }
+    ],
+    "resources": [
+        {
+            "id": "test-resource",
+            "description": "Configuration file",
+            "config": {
+                "path": "resource.yml"
+            },
+            "example": "..."
+        }
     ]
 }
