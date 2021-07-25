@@ -13,13 +13,27 @@ jobs:
       fail-fast: false
       matrix:
         include:
+          - component: cnit_ml
+            version: version2
+            context: algorithms/cnit_ml
+            title: Cubebeat
+            description: 'CNIT Machine Learning'
+            url: https://github.com/astrid-project/cnit-ml
+ 
+         - component: cnit_ml
+            version: version3
+            context: algorithms/cnit_ml
+            title: Cubebeat
+            description: 'CNIT Machine Learning'
+            url: https://github.com/astrid-project/cnit-ml
+
+
           - component: cubebeat
             version: master
             context: agents/cubebeat
             title: Cubebeat
             description: 'Cubebeat Docker image with configuration files'
             url: https://github.com/astrid-project/cubebeat
-
 
           - component: cubebeat
             version: v1.0.0
