@@ -1,4 +1,4 @@
-# ASTRID - CNIT Machine Learning
+ASTRID - CNIT Machine Learning
 # author: Alex Carrega <alessandro.carrega@cnit.it>
 
 # Stage GIT CLONE
@@ -14,7 +14,7 @@ RUN git clone https://github.com/$PROJECT-project/$COMPONENT --branch $BRANCH $I
 
 
 # Stage PIP REQUIREMENTS
-FROM python:3.8-alpine as pip-requirements
+FROM python:3.7-slim as pip-requirements
 
 ARG COMPONENT=cnit_ml
 ARG BRANCH=main
@@ -22,14 +22,12 @@ ARG VERSION=version3
 ARG PROJECT=astrid
 ARG INSTALLATION_PATH=/opt/$COMPONENT
 
-RUN apk add --no-cache --virtual .builddeps g++ gcc gfortran musl-dev lapack-dev
-
 COPY --from=git-clone $INSTALLATION_PATH/$VERSION/requirements.txt /requirements.txt
 RUN pip install --prefix=$INSTALLATION_PATH -r /requirements.txt
 
 
 # Stage FINAL
-FROM python:3.8-alpine as final
+FROM python:3.7-slim as final
 
 ARG COMPONENT=cnit_ml
 ARG BRANCH=main
