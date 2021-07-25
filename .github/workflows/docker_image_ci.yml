@@ -14,6 +14,13 @@ jobs:
       matrix:
         include:
           - component: cnit_ml
+            version: version1
+            context: algorithms/cnit_ml
+            title: Cubebeat
+            description: 'CNIT Machine Learning'
+            url: https://github.com/astrid-project/cnit-ml
+ 
+          - component: cnit_ml
             version: version2
             context: algorithms/cnit_ml
             title: Cubebeat
