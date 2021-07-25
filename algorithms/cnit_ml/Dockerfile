@@ -1,4 +1,4 @@
-ASTRID - CNIT Machine Learning
+# ASTRID - CNIT Machine Learning
 # author: Alex Carrega <alessandro.carrega@cnit.it>
 
 # Stage GIT CLONE
