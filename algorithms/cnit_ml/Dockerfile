@@ -22,7 +22,7 @@ ARG VERSION=version3
 ARG PROJECT=astrid
 ARG INSTALLATION_PATH=/opt/$COMPONENT
 
-RUN apk add --no-cache --virtual .build-deps gcc musl-dev linux-headers libffi-dev cargo openssl-dev
+RUN apk add --no-cache --virtual .builddeps g++ gcc gfortran musl-dev lapack-dev
 
 COPY --from=git-clone $INSTALLATION_PATH/$VERSION/requirements.txt /requirements.txt
 RUN pip install --prefix=$INSTALLATION_PATH -r /requirements.txt
