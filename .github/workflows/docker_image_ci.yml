@@ -16,22 +16,22 @@ jobs:
           - component: cnit_ml
             version: version1
             context: algorithms/cnit_ml
-            title: Cubebeat
-            description: 'CNIT Machine Learning'
+            title: CNIT ML (Machine Learning)
+            description: 'CNIT ML (Machine Learning)'
             url: https://github.com/astrid-project/cnit_ml
  
           - component: cnit_ml
             version: version2
             context: algorithms/cnit_ml
-            title: Cubebeat
-            description: 'CNIT Machine Learning'
+            title: CNIT ML (Machine Learning)
+            description: 'CNIT ML (Machine Learning)'
             url: https://github.com/astrid-project/cnit_ml
  
           - component: cnit_ml
             version: version3
             context: algorithms/cnit_ml
-            title: Cubebeat
-            description: 'CNIT Machine Learning'
+            title: CNIT ML (Machine Learning)
+            description: 'CNIT ML (Machine Learning)'
             url: https://github.com/astrid-project/cnit_ml
 
 
