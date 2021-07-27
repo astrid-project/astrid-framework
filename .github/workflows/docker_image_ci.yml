@@ -17,21 +17,21 @@ jobs:
             version: version1
             context: algorithms/cnit_ml
             title: CNIT ML (Machine Learning)
-            description: 'CNIT ML (Machine Learning)'
+            description: 'Detects multiple DDoS attacks (multiclass) using Random Forests.'
             url: https://github.com/astrid-project/cnit_ml
  
           - component: cnit_ml
             version: version2
             context: algorithms/cnit_ml
             title: CNIT ML (Machine Learning)
-            description: 'CNIT ML (Machine Learning)'
+            description: 'Detects multiple DDoS attacks (multiclass) using Random Forests.'
             url: https://github.com/astrid-project/cnit_ml
  
           - component: cnit_ml
             version: version3
             context: algorithms/cnit_ml
             title: CNIT ML (Machine Learning)
-            description: 'CNIT ML (Machine Learning)'
+            description: 'Detects multiple DDoS attacks (multiclass) using Random Forests.'
             url: https://github.com/astrid-project/cnit_ml
 
 
@@ -39,14 +39,14 @@ jobs:
             version: master
             context: agents/cubebeat
             title: Cubebeat
-            description: 'Cubebeat Docker image with configuration files'
+            description: 'Custom Beat of the Elastic Stack to interact with the Polycube-based eBPF cubes.'
             url: https://github.com/astrid-project/cubebeat
 
           - component: cubebeat
             version: v1.0.0
             context: agents/cubebeat
             title: Cubebeat
-            description: 'Cubebeat Docker image with configuration files'
+            description: 'Custom Beat of the Elastic Stack to interact with the Polycube-based eBPF cubes.'
             url: https://github.com/astrid-project/cubebeat
 
 
@@ -54,7 +54,7 @@ jobs:
             version: 7.8.0
             context: agents/filebeat
             title: Filebeat
-            description: 'Filebeat Docker image with configuration files'
+            description: 'Lightweight shipper for logs by Elastic.'
             url: https://www.elastic.co/beats/filebeat
 
 
@@ -62,35 +62,35 @@ jobs:
             version: master
             context: agents/lcp
             title: LCP (Local Control Plane)
-            description: 'LCP Docker image with configuration files'
+            description: 'Control plane responsible for programmability and changing the behavior of data plane at run-time.'
             url: https://github.com/astrid-project/lcp
 
           - component: lcp
             version: v1.0.3
             context: agents/lcp
             title: LCP (Local Control Plane)
-            description: 'LCP Docker image with configuration files'
+            description: 'Control plane responsible for programmability and changing the behavior of data plane at run-time.'
             url: https://github.com/astrid-project/lcp
 
           - component: lcp
             version: v1.0.2
             context: agents/lcp
             title: LCP (Local Control Plane)
-            description: 'LCP Docker image with configuration files'
+            description: 'Control plane responsible for programmability and changing the behavior of data plane at run-time.'
             url: https://github.com/astrid-project/lcp
 
           - component: lcp
             version: v1.0.1
             context: agents/lcp
             title: LCP (Local Control Plane)
-            description: 'LCP Docker image with configuration files'
+            description: 'Control plane responsible for programmability and changing the behavior of data plane at run-time.'
             url: https://github.com/astrid-project/lcp
 
           - component: lcp
             version: v1.0.0
             context: agents/lcp
             title: LCP (Local Control Plane)
-            description: 'LCP Docker image with configuration files'
+            description: 'Control plane responsible for programmability and changing the behavior of data plane at run-time.'
             url: https://github.com/astrid-project/lcp
 
 
@@ -98,7 +98,7 @@ jobs:
             version: 7.8.0
             context: agents/logstash
             title: Logstash
-            description: 'Logstash Docker image with configuration files for local environment'
+            description: 'Logstash is a tool for managing events and logs. Image for local services/environments.'
             url: https://www.elastic.co/logstash
 
 
@@ -106,7 +106,7 @@ jobs:
             version: 7.8.0
             context: agents/metricbeat
             title: Metricbeat
-            description: 'Metricbeat Docker image with configuration files'
+            description: 'Lightweight shipper for metrics by Elastic.'
             url: https://www.elastic.co/beats/metricbeat
 
 
@@ -114,7 +114,7 @@ jobs:
             version: 7.8.0
             context: agents/packetbeat
             title: Packetbeat
-            description: 'Packetbeat Docker image with configuration files'
+            description: 'Lightweight shipper for network data.'
             url: https://www.elastic.co/beats/packetbeat
 
 
@@ -122,35 +122,35 @@ jobs:
             version: master
             context: platform/cb-manager
             title: CB (Context Broker) Manager
-            description: 'CB-Manager Docker image with configuration files'
+            description: 'A REST Interface exposes data and events stored in the internal storage system in a structured way.'
             url: https://github.com/astrid-project/cb-manager
 
           - component: cb-manager
             version: v1.0.3
             context: platform/cb-manager
             title: CB (Context Broker) Manager
-            description: 'CB-Manager Docker image with configuration files'
+            description: 'A REST Interface exposes data and events stored in the internal storage system in a structured way.'
             url: https://github.com/astrid-project/cb-manager
 
           - component: cb-manager
             version: v1.0.2
             context: platform/cb-manager
             title: CB (Context Broker) Manager
-            description: 'CB-Manager Docker image with configuration files'
+            description: 'A REST Interface exposes data and events stored in the internal storage system in a structured way.'
             url: https://github.com/astrid-project/cb-manager
 
           - component: cb-manager
             version: v1.0.1
             context: platform/cb-manager
             title: CB (Context Broker) Manager
-            description: 'CB-Manager Docker image with configuration files'
+            description: 'A REST Interface exposes data and events stored in the internal storage system in a structured way.'
             url: https://github.com/astrid-project/cb-manager
 
           - component: cb-manager
             version: v1.0.0
             context: platform/cb-manager
             title: CB (Context Broker) Manager
-            description: 'CB-Manager Docker image with configuration files'
+            description: 'A REST Interface exposes data and events stored in the internal storage system in a structured way.'
             url: https://github.com/astrid-project/cb-manager
 
 
@@ -158,7 +158,7 @@ jobs:
             version: 7.8.0
             context: platform/elasticsearch
             title: Elasticsearch
-            description: 'Elasticsearch Docker image with configuration files'
+            description: 'Elasticsearch is a powerful open source search and analytics engine that makes data easy to explore.'
             url: https://www.elastic.co/elasticsearch
 
 
@@ -166,7 +166,7 @@ jobs:
             version: 2.6.2
             context: platform/kafka
             title: Kafka
-            description: 'Kafka Docker image with configuration files'
+            description: 'Apache Kafka is a distributed streaming platform used for building real-time applications.'
             url: https://kafka.apache.org
 
 
@@ -174,7 +174,7 @@ jobs:
             version: 7.8.0
             context: platform/logstash
             title: Logstash
-            description: 'Logstash Docker image with configuration files for central node'
+            description: 'Logstash is a tool for managing events and logs. Image for Context Broker.'
             url: https://www.elastic.co/logstash
 
 
