@@ -32,6 +32,21 @@
                     "enabled"
                 ]
             }
+        },
+        {
+            "id": "kafka-topic",
+            "type": "string",
+            "example": "",
+            "description": "Kafka output topic.",
+            "config": {
+                "schema": "yaml",
+                "source": "/opt/astrid/packetbeat/packetbeat.yml",
+                "path": [
+                    "packetbeat",
+                    "output",
+                    "topic"
+                ]
+            }
         }
     ],
     "actions": [
