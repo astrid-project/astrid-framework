@@ -1,9 +1,28 @@
 # ASTRID - Packetbeat
 # author: Alex Carrega <alessandro.carrega@cnit.it>
 
-# Image
-ARG OS_VERSION=3.12.0
-FROM alpine:$OS_VERSION
+# Stage Get Source
+FROM bitnami/minideb:stretch as get-source
+
+# Args
+ARG COMPONENT=packetbeat
+ARG VERSION=7.13.4
+ARG INSTALLATION_PATH=/opt/$COMPONENT
+ARG TMP_PATH=/tmp
+ARG SOURCE=$COMPONENT-$VERSION-linux-x86_64
+ARG FILE=$SOURCE.tar.gz
+
+# Component execution deps
+RUN install_packages wget
+
+# Download
+RUN wget --no-check-certificate -P $TMP_PATH/ https://artifacts.elastic.co/downloads/beats/$COMPONENT/$FILE
+RUN tar xzvf $TMP_PATH/$FILE -C $TMP_PATH/
+RUN mv $TMP_PATH/$SOURCE $INSTALLATION_PATH
+RUN rm $TMP_PATH/$FILE
+
+# Stage FINAL
+FROM bitnami/minideb:stretch as final
 
 # Args
 ARG COMPONENT=packetbeat
@@ -15,17 +34,8 @@ ARG FILE=$SOURCE.tar.gz
 
 # Label
 LABEL maintainer="alessandro.carrega@cnit.it"
-LABEL description="$COMPONENT image based on Alpine Linux"
+LABEL description="$COMPONENT image based on minideb"
 LABEL version=$VERSION
-
-# Download
-RUN wget -P $TMP_PATH/ https://artifacts.elastic.co/downloads/beats/$COMPONENT/$FILE
-RUN tar xzvf $TMP_PATH/$FILE -C $TMP_PATH/
-RUN mv $TMP_PATH/$SOURCE $INSTALLATION_PATH
-RUN rm $TMP_PATH/$FILE
-
-# Component execution deps
-RUN apk add libc6-compat
 
 # Variables
 ENV COMPONENT=$COMPONENT
@@ -37,6 +47,7 @@ ENV ELASTICSEARCH_HOSTS=localhost:9200
 ENV LOGSTASH_HOSTS=localhost:5044
 
 # Settings
+COPY --from=get-source $INSTALLATION_PATH $INSTALLATION_PATH
 COPY settings/$VERSION/$COMPONENT.yml $INSTALLATION_PATH/
 
 # Execute
