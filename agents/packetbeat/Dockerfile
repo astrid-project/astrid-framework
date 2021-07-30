@@ -2,7 +2,7 @@
 # author: Alex Carrega <alessandro.carrega@cnit.it>
 
 # Stage Get Source
-FROM bitnami/minideb:stretch as get-source
+FROM ubuntu:latest as get-source
 
 # Args
 ARG COMPONENT=packetbeat
@@ -13,7 +13,8 @@ ARG SOURCE=$COMPONENT-$VERSION-linux-x86_64
 ARG FILE=$SOURCE.tar.gz
 
 # Component execution deps
-RUN install_packages wget
+RUN apt update
+RUN apt install -y wget
 
 # Download
 RUN wget --no-check-certificate -P $TMP_PATH/ https://artifacts.elastic.co/downloads/beats/$COMPONENT/$FILE
@@ -22,7 +23,7 @@ RUN mv $TMP_PATH/$SOURCE $INSTALLATION_PATH
 RUN rm $TMP_PATH/$FILE
 
 # Stage FINAL
-FROM bitnami/minideb:stretch as final
+FROM ubuntu:latest as final
 
 # Args
 ARG COMPONENT=packetbeat
@@ -34,7 +35,7 @@ ARG FILE=$SOURCE.tar.gz
 
 # Label
 LABEL maintainer="alessandro.carrega@cnit.it"
-LABEL description="$COMPONENT image based on minideb"
+LABEL description="$COMPONENT image based on Ubuntu"
 LABEL version=$VERSION
 
 # Variables
