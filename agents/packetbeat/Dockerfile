@@ -38,8 +38,6 @@ ENV LOGSTASH_HOSTS=localhost:5044
 
 # Settings
 COPY settings/$VERSION/$COMPONENT.yml $INSTALLATION_PATH/
-RUN mkdir -p $INSTALLATION_PATH/config
-COPY settings/$VERSION/config/* $INSTALLATION_PATH/config/
 
 # Execute
 WORKDIR $INSTALLATION_PATH
