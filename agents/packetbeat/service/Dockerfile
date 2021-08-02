@@ -30,11 +30,11 @@ RUN apt install -y wget apt-transport-https gnupg
 RUN wget -qO - https://artifacts.elastic.co/GPG-KEY-elasticsearch | apt-key add -
 RUN echo "deb https://artifacts.elastic.co/packages/7.x/apt stable main" | tee -a /etc/apt/sources.list.d/elastic-7.x.list
 RUN apt-get update
-RUN apt-get install -y packetbeat
+RUN apt-get install -y packetbeat python3-pip
 
 # Settings
 COPY --from=restable $RESTable_PATH $RESTable_PATH
-COPY --from=restable -rf /usr/local/* /usr/local
+RUN pip install -r $RESTable_PATH/prod.requirements.txt
 
 COPY settings/$VERSION/$COMPONENT.yml $INSTALLATION_PATH/
 COPY settings/$VERSION/RESTable-settings.yaml $RESTable_PATH/settings.yaml
