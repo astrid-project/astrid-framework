@@ -13,6 +13,13 @@ jobs:
       fail-fast: false
       matrix:
         include:
+          - component: restable
+            version: master
+            context: agent/RESTable
+            title: CNIT ML (Machine Learning)
+            description: 'Make a standard app a RESTable one.'
+            url: https://github.com/alexcarrega/RESTable
+
           - component: cnit_ml
             version: version1
             context: algorithms/cnit_ml

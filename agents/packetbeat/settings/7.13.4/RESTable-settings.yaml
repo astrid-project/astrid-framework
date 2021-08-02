@@ -1,0 +1,17 @@
+port: 9999
+debug: True
+name: Packetbeat
+description: Service action controller.
+commands:
+  service-start:
+    script: service packetbeat start
+    daemon: false
+  service-stop:
+    script: service packetbeat stop
+    daemon: false
+  service-restart:
+    script: service packetbeat restart
+    daemon: false
+  service-status:
+    script: service packetbeat status
+    daemon: false
