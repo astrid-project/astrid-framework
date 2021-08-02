@@ -20,8 +20,8 @@ ARG VERSION=master
 ARG PROJECT=astrid
 ARG INSTALLATION_PATH=/opt/$COMPONENT
 
-COPY --from=git-clone $INSTALLATION_PATH/prod.requirements.txt /prod.requirements.txt
-RUN pip install --prefix=$INSTALLATION_PATH -r /prod.requirements.txt
+COPY --from=git-clone $INSTALLATION_PATH/requirements.txt /requirements.txt
+RUN pip install --prefix=$INSTALLATION_PATH -r /requirements.txt
 
 
 # Stage FINAL

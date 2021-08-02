@@ -34,7 +34,7 @@ RUN apt-get install -y packetbeat python3-pip
 
 # Settings
 COPY --from=restable $RESTable_PATH $RESTable_PATH
-RUN pip install -r $RESTable_PATH/prod.requirements.txt
+RUN pip install -r $RESTable_PATH/requirements.txt
 
 COPY settings/$VERSION/$COMPONENT.yml $INSTALLATION_PATH/
 COPY settings/$VERSION/RESTable-settings.yaml $RESTable_PATH/settings.yaml
