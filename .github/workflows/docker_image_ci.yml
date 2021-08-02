@@ -15,6 +15,7 @@ jobs:
         include:
           - component: restable
             version: master
+            tag: master
             context: agents/RESTable
             title: CNIT ML (Machine Learning)
             description: 'Make a standard app a RESTable one.'
@@ -22,6 +23,7 @@ jobs:
 
           - component: cnit_ml
             version: version1
+            tag: version1
             context: algorithms/cnit_ml
             title: CNIT ML (Machine Learning)
             description: 'Detects multiple DDoS attacks (multiclass) using Random Forests.'
@@ -29,6 +31,7 @@ jobs:
  
           - component: cnit_ml
             version: version2
+            tag: version2
             context: algorithms/cnit_ml
             title: CNIT ML (Machine Learning)
             description: 'Detects multiple DDoS attacks (multiclass) using Random Forests.'
@@ -36,6 +39,7 @@ jobs:
  
           - component: cnit_ml
             version: version3
+            tag: version3
             context: algorithms/cnit_ml
             title: CNIT ML (Machine Learning)
             description: 'Detects multiple DDoS attacks (multiclass) using Random Forests.'
@@ -44,6 +48,7 @@ jobs:
 
           - component: cubebeat
             version: master
+            tag: master
             context: agents/cubebeat
             title: Cubebeat
             description: 'Custom Beat of the Elastic Stack to interact with the Polycube-based eBPF cubes.'
@@ -51,6 +56,7 @@ jobs:
 
           - component: cubebeat
             version: v1.0.0
+            tag: v1.0.0
             context: agents/cubebeat
             title: Cubebeat
             description: 'Custom Beat of the Elastic Stack to interact with the Polycube-based eBPF cubes.'
@@ -59,6 +65,7 @@ jobs:
 
           - component: filebeat
             version: 7.8.0
+            tag: 7.8.0
             context: agents/filebeat
             title: Filebeat
             description: 'Lightweight shipper for logs by Elastic.'
@@ -67,6 +74,7 @@ jobs:
 
           - component: lcp
             version: master
+            tag: master
             context: agents/lcp
             title: LCP (Local Control Plane)
             description: 'Control plane responsible for programmability and changing the behavior of data plane at run-time.'
@@ -74,6 +82,7 @@ jobs:
 
           - component: lcp
             version: v1.0.3
+            tag: v1.0.3
             context: agents/lcp
             title: LCP (Local Control Plane)
             description: 'Control plane responsible for programmability and changing the behavior of data plane at run-time.'
@@ -81,6 +90,7 @@ jobs:
 
           - component: lcp
             version: v1.0.2
+            tag: v1.0.2
             context: agents/lcp
             title: LCP (Local Control Plane)
             description: 'Control plane responsible for programmability and changing the behavior of data plane at run-time.'
@@ -88,6 +98,7 @@ jobs:
 
           - component: lcp
             version: v1.0.1
+            tag: v1.0.1
             context: agents/lcp
             title: LCP (Local Control Plane)
             description: 'Control plane responsible for programmability and changing the behavior of data plane at run-time.'
@@ -95,6 +106,7 @@ jobs:
 
           - component: lcp
             version: v1.0.0
+            tag: v1.0.0
             context: agents/lcp
             title: LCP (Local Control Plane)
             description: 'Control plane responsible for programmability and changing the behavior of data plane at run-time.'
@@ -103,6 +115,7 @@ jobs:
 
           - component: logstash-local
             version: 7.8.0
+            tag: 7.8.0
             context: agents/logstash
             title: Logstash
             description: 'Logstash is a tool for managing events and logs. Image for local services/environments.'
@@ -111,6 +124,7 @@ jobs:
 
           - component: metricbeat
             version: 7.8.0
+            tag: 7.8.0
             context: agents/metricbeat
             title: Metricbeat
             description: 'Lightweight shipper for metrics by Elastic.'
@@ -119,6 +133,7 @@ jobs:
 
           - component: packetbeat
             version: 7.8.0
+            tag: 7.8.0
             context: agents/packetbeat
             title: Packetbeat
             description: 'Lightweight shipper for network data.'
@@ -126,7 +141,17 @@ jobs:
 
           - component: packetbeat
             version: 7.13.4
+            tag: 7.13.4
             context: agents/packetbeat
+            title: Packetbeat
+            description: 'Lightweight shipper for network data.'
+            url: https://www.elastic.co/beats/packetbeat
+
+
+          - component: packetbeat
+            version: 7.13.4
+            tag: 7.13.4-service
+            context: agents/packetbeat/service
             title: Packetbeat
             description: 'Lightweight shipper for network data.'
             url: https://www.elastic.co/beats/packetbeat
@@ -134,6 +159,7 @@ jobs:
 
           - component: cb-manager
             version: master
+            tag: master
             context: platform/cb-manager
             title: CB (Context Broker) Manager
             description: 'A REST Interface exposes data and events stored in the internal storage system in a structured way.'
@@ -141,6 +167,7 @@ jobs:
 
           - component: cb-manager
             version: v1.0.3
+            tag: v1.0.3
             context: platform/cb-manager
             title: CB (Context Broker) Manager
             description: 'A REST Interface exposes data and events stored in the internal storage system in a structured way.'
@@ -148,6 +175,7 @@ jobs:
 
           - component: cb-manager
             version: v1.0.2
+            tag: v1.0.2
             context: platform/cb-manager
             title: CB (Context Broker) Manager
             description: 'A REST Interface exposes data and events stored in the internal storage system in a structured way.'
@@ -155,6 +183,7 @@ jobs:
 
           - component: cb-manager
             version: v1.0.1
+            tag: v1.0.1
             context: platform/cb-manager
             title: CB (Context Broker) Manager
             description: 'A REST Interface exposes data and events stored in the internal storage system in a structured way.'
@@ -162,6 +191,7 @@ jobs:
 
           - component: cb-manager
             version: v1.0.0
+            tag: v1.0.0
             context: platform/cb-manager
             title: CB (Context Broker) Manager
             description: 'A REST Interface exposes data and events stored in the internal storage system in a structured way.'
@@ -170,6 +200,7 @@ jobs:
 
           - component: elasticsearch
             version: 7.8.0
+            tag: 7.8.0
             context: platform/elasticsearch
             title: Elasticsearch
             description: 'Elasticsearch is a powerful open source search and analytics engine that makes data easy to explore.'
@@ -178,6 +209,7 @@ jobs:
 
           - component: kafka
             version: 2.6.2
+            tag: 2.6.2
             context: platform/kafka
             title: Kafka
             description: 'Apache Kafka is a distributed streaming platform used for building real-time applications.'
@@ -186,6 +218,7 @@ jobs:
 
           - component: logstash-core
             version: 7.8.0
+            tag: 7.8.0
             context: platform/logstash
             title: Logstash
             description: 'Logstash is a tool for managing events and logs. Image for Context Broker.'
@@ -232,13 +265,13 @@ jobs:
             VERSION=${{ matrix.version }}
           no-cache: true
           push: true
-          tags: astridproject/${{ matrix.component }}:${{ matrix.version }}
+          tags: astridproject/${{ matrix.component }}:${{ matrix.tag }}
           labels: |
             org.opencontainers.image.title=${{ matrix.title }}
             org.opencontainers.image.description=${{ matrix.description }}
             org.opencontainers.image.url=${{ matrix.url }}
             org.opencontainers.image.source=${{ fromJson(steps.repo.outputs.result).html_url }}/tree/${{ steps.prep.outputs.branch }}/${{ matrix.context }}
-            org.opencontainers.image.version=${{ matrix.version }}
+            org.opencontainers.image.version=${{ matrix.tag }}
             org.opencontainers.image.created=${{ steps.prep.outputs.created }}
             org.opencontainers.image.revision=${{ github.sha }}
             org.opencontainers.image.licenses=${{ fromJson(steps.repo.outputs.result).license.spdx_id }}
