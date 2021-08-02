@@ -34,7 +34,7 @@ RUN apt-get install -y packetbeat
 
 # Settings
 COPY --from=restable $RESTable_PATH $RESTable_PATH
-COPY --from=restable /usr/local /usr/local
+COPY --from=restable -rf /usr/local/* /usr/local
 
 COPY settings/$VERSION/$COMPONENT.yml $INSTALLATION_PATH/
 COPY settings/$VERSION/RESTable-settings.yaml $RESTable_PATH/settings.yaml
