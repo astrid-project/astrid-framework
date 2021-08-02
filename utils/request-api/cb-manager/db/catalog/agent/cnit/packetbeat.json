@@ -51,37 +51,30 @@
     ],
     "actions": [
         {
-            "id": "devices",
-            "description": "List of available devices",
-            "config": {
-                "cmd": "/opt/astrid/packetbeat/packetbeat devices"
-            }
-        },
-        {
-            "id": "init",
-            "config": {
-                "cmd": "/opt/astrid/commands/packetbeat/init.sh"
-            }
-        },
-        {
             "id": "start",
             "status": "started",
             "config": {
-                "cmd": "/opt/astrid/commands/packetbeat/start.sh",
-                "daemon": true
+                "cmd": "curl localhost:9999/service-start"
             }
         },
         {
             "id": "stop",
             "status": "stopped",
             "config": {
-                "cmd": "/opt/astrid/commands/packetbeat/stop.sh"
+                "cmd": "curl localhost:9999/service-stop"
             }
         },
         {
-            "id": "health",
+            "id": "restart",
+            "status": "started",
             "config": {
-                "cmd": "/opt/astrid/commands/packetbeat/health.sh"
+                "cmd": "curl localhost:9999/service-restart"
+            }
+        },
+        {
+            "id": "status",
+            "config": {
+                "cmd": "curl localhost:9999/service-status"
             }
         }
     ]

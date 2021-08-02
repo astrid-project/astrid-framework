@@ -16,12 +16,18 @@
 @select = 
 @operator = equals
 @target = id
-@expr = dev
+@expr = packetbeat
 
 GET {{cb_manager_endpoint}}/{{uri}} HTTP/1.1
 
 {
-    "select": ["id", "actions"]
+    "select": ["id", "actions"],
+    "where": {
+        "equals": {
+            "target": "{{target}}",
+            "expr": "{{expr}}"
+        }
+    }
 }
 
 ###
@@ -33,14 +39,14 @@ POST {{cb_manager_endpoint}}/{{uri}} HTTP/1.1
 # < db/catalog/agent/cnit/logstash.json
 # < db/catalog/agent/cnit/metricbeat.json
 # < db/catalog/agent/cnit/nprobe.json
-# < db/catalog/agent/cnit/packetbeat.json
+< db/catalog/agent/cnit/packetbeat.json
 # < db/catalog/agent/cnit/termux-api.json
 # < db/exec-env/type.json
 # < db/network-link/type.json
 # < db/network-link/data.json
 # < db/connection.json
 # < db/catalog/algorithm/tei-atk.json
-< db/catalog/agent/cnit/dev.json
+# < db/catalog/agent/cnit/dev.json
 
 ###
 
