@@ -38,8 +38,8 @@ LABEL version=$VERSION
 
 COPY --from=git-clone $INSTALLATION_PATH $INSTALLATION_PATH
 COPY --from=pip-requirements $INSTALLATION_PATH /usr/local
-RUN chmod +x $INSTALLATION_PATH/prod.sh
+RUN chmod +x $INSTALLATION_PATH/run.sh
 
 # Execute
 WORKDIR $INSTALLATION_PATH
-ENTRYPOINT [ "./prod.sh" ]
+ENTRYPOINT [ "./run.sh" ]
