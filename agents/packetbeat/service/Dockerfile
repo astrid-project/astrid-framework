@@ -42,4 +42,4 @@ RUN chmod +x $RESTable_PATH/prod.sh
 
 # Execute
 WORKDIR $RESTable_PATH
-ENTRYPOINT [ "./prod.sh" ]
+ENTRYPOINT [ "./run.sh" ]
