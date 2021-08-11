@@ -38,7 +38,7 @@ RUN pip install -r $RESTable_PATH/requirements.txt
 
 COPY settings/$VERSION/$COMPONENT.yml $INSTALLATION_PATH/
 COPY settings/$VERSION/RESTable-settings.yaml $RESTable_PATH/settings.yaml
-RUN chmod +x $RESTable_PATH/prod.sh
+RUN chmod +x $RESTable_PATH/run.sh
 
 # Execute
 WORKDIR $RESTable_PATH
