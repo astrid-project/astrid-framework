@@ -2,3 +2,5 @@
   path.config: "${INSTALLATION_PATH}/pipeline/data.conf"
 - pipeline.id: event
   path.config: "${INSTALLATION_PATH}/pipeline/event.conf"
+- pipeline.id: proxy-data
+  path.config: "${INSTALLATION_PATH}/pipeline/proxy-data.conf"
