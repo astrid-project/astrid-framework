@@ -1,17 +1,17 @@
-# @uri = exec-env
 @uri = catalog/agent
-# @uri = type/exec-env
-# @uri = type/network-link
-# @uri = network-link
-# @uri = connection
-# @uri = instance/agent
-# @uri = instance/algorithm
 # @uri = catalog/algorithm
-# @uri = instance/ebpf-program
 # @uri = catalog/ebpf-program
+# @uri = connection
 # @uri = data
 # @uri = event
+# @uri = exec-env
+# @uri = instance/agent
+# @uri = instance/algorithm
+# @uri = instance/ebpf-program
+# @uri = network-link
 # @uri = pipeline
+# @uri = type/exec-env
+# @uri = type/network-link
 
 @select = 
 @operator = equals
@@ -21,13 +21,7 @@
 GET {{cb_manager_endpoint}}/{{uri}} HTTP/1.1
 
 {
-    "select": ["id", "actions"],
-    "where": {
-        "equals": {
-            "target": "{{target}}",
-            "expr": "{{expr}}"
-        }
-    }
+    "select": ["id"]
 }
 
 ###
@@ -39,7 +33,7 @@ POST {{cb_manager_endpoint}}/{{uri}} HTTP/1.1
 # < db/catalog/agent/cnit/logstash.json
 # < db/catalog/agent/cnit/metricbeat.json
 # < db/catalog/agent/cnit/nprobe.json
-< db/catalog/agent/cnit/packetbeat.json
+< db/catalog/agent/cnit/dynmon.json
 # < db/catalog/agent/cnit/termux-api.json
 # < db/exec-env/type.json
 # < db/network-link/type.json
