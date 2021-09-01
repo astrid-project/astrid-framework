@@ -172,6 +172,8 @@ spec:
             path: data.conf
           - key: event.conf
             path: event.conf
+          - key: proxy-data.conf
+            path: proxy-data.conf
       - name: elasticsearch-config
         configMap:
           name: elasticsearch-config

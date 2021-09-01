@@ -20,6 +20,50 @@ data:
     {\n\telasticsearch {\n\t\thosts => \"${ELASTICSEARCH_HOSTS}\"\n\t\tindex => \"event\"\n\t}\n\n\tif
     \"debug\" in [tags] {\n\t\tstdout {\n\t\t\tcodec  => rubydebug {\n\t\t\t\tmetadata
     => true\n\t\t\t}\n\t\t}\n\t}\n}\n"
+  proxy-data.conf: |
+    input {
+      kafka {
+        bootstrap_servers => "${KAFKA_BOOTSTRAP_SERVERS}"
+        client_id => "context-broker-logstash"
+        topics => ["AstridProxyReadData"]
+        metadata_max_age_ms => 60000
+        codec => json
+      }
+    }
+
+    filter {
+      ruby {
+        code => "event.set('central_logstash_time', Time.now());"
+        add_tag => "central_logstash_time"
+      }
+
+      mutate {
+        convert => { "central_logstash_time" => "string" }
+        add_tag => "central_logstash_time2string"
+      }
+
+      date {
+        match => [ "central_logstash_time", "ISO8601" ]
+        target => "central_logstash_time"
+        tag_on_failure => "central_logstash_time2data_failure"
+        add_tag => "central_logstash_time2date"
+      }
+    }
+
+    output {
+      elasticsearch {
+        hosts => "${ELASTICSEARCH_HOSTS}"
+        index => "proxy-data"
+      }
+
+      if "debug" in [tags] {
+        stdout {
+          codec  => rubydebug {
+            metadata => true
+          }
+        }
+      }
+    }
 kind: ConfigMap
 metadata:
   #creationTimestamp: "2020-11-20T14:25:51Z"
