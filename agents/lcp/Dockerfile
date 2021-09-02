@@ -38,7 +38,7 @@ LABEL maintainer="alessandro.carrega@cnit.it"
 LABEL description="LCP built with Python version 3.8 on Alpine Linux"
 LABEL version=$VERSION
 
-RUN apk add --no-cache curl
+RUN apk add --no-cache curl curlie
 
 COPY --from=git-clone $INSTALLATION_PATH $INSTALLATION_PATH
 COPY --from=pip-requirements $INSTALLATION_PATH /usr/local
