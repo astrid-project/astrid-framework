@@ -112,7 +112,7 @@ spec:
         image: docker.elastic.co/kibana/kibana:7.8.0
         env:
         - name: ELASTICSEARCH_HOSTS
-          value: "localhost:9200"
+          value: "http://localhost:9200"
         ports:
         - containerPort: 5601
 
