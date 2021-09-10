@@ -108,6 +108,16 @@ spec:
           - name: node
             mountPath: /node
 
+      - name: kibana
+        image: docker.elastic.co/elasticsearch/kibana:7.8.0
+        env:
+        - name: ELASTICSEARCH_HOSTS
+          value: "localhost:9200"
+        ports:
+        - containerPort: 5601
+        securityContext:
+          runAsUser: 0
+
       - name: elasticsearch
         image: docker.elastic.co/elasticsearch/elasticsearch:7.8.0
         securityContext:
