@@ -109,7 +109,7 @@ spec:
             mountPath: /node
 
       - name: kibana
-        image: docker.elastic.co/elasticsearch/kibana:7.8.0
+        image: docker.elastic.co/kibana/kibana:7.8.0
         env:
         - name: ELASTICSEARCH_HOSTS
           value: "localhost:9200"
