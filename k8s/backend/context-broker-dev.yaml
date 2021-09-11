@@ -81,6 +81,8 @@ spec:
           value: "yes"
         - name: KAFKA_CFG_AUTO_CREATE_TOPICS_ENABLE
           value: "true"
+        - name: KAFKA_LOG_DIRS
+          value: /node/opt/kafka_topics
         volumeMounts:
         - name: node
           mountPath: /node
