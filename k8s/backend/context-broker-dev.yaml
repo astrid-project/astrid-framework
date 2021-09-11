@@ -13,6 +13,13 @@ spec:
       labels:
         app: context-broker
     spec:
+      initContainers:
+      - image: byrnedo/alpine-curl:latest
+        name: remove-meta-properties-kafka-file
+        command: ['sh', '-c', 'if [ "$(ls /node/opt/kafka_topics/meta.properties)" ]; then rm /node/opt/kafka_topics/meta.properties; fi;']
+        volumeMounts:
+        - name: node
+          mountPath: /node
       containers:
       - name: cb-manager
         image: astridproject/cb-manager:master
