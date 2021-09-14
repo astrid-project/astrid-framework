@@ -54,21 +54,21 @@
             "id": "start",
             "status": "started",
             "config": {
-                "cmd": "curl localhost:9999/service-start"
+                "cmd": "curl -XPOST localhost:9999/service-start"
             }
         },
         {
             "id": "stop",
             "status": "stopped",
             "config": {
-                "cmd": "curl localhost:9999/service-stop"
+                "cmd": "curl -XPOST localhost:9999/service-stop"
             }
         },
         {
             "id": "restart",
             "status": "started",
             "config": {
-                "cmd": "curl localhost:9999/service-restart"
+                "cmd": "curl -XPOST localhost:9999/service-restart"
             }
         },
         {

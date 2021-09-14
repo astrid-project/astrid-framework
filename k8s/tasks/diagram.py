@@ -20,7 +20,7 @@ from invoke import task
 
 @task
 def general(c):
-    with Diagram('General Configuration', filename='general', show=False):
+    with Diagram('General Configuration', filename='general', show=False, graph_attr={'pad': '0.0'}):
         _ = NS('astrid-kube')
         _cb_pod = Pod('CB')
         _cb_deploy = Deployment('CB')
@@ -37,7 +37,7 @@ def general(c):
 
 @task
 def cb(c):
-    with Diagram('Context Broker Pod', filename='cb', show=False):
+    with Diagram('Context Broker Pod', filename='cb', show=False, graph_attr={'pad': '0.0'}):
         _kafka = Kafka('Kafka')
         _zk = Zookeeper('Zookeeper')
         _logstash = Logstash('Logstash')
@@ -65,5 +65,5 @@ def cb(c):
 
 @task
 def infrastructure(c):
-    with Diagram('ASTRID Kubernetes infrastructure', filename='infrastructure', show=False):
+    with Diagram('ASTRID Kubernetes infrastructure', filename='infrastructure', show=False, graph_attr={'pad': '0.0'}):
         _ = Master('compute01') - Node('compute02') - Node('compute03')
