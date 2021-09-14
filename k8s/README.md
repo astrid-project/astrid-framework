@@ -2,6 +2,11 @@
 
 This directory contains the manifest files used by Flux () for the CI / CD in a Kubernetes cluster installation.
 
+The ASTRID Kubernetes infrastructure is composed of 3 Node
+
+![ASTRID Kubernetes infrastructure](tasks/infrastructure.png)
+
+
 These manifest files allows the configuration of the following ASTRID components:
 
 ![General configurations](tasks/general.png)
@@ -15,7 +20,7 @@ These manifest files allows the configuration of the following ASTRID components
     - Kafka
     - Zookeeper
 
-![Conext-Broker POD](tasks/cb.png)
+![Context-Broker POD](tasks/cb.png)
 
 - Service [backend/service.yaml](backend/service.yaml)
     - CB-Manager
@@ -38,7 +43,7 @@ These manifest files allows the configuration of the following ASTRID components
 
 Alternatively, it is possible to apply this configuration without Flux executing the following command (works only with Linux):
 
-```bash
+```console
 ,/run.sh dev
 ```
 Actually the ``dev`` mode is the only one supported.

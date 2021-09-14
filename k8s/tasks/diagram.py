@@ -5,7 +5,7 @@
 # cspell:ignore strg srvs
 
 from diagrams import Cluster, Diagram
-from diagrams.elastic.elasticsearch import Elasticsearch, Logstash
+from diagrams.elastic.elasticsearch import Elasticsearch, Kibana, Logstash
 from diagrams.k8s.compute import Deployment, Pod, ReplicaSet
 from diagrams.k8s.group import NS
 from diagrams.k8s.infra import Master, Node
@@ -27,7 +27,7 @@ def general(c):
 
         with Cluster('Services'):
             _srvs = [Service('elasticsearch-service'),
-                     Service('kafka-service'), Service('cb-manager-service')]
+                     Service('kafka-service'), Service('cb-manager-service'), Service['kibana']]
 
         with Cluster('Storage'):
             _strg = PVC('elasticsearch-pv-volume') >> PV('elasticsearch-pv')
@@ -42,6 +42,7 @@ def cb(c):
         _zk = Zookeeper('Zookeeper')
         _logstash = Logstash('Logstash')
         _elasticsearch = Elasticsearch('Elasticsearch')
+        _kibana = Kibana('Kibana')
         _cb_man = Python('cb-manager')
 
         with Cluster('elasticsearch-config'):
@@ -58,6 +59,7 @@ def cb(c):
         _ = _logstash_pipe - _logstash
 
         _zk - _kafka >> _logstash >> _elasticsearch << _cb_man
+        _elasticsearch << _kibana
         _logstash << _cb_man >> _kafka
 
 
