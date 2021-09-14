@@ -20,14 +20,14 @@ from invoke import task
 
 @task
 def general(c):
-    with Diagram('general', show=False):
+    with Diagram('General Configuration', filename='general', show=False):
         _ = NS('astrid-kube')
         _cb_pod = Pod('CB')
         _cb_deploy = Deployment('CB')
 
         with Cluster('Services'):
             _srvs = [Service('elasticsearch-service'),
-                     Service('kafka-service'), Service('cb-manager-service'), Service['kibana']]
+                     Service('kafka-service'), Service('cb-manager-service'), Service('kibana')]
 
         with Cluster('Storage'):
             _strg = PVC('elasticsearch-pv-volume') >> PV('elasticsearch-pv')
@@ -37,7 +37,7 @@ def general(c):
 
 @task
 def cb(c):
-    with Diagram('cb', show=False):
+    with Diagram('Context Broker Pod', filename='cb', show=False):
         _kafka = Kafka('Kafka')
         _zk = Zookeeper('Zookeeper')
         _logstash = Logstash('Logstash')
@@ -65,5 +65,5 @@ def cb(c):
 
 @task
 def infrastructure(c):
-    with Diagram('infrastructure', show=False):
+    with Diagram('ASTRID Kubernetes infrastructure', filename='infrastructure', show=False):
         _ = Master('compute01') - Node('compute02') - Node('compute03')
