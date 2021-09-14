@@ -1,0 +1,10 @@
+- type: http
+  name: kibana
+  id: kibana@context-broker
+  enabled: false
+  schedule: "@every 60s"
+  urls:
+    - "http://context-broker:5601"
+  ipv4: true
+  ipv6: true
+  mode: any

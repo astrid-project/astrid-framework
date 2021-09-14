@@ -1,0 +1,4 @@
+- name: synflood
+  enabled: true
+  period: 10s
+  polycube.api-url: "http://localhost:9000/polycube/v1/synflood/sf/stats/"

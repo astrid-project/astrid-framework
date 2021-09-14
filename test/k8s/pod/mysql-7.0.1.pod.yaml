@@ -1,0 +1,179 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mysql
+  namespace: astrid-kube
+  annotations:
+    astrid.io/security-components: '["firewall"]'
+spec:
+  selector:
+    matchLabels:
+      app: mysql
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: mysql
+    spec:
+      hostAliases:
+        - ip: "127.0.0.1"
+          hostnames:
+            - "mysql"
+      containers:
+        - name: lcp
+          image: astridproject/lcp:latest
+          env:
+            - name: GIT_URL
+              value: "https://astrid-token:2nsubUuUss8sQ-Mue_yN@gitlab.com/astrid-repositories/lcp"
+            - name: ROOT_DIR
+              value: "/opt/lcp"
+            - name: CONFIG_DIR
+              value: "/opt/lcp-config"
+            - name: HOST
+              value: "0.0.0.0"
+            - name: PORT
+              value: "4000"
+            - name: DEV_USERNAME
+              value: "lcp"
+            - name: DEV_PASSWORD
+              value: "a9d4034da07d8ef31db1cd4119b6a4552fdfbd19787e2848e71c8ee3b47703a7" # "astrid" in hashed sha256
+            - name: LOG_LEVEL
+              value: "DEBUG"
+            - name: FORCE_APT_UPGRADE_BOOT
+              value: "no"
+            - name: FORCE_REBUILD_BOOT
+              value: "no"
+            - name: USE_ENV_CONFIG_FILES
+              value: "yes"
+          ports:
+            - name: lcp
+              containerPort: 4000
+          volumeMounts:
+            - name: metricbeat-modules
+              mountPath: /opt/metricbeat/modules.d/
+
+        - name: mysql
+          image: mysql:5.7
+          env:
+            - name: MYSQL_ALLOW_EMPTY_PASSWORD
+              value: "1"
+          ports:
+            - name: mysql
+              containerPort: 3601
+          volumeMounts:
+            - name: cgroup
+              mountPath: /sys/fs/cgroup
+            - name: proc
+              mountPath: /proc
+
+        - name: metricbeat
+          image: docker.elastic.co/beats/metricbeat:7.0.1
+          securityContext:
+            runAsUser: 0
+          resources:
+            limits:
+              memory: 200Mi
+            requests:
+              cpu: 100m
+              memory: 100Mi
+          volumeMounts:
+            - name: metricbeat
+              mountPath: /usr/share/metricbeat/metricbeat.yml
+              subPath: metricbeat.yml
+            - name: metricbeat-modules
+              mountPath: /usr/share/metricbeat/modules.d/
+            - name: cgroup
+              mountPath: /sys/fs/cgroup
+            - name: proc
+              mountPath: /proc
+
+        - name: heartbeat
+          image: docker.elastic.co/beats/heartbeat:7.0.1
+          securityContext:
+            runAsUser: 0
+          resources:
+            limits:
+              memory: 200Mi
+            requests:
+              cpu: 100m
+              memory: 100Mi
+          volumeMounts:
+            - name: heartbeat
+              mountPath: /usr/share/heartbeat/heartbeat.yml
+              subPath: heartbeat.yml
+            - name: heartbeat-monitors
+              mountPath: /usr/share/heartbeat/monitors.d/
+
+        - name: logstash
+          image: docker.elastic.co/logstash/logstash:7.0.1
+          securityContext:
+            runAsUser: 0
+          ports:
+            - name: logstash
+              containerPort: 5144
+          volumeMounts:
+            - name: logstash-config
+              mountPath: /usr/share/logstash/config/
+            - name: logstash-pipeline
+              mountPath: /usr/share/logstash/pipeline/
+
+      initContainers:
+        - name: copy
+          image: busybox
+          command:
+            - "sh"
+            - "-c"
+          args:
+            - "cp /metricbeat-modules-data/* /metricbeat-modules/ ;
+               cp /heartbeat-monitors-data/* /heartbeat-monitors/"
+          volumeMounts:
+            - name: metricbeat-modules
+              mountPath: /metricbeat-modules
+            - name: metricbeat-modules-data
+              mountPath: /metricbeat-modules-data
+            - name: heartbeat-monitors
+              mountPath: /heartbeat-monitors
+            - name: heartbeat-monitors-data
+              mountPath: /heartbeat-monitors-data
+
+      volumes:
+        - name: metricbeat
+          configMap:
+            name: mysql-metricbeat
+
+        - name: metricbeat-modules
+          emptyDir: {}
+
+        - name: metricbeat-modules-data
+          configMap:
+            name: mysql-metricbeat-modules
+
+        - name: heartbeat
+          configMap:
+            name: mysql-heartbeat
+
+        - name: heartbeat-monitors
+          emptyDir: {}
+
+        - name: heartbeat-monitors-data
+          configMap:
+            name: mysql-heartbeat-monitors
+
+        - name: logstash-config
+          configMap:
+            name: mysql-logstash-config
+
+        - name: logstash-pipeline
+          configMap:
+            name: mysql-logstash-pipeline
+            items:
+              - key: mysql-system-7.0.1.conf
+                path: mysql-system.conf
+
+        - name: cgroup
+          hostPath:
+            path: /sys/fs/cgroup
+
+        - name: proc
+          hostPath:
+            path: /proc

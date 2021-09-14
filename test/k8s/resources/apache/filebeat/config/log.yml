@@ -1,0 +1,6 @@
+- type: log
+  enabled: true
+  paths:
+    - /var/log/apache2/access.log
+  backoff: 10s
+  backoff_factor: 1

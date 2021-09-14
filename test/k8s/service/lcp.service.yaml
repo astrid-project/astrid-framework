@@ -1,0 +1,51 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: lcp-apache
+  namespace: astrid-kube
+  labels:
+    app: apache
+spec:
+  selector:
+    app: apache
+  type: NodePort
+  ports:
+  - name: lcp
+    port: 4000
+    targetPort: 4000
+    nodePort: 30401
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: lcp-mysql
+  namespace: astrid-kube
+  labels:
+    app: mysql
+spec:
+  selector:
+    app: mysql
+  type: NodePort
+  ports:
+  - name: lcp
+    port: 4000
+    targetPort: 4000
+    nodePort: 30402
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: lcp-ssh-server
+  namespace: astrid-kube
+  labels:
+    app: ssh-server
+spec:
+  selector:
+    app: ssh-server
+  type: NodePort
+  ports:
+  - name: lcp
+    port: 4000
+    targetPort: 4000
+    nodePort: 30403
+---

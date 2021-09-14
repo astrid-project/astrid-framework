@@ -1,0 +1,11 @@
+- type: tcp
+  name: logstash
+  id: logstash@context-broker
+  enabled: false
+  schedule: "@every 60s"
+  urls:
+    - "context-broker:5144"
+  check:
+    send: "Check"
+    receive: "Check"
+

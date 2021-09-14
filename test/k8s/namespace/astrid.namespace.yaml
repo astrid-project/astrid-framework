@@ -1,0 +1,7 @@
+kind: Namespace
+apiVersion: v1
+metadata:
+  name: astrid-kube
+  labels:
+    name: astrid-kube
+---

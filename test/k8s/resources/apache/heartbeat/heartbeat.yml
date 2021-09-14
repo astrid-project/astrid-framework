@@ -1,0 +1,31 @@
+name: apache
+tags:
+  - "heartbeat"
+  - "apache"
+
+heartbeat.config.monitors:
+  path: monitors.d/*.yml
+  reload.enabled: true
+  reload.period: 300s
+
+output.elasticsearch:
+  hosts:
+    - "elasticsearch:9200"
+#   index: "heartbeat"
+
+# setup.template:
+#   name: 'heartbeat'
+#   pattern: 'heartbeat'
+#   enabled: false
+
+logging:
+  level: info
+  selectors:
+   - "*"
+  metrics.enabled: false
+  to_files: true
+  files:
+    path: logs
+    name: heartbeat.log
+    keepfiles: 7
+    permissions: 0644

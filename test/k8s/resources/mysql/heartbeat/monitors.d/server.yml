@@ -1,0 +1,10 @@
+- type: tcp
+  name: server
+  id: server@mysql
+  enabled: false
+  schedule: "@every 60s"
+  urls:
+    - "mysql:3601"
+  check:
+    send: "Check"
+    receive: "Check"

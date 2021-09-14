@@ -1,0 +1,10 @@
+- type: tcp
+  name: zookeeper
+  id: zookeeper@context-broker
+  enabled: false
+  schedule: "@every 60s"
+  urls:
+    - "context-broker:2181"
+  check:
+    send: "Check"
+    receive: "Check"

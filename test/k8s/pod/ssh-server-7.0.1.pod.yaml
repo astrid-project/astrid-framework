@@ -1,0 +1,271 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ssh-server
+  namespace: astrid-kube
+  annotations:
+    astrid.io/security-components: '["firewall"]'
+spec:
+  selector:
+    matchLabels:
+      app: ssh-server
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: ssh-server
+    spec:
+      hostAliases:
+        - ip: "127.0.0.1"
+          hostnames:
+            - "ssh-server"
+      containers:
+        - name: lcp
+          image: astridproject/lcp:latest
+          env:
+            - name: GIT_URL
+              value: "https://astrid-token:2nsubUuUss8sQ-Mue_yN@gitlab.com/astrid-repositories/lcp"
+            - name: ROOT_DIR
+              value: "/opt/lcp"
+            - name: CONFIG_DIR
+              value: "/opt/lcp-config"
+            - name: HOST
+              value: "0.0.0.0"
+            - name: PORT
+              value: "4000"
+            - name: DEV_USERNAME
+              value: "lcp"
+            - name: DEV_PASSWORD
+              value: "a9d4034da07d8ef31db1cd4119b6a4552fdfbd19787e2848e71c8ee3b47703a7" # "astrid" in hashed sha256
+            - name: LOG_LEVEL
+              value: "DEBUG"
+            - name: FORCE_APT_UPGRADE_BOOT
+              value: "no"
+            - name: FORCE_REBUILD_BOOT
+              value: "no"
+            - name: USE_ENV_CONFIG_FILES
+              value: "yes"
+          securityContext:
+            runAsUser: 0
+          ports:
+            - name: lcp
+              containerPort: 4000
+          volumeMounts:
+            - name: cubebeat-config
+              mountPath: /opt/cubebeat/config.d/
+            - name: metricbeat-modules
+              mountPath: /opt/metricbeat/modules.d/
+
+        - name: ssh-server
+          image: astridproject/ssh-server:latest
+          ports:
+            - name: ssh-server
+              containerPort: 22
+          volumeMounts:
+            - name: proc
+              mountPath: /proc
+            - name: cgroup
+              mountPath: /sys/fs/cgroup
+
+        - name: polycubed
+          image: polycubenetwork/polycube:latest
+          command:
+            - "polycubed"
+            - "--loglevel=DEBUG"
+            - "--addr=0.0.0.0"
+            - "--logfile=/host/var/log/pcn_k8s"
+          lifecycle:
+            postStart:
+              exec:
+                command:
+                  - "/bin/sh"
+                  - "-c"
+                  - "sleep 30; /usr/local/bin/polycubectl synflood add sf"
+          volumeMounts:
+            - name: cni-path
+              mountPath: /host/opt/cni/bin
+            - name: etc-cni-netd
+              mountPath: /host/etc/cni/net.d
+            - name: lib-modules
+              mountPath: /lib/modules
+            - name: usr-src
+              mountPath: /usr/src
+            - name: var-log
+              mountPath: /host/var/log
+          securityContext:
+            privileged: true
+          ports:
+            - name: polycubed
+              containerPort: 9000
+          terminationMessagePolicy: FallbackToLogsOnError
+
+        - name: cubebeat
+          image: astridproject/cubebeat:latest
+          env:
+            - name: CUBEBEAT_ROOT
+              value: "src/gitlab.com/astrid-repositories/cubebeat"
+            - name: USE_ENV_CONFIG_FILES
+              value: "yes"
+          securityContext:
+            runAsUser: 0
+          resources:
+            limits:
+              memory: 200Mi
+            requests:
+              cpu: 100m
+              memory: 100Mi
+          volumeMounts:
+            - name: cubebeat
+              mountPath: /opt/go/src/gitlab.com/astrid-repositories/cubebeat/cubebeat.yml
+              subPath: cubebeat.yml
+            - name: cubebeat-config
+              mountPath: /opt/go/src/gitlab.com/astrid-repositories/cubebeat/config.d/
+
+        - name: metricbeat
+          image: docker.elastic.co/beats/metricbeat:7.0.1
+          securityContext:
+            runAsUser: 0
+          resources:
+            limits:
+              memory: 200Mi
+            requests:
+              cpu: 100m
+              memory: 100Mi
+          volumeMounts:
+            - name: metricbeat
+              mountPath: /usr/share/metricbeat/metricbeat.yml
+              subPath: metricbeat.yml
+            - name: metricbeat-modules
+              mountPath: /usr/share/metricbeat/modules.d/
+            - name: cgroup
+              mountPath: /sys/fs/cgroup
+            - name: proc
+              mountPath: /proc
+
+        - name: heartbeat
+          image: docker.elastic.co/beats/heartbeat:7.0.1
+          securityContext:
+            runAsUser: 0
+          resources:
+            limits:
+              memory: 200Mi
+            requests:
+              cpu: 100m
+              memory: 100Mi
+          volumeMounts:
+            - name: heartbeat
+              mountPath: /usr/share/heartbeat/heartbeat.yml
+              subPath: heartbeat.yml
+            - name: heartbeat-monitors
+              mountPath: /usr/share/heartbeat/monitors.d/
+
+        - name: logstash
+          image: docker.elastic.co/logstash/logstash:7.0.1
+          ports:
+            - name: cubebeat
+              containerPort: 5044
+            - name: metricbeat
+              containerPort: 5144
+          volumeMounts:
+            - name: logstash-config
+              mountPath: /usr/share/logstash/config/
+            - name: logstash-pipeline
+              mountPath: /usr/share/logstash/pipeline/
+
+      initContainers:
+        - name: copy
+          image: busybox
+          command:
+            - "sh"
+            - "-c"
+          args:
+            - "cp /cubebeat-config-data/* /cubebeat-config/ ;
+               cp /metricbeat-modules-data/* /metricbeat-modules/ ;
+               cp /heartbeat-monitors-data/* /heartbeat-monitors/"
+          volumeMounts:
+            - name: cubebeat-config
+              mountPath: /cubebeat-config
+            - name: cubebeat-config-data
+              mountPath: /cubebeat-config-data
+            - name: metricbeat-modules
+              mountPath: /metricbeat-modules
+            - name: metricbeat-modules-data
+              mountPath: /metricbeat-modules-data
+            - name: heartbeat-monitors
+              mountPath: /heartbeat-monitors
+            - name: heartbeat-monitors-data
+              mountPath: /heartbeat-monitors-data
+
+      volumes:
+        - name: cubebeat
+          configMap:
+            name: ssh-server-cubebeat
+
+        - name: cubebeat-config
+          emptyDir: {}
+
+        - name: cubebeat-config-data
+          configMap:
+            name: ssh-server-cubebeat-config
+
+        - name: metricbeat
+          configMap:
+            name: ssh-server-metricbeat
+
+        - name: metricbeat-modules
+          emptyDir: {}
+
+        - name: metricbeat-modules-data
+          configMap:
+            name: ssh-server-metricbeat-modules
+
+        - name: heartbeat
+          configMap:
+            name: ssh-server-heartbeat
+
+        - name: heartbeat-monitors
+          emptyDir: {}
+
+        - name: heartbeat-monitors-data
+          configMap:
+            name: ssh-server-heartbeat-monitors
+
+        - name: logstash-config
+          configMap:
+            name: ssh-server-logstash-config
+
+        - name: logstash-pipeline
+          configMap:
+            name: ssh-server-logstash-pipeline
+
+        - name: cgroup
+          hostPath:
+            path: /sys/fs/cgroup
+
+        - name: cni-path
+          hostPath:
+            path: /opt/cni/bin
+
+        - name: etc-cni-netd
+          hostPath:
+            path: /etc/cni/net.d
+
+        - name: lib-modules
+          hostPath:
+            path: /lib/modules
+
+        - name: netns
+          hostPath:
+            path: /var/run/netns
+
+        - name: proc
+          hostPath:
+            path: /proc
+
+        - name: usr-src
+          hostPath:
+            path: /usr/src
+
+        - name: var-log
+          hostPath:
+            path: /var/log

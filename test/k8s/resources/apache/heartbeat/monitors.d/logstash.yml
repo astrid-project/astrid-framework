@@ -1,0 +1,11 @@
+- type: tcp
+  name: logstash
+  id: logstash@apache
+  enabled: false
+  schedule: "@every 60s"
+  urls:
+    - "apache:5044"
+    - "apache:5144"
+  check:
+    send: "Check"
+    receive: "Check"

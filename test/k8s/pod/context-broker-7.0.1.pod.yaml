@@ -1,0 +1,233 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: context-broker
+  namespace: astrid-kube
+spec:
+  selector:
+    matchLabels:
+      app: context-broker
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: context-broker
+    spec:
+      hostAliases:
+        - ip: "127.0.0.1"
+          hostnames:
+            - "context-broker"
+      containers:
+        - name: metricbeat
+          image: docker.elastic.co/beats/metricbeat:7.0.1
+          securityContext:
+            runAsUser: 0
+          resources:
+            limits:
+              memory: 200Mi
+            requests:
+              cpu: 100m
+              memory: 100Mi
+          volumeMounts:
+            - name: metricbeat
+              mountPath: /usr/share/metricbeat/metricbeat.yml
+              subPath: metricbeat.yml
+            - name: metricbeat-modules
+              mountPath: /usr/share/metricbeat/modules.d/
+
+        - name: heartbeat
+          image: docker.elastic.co/beats/heartbeat:7.0.1
+          securityContext:
+            runAsUser: 0
+          resources:
+            limits:
+              memory: 200Mi
+            requests:
+              cpu: 100m
+              memory: 100Mi
+          volumeMounts:
+            - name: heartbeat
+              mountPath: /usr/share/heartbeat/heartbeat.yml
+              subPath: heartbeat.yml
+            - name: heartbeat-monitors
+              mountPath: /usr/share/heartbeat/monitors.d
+
+        - name: cb-manager
+          image: astridproject/cb-manager:latest
+          env:
+          - name: GIT_URL
+            value: "https://astrid-token:2nsubUuUss8sQ-Mue_yN@gitlab.com/astrid-repositories/cb-manager"
+          - name: ROOT_DIR
+            value: "/opt/cb-manager"
+          - name: CONFIG_DIR
+            value: "/opt/cb-manager-config"
+          - name: HOST
+            value: "0.0.0.0"
+          - name: PORT
+            value: "5000"
+          - name: DEV_USERNAME
+            value: "cb-manager"
+          - name: DEV_PASSWORD
+            value: "a9d4034da07d8ef31db1cd4119b6a4552fdfbd19787e2848e71c8ee3b47703a7" # "astrid" in hashed sha256
+          - name: ELASTICSEARCH_HOST
+            value: "elasticsearch"
+          - name: ELASTICSEARCH_PORT
+            value: "9200"
+          - name: ELASTICSEARCH_RETRY_PERIOD
+            value: "1min"
+          - name: ELASTICSEARCH_TIMEOUT
+            value: "20s"
+          - name: HEARTBEAT_PERIOD
+            value: "1min"
+          - name: HEARTBEAT_TIMEOUT
+            value: "20s"
+          - name: LOG_LEVEL
+            value: "DEBUG"
+          - name: FORCE_APT_UPGRADE_BOOT
+            value: "no"
+          - name: FORCE_REBUILD_BOOT
+            value: "no"
+          - name: USE_ENV_CONFIG_FILES
+            value: "yes"
+          ports:
+          - name: cb-manager
+            containerPort: 5000
+
+        - name: zookeeper
+          image: digitalwonderland/zookeeper
+          env:
+            - name: ZOOKEEPER_ID
+              value: "1"
+            - name: ZOOKEEPER_SERVER_1
+              value: localhost
+          ports:
+            - name: zookeeper
+              containerPort: 2181
+
+        - name: kafka
+          image: wurstmeister/kafka
+          env:
+            - name: KAFKA_ADVERTISED_PORT
+              value: "9092"
+            - name: KAFKA_ADVERTISED_HOST_NAME
+              value: kafka-bus
+            - name: KAFKA_ZOOKEEPER_CONNECT
+              value: localhost:2181
+            - name: KAFKA_BROKER_ID
+              value: "0"
+            - name: KAFKA_CREATE_TOPICS
+              value: "ssh-server:1:1,mysql:1:1,apache:1:1,system:1:1"
+          ports:
+            - name: kafka
+              containerPort: 9092
+
+        - name: logstash
+          image: docker.elastic.co/logstash/logstash:7.0.1
+          ports:
+            - name: logstash
+              containerPort: 5144
+          volumeMounts:
+            - name: logstash-config
+              mountPath: /usr/share/logstash/config/
+            - name: logstash-pipeline
+              mountPath: /usr/share/logstash/pipeline/
+
+        - name: elasticsearch
+          image: docker.elastic.co/elasticsearch/elasticsearch:7.0.1
+          securityContext:
+            runAsUser: 0
+          ports:
+            - name: elasticsearch
+              containerPort: 9200
+          volumeMounts:
+            - name: elasticsearch-config
+              mountPath: /usr/share/elasticsearch/config/elasticsearch.yml
+              subPath: elasticsearch.yml
+            - name: elasticsearch-config
+              mountPath: /usr/share/elasticsearch/config/log4j2.properties
+              subPath: log4j2.properties
+            - name: elasticsearch-data
+              mountPath: /usr/share/elasticsearch/data/
+
+        - name: kibana
+          image: astridproject/kibana:7.0.1
+          ports:
+            - name: kibana
+              containerPort: 5601
+          volumeMounts:
+            - name: kibana-config
+              mountPath: /usr/share/kibana/config/kibana.yml
+              subPath: kibana.yml
+            - name: kibana-data
+              mountPath: /usr/share/kibana/data/
+
+      initContainers:
+        - name: copy
+          image: busybox
+          command:
+            - "sh"
+            - "-c"
+          args:
+            - "cp /metricbeat-modules-data/* /metricbeat-modules/ ;
+               cp /heartbeat-monitors-data/* /heartbeat-monitors/"
+          volumeMounts:
+            - name: metricbeat-modules
+              mountPath: /metricbeat-modules
+            - name: metricbeat-modules-data
+              mountPath: /metricbeat-modules-data
+            - name: heartbeat-monitors
+              mountPath: /heartbeat-monitors
+            - name: heartbeat-monitors-data
+              mountPath: /heartbeat-monitors-data
+
+      volumes:
+        - name: metricbeat
+          configMap:
+            name: context-broker-metricbeat
+
+        - name: metricbeat-modules
+          emptyDir: {}
+
+        - name: metricbeat-modules-data
+          configMap:
+            name: context-broker-metricbeat-modules
+
+        - name: heartbeat
+          configMap:
+            name: context-broker-heartbeat
+
+        - name: heartbeat-monitors
+          emptyDir: {}
+
+        - name: heartbeat-monitors-data
+          configMap:
+            name: context-broker-heartbeat-monitors
+
+        - name: logstash-config
+          configMap:
+            name: context-broker-logstash-config
+
+        - name: logstash-pipeline
+          configMap:
+            name: context-broker-logstash-pipeline
+
+        - name: elasticsearch-config
+          configMap:
+            name: context-broker-elasticsearch-config
+            items:
+              - key: elasticsearch-7.0.1.yml
+                path: elasticsearch.yml
+              - key: log4j2.properties
+                path: log4j2.properties
+
+        - name: elasticsearch-data
+          persistentVolumeClaim:
+            claimName: elasticsearch-pv-claim
+
+        - name: kibana-config
+          configMap:
+            name: context-broker-kibana-config
+
+        - name: kibana-data
+          persistentVolumeClaim:
+            claimName: kibana-pv-claim

@@ -1,0 +1,10 @@
+- type: tcp
+  name: kafka
+  id: kafka@context-broker
+  enabled: false
+  schedule: "@every 60s"
+  urls:
+    - "context-broker:9092"
+  check:
+    send: "Check"
+    receive: "Check"

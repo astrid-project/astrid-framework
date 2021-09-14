@@ -1,0 +1,15 @@
+- type: icmp
+  name: mysql
+  id: host@mysql
+  enabled: false
+  schedule: "@every 60s"
+  hosts:
+    - "mysql"
+  ipv4: true
+  ipv6: true
+  mode: any
+  timeout: 16s
+  wait: 1s
+  tags:
+    - "heartbeat"
+    - "mysql"

@@ -1,0 +1,18 @@
+- module: system
+  period: 10s
+  metricsets:
+    - cpu
+    - load
+    - memory
+    - network
+    - process
+    - process_summary
+    - socket_summary
+    - core
+    - diskio
+    - socket
+  interfaces:
+    - eth0
+  process.include_top_n:
+    by_cpu: 5
+    by_memory: 5

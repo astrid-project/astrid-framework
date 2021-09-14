@@ -1,0 +1,11 @@
+- pipeline.id: apache
+  path.config: "/usr/share/logstash/pipeline/apache.conf"
+
+- pipeline.id: mysql
+  path.config: "/usr/share/logstash/pipeline/mysql.conf"
+
+- pipeline.id: ssh-server
+  path.config: "/usr/share/logstash/pipeline/ssh-server.conf"
+
+- pipeline.id: system
+  path.config: "/usr/share/logstash/pipeline/system.conf"

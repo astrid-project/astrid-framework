@@ -1,0 +1,31 @@
+name: ssh-server
+tags: ["metricbeat", "system", "ssh-server"]
+
+metricbeat.config.modules:
+  path: modules.d/*.yml
+  reload:
+    enabled: true
+    period: 5s
+
+setup:
+  template.settings:
+    index.number_of_shards: 3
+
+output.logstash:
+  hosts: ["localhost:5144"]
+
+logging:
+  level: info
+  selectors: ["*"]
+  to_files: true
+  files:
+    path: logs
+    name: metricbeat.log
+    keepfiles: 7
+    permissions: 0644
+
+xpack.monitoring:
+  enabled: true
+  elasticsearch:
+    hosts: ["elasticsearch:9200"]
+    sniffing: true

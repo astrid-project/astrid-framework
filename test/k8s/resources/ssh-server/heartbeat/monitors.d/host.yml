@@ -1,0 +1,15 @@
+- type: icmp
+  name: ssh-server
+  id: host@ssh-server
+  enabled: false
+  schedule: "@every 60s"
+  hosts:
+    - "ssh-server"
+  ipv4: true
+  ipv6: true
+  mode: any
+  timeout: 16s
+  wait: 1s
+  tags:
+    - "heartbeat"
+    - "ssh-server"

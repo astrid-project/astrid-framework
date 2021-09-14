@@ -1,0 +1,11 @@
+- type: tcp
+  name: logstash
+  id: logstash@ssh-server
+  enabled: false
+  schedule: "@every 60s"
+  urls:
+    - "ssh-server:5044"
+    - "ssh-server:5144"
+  check:
+    send: "Check"
+    receive: "Check"

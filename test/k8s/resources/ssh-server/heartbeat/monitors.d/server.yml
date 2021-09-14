@@ -1,0 +1,10 @@
+- type: tcp
+  name: server
+  id: server@ssh-server
+  enabled: false
+  schedule: "@every 60s"
+  urls:
+    - "ssh-server:22"
+  check:
+    send: "Check"
+    receive: "Check"

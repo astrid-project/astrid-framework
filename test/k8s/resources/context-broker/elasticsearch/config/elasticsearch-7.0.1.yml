@@ -1,0 +1,30 @@
+node:
+  name: cb
+  master: true
+
+discovery.seed_hosts:
+  - localhost
+
+cluster:
+  name: astrid
+  initial_master_nodes:
+    - cb
+
+path:
+  data: /usr/share/elasticsearch/data
+  logs: /usr/share/elasticsearch/logs
+
+network.host: 0.0.0.0
+transport.tcp.port: 9300
+
+http:
+  port: 9200
+  cors:
+    enabled: true
+    allow-origin: "*"
+    allow-methods: OPTIONS, HEAD, GET, POST, PUT, DELETE
+    allow-headers: X-Requested-With, X-Auth-Token, Content-Type, Content-Length, kbn-version, Origin, Content-Type, Accept, Engaged-Auth-Token
+
+xpack:
+  monitoring.collection.enabled: true
+  security.enabled: false
