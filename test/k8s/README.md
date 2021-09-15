@@ -49,7 +49,7 @@ The different versions (6.8.1 and 7.0.1) are related to Elastic stack: Metricbea
 
 ## SSH Server
 
-![SSH Server Pod](ssh-server.png)
+![SSH Server Pod](ssh_server.png)
 
 The following manifest files
 
