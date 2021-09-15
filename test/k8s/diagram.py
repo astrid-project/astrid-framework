@@ -5,9 +5,9 @@
 # cspell:ignore strg srvs
 
 from diagrams import Cluster, Diagram
+from diagrams.custom import Custom
 from diagrams.elastic.elasticsearch import (Beats, Elasticsearch, Kibana,
                                             Logstash)
-from diagrams.generic.blank import Blank
 from diagrams.k8s.compute import Deployment, Pod
 from diagrams.k8s.group import NS
 from diagrams.k8s.network import Service
@@ -175,10 +175,10 @@ def mysql(c, version):
 @task
 def ssh_server(c):
     with Diagram('SSH Server Pod', filename='ssh_server', show=False, graph_attr={'pad': '0.0'}):
-        _ssh_server = Blank('OpenSSH Server')
-        _polycube = Blank('Polycube')
+        _ssh_server = Custom('OpenSSH Server', 'ssh.png')
+        _polycube = Custom('Polycube', 'polycube.png')
         _cubebeat = Beats('Cubebeat')
-        _metricbeat = Blank('Metricbeat')
+        _metricbeat = Beats('Metricbeat')
         _heartbeat = Beats('Heartbeat')
         _logstash = Logstash('Logstash')
 
