@@ -1,11 +1,11 @@
-@uri = catalog/agent
+# @uri = catalog/agent
 # @uri = catalog/algorithm
 # @uri = catalog/ebpf-program
 # @uri = connection
 # @uri = data
 # @uri = event
 # @uri = exec-env
-# @uri = instance/agent
+@uri = instance/agent
 # @uri = instance/algorithm
 # @uri = instance/ebpf-program
 # @uri = network-link
@@ -18,10 +18,45 @@
 @target = id
 @expr = packetbeat
 
+@id = 294e0e4c-a984-4283-ba20-e989b57e12b9
+# @id = 2638907c-b896-4b2d-903b-da842fe13826
+# @id = d1c096e7-0454-406c-aaf3-91794143fd8b
+# @id = fc9e12b4-a236-4155-ada4-77aa72dccc12
+# @id = 751a9d1b-ecba-4228-a6d1-dc5d38c29680
+# @id = 87bbbedf-782a-4918-9344-256864821bdb
+# @id = f0adc52d-a726-49f9-95d8-5809c2a8c10f
+# @id = 07f11694-96ac-4c26-9a43-2a2918684f11
+# @id = 60a5330a-ff5a-4027-a64b-4b7fa919ec1b
+
+###
+
+PUT {{cb_manager_endpoint}}/{{uri}} HTTP/1.1
+
+{
+    "id": "{{id}}",
+    "operations": [
+        {
+            "actions": [
+                {
+                    "id": "start"
+                }
+            ]
+        }
+    ]
+}
+
+###
+
 GET {{cb_manager_endpoint}}/{{uri}} HTTP/1.1
 
 {
-    "select": ["id"]
+    "select": ["id", "status"],
+    "where": {
+        "equals": {
+            "target": "agent_catalog_id",
+            "expr": "packetbeat"
+        }
+    }
 }
 
 ###
@@ -41,32 +76,6 @@ POST {{cb_manager_endpoint}}/{{uri}} HTTP/1.1
 # < db/connection.json
 # < db/catalog/algorithm/tei-atk.json
 # < db/catalog/agent/cnit/dev.json
-
-###
-
-PUT {{cb_manager_endpoint}}/{{uri}} HTTP/1.1
-
-{
-    "id": "dev@user-vm",
-    "operations": [
-        {
-            "parameters": [
-                {
-                    "id": "test-json",
-                    "value": "crypted"
-                },
-                {
-                    "id": "test-xml",
-                    "value": 32
-                },
-                {
-                    "id": "test-yaml",
-                    "value": false
-                }
-            ]
-        }
-    ]
-}
 
 ###
 

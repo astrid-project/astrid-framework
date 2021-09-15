@@ -10,6 +10,8 @@ Essentially the tests are performed with following software:
 
 ## Apache HTTP Server
 
+![Apache HTTP Server Pod](apache.png)
+
 The following manifest files
 
 - [pod/apache-6.8.1.pod.yaml](pod/apache-6.8.1.pod.yaml)
@@ -28,6 +30,9 @@ The different versions (6.8.1 and 7.0.1) are related to Elastic stack: Filebeat,
 
 ## MySQL Server
 
+![MySQL Server Pod](mysql-6.8.1.png)
+![MySQL Server Pod](mysql-7.0.1.png)
+
 The following manifest files
 
 - [pod/mysql-6.8.1.pod.yaml](pod/mysql-6.8.1.pod.yaml)
@@ -43,6 +48,8 @@ configure a Kubernetes pod with the following components:
 The different versions (6.8.1 and 7.0.1) are related to Elastic stack: Metricbeat, Heartbeat and Logstash.
 
 ## SSH Server
+
+![SSH Server Pod](ssh-server.png)
 
 The following manifest files
 
