@@ -1,0 +1,38 @@
+@uri = instance/agent
+
+# @name getInstances
+GET {{cb_manager_endpoint}}/{{uri}} HTTP/1.1
+
+{
+    "select": ["id", "status", "agent_catalog_id"],
+    "where": {
+        "and": [
+            {
+                "equals": {
+                    "target": "agent_catalog_id",
+                    "expr": "packetbeat"
+                
+                }
+            }
+        ]
+    }
+}
+
+###
+
+@id = {{getInstances.response.body.0.id}}
+
+PUT {{cb_manager_endpoint}}/{{uri}} HTTP/1.1
+
+{
+    "id": "{{id}}",
+    "operations": [
+        {
+            "actions": [
+                {
+                    "id": "stop"
+                }
+            ]
+        }
+    ]
+}
