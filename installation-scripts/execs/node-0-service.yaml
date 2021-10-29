@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: node-0
+  name: node-0
+  namespace: astrid-kube
+spec:
+  ports:
+    - name: "5000"
+      port: 5000
+      targetPort: 5000
+  selector:
+    app: node-0
+  clusterIP: None
+status:
+  loadBalancer: {}

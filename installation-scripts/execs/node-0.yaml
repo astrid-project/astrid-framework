@@ -1,0 +1,227 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    app: node-0
+  name: node-0
+  namespace: astrid-kube
+spec:
+  containers:
+#<METRICBEAT
+#  - name: metricbeat
+#METRICBEAT>
+
+#<FILEBEAT
+  - name: filebeat
+    image: docker.elastic.co/beats/filebeat:7.8.0
+    args: [
+          "-c", "/etc/filebeat.yml",
+          "-e",
+    ]
+    env:
+      - name: FILEBEAT_LOG_DATA_PATH
+        value: "_FILEBEAT_LOG_DATA_PATH_"
+    securityContext:
+      runAsUser: 0
+    resources:
+      limits:
+        memory: 200Mi
+      requests:
+        cpu: 100m
+        memory: 100Mi
+    volumeMounts:
+    - name: filebeat-config
+      mountPath: /etc/filebeat.yml
+      subPath: filebeat.yml
+#    - name: apache-logs
+#      mountPath: /usr/local/apache2/logs
+#    - name: apache-log-module
+#      mountPath: /usr/share/filebeat/modules.d
+#FILEBEAT>
+
+#<PACKETBEAT
+  - image: astridproject/packetbeat:7.13.4-service
+    name: packetbeat
+    volumeMounts:
+      - name: pipelines
+        mountPath: /usr/share/packetbeat/packetbeat.yml
+        subPath: packetbeat.yml
+#PACKETBEAT>
+
+#<SCHEDULER
+  - image: dwdraju/alpine-curl-jq:latest
+    name: scheduler
+    env:
+      - name: POLLING_TIME
+        value: "3s"
+    command: ["/bin/sh", "-c"]
+    args: ["/root/scheduler.sh"]
+    volumeMounts:
+    - name: scheduler
+      mountPath: /root/scheduler.sh
+      subPath: scheduler.sh
+    - name: pipelines
+      mountPath: /usr/share/scheduler/
+#SCHEDULER>
+
+#<LOGSTASH  
+  - image: docker.elastic.co/logstash/logstash:7.8.0
+    name: logstash
+     #ports:
+     #- containerPort: 25826
+     #- containerPort: 5044
+    resources: {}
+    volumeMounts:
+  # - name: tmp-pipelines
+      #mountPath: /usr/share/logstash/tmp/pipeline
+      #mountPath: /usr/share/logstash/pipeline
+    - name: pipelines
+      mountPath: /usr/share/logstash/pipeline
+    - name: config
+      mountPath: /usr/share/logstash/config/logstash.yml
+      subPath: logstash.yml
+    - name: pipelines-config
+      mountPath: /usr/share/logstash/config/pipelines.yml
+      subPath: pipelines.yml
+    securityContext:
+      runAsUser: 0
+#LOGSTASH>
+
+#<POLYCUBE
+  - image: polycubenetwork/polycube:latest
+    name: polycube
+    command: ["/bin/bash", "-c"] 
+    args: ["whoami; polycubed"]
+    resources: {}
+    volumeMounts:
+    - name: etc-localtime
+      mountPath: /etc/localtime
+      readOnly: true
+    - name: lib-modules
+      mountPath: /lib/modules
+      readOnly: true
+    - name: usr-src
+      mountPath: /usr/src
+      readOnly: true
+    - name: dev-net-tun
+      mountPath: /dev/net/tun
+      readOnly: true
+    securityContext:
+      capabilities:
+         #drop:
+           #- all
+         add:
+           - all
+           #- NET_BIND_SERVICE
+      #runAsUser: 0
+      # allowPrivilegeEscalation: true
+#POLYCUBE>
+
+#<LCP
+  - image: astridproject/lcp:master
+    name: lcp
+    env:
+      - name: LCP_HOST
+        value: "0.0.0.0"
+      - name: LCP_PORT
+        value: "5000"
+      - name: LCP_HTTPS
+        value: "false"
+      - name: LCP_AUTH_ENABLED
+        value: "true"
+      - name: LCP_AUTH_HEADER_PREFIX
+        value: "ASTRID"
+      - name: LCP_AUTH_SECRET_KEY
+        value: "astrid-secret-key"
+      - name: LCP_ELASTIC_APM_ENABLED
+        value: "false"
+      - name: LCP_ELASTIC_APM_SERVER
+        value: "http://localhost:8200"
+      - name: LCP_POLYCUBE_HOST
+        value: "localhost"
+      - name: LCP_POLYCUBE_PORT
+        value: "9000"
+      - name: LCP_POLYCUBE_TIMEOUT
+        value: "20s"
+      - name: LCP_LOG_CONFIG
+        value: "log.yaml"
+    volumeMounts:
+    - name: pipelines
+      mountPath: /usr/share/logstash/pipeline
+    - name: pipelines
+      mountPath: /usr/share/scheduler
+#LCP>
+
+  initContainers:
+  - image: byrnedo/alpine-curl:latest
+    name: copy-files
+    command: ['sh', '-c', 'if ! [ "$(ls -A /usr/share/logstash/pipeline)" ]; then cp /usr/share/logstash/tmp/pipeline/* /usr/share/logstash/pipeline/ ; fi; if ! [ "$(ls -A /usr/share/logstash/pipeline/packetbeat.yml)" ]; then cp /usr/share/logstash/tmp/pipeline/packetbeat.yml /usr/share/logstash/pipeline/ ; fi;']
+    volumeMounts:
+    - name: tmp-pipelines
+      mountPath: /usr/share/logstash/tmp/pipeline
+      #mountPath: /usr/share/logstash/pipeline
+    - name: pipelines
+      mountPath: /usr/share/logstash/pipeline
+
+  dnsConfig:
+    searches:
+      - astrid-kube.svc.cluster.local
+  #restartPolicy: OnFailure
+  restartPolicy: Never
+  volumes:
+  - name: filebeat-config
+    configMap:
+      name: node-0-configmap
+      items:
+        - key: filebeat.yml
+          path: filebeat.yml
+  - name: tmp-pipelines
+    configMap:
+      name: node-0-configmap
+      items:
+        - key: polycube_bau.conf
+          path: polycube_bau.conf
+        - key: polycube_bau_and_warn.conf
+          path: polycube_bau_and_warn.conf
+        - key: polycube_dns_bau.conf
+          path: polycube_dns_bau.conf
+        - key: polycube_dns_warn.conf
+          path: polycube_dns_warn.conf
+        - key: packetbeat.yml
+          path: packetbeat.yml
+  - name: pipelines
+    persistentVolumeClaim:
+      claimName: node-0-pv-claim 
+  - name: config
+    configMap:
+      name: node-0-configmap
+      defaultMode: 0666
+      items:
+        - key: logstash.yml
+          path: logstash.yml
+  - name: pipelines-config
+    configMap:
+       name: node-0-configmap
+       defaultMode: 0666
+       items:
+        - key: pipelines.yml
+          path: pipelines.yml
+  - name: scheduler
+    configMap:
+      name: node-0-configmap
+      defaultMode: 0777
+      items:
+        - key: scheduler.sh
+          path: scheduler.sh
+  - name: lib-modules
+    hostPath:
+       path: /lib/modules
+  - name: usr-src
+    hostPath:
+       path: /usr/src
+  - name: etc-localtime
+    hostPath:
+       path: /etc/localtime 
+  - name: dev-net-tun
+    hostPath:
+       path: /dev/net/tun

@@ -1,0 +1,699 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: node-0-configmap
+  namespace: astrid-kube
+data:
+  logstash.yml: |
+        config.reload:
+            automatic: true
+            interval: 5s
+        http.host: "0.0.0.0"
+  pipelines.yml: |
+          - pipeline.id: bau
+            path.config: "/usr/share/logstash/pipeline/polycube_bau.conf"
+          - pipeline.id: bau_and_warn
+            path.config: "/usr/share/logstash/pipeline/polycube_bau_and_warn.conf"
+          - pipeline.id: dns_bau
+            path.config: "/usr/share/logstash/pipeline/polycube_dns_bau.conf"
+          - pipeline.id: dns_warn
+            path.config: "/usr/share/logstash/pipeline/polycube_dns_warn.conf"
+  polycube_bau.conf: |
+   input {
+       http{
+         host => "127.0.0.1"
+         port => 30001
+       }
+   }
+   
+   filter {
+           prune {
+                   whitelist_names => "ingress-metrics"
+           }
+   
+           mutate {
+                   add_field => {
+                           "timestamp" => "123456789"
+                           "node_id" => "node1:Genoa RtA"
+                           #"use_case" => [ {
+                           #       "id" => "NTP"
+                           #       "bau" => [ 0 ]
+                           #} ]
+                   }
+           }
+   
+           ruby {
+                   init => '
+                           @old_bau = [0]
+                           @tmp_bau = [0]
+                   '
+                   code => '
+                           bau = []
+                           warn = [ 0 ]
+                           timestamp = 0
+   
+                           event_code = event.get( "ingress-metrics" )
+   
+                           if event_code != nil
+                                   event_code.each do |elem|
+                                           if elem[ "name" ] == "ntp_packets_total"
+                                                   @tmp_bau = elem[ "value" ]
+                                                   bau << ( @tmp_bau[0] - @old_bau[0] )
+                                                   if bau[0] < 0
+                                                          bau[0] = 0
+                                                   end
+                                                   @old_bau = @tmp_bau
+                                                   timestamp = elem[ "timestamp" ].to_s
+                                           end
+                                   end
+   
+                                   event.set( "timestamp", timestamp )
+                                   event.set( "use_case", [ Hash[ "id", "NTP", "bau", bau, "warn", warn ] ] )
+   
+                                   event.remove( "ingress-metrics" )
+   
+                                   json_message = event.to_json
+   
+                                   new_json_message = "\""
+                                   json_message.each_char { |c|
+                                           if c == "\""
+                                                   new_json_message << "\\"
+                                           end
+                                           new_json_message << c
+                                   }
+                                   new_json_message << "\""
+   
+                                   event.set( "message", new_json_message )
+                                   event.set( "host", "" )
+   
+                           else
+                                   event.cancel
+   
+                           end
+                   '
+           }
+   
+   }
+   
+   output {
+           kafka {
+                   codec => plain
+                   topic_id => "AstridProxyReadData"
+                   bootstrap_servers => "kafka-service:9092"
+                   message_key => '"%{[timestamp]}"'
+                   #event['message'] => "event['message']"
+           }
+      }
+  polycube_bau_and_warn.conf : | 
+   input {
+       http{
+         host => "127.0.0.1"
+         port => 30002
+       }
+   }
+   
+   filter {
+           prune {
+                   whitelist_names => "ingress-metrics"
+           }
+   
+           mutate {
+                   add_field => {
+                           "timestamp" => "123456789"
+                           "node_id" => "node1:Genoa RtA"
+                           #"use_case" => [ {
+                           #       "id" => "NTP"
+                           #       "bau" => [ 0 ]
+                           #       "warn" => [ 0 ]
+                           #} ]
+                   }
+           }
+   
+           ruby {
+                   init => '
+                           @old_bau = [0]
+                           @tmp_bau = [0]
+                           @old_warn = [0]
+                           @tmp_warn = [0]
+                   '
+                   code => '
+                           bau = []
+                           warn = []
+                           timestamp = 0
+   
+                           event_code = event.get( "ingress-metrics" )
+   
+                           if event_code != nil
+                                   event_code.each do |elem|
+                                           if elem[ "name" ] == "ntp_packets_total"
+                                                   @tmp_bau = elem[ "value" ]
+                                                   bau << ( @tmp_bau[0] - @old_bau[0] )
+                                                   if bau[0] < 0 
+                                                           bau[0] = 0
+                                                   end
+                                                   @old_bau = @tmp_bau
+                                                   timestamp = elem[ "timestamp" ].to_s
+                                           end
+                                           if elem[ "name" ] == "ntp_mode_private_packets_total"
+                                                   @tmp_warn = elem[ "value"]
+                                                   warn << ( @tmp_warn[0] - @old_warn[0] ) 
+                                                   if warn[0] < 0 
+                                                           warn[0] = 0
+                                                   end
+                                                   @old_warn = @tmp_warn
+                                                   timestamp = elem[ "timestamp" ].to_s
+                                           end
+                                   end
+   
+                                   event.set( "timestamp", timestamp )
+                                   event.set( "use_case", [ Hash[ "id", "NTP", "bau", bau, "warn", warn ] ] )
+   
+                                   event.remove( "ingress-metrics" )
+   
+                                   json_message = event.to_json
+   
+                                   new_json_message = "\""
+                                   json_message.each_char { |c|
+                                           if c == "\""
+                                                   new_json_message << "\\"
+                                           end
+                                           new_json_message << c
+                                   }
+                                   new_json_message << "\""
+   
+                                   event.set( "message", new_json_message )
+                                   event.set( "host", "" )
+   
+                           else
+                                   event.cancel
+   
+                           end
+                   '
+           }
+   
+   }
+   
+   output {
+           kafka {
+                   codec => plain
+                   topic_id => "AstridProxyReadData"
+                   bootstrap_servers => "kafka-service:9092"
+                   message_key => '"%{[timestamp]}"'
+                   #event['message'] => "event['message']"
+           }
+   }
+  polycube_dns_bau.conf: |
+   input {
+       http{
+         host => "127.0.0.1"
+         port => 30003
+       }
+   }
+   
+   filter {
+           prune {
+                   whitelist_names => "ingress-metrics"
+           }
+   
+           mutate {
+                   add_field => {
+                           "timestamp" => "123456789"
+                           "node_id" => "node1:Genoa RtA"
+                           #"use_case" => [ {
+                           #       "id" => "NTP"
+                           #       "bau" => [ 0 ]
+                           #} ]
+                   }
+           }
+   
+           ruby {
+                   init => '
+                           @old_bau = [0]
+                           @tmp_bau = [0]
+                   '
+                   code => '
+                           bau = []
+                           warn = [ 0 ]
+                           timestamp = 0
+   
+                           event_code = event.get( "ingress-metrics" )
+   
+                           if event_code != nil
+                                   event_code.each do |elem|
+                                           if elem[ "name" ] == "Total DNS packets"
+                                                   @tmp_bau = elem[ "value" ]
+                                                   bau << ( @tmp_bau[0] - @old_bau[0] )
+                                                   if bau[0] < 0
+                                                          bau[0] = 0
+                                                   end
+                                                   @old_bau = @tmp_bau
+                                                   timestamp = elem[ "timestamp" ].to_s
+                                           end
+                                   end
+   
+                                   event.set( "timestamp", timestamp )
+                                   event.set( "use_case", [ Hash[ "id", "DNS", "bau", bau, "warn", warn ] ] )
+   
+                                   event.remove( "ingress-metrics" )
+   
+                                   json_message = event.to_json
+   
+                                   new_json_message = "\""
+                                   json_message.each_char { |c|
+                                           if c == "\""
+                                                   new_json_message << "\\"
+                                           end
+                                           new_json_message << c
+                                   }
+                                   new_json_message << "\""
+   
+                                   event.set( "message", new_json_message )
+                                   event.set( "host", "" )
+   
+                           else
+                                   event.cancel
+   
+                           end
+                   '
+           }
+   
+   }
+   
+   output {
+           kafka {
+                   codec => plain
+                   topic_id => "AstridProxyReadData"
+                   bootstrap_servers => "kafka-service:9092"
+                   message_key => '"%{[timestamp]}"'
+                   #event['message'] => "event['message']"
+           }
+      }
+  polycube_dns_warn.conf : | 
+   input {
+       http{
+         host => "127.0.0.1"
+         port => 30004
+       }
+   }
+   
+   filter {
+           prune {
+                   whitelist_names => "ingress-metrics"
+           }
+   
+           mutate {
+                   add_field => {
+                           "timestamp" => "123456789"
+                           "node_id" => "node1:Genoa RtA"
+                           #"use_case" => [ {
+                           #       "id" => "NTP"
+                           #       "bau" => [ 0 ]
+                           #       "warn" => [ 0 ]
+                           #} ]
+                   }
+           }
+   
+           ruby {
+                   init => '
+                           @old_bau = [0]
+                           @tmp_bau = [0]
+                           @old_warn = [0]
+                           @tmp_warn = [0]
+                   '
+                   code => '
+                           bau = []
+                           warn = []
+                           timestamp = 0
+   
+                           event_code = event.get( "ingress-metrics" )
+   
+                           if event_code != nil
+                                   event_code.each do |elem|
+                                           if elem[ "name" ] == "Total DNS packets"
+                                                   @tmp_bau = elem[ "value" ]
+                                                   bau << ( @tmp_bau[0] - @old_bau[0] )
+                                                   if bau[0] < 0 
+                                                           bau[0] = 0
+                                                   end
+                                                   @old_bau = @tmp_bau
+                                                   timestamp = elem[ "timestamp" ].to_s
+                                           end
+                                           if elem[ "name" ] == "Total DNS queries of type ANY"
+                                                   @tmp_warn = elem[ "value"]
+                                                   warn << ( @tmp_warn[0] - @old_warn[0] ) 
+                                                   if warn[0] < 0 
+                                                           warn[0] = 0
+                                                   end
+                                                   @old_warn = @tmp_warn
+                                                   timestamp = elem[ "timestamp" ].to_s
+                                           end
+                                   end
+   
+                                   event.set( "timestamp", timestamp )
+                                   event.set( "use_case", [ Hash[ "id", "DNS", "bau", bau, "warn", warn ] ] )
+   
+                                   event.remove( "ingress-metrics" )
+   
+                                   json_message = event.to_json
+   
+                                   new_json_message = "\""
+                                   json_message.each_char { |c|
+                                           if c == "\""
+                                                   new_json_message << "\\"
+                                           end
+                                           new_json_message << c
+                                   }
+                                   new_json_message << "\""
+   
+                                   event.set( "message", new_json_message )
+                                   event.set( "host", "" )
+   
+                           else
+                                   event.cancel
+   
+                           end
+                   '
+           }
+   
+   }
+   
+   output {
+           kafka {
+                   codec => plain
+                   topic_id => "AstridProxyReadData"
+                   bootstrap_servers => "kafka-service:9092"
+                   message_key => '"%{[timestamp]}"'
+                   #event['message'] => "event['message']"
+           }
+   }
+
+  scheduler.sh : |
+   #!/bin/sh
+   set -e
+   
+   polling=$POLLING_TIME
+   polling_time_file=/usr/share/scheduler/pollingtime.txt
+   previous_stat=0
+   ntp_bau_port=30001
+   ntp_bau_and_warn_port=30002
+   dns_bau_port=30003
+   dns_bau_and_warn_port=30004
+   
+   read_and_send() {
+     response_dynmon=$(curl -s 'http://localhost:9000/polycube/v1/dynmon' --max-time 2)
+   
+     for cube in $( echo $response_dynmon | jq '.[] | select( type=="object" ) | .name ' -r )
+     do
+             metrics=$(curl -s "http://localhost:9000/polycube/v1/dynmon/${cube}/metrics" --max-time 2 )
+             map_counter=0
+             map_type=""
+             for map in $( echo $metrics | jq '."ingress-metrics"[].name ' | sed "s/\ /-/g" )
+             do
+                     map_counter=$(( $map_counter + 1 ))
+                     if echo $map | grep -iqF "dns";then
+                             map_type="DNS"
+                     fi
+                     if echo $map | grep -iqF "ntp";then
+                             map_type="NTP"
+                     fi
+             done
+   
+             port=0
+   
+             if [[ $map_type == "NTP" ]]; then
+                     if [[ $map_counter == 1 ]]; then
+                             port=$ntp_bau_port
+                     fi
+                     if [[ $map_counter == 2 ]]; then
+                             port=$ntp_bau_and_warn_port
+                     fi
+             fi
+   
+             if [[ $map_type == "DNS" ]]; then
+                     if [[ $map_counter == 1 ]]; then
+                             port=$dns_bau_port
+                     fi
+                     if [[ $map_counter ==  2 ]]; then
+                             port=$dns_bau_and_warn_port
+                     fi
+             fi
+   
+             echo $map_type"-"$map_counter" - response: "$metrics
+   
+             if [[ $port != 0 ]]; then
+                     curl -H "content-type: application/json" -XPUT -s "http://127.0.0.1:${port}" -d "${metrics}"
+             fi
+     done
+   
+     return
+   }
+   
+   while true
+   do
+     if [ -f "$polling_time_file" ];
+     then
+       actual_stat=`stat $polling_time_file -c %Y`
+       if [ $actual_stat -ne $previous_stat ];
+       then
+         polling=`cat $polling_time_file`
+         previous_stat=$actual_stat
+       fi
+     else
+       mkdir -p /usr/share/scheduler/
+       echo "$polling" > $polling_time_file
+     fi
+   
+   
+     read_and_send &
+     echo "wait for "$polling" second..."
+     sleep $polling
+   done
+
+  packetbeat.yml : |
+   # =============================== Network device ===============================
+   
+   # Select the network interface to sniff the data. On Linux, you can use the
+   # "any" keyword to sniff on all connected interfaces.
+   packetbeat.interfaces.device: eth0
+   
+   # The network CIDR blocks that are considered "internal" networks for
+   # the purpose of network perimeter boundary classification. The valid
+   # values for internal_networks are the same as those that can be used
+   # with processor network conditions.
+   #
+   # For a list of available values see:
+   # https://www.elastic.co/guide/en/beats/packetbeat/current/defining-processors.html#condition-network
+   packetbeat.interfaces.internal_networks:
+     - private
+   
+   # =================================== Flows ====================================
+   
+   # Set `enabled: false` or comment out all options to disable flows reporting.
+   packetbeat.flows:
+     # Set network flow timeout. Flow is killed if no packet is received before being
+     # timed out.
+     timeout: 30s
+   
+     # Configure reporting period. If set to -1, only killed flows will be reported
+     period: 5s
+   
+   # =========================== Transaction protocols ============================
+   
+   packetbeat.protocols:
+   - type: icmp
+     # Enable ICMPv4 and ICMPv6 monitoring. The default is true.
+     enabled: true
+   
+   - type: amqp
+     # Configure the ports where to listen for AMQP traffic. You can disable
+     # the AMQP protocol by commenting out the list of ports.
+     ports: [5672]
+   
+   - type: cassandra
+     # Configure the ports where to listen for Cassandra traffic. You can disable
+     # the Cassandra protocol by commenting out the list of ports.
+     ports: [9042]
+   
+   - type: dhcpv4
+     # Configure the DHCP for IPv4 ports.
+     ports: [67, 68]
+   
+   - type: dns
+     # Configure the ports where to listen for DNS traffic. You can disable
+     # the DNS protocol by commenting out the list of ports.
+     ports: [53]
+   
+   - type: http
+     # Configure the ports where to listen for HTTP traffic. You can disable
+     # the HTTP protocol by commenting out the list of ports.
+     ports: [80, 8080, 8000, 5000, 8002]
+   
+   - type: memcache
+     # Configure the ports where to listen for memcache traffic. You can disable
+     # the Memcache protocol by commenting out the list of ports.
+     ports: [11211]
+   
+   - type: mysql
+     # Configure the ports where to listen for MySQL traffic. You can disable
+     # the MySQL protocol by commenting out the list of ports.
+     ports: [3306,3307]
+   
+   - type: pgsql
+     # Configure the ports where to listen for Pgsql traffic. You can disable
+     # the Pgsql protocol by commenting out the list of ports.
+     ports: [5432]
+   
+   - type: redis
+     # Configure the ports where to listen for Redis traffic. You can disable
+     # the Redis protocol by commenting out the list of ports.
+     ports: [6379]
+   
+   - type: thrift
+     # Configure the ports where to listen for Thrift-RPC traffic. You can disable
+     # the Thrift-RPC protocol by commenting out the list of ports.
+     ports: [9090]
+   
+   - type: mongodb
+     # Configure the ports where to listen for MongoDB traffic. You can disable
+     # the MongoDB protocol by commenting out the list of ports.
+     ports: [27017]
+   
+   - type: nfs
+     # Configure the ports where to listen for NFS traffic. You can disable
+     # the NFS protocol by commenting out the list of ports.
+     ports: [2049]
+   
+   - type: tls
+     # Configure the ports where to listen for TLS traffic. You can disable
+     # the TLS protocol by commenting out the list of ports.
+     ports:
+       - 443   # HTTPS
+       - 993   # IMAPS
+       - 995   # POP3S
+       - 5223  # XMPP over SSL
+       - 8443
+       - 8883  # Secure MQTT
+       - 9243  # Elasticsearch
+   
+   - type: sip
+     # Configure the ports where to listen for SIP traffic. You can disable
+     # the SIP protocol by commenting out the list of ports.
+     ports: [5060]
+   
+   # ======================= Elasticsearch template setting =======================
+   
+   setup.template.settings:
+     index.number_of_shards: 1
+     #index.codec: best_compression
+     #_source.enabled: false
+   
+   # ================================== General ===================================
+   
+   # The name of the shipper that publishes the network data. It can be used to group
+   # all the transactions sent by a single shipper in the web interface.
+   #name: upf1
+   
+   # A list of tags to include in every event. In the default configuration file
+   # the forwarded tag causes Packetbeat to not add any host fields. If you are
+   # monitoring a network tap or mirror port then add the forwarded tag.
+   #tags: [forwarded]
+   
+   # Optional fields that you can specify to add additional information to the
+   # output.
+   #fields:
+   #  env: staging
+   
+   fields_under_root: false
+   
+   fields:
+      log_topic: PacketBeatTest
+   
+   
+   # =================================== Kibana ===================================
+   
+   # Starting with Beats version 6.0.0, the dashboards are loaded via the Kibana API.
+   # This requires a Kibana endpoint configuration.
+   setup.kibana:
+   
+     # Kibana Host
+     # Scheme and port can be left out and will be set to the default (http and 5601)
+     # In case you specify and additional path, the scheme is required: http://localhost:5601/path
+     # IPv6 addresses should always be defined as: https://[2001:db8::1]:5601
+     #host: "localhost:5601"
+   
+     # Kibana Space ID
+     # ID of the Kibana Space into which the dashboards should be loaded. By default,
+     # the Default Space will be used.
+     #space.id:
+   
+   # ================================== Outputs ===================================
+   
+   # ------------------------------ Logstash Output -------------------------------
+   
+   output.kafka:
+     # initial brokers for reading cluster metadata
+     hosts: ["kafka-service.astrid-kube:9092"]
+   
+     # message topic selection + partitioning
+     #topic: '%{[fields.log_topic]}-%{[host.name]}'
+     #topic: '%{[log_topic]}'
+     #topic: PacketBeatTest
+     topic: PacketBeatData
+     partition.round_robin:
+       reachable_only: false
+   
+     required_acks: 1
+     compression: gzip
+     max_message_bytes: 1000000
+   
+   # ================================= Processors =================================
+   
+   processors:
+     - # Add forwarded to tags when processing data from a network tap or mirror.
+       if.contains.tags: forwarded
+       then:
+         - drop_fields:
+             fields: [host]
+       else:
+         - add_host_metadata: ~
+     - add_cloud_metadata: ~
+     - add_docker_metadata: ~
+     - detect_mime_type:
+         field: http.request.body.content
+         target: http.request.mime_type
+     - detect_mime_type:
+         field: http.response.body.content
+         target: http.response.mime_type
+  filebeat.yml: |
+   #filebeat.config:
+     #modules:
+       #path: /usr/share/filebeat/modules.d/apache.yml
+       #reload.enabled: true
+       # Period on which files under path should be checked for changes
+       #reload.period: 1s
+   filebeat.inputs:
+     - type: log
+       enabled: true
+       paths:
+         - '${FILEBEAT_LOG_DATA_PATH}'
+       backoff: 5s
+       max_backoff: 5s
+
+   output.kafka:
+     # initial brokers for reading cluster metadata
+     hosts: ["kafka-service.astrid-kube:9092"]
+   
+     # message topic selection + partitioning
+     #topic: '%{[fields.log_topic]}-%{[host.name]}'
+     #topic: '%{[log_topic]}'
+     #topic: PacketBeatTest
+     topic: FileBeatData
+     partition.round_robin:
+       reachable_only: false
+   
+     required_acks: 1
+     compression: gzip
+     max_message_bytes: 1000000
+ 
+
+
