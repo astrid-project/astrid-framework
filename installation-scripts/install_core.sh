@@ -8,7 +8,7 @@ CB_STATUS=""
 # 60 is 5 minute (one loop for every 5 seconds)
 POD_CHECK_TIMEOUT=60
 CB_NAMESPACE="astrid-kube"
-FILEBEAT_LOG_DATA_PATH="/var/log/syslog"
+FILEBEAT_LOG_DATA_PATH="/var/log/*"
 EXECENV_YML_TMP_FOLDER="./execs/tmp"
 CB_AUTH_KEY='Authorization: ASTRID eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOiIxNjE2NzgxMDU4IiwiZXhwIjoiMTY0ODMxNzA1OCIsIm5iZiI6MTYxNjc4MTA1OH0.3eNv1XH_YDq_u5KFn8B79KMzXPXI1cypgjry9xKXlN4'
 METRICBEAT="no"
@@ -16,6 +16,11 @@ FILEBEAT="no"
 PACKETBEAT="no"
 POLYCUBE="no"
 PROBE="no"
+BASE_PATH=$(pwd)
+
+# Import external function
+. ./execs/astrid-controller.sh
+#
 
 function help()
 {
@@ -23,7 +28,9 @@ function help()
   echo " * Script for Astrid Framework installation *"
   echo "    list of parameters:"
   echo "     -h | --help : show this help"
-  echo "     -cb | --contextbroker: install Context Broker"
+  echo "     -af | --astridframework: install Context Broker and Astrid Controller"
+  echo "     -cb | --contextbroker: install Context Broker only"
+  echo "     -ac | --astridcontroller: install Astrid Controller only"
   echo "     -ee X {-Y} | --executionenvironment X {-Y} "
   echo "         install X instances of Execution Environment"
   echo "         Y agent to activate (can be more that one):"
@@ -68,7 +75,6 @@ function checkPod()
 function container_disable()
 {
   sed -i ":a;N;\$!ba;s/#<${2}.*#${2}>//" $1
-  echo "sed -i \":a;N;\$!ba;s/#<${2}.*#${2}>//\" $1"
 }
 
 if [ $# -eq 0 ]
@@ -80,8 +86,17 @@ else
     KEY="$1"
 
     case $KEY in
+      -af|--astridframework)
+        INSTALL_CB=YES
+        INSTALL_AC=YES
+        shift
+        ;;
       -cb|--contextbroker)
         INSTALL_CB=YES
+        shift
+        ;;
+      -ac|--astridcontroler)
+        INSTALL_AC=YES
         shift
         ;;
       -h|--help)
@@ -170,6 +185,12 @@ then
   echo " * Astrid Framework core installation completed"
 fi
 
+if [ "$INSTALL_AC" = YES ]
+then
+  astrid-controller-docker-image
+  astrid-controller-k8s-deployment
+fi
+
 if [ ! -z $EXEC_ENV_INSTANCES ]
 then
   echo " * Installation of Execution Environment(s) "
@@ -246,9 +267,9 @@ then
 
     CB_POD_INSTANCE_NAME=$(kubectl get pods --all-namespaces | grep context-broker | awk '{ print $2 }')
     echo " * Setting LCP ..."
-    kubectl exec -it --namespace=${CB_NAMESPACE} ${CB_POD_INSTANCE_NAME} -c elasticsearch -- bash -c "curl -XPOST -H 'Content-Type: application/json' -H \"${CB_AUTH_KEY}\" cb-manager-service:5000/type/exec-env -d '[{ \"name\":\"Container Docker\", \"description\":\"Linux container\", \"id\":\"container-docker\" }]'" > /dev/null
+#    kubectl exec -it --namespace=${CB_NAMESPACE} ${CB_POD_INSTANCE_NAME} -c elasticsearch -- bash -c "curl -XPOST -H 'Content-Type: application/json' -H \"${CB_AUTH_KEY}\" cb-manager-service:5000/type/exec-env -d '[{ \"name\":\"Container Docker\", \"description\":\"Linux container\", \"id\":\"container-docker\" }]'" > /dev/null
     
-    kubectl exec -it --namespace=${CB_NAMESPACE} ${CB_POD_INSTANCE_NAME} -c elasticsearch -- bash -c "curl -XPOST -H 'Content-Type: application/json' -H \"${CB_AUTH_KEY}\" cb-manager-service:5000/exec-env -d '[{ \"lcp\":{ \"port\":5000, \"https\":false }, \"id\": \"${EE_NAME}\", \"description\": \"exec-env\", \"type_id\":\"container-docker\", \"hostname\":\"${EE_NAME}\", \"enabled\":\"Yes\" }]'" > /dev/null
+#    kubectl exec -it --namespace=${CB_NAMESPACE} ${CB_POD_INSTANCE_NAME} -c elasticsearch -- bash -c "curl -XPOST -H 'Content-Type: application/json' -H \"${CB_AUTH_KEY}\" cb-manager-service:5000/exec-env -d '[{ \"lcp\":{ \"port\":5000, \"https\":false }, \"id\": \"${EE_NAME}\", \"description\": \"exec-env\", \"type_id\":\"container-docker\", \"hostname\":\"${EE_NAME}\", \"enabled\":\"Yes\" }]'" > /dev/null
 
   done
 
