@@ -638,7 +638,7 @@ data:
      #topic: '%{[fields.log_topic]}-%{[host.name]}'
      #topic: '%{[log_topic]}'
      #topic: PacketBeatTest
-     topic: PacketBeatData
+     topic: packetbeat-data
      partition.round_robin:
        reachable_only: false
    
@@ -687,7 +687,7 @@ data:
      #topic: '%{[fields.log_topic]}-%{[host.name]}'
      #topic: '%{[log_topic]}'
      #topic: PacketBeatTest
-     topic: FileBeatData
+     topic: filebeat-data
      partition.round_robin:
        reachable_only: false
    
@@ -743,7 +743,7 @@ data:
      #topic: '%{[fields.log_topic]}-%{[host.name]}'
      #topic: '%{[log_topic]}'
      #topic: PacketBeatTest
-     topic: MetricBeatData
+     topic: metricbeat-data
      partition.round_robin:
        reachable_only: false
    

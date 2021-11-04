@@ -19,7 +19,11 @@ PROBE="no"
 BASE_PATH=$(pwd)
 
 # Import external function
-. ./execs/astrid-controller.sh
+source ./execs/astrid-controller.sh
+source ./execs/exec-env.sh
+source ./execs/agent-catalog.sh
+source ./execs/ebpf-program-catalog.sh
+source ./execs/network-link.sh
 #
 
 function help()
@@ -181,6 +185,18 @@ then
   
   echo " * Setting the storage (2/2) ..."
   kubectl exec -it --namespace=${CB_NAMESPACE} ${CB_POD_INSTANCE_NAME} -c elasticsearch -- /bin/bash -c "/bin/chmod -R 777 /node/mnt/elasticsearch-data"
+
+  echo " * Setting agent-catalog ..."
+  kubectl exec -it --namespace=${CB_NAMESPACE} ${CB_POD_INSTANCE_NAME} -c elasticsearch -- bash -c "curl -XPOST -H 'Content-Type: application/json' -H \"${CB_AUTH_KEY}\" cb-manager-service:5000/catalog/agent -d $(agent_catalog)" > /dev/null 
+
+  echo " * Setting program-catalog ..."
+  kubectl exec -it --namespace=${CB_NAMESPACE} ${CB_POD_INSTANCE_NAME} -c elasticsearch -- bash -c "curl -XPOST -H 'Content-Type: application/json' -H \"${CB_AUTH_KEY}\" cb-manager-service:5000/catalog/ebpf-program -d $(ebpf_program_catalog)" > /dev/null 
+
+  echo " * Setting exec-env-type ..."
+  kubectl exec -it --namespace=${CB_NAMESPACE} ${CB_POD_INSTANCE_NAME} -c elasticsearch -- bash -c "curl -XPOST -H 'Content-Type: application/json' -H \"${CB_AUTH_KEY}\" cb-manager-service:5000/type/exec-env -d $(exec_env_types)" > /dev/null 
+
+  echo " * Setting network-link-type ..."
+  kubectl exec -it --namespace=${CB_NAMESPACE} ${CB_POD_INSTANCE_NAME} -c elasticsearch -- bash -c "curl -XPOST -H 'Content-Type: application/json' -H \"${CB_AUTH_KEY}\" cb-manager-service:5000/type/network-link -d $(network_link_types)" > /dev/null 
   
   echo " * Astrid Framework core installation completed"
 fi
@@ -267,9 +283,9 @@ then
 
     CB_POD_INSTANCE_NAME=$(kubectl get pods --all-namespaces | grep context-broker | awk '{ print $2 }')
     echo " * Setting LCP ..."
-#    kubectl exec -it --namespace=${CB_NAMESPACE} ${CB_POD_INSTANCE_NAME} -c elasticsearch -- bash -c "curl -XPOST -H 'Content-Type: application/json' -H \"${CB_AUTH_KEY}\" cb-manager-service:5000/type/exec-env -d '[{ \"name\":\"Container Docker\", \"description\":\"Linux container\", \"id\":\"container-docker\" }]'" > /dev/null
+#   kubectl exec -it --namespace=${CB_NAMESPACE} ${CB_POD_INSTANCE_NAME} -c elasticsearch -- bash -c "curl -XPOST -H 'Content-Type: application/json' -H \"${CB_AUTH_KEY}\" cb-manager-service:5000/type/exec-env -d $(exec_env_types)" 
     
-#    kubectl exec -it --namespace=${CB_NAMESPACE} ${CB_POD_INSTANCE_NAME} -c elasticsearch -- bash -c "curl -XPOST -H 'Content-Type: application/json' -H \"${CB_AUTH_KEY}\" cb-manager-service:5000/exec-env -d '[{ \"lcp\":{ \"port\":5000, \"https\":false }, \"id\": \"${EE_NAME}\", \"description\": \"exec-env\", \"type_id\":\"container-docker\", \"hostname\":\"${EE_NAME}\", \"enabled\":\"Yes\" }]'" > /dev/null
+    kubectl exec -it --namespace=${CB_NAMESPACE} ${CB_POD_INSTANCE_NAME} -c elasticsearch -- bash -c "curl -XPOST -H 'Content-Type: application/json' -H \"${CB_AUTH_KEY}\" cb-manager-service:5000/exec-env -d $(exec_env)" > /dev/null 
 
   done
 
