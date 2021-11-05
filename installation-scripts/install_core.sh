@@ -50,7 +50,7 @@ function help()
 # $1 is the name of the POD
 function checkPod()
 {
-  i=0
+  local i=0
   while [ true ]
   do
     POD_STATUS=$(kubectl get pods --all-namespaces | grep $1 | awk '{ print $4}')
@@ -224,10 +224,12 @@ then
 
     cp ./execs/*.yaml ${EXECENV_YML_TMP_FOLDER}
 
+    echo ""
     echo " * Setting parameters for execenv (${i}/${EXEC_ENV_INSTANCES})... "
     EE_NAME="node-"$(cat /proc/sys/kernel/random/uuid | sed 's/[-]//g' | head -c 10)
     EE_NAMES+=( $EE_NAME )
     echo "   "${EE_NAME}
+
     if [ "${METRICBEAT}" == "no" ]
     then
       echo " * METRICBEAT disabled"
@@ -235,6 +237,7 @@ then
     else
       echo " * METRICBEAT enabled"
     fi
+
     if [ "${FILEBEAT}" == "no" ]
     then
       echo " * FILEBEAT disabled"
@@ -242,13 +245,15 @@ then
     else
       echo " * FILEBEAT enabled"
     fi
+
     if [ "${PACKETBEAT}" == "no" ]
     then
       echo " * PACKETBEAT disabled"
       container_disable ${EXECENV_YML_TMP_FOLDER}/node-0.yaml "PACKETBEAT"
     else
       echo " * PACKETBEAT enabled"
-    fi   
+    fi 
+
     if [ "${POLYCUBE}" == "no" ]
     then
       if [ "${PROBE}" == "no" ]
@@ -259,6 +264,7 @@ then
     else
       echo " * POLYCUBE enabled"
     fi
+
     if [ "${PROBE}" == "no" ]
     then
       echo " * PROBE disabled"
@@ -290,7 +296,7 @@ then
   done
 
   echo " * Deployed execenv: "
-  for NAME in ${EE_NAMES}
+  for NAME in ${EE_NAMES[@]};
   do
     echo "    ${NAME}"
   done
