@@ -45,8 +45,6 @@ LABEL version=$VERSION
 COPY --from=git-clone $INSTALLATION_PATH/$VERSION $INSTALLATION_PATH
 COPY --from=pip-requirements $INSTALLATION_PATH /usr/local
 
-COPY settings/$VERSION/.env $INSTALLATION_PATH/
-
 # Execute
 WORKDIR $INSTALLATION_PATH
 ENTRYPOINT [ "python" ]
