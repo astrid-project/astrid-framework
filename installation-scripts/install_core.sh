@@ -160,7 +160,7 @@ then
   #git clone ${ASTRID_FRAMEWORK_GITHUB}
   
   echo " * Moving in \"Astrid Framework\" folder ..."
-  cd ../astrid-framework/k8s
+  cd ../../astrid-framework/k8s
   
   echo " * Preparing for the \"Astrid Framework\" core installation ..."
   source run.sh dev > /dev/null
