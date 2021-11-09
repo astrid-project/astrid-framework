@@ -156,11 +156,11 @@ then
   sysctl -w vm.max_map_count=262144
   
   
-  echo " * Download \"Astrid Framework\" code from ${ASTRID_FRAMEWORK_GITHUB} ..."
-  git clone ${ASTRID_FRAMEWORK_GITHUB}
+  #echo " * Download \"Astrid Framework\" code from ${ASTRID_FRAMEWORK_GITHUB} ..."
+  #git clone ${ASTRID_FRAMEWORK_GITHUB}
   
   echo " * Moving in \"Astrid Framework\" folder ..."
-  cd astrid-framework/k8s
+  cd ../astrid-framework/k8s
   
   echo " * Preparing for the \"Astrid Framework\" core installation ..."
   source run.sh dev > /dev/null
