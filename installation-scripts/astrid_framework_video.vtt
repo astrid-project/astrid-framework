@@ -1,55 +1,44 @@
-﻿1
-00:00:00,000 --> 00:00:07,000
+WEBVTT
+
+00:00.000 --> 00:07.000
 Go to the <b>GitHub ASTRID repository</b>:
 <u>https://github.com/ASTRID-project/ASTRID-framework</u>
 
-2
-00:00:08,000 --> 00:00:19,000
+00:08.000 --> 00:19.000
 <b>Download</b> the <i>code</i>
 
-3
-00:00:21,000 --> 00:00:27,000
+00:21.000 --> 00:27.000
 <b>Move</b> into the <i>installation script</i> folder
 
-4
-00:00:30,000 --> 00:00:50,000
+00:30.000 --> 00:50.000
 <b>Install</b> the <b>ASTRID</b> <i>Framework</i>
 
-5
-00:01:06,000 --> 00:01:10,000
+01:06.000 --> 01:10.000
 <b>Checking</b> <i>Context Broker</i> installation
 <b>Lens IDE</b> for <i>Kubernetes</i> - <u>https://k8slens.dev</u>
 
-6
-00:01:35,000 --> 00:01:39,000
+01:35.000 --> 01:39.000
 <b>Checking</b> <b>ASTRID</b> <i>Controller</i> <b>installation</b>
 
-7
-00:01:49,000 --> 00:01:59,000
+01:49.000 --> 01:59.000
 <b>Installation</b> and <b>configuration</b> of<b> ASTRID</b> <i>Framework</i> is <b>completed</b>
 
-8
-00:02:04,000 --> 00:02:12,000
+02:04.000 --> 02:12.000
 <b>Proceed</b> with <b>installation</b> of <b>2</b> <i>Execution Environments</i>
 
-9
-00:02:13,000 --> 00:02:20,000
+02:13.000 --> 02:20.000
 <b>Installation</b> and <b>configuration</b> of <i>Execution Environment</i> <b>n. 1</b> with <i>Filebeat</i> <b>activated</b>
 
-10
-00:02:33,000 --> 00:02:47,000
+02:33.000 --> 02:47.000
 <b>Installation</b> of <i>Execution Environment</i> <b>n. 1</b> is <b>completed</b>
 
-11
-00:02:52,000 --> 00:03:10,000
+02:52.000 --> 03:10.000
 <b>Installation</b> and <b>configuration</b> of <i>Execution Environment</i> <b>n. 2</b> with <i>Polycube</i> <b>activated</b>
 
-12
-00:03:18,000 --> 00:03:24,000
+03:18.000 --> 03:24.000
 <b>Installation</b> of <i>Execution Environment</i> <b>n. 2</b> is <b>completed</b>
 
-13
-00:03:26,000 --> 00:03:31,000
+03:26.000 --> 03:31.000
 To <b>change</b> the <b>agent configurations</b> and <b>see</b> the <b>status</b> of each <b>component</b>
 <b>install</b> the <b>ASTRID</b> <i>Security Dashboard</i> (<u>https://github.com/ASTRID-project/security-dashboard</u>)<b>
 Video</b>: <u>https://github.com/ASTRID-project/security-dashboard/blob/master/cut.mp4</u>
