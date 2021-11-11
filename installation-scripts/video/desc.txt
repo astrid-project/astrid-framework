@@ -12,7 +12,7 @@ For the CB two pods are deployed. The first one includes:
 - Elasticsearch (https://www.elastic.co/elasticsearch)
 - CB-Manager (https://github.com/astrid-project/cb-manager)
 The second one includes:
-- ASTRID Controller (https://github.com/astrid-project/astrid-controller)
+- Security Controller (https://github.com/astrid-project/astrid-controller)
 
 For the two execution environments, the two deployed pods includes:
 1. Apache HTTP Server (https://httpd.apache.org) with Filebeat (https://www.elastic.co/beats/filebeat) agent.
