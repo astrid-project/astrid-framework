@@ -1,6 +1,6 @@
 ASTRID Framework - Installation
 
-This video shows the needed step for the installation of the ASTRID Framework (https://github.com/astrid-project/astrid-framework) in a Kubernetes Infrastructures.
+This video shows the needed steps for the installation of the ASTRID Framework (https://github.com/astrid-project/astrid-framework) in a Kubernetes Infrastructures.
 
 The installed components are:
 - Context Broker (CB)
