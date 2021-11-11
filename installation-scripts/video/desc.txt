@@ -1,0 +1,24 @@
+ASTRID Framework - Installation
+
+This video shows the needed step for the installation of the ASTRID Framework (https://github.com/astrid-project/astrid-framework) in a Kubernetes Infrastructures.
+
+The installed components are:
+- Context Broker (CB)
+- 2 Execution Environments
+
+For the CB two pods are deployed. The first one includes: 
+- Kafka (https://kafka.apache.org)
+- Logstash (https://www.elastic.co/logstash)
+- Elasticsearch (https://www.elastic.co/elasticsearch)
+- CB-Manager (https://github.com/astrid-project/cb-manager)
+The second one includes:
+- ASTRID Controller (https://github.com/astrid-project/astrid-controller)
+
+For the two execution environments, the two deployed pods includes:
+1. Apache HTTP Server (https://httpd.apache.org) with Filebeat (https://www.elastic.co/beats/filebeat) agent.
+2. Firewall (https://polycube.readthedocs.io/en/latest/services/pcn-firewall/firewall.html) eBPF program deployed with Polycube (https://github.com/polycube-network/polycube - Manual: https://polycube.readthedocs.io) with Metricbeat (https://www.elastic.co/beats/metricbeat) agent.
+
+
+Tags:
+
+installation,astrid,framework,cb-manager,metricbeat,filebeat,logstash,elasticsearch,kafka,polycube,apache,cybersecurity,agent,epbf
