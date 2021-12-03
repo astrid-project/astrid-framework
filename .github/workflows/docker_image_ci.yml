@@ -4,7 +4,7 @@ on:
   workflow_dispatch: # manual trigger
 
   schedule:
-    - cron: '0 05 * * *' # everyday at 05am
+    - cron: "0 05 * * *" # everyday at 05am
 
 jobs:
   docker:
@@ -18,7 +18,7 @@ jobs:
             tag: master
             context: agents/RESTable
             title: CNIT ML (Machine Learning)
-            description: 'Make a standard app a RESTable one.'
+            description: "Make a standard app a RESTable one."
             url: https://github.com/alexcarrega/RESTable
 
           - component: cnit_ml
@@ -26,32 +26,31 @@ jobs:
             tag: version1
             context: algorithms/cnit_ml
             title: CNIT ML (Machine Learning)
-            description: 'Detects multiple DDoS attacks (multiclass) using Random Forests.'
+            description: "Detects multiple DDoS attacks (multiclass) using Random Forests."
             url: https://github.com/astrid-project/cnit_ml
- 
+
           - component: cnit_ml
             version: version2
             tag: version2
             context: algorithms/cnit_ml
             title: CNIT ML (Machine Learning)
-            description: 'Detects multiple DDoS attacks (multiclass) using Random Forests.'
+            description: "Detects multiple DDoS attacks (multiclass) using Random Forests."
             url: https://github.com/astrid-project/cnit_ml
- 
+
           - component: cnit_ml
             version: version3
             tag: version3
             context: algorithms/cnit_ml
             title: CNIT ML (Machine Learning)
-            description: 'Detects multiple DDoS attacks (multiclass) using Random Forests.'
+            description: "Detects multiple DDoS attacks (multiclass) using Random Forests."
             url: https://github.com/astrid-project/cnit_ml
-
 
           - component: cubebeat
             version: master
             tag: master
             context: agents/cubebeat
             title: Cubebeat
-            description: 'Custom Beat of the Elastic Stack to interact with the Polycube-based eBPF cubes.'
+            description: "Custom Beat of the Elastic Stack to interact with the Polycube-based eBPF cubes."
             url: https://github.com/astrid-project/cubebeat
 
           - component: cubebeat
@@ -59,25 +58,23 @@ jobs:
             tag: v1.0.0
             context: agents/cubebeat
             title: Cubebeat
-            description: 'Custom Beat of the Elastic Stack to interact with the Polycube-based eBPF cubes.'
+            description: "Custom Beat of the Elastic Stack to interact with the Polycube-based eBPF cubes."
             url: https://github.com/astrid-project/cubebeat
-
 
           - component: filebeat
             version: 7.8.0
             tag: 7.8.0
             context: agents/filebeat
             title: Filebeat
-            description: 'Lightweight shipper for logs by Elastic.'
+            description: "Lightweight shipper for logs by Elastic."
             url: https://www.elastic.co/beats/filebeat
-
 
           - component: lcp
             version: master
             tag: master
             context: agents/lcp
             title: LCP (Local Control Plane)
-            description: 'Control plane responsible for programmability and changing the behavior of data plane at run-time.'
+            description: "Control plane responsible for programmability and changing the behavior of data plane at run-time."
             url: https://github.com/astrid-project/lcp
 
           - component: lcp
@@ -85,7 +82,7 @@ jobs:
             tag: v1.0.3
             context: agents/lcp
             title: LCP (Local Control Plane)
-            description: 'Control plane responsible for programmability and changing the behavior of data plane at run-time.'
+            description: "Control plane responsible for programmability and changing the behavior of data plane at run-time."
             url: https://github.com/astrid-project/lcp
 
           - component: lcp
@@ -93,7 +90,7 @@ jobs:
             tag: v1.0.2
             context: agents/lcp
             title: LCP (Local Control Plane)
-            description: 'Control plane responsible for programmability and changing the behavior of data plane at run-time.'
+            description: "Control plane responsible for programmability and changing the behavior of data plane at run-time."
             url: https://github.com/astrid-project/lcp
 
           - component: lcp
@@ -101,7 +98,7 @@ jobs:
             tag: v1.0.1
             context: agents/lcp
             title: LCP (Local Control Plane)
-            description: 'Control plane responsible for programmability and changing the behavior of data plane at run-time.'
+            description: "Control plane responsible for programmability and changing the behavior of data plane at run-time."
             url: https://github.com/astrid-project/lcp
 
           - component: lcp
@@ -109,34 +106,31 @@ jobs:
             tag: v1.0.0
             context: agents/lcp
             title: LCP (Local Control Plane)
-            description: 'Control plane responsible for programmability and changing the behavior of data plane at run-time.'
+            description: "Control plane responsible for programmability and changing the behavior of data plane at run-time."
             url: https://github.com/astrid-project/lcp
-
 
           - component: logstash-local
             version: 7.8.0
             tag: 7.8.0
             context: agents/logstash
             title: Logstash
-            description: 'Logstash is a tool for managing events and logs. Image for local services/environments.'
+            description: "Logstash is a tool for managing events and logs. Image for local services/environments."
             url: https://www.elastic.co/logstash
-
 
           - component: metricbeat
             version: 7.8.0
             tag: 7.8.0
             context: agents/metricbeat
             title: Metricbeat
-            description: 'Lightweight shipper for metrics by Elastic.'
+            description: "Lightweight shipper for metrics by Elastic."
             url: https://www.elastic.co/beats/metricbeat
-
 
           - component: packetbeat
             version: 7.8.0
             tag: 7.8.0
             context: agents/packetbeat
             title: Packetbeat
-            description: 'Lightweight shipper for network data.'
+            description: "Lightweight shipper for network data."
             url: https://www.elastic.co/beats/packetbeat
 
           - component: packetbeat
@@ -144,25 +138,23 @@ jobs:
             tag: 7.13.4
             context: agents/packetbeat
             title: Packetbeat
-            description: 'Lightweight shipper for network data.'
+            description: "Lightweight shipper for network data."
             url: https://www.elastic.co/beats/packetbeat
-
 
           - component: packetbeat
             version: 7.13.4
             tag: 7.13.4-service
             context: agents/packetbeat/service
             title: Packetbeat
-            description: 'Lightweight shipper for network data.'
+            description: "Lightweight shipper for network data."
             url: https://www.elastic.co/beats/packetbeat
-
 
           - component: cb-manager
             version: master
             tag: master
             context: platform/cb-manager
             title: CB (Context Broker) Manager
-            description: 'A REST Interface exposes data and events stored in the internal storage system in a structured way.'
+            description: "A REST Interface exposes data and events stored in the internal storage system in a structured way."
             url: https://github.com/astrid-project/cb-manager
 
           - component: cb-manager
@@ -170,7 +162,7 @@ jobs:
             tag: v1.0.3
             context: platform/cb-manager
             title: CB (Context Broker) Manager
-            description: 'A REST Interface exposes data and events stored in the internal storage system in a structured way.'
+            description: "A REST Interface exposes data and events stored in the internal storage system in a structured way."
             url: https://github.com/astrid-project/cb-manager
 
           - component: cb-manager
@@ -178,7 +170,7 @@ jobs:
             tag: v1.0.2
             context: platform/cb-manager
             title: CB (Context Broker) Manager
-            description: 'A REST Interface exposes data and events stored in the internal storage system in a structured way.'
+            description: "A REST Interface exposes data and events stored in the internal storage system in a structured way."
             url: https://github.com/astrid-project/cb-manager
 
           - component: cb-manager
@@ -186,7 +178,7 @@ jobs:
             tag: v1.0.1
             context: platform/cb-manager
             title: CB (Context Broker) Manager
-            description: 'A REST Interface exposes data and events stored in the internal storage system in a structured way.'
+            description: "A REST Interface exposes data and events stored in the internal storage system in a structured way."
             url: https://github.com/astrid-project/cb-manager
 
           - component: cb-manager
@@ -194,36 +186,32 @@ jobs:
             tag: v1.0.0
             context: platform/cb-manager
             title: CB (Context Broker) Manager
-            description: 'A REST Interface exposes data and events stored in the internal storage system in a structured way.'
+            description: "A REST Interface exposes data and events stored in the internal storage system in a structured way."
             url: https://github.com/astrid-project/cb-manager
-
 
           - component: elasticsearch
             version: 7.8.0
             tag: 7.8.0
             context: platform/elasticsearch
             title: Elasticsearch
-            description: 'Elasticsearch is a powerful open source search and analytics engine that makes data easy to explore.'
+            description: "Elasticsearch is a powerful open source search and analytics engine that makes data easy to explore."
             url: https://www.elastic.co/elasticsearch
 
-
           - component: kafka
-            version: 2.6.2
-            tag: 2.6.2
+            version: 2.6.3
+            tag: 2.6.3
             context: platform/kafka
             title: Kafka
-            description: 'Apache Kafka is a distributed streaming platform used for building real-time applications.'
+            description: "Apache Kafka is a distributed streaming platform used for building real-time applications."
             url: https://kafka.apache.org
-
 
           - component: logstash-core
             version: 7.8.0
             tag: 7.8.0
             context: platform/logstash
             title: Logstash
-            description: 'Logstash is a tool for managing events and logs. Image for Context Broker.'
+            description: "Logstash is a tool for managing events and logs. Image for Context Broker."
             url: https://www.elastic.co/logstash
-
 
     steps:
       - name: Checkout
