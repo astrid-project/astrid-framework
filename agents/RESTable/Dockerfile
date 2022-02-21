@@ -42,4 +42,4 @@ RUN chmod +x $INSTALLATION_PATH/run.sh
 
 # Execute
 WORKDIR $INSTALLATION_PATH
-ENTRYPOINT [ "./run.sh" ]
+ENTRYPOINT [ "./scripts/start.sh" ]
