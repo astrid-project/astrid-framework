@@ -9,7 +9,7 @@ ARG VERSION=master
 ARG PROJECT=astrid
 ARG INSTALLATION_PATH=/opt/$COMPONENT
 
-RUN git clone https://github.com/alexcarrega/$COMPONENT --branch $VERSION $INSTALLATION_PATH
+RUN git clone https://github.com/astrid-project/$COMPONENT --branch $VERSION $INSTALLATION_PATH
 
 
 # Stage PIP REQUIREMENTS
