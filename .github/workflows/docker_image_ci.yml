@@ -17,9 +17,9 @@ jobs:
             version: master
             tag: master
             context: agents/RESTable
-            title: CNIT ML (Machine Learning)
+            title: RESTable
             description: "Make a standard app a RESTable one."
-            url: https://github.com/alexcarrega/RESTable
+            url: https://github.com/astrid-project/RESTable
 
           - component: cnit_ml
             version: version1
