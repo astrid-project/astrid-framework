@@ -1,8 +1,8 @@
 name: Docker Image CI
 
 on:
+  push:
   workflow_dispatch: # manual trigger
-
   schedule:
     - cron: "0 05 * * *" # everyday at 05am
 
@@ -198,8 +198,8 @@ jobs:
             url: https://www.elastic.co/elasticsearch
 
           - component: kafka
-            version: 2.6.3
-            tag: 2.6.3
+            version: 2.8.1
+            tag: 2.8.1
             context: platform/kafka
             title: Kafka
             description: "Apache Kafka is a distributed streaming platform used for building real-time applications."
