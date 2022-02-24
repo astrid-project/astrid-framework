@@ -38,8 +38,8 @@ RUN pip install -r $RESTable_PATH/requirements.txt
 
 COPY settings/$VERSION/$COMPONENT.yml $INSTALLATION_PATH/
 COPY settings/$VERSION/RESTable-settings.yaml $RESTable_PATH/settings.yaml
-RUN chmod +x $RESTable_PATH/run.sh
+RUN chmod +x $RESTable_PATH/scripts/start.sh
 
 # Execute
 WORKDIR $RESTable_PATH
-ENTRYPOINT [ "./run.sh" ]
+ENTRYPOINT [ "./scripts/start.sh" ]
